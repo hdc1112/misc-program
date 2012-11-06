@@ -1,0 +1,1 @@
+zlibtest.c should be compiled with -lz in gcc cmd line
