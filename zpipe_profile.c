@@ -17,6 +17,9 @@
 #include <assert.h>
 #include "zlib.h"
 
+// hdc:
+#include <sys/time.h>
+
 #if defined(MSDOS) || defined(OS2) || defined(WIN32) || defined(__CYGWIN__)
 #  include <fcntl.h>
 #  include <io.h>
@@ -25,7 +28,8 @@
 #  define SET_BINARY_MODE(file)
 #endif
 
-#define CHUNK 16384
+//#define CHUNK 16384
+#define CHUNK 524288
 
 /* Compress from file source to file dest until EOF on source.
  * def() returns Z_OK on success, Z_MEM_ERROR if memory could not be
@@ -49,13 +53,13 @@ int def(FILE *source, FILE *dest, int level)
   if (ret != Z_OK)
     return ret;
 
+  // hdc:
+  struct timeval tv;
+  long a, b, total;
+
   /* compress until end of file */
   do {
     strm.avail_in = fread(in, 1, CHUNK, source);
-    
-    // hdc: profile
-    fprintf(stderr, "fread %d bytes\n", strm.avail_in);
-
     if (ferror(source)) {
       (void)deflateEnd(&strm);
       return Z_ERRNO;
@@ -67,12 +71,28 @@ int def(FILE *source, FILE *dest, int level)
      * compression if all of source has been read in */
 
     // hdc: profile
-    unsigned int n = 0;
+    //unsigned int n = 0;
+    total = 0;
 
     do {
       strm.avail_out = CHUNK;
       strm.next_out = out;
+
+      // hdc:
+      gettimeofday(&tv, NULL);
+      //fprintf(stderr, "-----seconds:\t%ld\n", tv.tv_sec);
+      //fprintf(stderr, "-----%d before deflate, microseconds:\t%ld\n", n, tv.tv_usec);
+      a = tv.tv_usec;
+
       ret = deflate(&strm, flush);    /* no bad return value */
+
+      // hdc:
+      gettimeofday(&tv, NULL);
+      //fprintf(stderr, "-----seconds:\t%ld\n", tv.tv_sec);
+      b = tv.tv_usec;
+      // fprintf(stderr, "-----%d after deflate, microseconds:\t%ld\n", n, tv.tv_usec);
+      total += b - a;
+
       assert(ret != Z_STREAM_ERROR);  /* state not clobbered */
       have = CHUNK - strm.avail_out;
       if (fwrite(out, 1, have, dest) != have || ferror(dest)) {
@@ -81,10 +101,13 @@ int def(FILE *source, FILE *dest, int level)
       }
 
       // hdc: profile
-      fprintf(stderr, "%d deflate's output %d bytes. strm.avail_out=%d\n", n++, have, strm.avail_out);
+      //fprintf(stderr, "%d deflate's output %d bytes. strm.avail_out=%d\n", n++, have, strm.avail_out);
 
     } while (strm.avail_out == 0);
     assert(strm.avail_in == 0);     /* all input will be used */
+
+    // hdc: in microseconds
+    fprintf(stderr, "%ld\n", total);
 
     /* done when last data in file processed */
   } while (flush != Z_FINISH);
