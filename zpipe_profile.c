@@ -52,6 +52,10 @@ int def(FILE *source, FILE *dest, int level)
   /* compress until end of file */
   do {
     strm.avail_in = fread(in, 1, CHUNK, source);
+    
+    // hdc: profile
+    fprintf(stderr, "fread %d bytes\n", strm.avail_in);
+
     if (ferror(source)) {
       (void)deflateEnd(&strm);
       return Z_ERRNO;
@@ -61,6 +65,10 @@ int def(FILE *source, FILE *dest, int level)
 
     /* run deflate() on input until output buffer not full, finish
      * compression if all of source has been read in */
+
+    // hdc: profile
+    unsigned int n = 0;
+
     do {
       strm.avail_out = CHUNK;
       strm.next_out = out;
@@ -71,6 +79,10 @@ int def(FILE *source, FILE *dest, int level)
         (void)deflateEnd(&strm);
         return Z_ERRNO;
       }
+
+      // hdc: profile
+      fprintf(stderr, "%d deflate's output %d bytes. strm.avail_out=%d\n", n++, have, strm.avail_out);
+
     } while (strm.avail_out == 0);
     assert(strm.avail_in == 0);     /* all input will be used */
 
