@@ -6,7 +6,21 @@ zlib.x: zpipe.c
 zlib.x.si: zpipe_sourceinstru.c
 	gcc -o zlib.x.si zpipe_sourceinstru.c -lz
 
-.PHONY: deflate deflate-si deflate-strace1 deflate-strace2 deflate-strace3 deflate-strace4
+zlib.x.noprefetch: zpipe_noprefetch.c
+	gcc -o zlib.x.noprefetch zpipe_noprefetch.c -lz
+
+.PHONY: clean deflate deflate-si inflate deflate-strace1 deflate-strace2 deflate-strace3 deflate-strace4 \
+	deflate-strace5 deflate-strace6
+
+clean:
+	rm -f 1.compress;
+	rm -f 1.log;
+	rm -f strace.log;
+	rm -f 1.txt.duibi;
+	find -type f -name "*~" | xargs rm -f;
+	find -type f -name "zlib.x*" | xargs rm -f;
+	find -type f -name "a.out" | xargs rm -f;
+	find -type f -name "a.exe" | xargs rm -f;
 
 # normal use
 deflate: zlib.x
@@ -14,6 +28,9 @@ deflate: zlib.x
 
 deflate-si: zlib.x.si
 	cat ./1.txt | ./zlib.x.si > 1.compress 2>1.log
+
+inflate: zlib.x
+	cat ./1.compress | ./zlib.x -d > 1.txt.duibi
 
 # strace for zpipe.c's deflate
 # (warning)
@@ -30,3 +47,9 @@ deflate-strace3: zlib.x.si
 
 deflate-strace4: zlib.x.si
 	cat ./1.txt | strace -r -o ./strace.log ./zlib.x.si >1.compress 2>1.log 
+
+deflate-strace5: zlib.x.noprefetch
+	cat ./1.txt | strace -tt -o ./strace.log ./zlib.x.noprefetch >1.compress 2>1.log
+
+deflate-strace6: zlib.x.noprefetch
+	cat ./1.txt | strace -r -o ./strace.log ./zlib.x.noprefetch >1.compress 2>1.log
