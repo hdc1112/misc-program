@@ -1,6 +1,8 @@
-# added by hdc
-# this is actually the strace results for /tmp.abc.sh
-# so I still need to write another .c instead of pipe
+# (useless)
+# this is the strace log when I strace ./abc.sh
+# ./abc.sh is 
+# #!/bin/bash
+# cat 4MB.txt | ./zlib.out > 4MB.compress 2>4MB.compress.log
 execve("/tmp/abc.sh", ["/tmp/abc.sh"], [/* 35 vars */]) = 0
 brk(0)                                  = 0x1906000
 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)

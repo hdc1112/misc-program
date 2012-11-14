@@ -55,7 +55,8 @@ int def(FILE *source, FILE *dest, int level)
 
   // hdc:
   struct timeval tv;
-  long a, b, total;
+  unsigned long a, b, total;
+  int n = 0;
 
   /* compress until end of file */
   do {
@@ -71,7 +72,7 @@ int def(FILE *source, FILE *dest, int level)
      * compression if all of source has been read in */
 
     // hdc: profile
-    //unsigned int n = 0;
+    n = 0;
     total = 0;
 
     do {
@@ -102,12 +103,13 @@ int def(FILE *source, FILE *dest, int level)
 
       // hdc: profile
       //fprintf(stderr, "%d deflate's output %d bytes. strm.avail_out=%d\n", n++, have, strm.avail_out);
+      n++;
 
     } while (strm.avail_out == 0);
     assert(strm.avail_in == 0);     /* all input will be used */
 
     // hdc: in microseconds
-    fprintf(stderr, "%ld\n", total);
+    fprintf(stderr, "#times=%d, micro=%ul\n", n, total);
 
     /* done when last data in file processed */
   } while (flush != Z_FINISH);
