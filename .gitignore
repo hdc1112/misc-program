@@ -85,8 +85,14 @@ GTAGS
 *~
 \#*#
 
-#java
+# java
 *.class
 .metadata
 a.exe
 a.out
+
+# Wormup
+/Wormup/1.txt
+/Wormup/1.compress
+/Wormup/1.log
+/Wormup/zlib.x
