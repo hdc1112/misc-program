@@ -53,3 +53,6 @@ deflate-strace5: zlib.x.noprefetch
 
 deflate-strace6: zlib.x.noprefetch
 	cat ./1.txt | strace -r -o ./strace.log ./zlib.x.noprefetch >1.compress 2>1.log
+
+deflate-strace7: zlib.x
+	cat ./1.txt | strace -T -o ./strace.log ./zlib.x >1.compress 2>1.log 
