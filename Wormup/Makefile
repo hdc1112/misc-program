@@ -10,7 +10,8 @@ zlib.x.noprefetch: zpipe_noprefetch.c
 	gcc -o zlib.x.noprefetch zpipe_noprefetch.c -lz
 
 .PHONY: clean deflate deflate-si inflate deflate-strace1 deflate-strace2 deflate-strace3 deflate-strace4 \
-	deflate-strace5 deflate-strace6
+	deflate-strace5 deflate-strace6 deflate-strace7 \
+	deflate-strace8 deflate-strace9 deflate-strace10
 
 clean:
 	rm -f 1.compress;
