@@ -2,10 +2,14 @@
 zlib.x: zpipe.c
 	gcc -o zlib.x zpipe.c -lz
 
+zlib.x.freadret: zpipe_freadret.c
+	gcc -o $@ $^ -lz
+
 # source code instru version
 zlib.x.si: zpipe_sourceinstru.c
 	gcc -o zlib.x.si zpipe_sourceinstru.c -lz
 
+# the only noprefetch guy
 zlib.x.noprefetch: zpipe_noprefetch.c
 	gcc -o zlib.x.noprefetch zpipe_noprefetch.c -lz
 
@@ -66,3 +70,6 @@ deflate-strace9: zlib.x.noprefetch
 
 deflate-strace10: zlib.x.noprefetch
 	cat ./1.txt | strace -T -tt -o ./strace.log ./zlib.x.noprefetch >1.compress 2>1.log 
+
+deflate-strace11: zlib.x.freadret
+	cat ./1.txt | strace -T -tt -o ./strace.log ./zlib.x.freadret >1.compress 2>1.log 

@@ -57,6 +57,10 @@ int def(FILE *source, FILE *dest, int level)
   /* compress until end of file */
   do {
     strm.avail_in = fread(in, 1, CHUNK, source);
+
+    // hdc:
+    fprintf(stderr, "fread ret: %d\n", strm.avail_in);
+
     if (ferror(source)) {
       (void)deflateEnd(&strm);
       return Z_ERRNO;

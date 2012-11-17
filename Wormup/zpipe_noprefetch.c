@@ -25,8 +25,9 @@
 #  define SET_BINARY_MODE(file)
 #endif
 
-#define CHUNK 16384
-//#define CHUNK 524288
+#define CHUNK 524288
+//#define CHUNK 5120
+//#define CHUNK 16384
 
 /* Compress from file source to file dest until EOF on source.
  * def() returns Z_OK on success, Z_MEM_ERROR if memory could not be
