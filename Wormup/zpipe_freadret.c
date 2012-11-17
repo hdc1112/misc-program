@@ -27,10 +27,11 @@
 
 //#define CHUNK 524288
 //#define CHUNK 16384
-#define CHUNK 3072  // 3k
+//#define CHUNK 3072  // 3k
 //#define CHUNK 5120  // 5k
 //#define CHUNK 7168  // 7k
 //#define CHUNK 10240
+#define CHUNK 2048
 
 /* Compress from file source to file dest until EOF on source.
  * def() returns Z_OK on success, Z_MEM_ERROR if memory could not be
