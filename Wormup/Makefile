@@ -13,7 +13,7 @@ zlib.x.si: zpipe_sourceinstru.c
 zlib.x.noprefetch: zpipe_noprefetch.c
 	gcc -o zlib.x.noprefetch zpipe_noprefetch.c -lz
 
-.PHONY: clean deflate deflate-si inflate deflate-strace1 deflate-strace2 deflate-strace3 deflate-strace4 \
+.PHONY: clean todo deflate deflate-si inflate deflate-strace1 deflate-strace2 deflate-strace3 deflate-strace4 \
 	deflate-strace5 deflate-strace6 deflate-strace7 \
 	deflate-strace8 deflate-strace9 deflate-strace10
 
@@ -26,6 +26,13 @@ clean:
 	find -type f -name "zlib.x*" | xargs rm -f;
 	find -type f -name "a.out" | xargs rm -f;
 	find -type f -name "a.exe" | xargs rm -f;
+
+todo:
+	find -type f -name "*.java" | xargs grep -in "TODO:" || true
+	find -type f -name "*.c" | xargs grep -in "TODO:" || true
+	find -type f -name "*.cpp" | xargs grep -in "TODO:" || true
+	find -type f -name "*.h" | xargs grep -in "TODO:" || true
+	cat TODO || true
 
 # normal use
 deflate: zlib.x
