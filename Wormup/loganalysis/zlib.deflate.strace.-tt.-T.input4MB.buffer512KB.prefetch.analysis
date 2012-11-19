@@ -1,0 +1,27 @@
+read0:84us:98304B	84/3=28
+read1:74us:98304B	74/3=24
+read2:55us:98304B	55/3=18
+read3:62us:98304B	62/3=20
+read4:59us:98304B	59/3=19
+read5:16us:32768B	16/3=5
+read6:56us:131072B	56/3=18
+read7:32us:98304B	32/3=10
+read8:26us:98304B	26/3=8
+read9:28us:98304B	28/3=9
+
+up0:49us
+up1:45us
+up2:32us
+up3:27us
+up4:25us
+up5:9772us
+up6:us
+up7:us
+up8:us
+
+Assumption:
+SSD has a 3 times larger throughput to Disk
+disk latency is 9000us, i.e. 9ms
+
+Conclusion:
+the head size by my algorithm is 512KB
