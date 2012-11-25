@@ -1,4 +1,6 @@
-if possible, write programs for:
+`if possible, write programs for:
 1. n numbers, find n-1 numbers such that multiplication is the biggest
 2. n numbers, find three numbers such that they increasing
 3. n numbers, find two numbers, such that aj > ai and j-i is the biggest
+
+`create a bst from in-order and pre-order traversal history
