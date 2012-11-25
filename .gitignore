@@ -97,3 +97,5 @@ a.out
 /Wormup/1.log
 /Wormup/strace.log
 /Wormup/zlib.x*
+
+*.h.gch
