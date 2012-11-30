@@ -5,6 +5,8 @@
 
 `write merge sort by two methods: extra space, and swap method
 
+`write matrix (x,y) -> (0,0) left,down. Sigma(v) max. O(n) space 
+
 `think about the gold pot problem:
 
 `create a bst from in-order and pre-order traversal history:
