@@ -3,6 +3,8 @@
 2. n numbers, find three numbers such that they increasing
 3. n numbers, find two numbers, such that aj > ai and j-i is the biggest
 
+`write merge sort by two methods: extra space, and swap method
+
 `think about the gold pot problem:
 
 `create a bst from in-order and pre-order traversal history:
