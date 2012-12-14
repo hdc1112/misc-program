@@ -7,6 +7,10 @@
 
 `think about the gold pot problem, google's interview question:
 
+`1-100 rotate unknown bits, find the smallest, O(lgn):
+
 `think about using random(1-5) to get random(1-7)
+(DONE)
 
 `10 mice eat 1000 bottle pills, only one bottle is deadly. find it:
+(DONE)
