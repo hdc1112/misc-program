@@ -9,6 +9,8 @@
 
 `1-100 rotate unknown bits, find the smallest, O(lgn):
 
+`think about 54321's previous, e.g. 54312, 12345 doesn't have a prev:
+
 `think about using random(1-5) to get random(1-7)
 (DONE)
 
