@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 sudo /root/mcss/mcss -i
 sudo yum upgrade
