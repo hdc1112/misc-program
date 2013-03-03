@@ -100,3 +100,5 @@ a.out
 
 *.h.gch
 a.exe.stackdump
+
+*.gdb
