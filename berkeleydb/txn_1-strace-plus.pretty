@@ -1,0 +1,1143 @@
+execve("./a.out", ["./a.out"], [/* 36 vars */]) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > startup_child() strace.c:690
+  > main() strace.c:1051
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/usr/local/bin/strace+]
+brk(0)                                  = 0x727000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc43ca00000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+fstat(3, {st_mode=S_IFREG|0644, st_size=87878, ...}) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 87878, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fc43c9ea000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+close(3)                                = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+open("/usr/lib/libdb-5.3.so", O_RDONLY) = 3
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\300\v\3\0\0\0\0\0"..., 832) = 832
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+fstat(3, {st_mode=S_IFREG|0775, st_size=13376332, ...}) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 4578720, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc43c58c000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x7fc43c7e0000, 2097152, PROT_NONE) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x7fc43c9e0000, 40960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x254000) = 0x7fc43c9e0000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+close(3)                                = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360\355\301\2372\0\0\0"..., 832) = 832
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+fstat(3, {st_mode=S_IFREG|0755, st_size=1922152, ...}) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x329fc00000, 3745960, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x329fc00000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x329fd8a000, 2093056, PROT_NONE) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x329ff89000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x189000) = 0x329ff89000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x329ff8e000, 18600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x329ff8e000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+close(3)                                = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+open("/lib64/libpthread.so.0", O_RDONLY) = 3
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0`\\@\0012\0\0\0"..., 832) = 832
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+fstat(3, {st_mode=S_IFREG|0755, st_size=145720, ...}) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc43c58b000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x3201400000, 2212768, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x3201400000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x3201417000, 2097152, PROT_NONE) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x3201617000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x3201617000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(0x3201619000, 13216, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3201619000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+close(3)                                = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc43c58a000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc43c589000
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+arch_prctl(ARCH_SET_FS, 0x7fc43c58a700) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x3201617000, 4096, PROT_READ) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x329ff89000, 16384, PROT_READ) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+mprotect(0x329fa1f000, 4096, PROT_READ) = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+munmap(0x7fc43c9ea000, 87878)           = 0
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+  > [unknown function] /lib64/ld-2.12.so
+set_tid_address(0x7fc43c58a9d0)         = 13384
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+set_robust_list(0x7fc43c58a9e0, 0x18)   = 0
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+futex(0x7fff0624722c, FUTEX_WAKE_PRIVATE, 1) = 0
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+futex(0x7fff0624722c, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 1, NULL, 7fc43c58a700) = -1 EAGAIN (Resource temporarily unavailable)
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+rt_sigaction(SIGRTMIN, {0x3201405ae0, [], SA_RESTORER|SA_SIGINFO, 0x320140f500}, NULL, 8) = 0
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+rt_sigaction(SIGRT_1, {0x3201405b70, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x320140f500}, NULL, 8) = 0
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+getrlimit(RLIMIT_STACK, {rlim_cur=10240*1024, rlim_max=RLIM_INFINITY}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+  > [unknown function] /lib64/libpthread-2.12.so
+brk(0)                                  = 0x727000
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_malloc() ../src/os/os_alloc.c:255
+  > __os_calloc() ../src/os/os_alloc.c:218
+  > db_env_create() ../src/env/env_method.c:85
+  > main() txn_1.c:23
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+brk(0x748000)                           = 0x748000
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_malloc() ../src/os/os_alloc.c:255
+  > __os_calloc() ../src/os/os_alloc.c:218
+  > db_env_create() ../src/env/env_method.c:85
+  > main() txn_1.c:23
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/proc/stat", O_RDONLY|O_CLOEXEC)  = 3
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __lock_env_create() ../src/lock/lock_method.c:41
+  > db_env_create() ../src/env/env_method.c:92
+  > main() txn_1.c:23
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(3, "cpu  103888 27 24388 41828391 15"..., 8192) = 1477
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __lock_env_create() ../src/lock/lock_method.c:41
+  > db_env_create() ../src/env/env_method.c:92
+  > main() txn_1.c:23
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(3)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __lock_env_create() ../src/lock/lock_method.c:41
+  > db_env_create() ../src/env/env_method.c:92
+  > main() txn_1.c:23
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/DB_CONFIG", O_RDONLY) = -1 ENOENT (No such file or directory)
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __env_read_db_config() ../src/env/env_config.c:282
+  > __env_config() ../src/env/env_open.c:476
+  > __env_open() ../src/env/env_open.c:140
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+stat("/var/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=4096, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_exists() ../src/os/os_stat.c:39
+  > __os_tmpdir() ../src/os/os_tmpdir.c:128
+  > __env_config() ../src/env/env_open.c:489
+  > __env_open() ../src/env/env_open.c:140
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/__db.001", O_RDWR|O_CREAT|O_EXCL, 0660) = -1 EEXIST (File exists)
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __env_attach() ../src/env/env_region.c:105
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/__db.001", O_RDWR) = 3
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __env_attach() ../src/env/env_region.c:122
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(3, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __env_attach() ../src/env/env_region.c:122
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __env_attach() ../src/env/env_region.c:122
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fstat(3, {st_mode=S_IFREG|0660, st_size=303104, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_ioinfo() ../src/os/os_stat.c:81
+  > __env_attach() ../src/env/env_region.c:155
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(3, "\227\10\22\0\0\0\0\0\5\0\0\0\3\0\0\0\25\0\0\0{\243\277\3119 \307)\0\0\0\0"..., 160) = 160
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_read() ../src/os/os_rw.c:174
+  > __env_attach() ../src/env/env_region.c:195
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+lseek(3, 472, SEEK_SET)                 = 472
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_seek() ../src/os/os_seek.c:50
+  > __env_attach() ../src/env/env_region.c:195
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(3, "\0\240\4\0\0\0\0\0\0\240\20\0\0\0\0\0\377\377\377\377\377\377\377\377", 24) = 24
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_read() ../src/os/os_rw.c:174
+  > __env_attach() ../src/env/env_region.c:207
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(3)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __env_attach() ../src/env/env_region.c:228
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/__db.001", O_RDWR) = 3
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_attach() ../src/env/env_region.c:236
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(3, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_attach() ../src/env/env_region.c:236
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_attach() ../src/env/env_region.c:236
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+mmap(NULL, 1089536, PROT_READ|PROT_WRITE, MAP_SHARED, 3, 0) = 0x7fc43c47f000
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_map() ../src/os/os_map.c:523
+  > __os_attach() ../src/os/os_map.c:225
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_attach() ../src/env/env_region.c:236
+  > __env_attach_regions() ../src/env/env_open.c:1030
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/proc/stat", O_RDONLY|O_CLOEXEC)  = 4
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __mutex_open() ../src/mutex/mut_region.c:57
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(4, "cpu  103888 27 24388 41828395 15"..., 8192) = 1477
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __mutex_open() ../src/mutex/mut_region.c:57
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(4)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_cpu_count() ../src/os/os_cpu.c:42
+  > __mutex_open() ../src/mutex/mut_region.c:57
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/__db.002", O_RDWR|O_CREAT, 0660) = 4
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __mutex_open() ../src/mutex/mut_region.c:93
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(4, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __mutex_open() ../src/mutex/mut_region.c:93
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(4, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __mutex_open() ../src/mutex/mut_region.c:93
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+mmap(NULL, 237568, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0x7fc43c445000
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_map() ../src/os/os_map.c:523
+  > __os_attach() ../src/os/os_map.c:225
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __mutex_open() ../src/mutex/mut_region.c:93
+  > __env_attach_regions() ../src/env/env_open.c:1087
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/__db.003", O_RDWR|O_CREAT, 0660) = 5
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __memp_open() ../src/mp/mp_region.c:70
+  > __env_attach_regions() ../src/env/env_open.c:1132
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(5, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __memp_open() ../src/mp/mp_region.c:70
+  > __env_attach_regions() ../src/env/env_open.c:1132
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(5, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __os_attach() ../src/os/os_map.c:200
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __memp_open() ../src/mp/mp_region.c:70
+  > __env_attach_regions() ../src/env/env_open.c:1132
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+mmap(NULL, 270336, PROT_READ|PROT_WRITE, MAP_SHARED, 5, 0) = 0x7fc43c403000
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_map() ../src/os/os_map.c:523
+  > __os_attach() ../src/os/os_map.c:225
+  > __env_sys_attach() ../src/env/env_region.c:1296
+  > __env_region_attach() ../src/env/env_region.c:1090
+  > __memp_open() ../src/mp/mp_region.c:70
+  > __env_attach_regions() ../src/env/env_open.c:1132
+  > __env_open() ../src/env/env_open.c:209
+  > __env_open_pp() ../src/env/env_open.c:115
+  > main() txn_1.c:36
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+stat("/tmp/myEnvironment/mydb.db", {st_mode=S_IFREG|0660, st_size=8192, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_exists() ../src/os/os_stat.c:39
+  > __db_fullpath() ../src/env/env_name.c:83
+  > __db_appname() ../src/env/env_name.c:165
+  > __fop_file_setup() ../src/fileops/fop_util.c:277
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+stat("/tmp/myEnvironment/mydb.db", {st_mode=S_IFREG|0660, st_size=8192, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_exists() ../src/os/os_stat.c:39
+  > __fop_file_setup() ../src/fileops/fop_util.c:332
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/mydb.db", O_RDWR) = 6
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __fop_file_setup() ../src/fileops/fop_util.c:352
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(6, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __fop_file_setup() ../src/fileops/fop_util.c:352
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(6, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __fop_file_setup() ../src/fileops/fop_util.c:352
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(6, "\0\0\0\0\1\0\0\0\0\0\0\0b1\5\0\t\0\0\0\0\20\0\0\0\t\0\0\0\0\0\0"..., 512) = 512
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_read() ../src/os/os_rw.c:174
+  > __fop_read_meta() ../src/fileops/fop_util.c:1148
+  > __fop_file_setup() ../src/fileops/fop_util.c:375
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(6)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __fop_file_setup() ../src/fileops/fop_util.c:751
+  > __db_open() ../src/db/db_open.c:187
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+stat("/tmp/myEnvironment/mydb.db", {st_mode=S_IFREG|0660, st_size=8192, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_exists() ../src/os/os_stat.c:39
+  > __db_fullpath() ../src/env/env_name.c:83
+  > __db_appname() ../src/env/env_name.c:165
+  > __memp_fopen() ../src/mp/mp_fopen.c:358
+  > __env_mpool() ../src/db/db.c:689
+  > __env_setup() ../src/db/db.c:489
+  > __db_open() ../src/db/db_open.c:211
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/mydb.db", O_RDWR|O_CREAT, 0) = 6
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __memp_fopen() ../src/mp/mp_fopen.c:361
+  > __env_mpool() ../src/db/db.c:689
+  > __env_setup() ../src/db/db.c:489
+  > __db_open() ../src/db/db_open.c:211
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(6, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __memp_fopen() ../src/mp/mp_fopen.c:361
+  > __env_mpool() ../src/db/db.c:689
+  > __env_setup() ../src/db/db.c:489
+  > __db_open() ../src/db/db_open.c:211
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(6, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __memp_fopen() ../src/mp/mp_fopen.c:361
+  > __env_mpool() ../src/db/db.c:689
+  > __env_setup() ../src/db/db.c:489
+  > __db_open() ../src/db/db_open.c:211
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fstat(6, {st_mode=S_IFREG|0660, st_size=8192, ...}) = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_ioinfo() ../src/os/os_stat.c:81
+  > __memp_fopen() ../src/mp/mp_fopen.c:379
+  > __env_mpool() ../src/db/db.c:689
+  > __env_setup() ../src/db/db.c:489
+  > __db_open() ../src/db/db_open.c:211
+  > __db_open_pp() ../src/db/db_iface.c:1191
+  > main() txn_1.c:55
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+open("/tmp/myEnvironment/log.0000000001", O_RDWR) = 7
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:123
+  > __os_open() ../src/os/os_open.c:104
+  > __log_name() ../src/log/log_put.c:1506
+  > __log_valid() ../src/log/log.c:631
+  > __log_newfh() ../src/log/log_put.c:1437
+  > __log_write() ../src/log/log_put.c:1284
+  > __log_flush_int() ../src/log/log_put.c:1095
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(7, F_GETFD)                       = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __log_name() ../src/log/log_put.c:1506
+  > __log_valid() ../src/log/log.c:631
+  > __log_newfh() ../src/log/log_put.c:1437
+  > __log_write() ../src/log/log_put.c:1284
+  > __log_flush_int() ../src/log/log_put.c:1095
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fcntl(7, F_SETFD, FD_CLOEXEC)           = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_openhandle() ../src/os/os_handle.c:161
+  > __os_open() ../src/os/os_open.c:104
+  > __log_name() ../src/log/log_put.c:1506
+  > __log_valid() ../src/log/log.c:631
+  > __log_newfh() ../src/log/log_put.c:1437
+  > __log_write() ../src/log/log_put.c:1284
+  > __log_flush_int() ../src/log/log_put.c:1095
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+read(7, "\0\0\0\0\34\0\0\0\2644\t>\210\t\4\0\23\0\0\0\0\0\240\0\0\0\0\0", 28) = 28
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_read() ../src/os/os_rw.c:174
+  > __log_valid() ../src/log/log.c:656
+  > __log_newfh() ../src/log/log_put.c:1437
+  > __log_write() ../src/log/log_put.c:1284
+  > __log_flush_int() ../src/log/log_put.c:1095
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+pwrite(7, "\364&\0\0T\0\0\0\252-\201~\2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2\0\0\0"..., 395, 10016) = 395
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_io() ../src/os/os_rw.c:90
+  > __log_write() ../src/log/log_put.c:1312
+  > __log_flush_int() ../src/log/log_put.c:1095
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fdatasync(7)                            = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_fsync() ../src/os/os_fsync.c:93
+  > __log_flush_int() ../src/log/log_put.c:1121
+  > __log_flush_commit() ../src/log/log_put.c:538
+  > __log_put() ../src/log/log_put.c:312
+  > __log_put_record_int() ../src/log/log_put.c:2002
+  > __log_put_record() ../src/log/log_put.c:1743
+  > __txn_regop_log() ../src/dbinc_auto/txn_auto.h:47
+  > __txn_commit() ../src/txn/txn.c:786
+  > __txn_commit_pp() ../src/txn/txn.c:632
+  > main() txn_1.c:94
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+pwrite(6, "\1\0\0\0;(\0\0\1\0\0\0\0\0\0\0\0\0\0\0\2\0\350\17\1\5\364\17\350\17\333\333"..., 4096, 4096) = 4096
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_io() ../src/os/os_rw.c:90
+  > __memp_pgwrite() ../src/mp/mp_bh.c:433
+  > __memp_bhwrite() ../src/mp/mp_bh.c:176
+  > __memp_sync_int() ../src/mp/mp_sync.c:562
+  > __memp_fsync() ../src/mp/mp_sync.c:241
+  > __db_sync() ../src/db/db_am.c:824
+  > __db_refresh() ../src/db/db.c:869
+  > __db_close() ../src/db/db.c:744
+  > __db_close_pp() ../src/db/db_iface.c:261
+  > main() txn_1.c:103
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+fdatasync(6)                            = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_fsync() ../src/os/os_fsync.c:93
+  > __memp_sync_int() ../src/mp/mp_sync.c:625
+  > __memp_fsync() ../src/mp/mp_sync.c:241
+  > __db_sync() ../src/db/db_am.c:824
+  > __db_refresh() ../src/db/db.c:869
+  > __db_close() ../src/db/db.c:744
+  > __db_close_pp() ../src/db/db_iface.c:261
+  > main() txn_1.c:103
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(6)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __memp_fclose() ../src/mp/mp_fopen.c:967
+  > __db_refresh() ../src/db/db.c:1025
+  > __db_close() ../src/db/db.c:744
+  > __db_close_pp() ../src/db/db_iface.c:261
+  > main() txn_1.c:103
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(7)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __log_env_refresh() ../src/log/log.c:974
+  > __env_refresh() ../src/env/env_open.c:745
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(5)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __os_detach() ../src/os/os_map.c:311
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_region_detach() ../src/env/env_region.c:1205
+  > __memp_env_refresh() ../src/mp/mp_region.c:609
+  > __env_refresh() ../src/env/env_open.c:818
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+munmap(0x7fc43c403000, 270336)          = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_detach() ../src/os/os_map.c:317
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_region_detach() ../src/env/env_region.c:1205
+  > __memp_env_refresh() ../src/mp/mp_region.c:609
+  > __env_refresh() ../src/env/env_open.c:818
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(4)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __os_detach() ../src/os/os_map.c:311
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_region_detach() ../src/env/env_region.c:1205
+  > __mutex_env_refresh() ../src/mutex/mut_region.c:315
+  > __env_refresh() ../src/env/env_open.c:891
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+munmap(0x7fc43c445000, 237568)          = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_detach() ../src/os/os_map.c:317
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_region_detach() ../src/env/env_region.c:1205
+  > __mutex_env_refresh() ../src/mutex/mut_region.c:315
+  > __env_refresh() ../src/env/env_open.c:891
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+close(3)                                = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_closehandle() ../src/os/os_handle.c:227
+  > __os_detach() ../src/os/os_map.c:311
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_detach() ../src/env/env_region.c:836
+  > __env_refresh() ../src/env/env_open.c:901
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+munmap(0x7fc43c47f000, 1089536)         = 0
+  > [unknown function] /lib64/libc-2.12.so
+  > __os_detach() ../src/os/os_map.c:317
+  > __env_sys_detach() ../src/env/env_region.c:1337
+  > __env_detach() ../src/env/env_region.c:836
+  > __env_refresh() ../src/env/env_open.c:901
+  > __env_close() ../src/env/env_open.c:651
+  > __env_close_pp() ../src/env/env_open.c:579
+  > main() txn_1.c:112
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]
+exit_group(0)                           = ?
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > [unknown function] /lib64/libc-2.12.so
+  > _start() [/home/dachuan/misc-program/berkeleydb/a.out]

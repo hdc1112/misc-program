@@ -43,7 +43,9 @@ int main() {
 
   /* Associate DB with a file (create a btree)*/
   if ((dbRet = myDB->open(myDB, NULL, "berkeleydbTest.db", NULL, DB_BTREE, DB_CREATE, 0664)) != 0) { 
+  //if ((dbRet = myDB->open(myDB, NULL, "/dev/sdb", NULL, DB_BTREE, DB_CREATE, 0664)) != 0) { 
     myDB->err(myDB, dbRet, "berkeleydbTest.db"); 
+    //myDB->err(myDB, dbRet, "/dev/sdb"); 
     closeDB(myDB);
     exit(1);
   } else {
