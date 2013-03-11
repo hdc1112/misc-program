@@ -96,7 +96,7 @@ main(int argc, char *argv[])
 #ifdef _WIN32
   db_home_dir = ".\\";
 #else
-  db_home_dir = "./";
+  db_home_dir = "/tmp/txn_2_env/";
 #endif
   while ((ch = getopt(argc, argv, "h:")) != EOF)
     switch (ch) {
