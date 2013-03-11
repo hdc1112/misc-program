@@ -11,7 +11,7 @@ int main(void)
   DB_ENV *envp;
   DBT key, data;
   DB_TXN *txn;
-  const char *db_home_dir = "/tmp/myEnvironment";
+  const char *db_home_dir = "/mnt/iscsi-fs/myEnvironment";
   const char *file_name = "mydb.db";
   const char *keystr ="thekey";
   const char *datastr = "thedata";
