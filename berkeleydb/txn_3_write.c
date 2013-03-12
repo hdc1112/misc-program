@@ -107,10 +107,6 @@ int main(void)
     goto err;
   }
 
-
-  printf("i am sleeping\n");
-  sleep(10);
-
 err:
   /* Close the database */
   if (dbp != NULL) {
