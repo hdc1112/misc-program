@@ -1,0 +1,11 @@
+If a problem's name in leetcode is "Palindrome Partitioning II",
+then all words are connected by "_", so the source code name is
+"Palindrome_Partitioning_II", and the suffix is the source
+code type, if it's cpp file, then the total source code name is
+"Palindrome_Partitioning_II.cpp".
+
+It's very normal if a source code file cannot be compiled locally,
+it is supposed to run in leetcode console: http://leetcode.com/onlinejudge .
+
+If you still want to compile it localy, some minor modifications
+need to be done. It depends on the source code file.
