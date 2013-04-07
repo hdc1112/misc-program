@@ -107,3 +107,9 @@ a.exe.stackdump
 /berkeleydb/*.x
 
 /adaptive-replacement-cache/*.x
+
+/tokyo-cabinet/*.x
+/tokyo-cabinet/casket.tch
+/tokyo-cabinet/casket.tcb
+/tokyo-cabinet/casket.tcf
+/tokyo-cabinet/casket.tct
