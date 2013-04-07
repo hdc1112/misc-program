@@ -19,8 +19,55 @@ public class Surrounded_Regions {
 		}
 	}
 
+	private void bfs2(char[][] board, final int i, final int j, boolean toX) {
+
+		Queue<Coordinate> q = new LinkedList<Coordinate>();
+		q.add(new Coordinate(i, j));
+
+		int up_x, up_y;
+		int down_x, down_y;
+		int left_x, left_y;
+		int right_x, right_y;
+
+		while (q.isEmpty() == false) {
+			Coordinate e = q.remove();
+			visited[e.i][e.j] = true;
+			board[e.i][e.j] = toX == true ? 'X' : 'O';
+
+			up_x = e.i - 1;
+			up_y = e.j;
+			down_x = e.i + 1;
+			down_y = e.j;
+			left_x = e.i;
+			left_y = e.j - 1;
+			right_x = e.i;
+			right_y = e.j + 1;
+
+			if (up_x >= 0 && board[up_x][up_y] == 'O'
+					&& visited[up_x][up_y] == false) {
+				q.add(new Coordinate(up_x, up_y));
+			}
+
+			if (down_x <= height - 1 && board[down_x][down_y] == 'O'
+					&& visited[down_x][down_y] == false) {
+				q.add(new Coordinate(down_x, down_y));
+			}
+
+			if (left_y >= 0 && board[left_x][left_y] == 'O'
+					&& visited[left_x][left_y] == false) {
+				q.add(new Coordinate(left_x, left_y));
+			}
+
+			if (right_y <= width - 1 && board[right_x][right_y] == 'O'
+					&& visited[right_x][right_y] == false) {
+				q.add(new Coordinate(right_x, right_y));
+			}
+		} /* end of while */
+	}
+
 	private boolean bfs(char[][] board, final int i, final int j,
 			boolean original) {
+
 		boolean ret = false;
 
 		if (i == 0 || i == height - 1 || j == 0 || j == width - 1) {
@@ -135,24 +182,22 @@ public class Surrounded_Regions {
 			return true;
 		} else if (ret_up == true || ret_down == true || ret_left == true
 				|| ret_right == true) {
-
 			return true;
 		}
 
 		return false;
 	}
 
-	private void _solve1(char[][] board) {
+	private void _init(char[][] board) {
 		height = board.length;
 		width = board[0].length;
 
+		// java would init this to 0
 		visited = new boolean[height][width];
+	}
 
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				visited[i][j] = UNVISITED;
-			}
-		}
+	private void _solve1(char[][] board) {
+		_init(board);
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -170,7 +215,46 @@ public class Surrounded_Regions {
 					bfs(board, i, j, VISITED);
 				}
 			} /* end of 2nd for */
+		} /* end of 1st for */
+	}
+
+	private void _solve2(char[][] board) {
+		_init(board);
+
+		int x = 0, y = 0;
+		for (x = 0, y = 0; y <= width - 1; y++) {
+			if (board[x][y] == 'O' && visited[x][y] == false) {
+				bfs2(board, x, y, false);
+			}
 		}
+
+		for (x = height - 1, y = 0; y <= width - 1; y++) {
+			if (board[x][y] == 'O' && visited[x][y] == false) {
+				bfs2(board, x, y, false);
+			}
+		}
+
+		for (y = 0, x = 0; x <= height - 1; x++) {
+			if (board[x][y] == 'O' && visited[x][y] == false) {
+				bfs2(board, x, y, false);
+			}
+		}
+
+		for (y = width - 1, x = 0; x <= height - 1; x++) {
+			if (board[x][y] == 'O' && visited[x][y] == false) {
+				bfs2(board, x, y, false);
+			}
+		}
+
+		for (int i = 1; i <= height - 2; i++) {
+			for (int j = 1; j <= width - 2; j++) {
+				if (visited[i][j] || board[i][j] == 'X') {
+					continue;
+				}
+
+				bfs2(board, i, j, true);
+			}
+		} /* end of 1st for */
 	}
 
 	public void solve(char[][] board) {
@@ -178,7 +262,15 @@ public class Surrounded_Regions {
 		// DO NOT write main() function
 		if (board.length == 0 || board[0].length == 0)
 			return;
-		_solve1(board);
+
+		/*
+		 * _solve2, in theory, should be faster than _solve1, but when the grid
+		 * doesn't have too many 'O's which need to be traversed twice in
+		 * _solve1, then they have basically the same performance.
+		 */
+
+		// _solve1(board);
+		_solve2(board);
 	}
 
 	public static void printBoard(char[][] board) {
@@ -223,7 +315,10 @@ public class Surrounded_Regions {
 				"OOOOOOOOOOOOOOOOOOOO".toCharArray(),
 				"XOOOOXOOOXXOOXOXOXOO".toCharArray() };
 		printBoard(board);
+		long t1 = System.currentTimeMillis();
 		sr.solve(board);
+		long t2 = System.currentTimeMillis();
 		printBoard(board);
+		System.out.println(t2 - t1);
 	}
 }
