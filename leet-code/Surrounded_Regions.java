@@ -194,6 +194,10 @@ public class Surrounded_Regions {
 		visited = new boolean[height][width];
 	}
 
+  // _solve1:
+  // Iterate the matrix, if it's 'O',
+  // then DFS to judge whether it's on edge,
+  // if it's not on edge, DFS again to flip to 'X'
 	private void _solve1(char[][] board) {
 		_init(board);
 
@@ -216,6 +220,10 @@ public class Surrounded_Regions {
 		} /* end of 1st for */
 	}
 
+  // _solve2:
+  // first iterate four boundaries
+  // mark 'O' as visited.
+  // then bfs every internal 'O' and flip
 	private void _solve2(char[][] board) {
 		_init(board);
 
@@ -255,6 +263,10 @@ public class Surrounded_Regions {
 		} /* end of 1st for */
 	}
 
+  // _solve3:
+  // first iterate four boundaries
+  // and then iterate the matrix
+  // to make every unvisited to 'X'
   private void _solve3(char[][] board) {
     _init(board);
 
@@ -305,7 +317,7 @@ public class Surrounded_Regions {
 		 */
 
 		//_solve1(board);
-		// _solve2(board);
+		//_solve2(board);
     _solve3(board);
 	}
 
