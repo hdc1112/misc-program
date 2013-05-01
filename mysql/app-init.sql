@@ -1,0 +1,12 @@
+drop database hdcdb;
+create database hdcdb; 
+show databases; 
+print;
+show create database hdcdb;
+print;
+use hdcdb; 
+create table target (keystr varchar(30), valuestr varchar(30), primary key (keystr));
+desc target;
+print;
+show create table target;
+print;
