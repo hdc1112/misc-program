@@ -113,3 +113,5 @@ a.exe.stackdump
 /tokyo-cabinet/casket.tcb
 /tokyo-cabinet/casket.tcf
 /tokyo-cabinet/casket.tct
+
+/mysql/*.x
