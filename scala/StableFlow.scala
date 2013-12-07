@@ -3,6 +3,16 @@ import java.io.{BufferedReader, InputStreamReader, PrintStream}
 import java.io.IOException
 import scala.util.control.Breaks._
 
+/*
+ * This program reads from a local text file,
+ * and transfer it to a client by a specified
+ * speed. It is like a stable data flow
+ * 
+ *      Dachuan Huang
+ *      12/6/2013
+ *      hdc1112@gmail.com
+ */
+
 private class ClientHandler(
   val client: Socket,
   val filepath: String) extends Thread {
@@ -30,11 +40,15 @@ private class ClientHandler(
   }
 
   override def run(): Unit = {
-    // client socket end
+    // client socket send buffer size
+    // println("client socket send buffer size %d".format(client.getSendBufferSize))
+    // println("client socket receive buffer size %d".format(client.getReceiveBufferSize))
+
+    // client socket
     val outputStream = client.getOutputStream
     val printStream = new PrintStream(outputStream)
 
-    // local cmd end
+    // local cmd
     val cmd = "pv -L %s -q %s".format(flowspeed, filepath)
     println("cmd: %s".format(cmd))
     val process = sys.runtime.exec(cmd)
@@ -46,12 +60,17 @@ private class ClientHandler(
     println("Each dot represents %d lines, %d dots per line".format(dot, dotsline))
 
     breakable {
-      while(true) {
+      while (true) {
         val str = reader.readLine
         Option(str) match {
           case Some(s) => 
             try {
               printStream.println(str)
+              // printStream.flush
+              if (printStream.checkError) {
+                println("Client flush error")
+                break
+              }
   
               lines += 1
               if (lines % dot == 0) {
@@ -73,11 +92,12 @@ private class ClientHandler(
 
           case None => break
         }
-      }
+      } // end of while
     }
 
     println("Client %s ends".format(client.getInetAddress.getHostAddress))
-  }
+  } // end of run()
+
 }
 
 object StableFlow {
