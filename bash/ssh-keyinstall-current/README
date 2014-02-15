@@ -1,0 +1,62 @@
+
+	ssh-keyinstall is a script that helps an ssh user set up the
+keys at both ends of an ssh connection.  It creates an rsa or dsa key if
+needed and copies the public half to the server.  Once the process is
+done, you'll be able to log in with the passphrase and key instead of a
+password.
+
+
+
+Requirements:
+
+- The client machine (the machine that makes a connection to an ssh
+server) needs to be a Unix machine with bash and some basic system
+utilities.
+
+- The client machine needs an ssh client, the server needs an ssh
+server.
+
+- You'll need a shell account on both machines.
+
+- You'll need the "netcat" utility on the client end.  This may be part
+of a "netcat" or "nc" package.
+
+- Note that a Windows machine with the cygwin environment (
+http://www.cygwin.com ) and netcat for nt (
+http://www.atstake.com/research/tools/index.html ) runs ssh-keyinstall
+quite well.  Put netcat (nc) somewhere in your windows path, say, in
+c:\windows\command , and ssh-keyinstall can use it.  Winzip (
+http://www.winzip.com ) can handlle both the netcat zip file and the
+ssh-keyinstall tar.gz file.
+
+
+How to use it:
+
+1.	Log into the client machine - the one you'll be ssh'ing _from_.
+If you're using "su" to become a different user, then make sure to use
+"su -" to update your environment variables.
+
+2.	Place ssh-keyinstall in your path (or remember to run it as
+"/full/path/to/ssh-keyinstall ...."
+
+3.	Run:
+ssh-keyinstall -s RemoteServerName
+	and the keys will be created and transferred across.  Run it
+without any parameters to see a description of the lesser used options.
+
+4.	As part of the transfer process, you'll be prompted a few times
+to enter your password on the remote system.  At each step, you'll be
+shown the ssh command that will be run on the remote system or the scp
+command being used to transfer a file across.
+	Kevin Burton asked the reasonable question:
+
+"I just wonder if there is a way to supress the 4-5 password requests? 
+Maybe an expect script?"
+
+	That's a toughie.  I probably could work out some way to feed in
+the password, but I'm actually hoping to avoid storing it in the script. 
+My personal preference is that the user talk directly to ssh/scp, mostly
+to give my (assumed security-conscious) users peace of mind.  I've
+reduced the number of times the user needs to type it by bunching
+commands together.
+

@@ -1,0 +1,70 @@
+Version 1.0.0 (9/10/2002)
+- 1.0 release - code has been stable for a while now.
+- Change >/dev/stderr and >>/dev/stderr to >&2
+
+
+Version 0.1.9 (8/21/2002)
+- Fix usage; "|" wasn't quoted correctly.
+
+
+Version 0.1.8 (8/12/2002)
+- Don't force the port to 22 if not specified; we might be using a
+  ~/.ssh/config section that forces the port in that section.
+- Added a "-t OPENSSH|COMSSH2|COMSSH1" command line option to force the
+  server protocol in case of nc autodetect failure.
+
+
+Version 0.1.7 (7/24/2002)
+- A new ID string for a new ssh commercial version - thanks again, Chris.
+
+
+Version 0.1.6 (7/24/2002)
+- Wait 5 seconds for the banner return.  Thanks for the bug report, Chris!
+- Check for whether a file exists on the remote machine.
+
+
+Version 0.1.5 (3/28/2002)
+- Mitchell Henderson contributed a new commercial ssh signature.  Thanks
+  Mitch!
+
+
+Version 0.1.4 (3/27/2002)
+- typo in test command at the end, and new openssh version string.
+  Thanks to Rob Walker and Marion Bates!
+- documentation additions
+
+
+Version 0.1.3 (5/19/2001)
+- Minor cosmetic fixes.
+- Merge ssh commands together so that the user has fewer passwords to enter.
+
+
+Version 0.1.2 (4/15/2001)
+- More combinations tested.  Still some to go...
+- -v now fails to enter an infinite loop from a missing shift.
+- Don't add duplicate line to "identification"
+- Message at the end showing how to test if install worked.
+- First of three fixes to use a temporary auth file, needed because the 
+  once the ssh key is in place with an optional forced command, we lose
+  the ability to run real commands with a password.
+- Use REMPORT on all ssh's and scp's.
+- Avoid using ~ as local and remote machine won't agree if different
+  usernames are used.
+- Use "Command " instead of "Command=" for commercial ssh.
+- First freshmeat release.
+
+
+Version 0.1.1 (4/14/2001)
+- fixes for a few client and server version strings that 0.1 didn't know about.
+- updated credits, fixed typos.
+- minor cosmetic fixes and ssh version-specific accomodations.
+
+
+Version 0.1 (4/9/2001)
+- basic functionality in place for ssh1, ssh2, openssh, but not tested.
+- checks for needed utils
+- remote command, port, server, and username CLP's, as well as help and verbose.
+- detects client and server versions from ssh -V and netcatting to server.
+- creates local key if needed.
+- makes required directories and files on server.
+- doesn't work for a number of combinations - use >=0.1.1 instead.
