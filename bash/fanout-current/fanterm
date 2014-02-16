@@ -62,7 +62,9 @@ for OneHost in "$@" ; do
 	fi
 done
 
-fanmux $InPipes
+absme=`readlink -f $0`
+abshere=`dirname $absme`
+$abshere/fanmux $InPipes
 
 wait
 
