@@ -1,5 +1,5 @@
 digraph G {
-  size = "8, 10";
+  size = "8, 15";
   ranksep=.75;
   StorageLevel -> Externalizable;
   BlockInfo -> StorageLevel;
@@ -41,4 +41,29 @@ digraph G {
   BlockManager -> DiskBlockObjectWriter;
   DiskBlockObjectWriter -> BlockObjectWriter;
   BlockManagerSlaveActor -> BlockManager;
+  SparkEnv -> BlockManagerMaster;
+  BlockManagerMaster -> BlockManagerMasterActor;
+  BlockManagerMessages -> ToBlockManagerSlave;
+  ToBlockManagerSlave -> RemoveBlock;
+  ToBlockManagerSlave -> RemoveRdd;
+  BlockManagerMessages -> ToBlockManagerMaster;
+  ToBlockManagerMaster -> RegisterBlockManager;
+  ToBlockManagerMaster -> HeartBeat;
+  ToBlockManagerMaster -> UpdateBlockInfo;
+  ToBlockManagerMaster -> GetLocations;
+  ToBlockManagerMaster -> GetLocationsMultipleBlockIds;
+  ToBlockManagerMaster -> GetPeers;
+  ToBlockManagerMaster -> RemoveExecutor;
+  ToBlockManagerMaster -> StopBlockManagerMaster;
+  ToBlockManagerMaster -> GetMemoryStatus;
+  ToBlockManagerMaster -> ExpireDeadHosts;
+  ToBlockManagerMaster -> GetStorageStatus;
+  BlockManagerMaster -> BlockManagerMessages;
+  BlockManagerMasterActor -> BlockManagerId;
+  BlockManagerMasterActor -> BlockManagerMessages;
+  BlockManagerMasterActor -> BlockStatus;
+  BlockManagerMasterActor -> BlockManagerInfo;
+  BlockManagerInfo -> BlockManagerId;
+  BlockManagerInfo -> BlockStatus;
+  BlockManagerInfo -> BlockId;
 }
