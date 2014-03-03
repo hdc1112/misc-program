@@ -196,4 +196,8 @@ digraph G {
   TaskSchedulerImpl -> Pool;
   Pool -> Schedulable;
   DAGScheduler -> JobResult;
+  ShuffleMapTask -> RDD;
+  ShuffleMapTask -> TaskContext;
+  ResultTask -> RDD;
+  ResultTask -> TaskContext;
 }
