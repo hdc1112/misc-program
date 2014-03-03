@@ -203,4 +203,21 @@ digraph G {
   ActiveJob -> JobListener;
   TaskSetManager -> TaskSchedulerImpl;
   TaskSetManager -> TaskSet;
+  JobWaiter -> DAGScheduler;
+  Stage -> ShuffleDependency;
+  ShuffleDependency -> Dependency;
+  ShuffleDependency -> Partitioner;
+  Dependency -> RDD;
+  HashPartitioner -> Partitioner;
+  RangePartitioner -> Partitioner;
+  SerializerManager -> Serializer;
+  MapOutputTrackerMaster -> MapOutputTracker;
+  MapOutputTracker -> MapOutputTrackerMasterActor;
+  MapOutputTrackerMasterActor -> MapOutputTrackerMaster;
+  MapOutputTrackerMasterActor -> MapOutputTrackerMessage;
+  MapOutputTracker -> MapStatus;
+  MapStatus -> BlockManagerId;
+  BlockManagerWorker -> ConnectionManager;
+  TaskSchedulerImpl -> TaskResultGetter;
+  ShuffleMapTask -> MapStatus;
 }
