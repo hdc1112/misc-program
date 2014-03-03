@@ -200,4 +200,7 @@ digraph G {
   ShuffleMapTask -> TaskContext;
   ResultTask -> RDD;
   ResultTask -> TaskContext;
+  ActiveJob -> JobListener;
+  TaskSetManager -> TaskSchedulerImpl;
+  TaskSetManager -> TaskSet;
 }
