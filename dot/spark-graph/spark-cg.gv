@@ -220,4 +220,7 @@ digraph G {
   BlockManagerWorker -> ConnectionManager;
   TaskSchedulerImpl -> TaskResultGetter;
   ShuffleMapTask -> MapStatus;
+  Stage -> MapStatus;
+  ShuffleMapTask -> ShuffleBlockManager;
+  ShuffleMapTask -> ShuffleWriterGroup;
 }
