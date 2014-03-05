@@ -223,4 +223,12 @@ digraph G {
   Stage -> MapStatus;
   ShuffleMapTask -> ShuffleBlockManager;
   ShuffleMapTask -> ShuffleWriterGroup;
+  ShuffledRDD -> RDD;
+  ShuffledRDD -> ShuffleFetcher;
+  BlockStoreShuffleFetcher -> ShuffleFetcher;
+  ShuffleFetcher -> TaskContext;
+  ShuffleFetcher -> Serializer;
+  BlockStoreShuffleFetcher -> BlockManager;
+  BlockStoreShuffleFetcher -> MapOutputTracker;
+  //ShuffleBlockManager -> ShuffleWriterGroup;
 }
