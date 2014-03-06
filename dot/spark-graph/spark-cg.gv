@@ -231,4 +231,6 @@ digraph G {
   BlockStoreShuffleFetcher -> BlockManager;
   BlockStoreShuffleFetcher -> MapOutputTracker;
   //ShuffleBlockManager -> ShuffleWriterGroup;
+  RDD -> RDDCheckpointData;
+  CheckpointRDD -> RDD;
 }
