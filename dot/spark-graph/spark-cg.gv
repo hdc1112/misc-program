@@ -233,4 +233,17 @@ digraph G {
   //ShuffleBlockManager -> ShuffleWriterGroup;
   RDD -> RDDCheckpointData;
   CheckpointRDD -> RDD;
+  NarrowDependency -> Dependency;
+  TaskSchedulerImpl -> SchedulingMode;
+  TaskScheduler -> SchedulingMode;
+  TaskSchedulerImpl -> SchedulableBuilder;
+  FIFOSchedulableBuilder -> SchedulableBuilder;
+  FairSchedulableBuilder -> SchedulableBuilder;
+  Pool -> SchedulingAlgorithm;
+  FIFOSchedulingAlgorithm -> SchedulingAlgorithm;
+  FairSchedulingAlgorithm -> SchedulingAlgorithm;
+  TaskSetManager -> TaskInfo;
+  TaskSchedulerImpl -> TaskDescription;
+  CoarseGrainedSchedulerBackend-> TaskDescription;
+  TaskSetManager -> TaskDescription;
 }
