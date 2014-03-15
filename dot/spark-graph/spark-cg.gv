@@ -246,4 +246,5 @@ digraph G {
   TaskSchedulerImpl -> TaskDescription;
   CoarseGrainedSchedulerBackend-> TaskDescription;
   TaskSetManager -> TaskDescription;
+  CoarseGrainedExecutorBackend -> WorkerWatcher;
 }
