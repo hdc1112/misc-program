@@ -9,7 +9,9 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 
@@ -20,11 +22,15 @@ public class WordCount {
 		private Text word = new Text();
 		
 		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+			int loop = 0;
 			StringTokenizer itr = new StringTokenizer(value.toString());
 			while (itr.hasMoreTokens()) {
 				word.set(itr.nextToken());
 				context.write(word, one);
+				loop++;
 			}
+			context.write(new Text(Integer.toString(loop)), new IntWritable(loop));
+			context.write(new Text(key.getClass().getName()), one);
 		}
 	}
 	
@@ -50,6 +56,8 @@ public class WordCount {
 		}
 		Job job = new Job(conf, "word count");
 		job.setJarByClass(WordCount.class);
+		job.setInputFormatClass(MyInputFormat.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
 		job.setMapperClass(TokenizerMapper.class);
 		job.setCombinerClass(IntSumReducer.class);
 		job.setReducerClass(IntSumReducer.class);
