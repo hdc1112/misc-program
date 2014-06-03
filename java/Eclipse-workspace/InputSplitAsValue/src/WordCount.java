@@ -3,7 +3,9 @@ import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -17,20 +19,22 @@ import org.apache.hadoop.util.GenericOptionsParser;
 
 public class WordCount {
 	
-	public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
+	public static class TokenizerMapper extends Mapper<NullWritable, BytesWritable, Text, IntWritable> {
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
 		
-		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-			int loop = 0;
-			StringTokenizer itr = new StringTokenizer(value.toString());
-			while (itr.hasMoreTokens()) {
-				word.set(itr.nextToken());
-				context.write(word, one);
-				loop++;
-			}
-			context.write(new Text(Integer.toString(loop)), new IntWritable(loop));
-			context.write(new Text(key.getClass().getName()), one);
+		@Override
+		public void map(NullWritable key, BytesWritable value, Context context) throws IOException, InterruptedException {
+//			int loop = 0;
+//			StringTokenizer itr = new StringTokenizer(value.toString());
+//			while (itr.hasMoreTokens()) {
+//				word.set(itr.nextToken());
+//				context.write(word, one);
+//				loop++;
+//			}
+//			context.write(new Text(Integer.toString(loop)), new IntWritable(loop));
+//			context.write(new Text(key.getClass().getName()), one);
+			context.write(new Text(Integer.toString(value.getBytes().length)), one);
 		}
 	}
 	
