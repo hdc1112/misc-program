@@ -35,6 +35,7 @@ public class WordCount {
 //			context.write(new Text(Integer.toString(loop)), new IntWritable(loop));
 //			context.write(new Text(key.getClass().getName()), one);
 			context.write(new Text(Integer.toString(value.getBytes().length)), one);
+			context.write(new Text("aaa"), one);
 		}
 	}
 	
