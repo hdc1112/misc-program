@@ -15,9 +15,6 @@ import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 public class MyRecordReader extends RecordReader<NullWritable, BytesWritable> {
-	public static final String MAX_LINE_LENGTH = "mapreduce.input.linerecordreader.line.maxlength";
-	private static final Log LOG = LogFactory.getLog(MyRecordReader.class);
-
 	private FileSplit fileSplit;
 	private Configuration conf;
 	private BytesWritable value = new BytesWritable();
@@ -45,7 +42,6 @@ public class MyRecordReader extends RecordReader<NullWritable, BytesWritable> {
 				IOUtils.closeStream(in);
 			}
 			processed = true;
-//			LOG.fatal("hdc: " + value.toString());
 			return true;
 		}
 		return false;
@@ -70,6 +66,5 @@ public class MyRecordReader extends RecordReader<NullWritable, BytesWritable> {
 
 	@Override
 	public void close() throws IOException {
-		// do nothing
 	}
 }
