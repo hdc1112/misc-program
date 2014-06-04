@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -9,15 +8,16 @@ import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
+
+/* This program implements the algorithm from the link below */
+/* http://www.ijric.org/volumes/Vo12/Vol12No7.pdf */
 
 public class MR2PhaseApriori {
 
@@ -77,7 +77,7 @@ public class MR2PhaseApriori {
 		@Override
 		public void map(NullWritable key, BytesWritable value, Context context)
 				throws IOException, InterruptedException {
-			
+
 			// transform the bytes to strings
 			String realstr = new String(value.getBytes());
 			String[] rows = realstr.split("\n");
@@ -90,20 +90,25 @@ public class MR2PhaseApriori {
 			}
 
 			// from now on, the input split is a ArrayList<String>
-			// for (Iterator<String> it = array.iterator(); it.hasNext();) {
-			// context.write(new Text(it.next()), one);
-			// }
 			// now call the local apriori algorithm
 
 			LocalApriori localalg = new LocalApriori(transactions, items,
 					minsupport, dataset);
 			localalg.apriori();
-			ArrayList<String> frequent = localalg.frequentItemset();
-			for (Iterator<String> it = frequent.iterator(); it.hasNext();) {
-				// at this stage, we don't care about the
-				// local occurrences of that itemset, so just
-				// emit one for every itemset
-				context.write(new Text(it.next()), one);
+			ArrayList<ArrayList<String>> frequent = localalg.frequentItemset();
+			ArrayList<ArrayList<Integer>> occurrences = localalg.frequencies();
+
+			int loopc = 0, loopc2 = 0;
+			for (Iterator<ArrayList<String>> it = frequent.iterator(); it
+					.hasNext(); loopc++) {
+				ArrayList<String> thisitemset = it.next();
+				ArrayList<Integer> thisfreq = occurrences.get(loopc);
+				loopc2 = 0;
+				for (Iterator<String> it2 = thisitemset.iterator(); it2
+						.hasNext(); loopc2++) {
+					context.write(new Text(it2.next()), new IntWritable(
+							thisfreq.get(loopc2)));
+				}
 			}
 		}
 	}
@@ -111,15 +116,19 @@ public class MR2PhaseApriori {
 	public static class FirstPhaseReducer extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
 		private IntWritable result = new IntWritable();
+		private IntWritable one = new IntWritable(1);
 
 		public void reduce(Text key, Iterable<IntWritable> values,
 				Context context) throws IOException, InterruptedException {
-			int sum = 0;
-			for (IntWritable val : values) {
-				sum += val.get();
-			}
-			result.set(sum);
-			context.write(key, result);
+			// the following is for debugging purpose
+			// int sum = 0;
+			// for (IntWritable val : values) {
+			// sum += val.get();
+			// }
+			// result.set(sum);
+			// context.write(key, result);
+			// the following is from paper's description
+			context.write(key, one);
 		}
 	}
 
@@ -134,10 +143,16 @@ public class MR2PhaseApriori {
 			System.err.println(" <minimum support>");
 			System.exit(2);
 		}
+
 		inputpath = otherArgs[0];
 		outputpath = otherArgs[1];
+
+		// at this stage, let's assume that each
+		// split has the same amount of transactions,
+		// the same number of items
 		transactions = Integer.parseInt(otherArgs[2]);
 		items = Integer.parseInt(otherArgs[3]);
+
 		minsupport = Integer.parseInt(otherArgs[4]);
 
 		run_on_hadoop_phase1();

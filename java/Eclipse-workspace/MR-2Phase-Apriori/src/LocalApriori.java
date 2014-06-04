@@ -16,7 +16,11 @@ public class LocalApriori {
 	private int minsupport;
 	private ArrayList<String> dataset;
 
-	private ArrayList<String> candidates;
+	private ArrayList<ArrayList<String>> g_candidates = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<Integer>> g_frequencies = new ArrayList<ArrayList<Integer>>();
+
+	private ArrayList<String> candidates = new ArrayList<String>();
+	private ArrayList<Integer> frequencies = new ArrayList<Integer>();
 
 	public final static String SEPARATOR = " ";
 	public final static String PURCHASED = "1";
@@ -27,26 +31,35 @@ public class LocalApriori {
 		this.items = items;
 		this.minsupport = minsupport;
 		this.dataset = dataset;
-
-		this.candidates = new ArrayList<String>();
 	}
 
 	public void apriori() {
 		int itemsetNumber = 0;
 		do {
 			itemsetNumber++;
+			// after these two calls
+			// candidates will store the frequent itemset
+			// count[] will store each one's occurrences
 			generateCandidates(itemsetNumber);
 			calculateFrequentItemsets(itemsetNumber);
-			// if you want to get all length
-			// frequent itemset, you must
-			// store the candidates to some
-			// other place at here
-//		} while (candidates.size() > 1);
-		} while (itemsetNumber <= 1);
+
+			// add this iteration's result into global result
+			// these two lines of code are based on the
+			// assumption there won't be any "write" operation
+			// on the data structure. So far, this assumption
+			// is true.
+			g_candidates.add(candidates);
+			g_frequencies.add(frequencies);
+		} while (candidates.size() > 1);
+		// } while (itemsetNumber < 2); // debug
 	}
 
-	public ArrayList<String> frequentItemset() {
-		return candidates;
+	public ArrayList<ArrayList<String>> frequentItemset() {
+		return g_candidates;
+	}
+
+	public ArrayList<ArrayList<Integer>> frequencies() {
+		return g_frequencies;
 	}
 
 	private void generateCandidates(int number) {
@@ -130,9 +143,12 @@ public class LocalApriori {
 				}
 			}
 		}
+
+		frequencies = new ArrayList<Integer>();
 		for (int i = 0; i < candidates.size(); i++) {
 			if ((count[i] / (double) transactions) >= (minsupport / 100.0)) {
 				frequentCandidates.add(candidates.get(i));
+				frequencies.add(count[i]);
 			}
 		}
 		candidates = frequentCandidates;
