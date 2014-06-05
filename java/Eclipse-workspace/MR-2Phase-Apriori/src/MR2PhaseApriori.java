@@ -31,12 +31,14 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-/* This program implements the algorithm from the link below */
+/* Dachuan Huang, June 2014 */
+/* hdc1112@gmail.com */
+/* This program is one MapReduce implementation of Apriori algorithm */
+/* It implements the algorithm from the link below */
 /* http://www.ijric.org/volumes/Vo12/Vol12No7.pdf */
+/* This program is tested in Hadoop 2.2.0 */
 
 public class MR2PhaseApriori {
-
-	/* for phase 1 */
 
 	private static String inputpath;
 	private static String outputpath1stphase;
@@ -50,6 +52,8 @@ public class MR2PhaseApriori {
 
 	private static String SPLIT_NUM_ROWS = "split_num_rows";
 	private static String TOTAL_NUM_ROWS = "_totalrows.txt";
+
+	/* for phase 1 */
 
 	public static void run_on_hadoop_phase1() throws IllegalArgumentException,
 			IOException, ClassNotFoundException, InterruptedException {
@@ -89,7 +93,6 @@ public class MR2PhaseApriori {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			minsupport = context.getConfiguration()
 					.getInt(MINSUPPORT_CONFIG, 0);
-
 		}
 
 		@Override
@@ -164,13 +167,13 @@ public class MR2PhaseApriori {
 				// out.close();
 			} else {
 				// the following is for debugging purpose
-				int sum = 0;
-				for (IntWritable val : values) {
-					sum += val.get();
-				}
-				context.write(key, new IntWritable(sum));
+				// int sum = 0;
+				// for (IntWritable val : values) {
+				// sum += val.get();
+				// }
+				// context.write(key, new IntWritable(sum));
 				// the following is from paper's description
-				// context.write(key, one);
+				context.write(key, one);
 			}
 		}
 	}
@@ -190,7 +193,6 @@ public class MR2PhaseApriori {
 		job.setInputFormatClass(WholeFileInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		job.setMapperClass(SecondPhaseMapper.class);
-		job.setCombinerClass(SecondPhaseReducer.class);
 		job.setReducerClass(SecondPhaseReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
@@ -305,7 +307,7 @@ public class MR2PhaseApriori {
 	public static class SecondPhaseReducer extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
 
-		private String totalrows;
+		private int totalrows = 8;
 
 		private int minsupport;
 
@@ -328,23 +330,9 @@ public class MR2PhaseApriori {
 			for (IntWritable val : values) {
 				sum += val.get();
 			}
-			// context.write(new Text(Integer.toString(sum)), new
-			// IntWritable(sum));
-			context.write(
-					new Text("zzz--" + key.toString() + "---"
-							+ Integer.toString(sum)), new IntWritable(555));
-			// if ((sum * 1.0 / 8.0) >= (minsupport * 1.0 / 100.0)) {
-			// context.write(key, new IntWritable(sum));
-			// context.write(key, new IntWritable(1000));
-			// context.write(key, new IntWritable(loopc));
-			// } else {
-			// context.write(key, new IntWritable(1000));
-			// }
-			// context.write(new Text("zzz--" + key.toString() + "---" +
-			// Integer.toString(sum)),
-			// new IntWritable(999));
-			// context.write(new Text("hhh--" + Integer.toString(minsupport)),
-			// new IntWritable(100));
+			if ((sum * 100) >= (minsupport * totalrows)) {
+				context.write(key, new IntWritable(sum));
+			}
 		}
 	}
 
@@ -364,10 +352,10 @@ public class MR2PhaseApriori {
 
 		inputpath = otherArgs[0];
 		outputpath = otherArgs[1];
-		outputpath1stphase = outputpath + "-1stphase";
-
 		items = Integer.parseInt(otherArgs[2]);
 		minsupport = Integer.parseInt(otherArgs[3]);
+
+		outputpath1stphase = outputpath + "-1stphase";
 
 		run_on_hadoop_phase1();
 
