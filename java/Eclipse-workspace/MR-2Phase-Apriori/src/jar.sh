@@ -14,9 +14,3 @@ jar cvfe ./mr-2phase-apriori.jar MR2PhaseApriori *.class
 jar -tf ./mr-2phase-apriori.jar
 scp ./mr-2phase-apriori.jar hadoop1:/tmp/
 rm -f *.class
-
-if [ "$1" = "run" ]; then
-  ssh -n hadoop1 /home/dachuan/projects/run.sh
-fi
-
-date

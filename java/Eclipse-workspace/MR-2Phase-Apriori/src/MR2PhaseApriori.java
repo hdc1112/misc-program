@@ -92,8 +92,8 @@ public class MR2PhaseApriori {
 		FileOutputFormat.setOutputPath(job, new Path(outputpath1stphase));
 
 		int retval = job.waitForCompletion(true) ? 0 : 1;
-		if (retval == 1) {
-			System.exit(1);
+		if (retval != 0) {
+			System.exit(retval);
 		}
 
 		Counters counters = job.getCounters();
@@ -221,7 +221,11 @@ public class MR2PhaseApriori {
 			job.addCacheFile(new URI(path.toString()));
 		}
 
-		System.exit(job.waitForCompletion(true) ? 0 : 1);
+		int retval = job.waitForCompletion(true) ? 0 : 1;
+
+//		if (retval != 0) {
+//			System.exit(retval);
+//		}
 	}
 
 	public static class SecondPhaseMapper extends
@@ -357,8 +361,15 @@ public class MR2PhaseApriori {
 
 		outputpath1stphase = outputpath + "-1stphase";
 
+		long starttime = System.currentTimeMillis();
+
 		run_on_hadoop_phase1();
 
 		run_on_hadoop_phase2();
+
+		long endtime = System.currentTimeMillis();
+
+		System.err.println(PREFIX + "Total execution time: "
+				+ (endtime - starttime));
 	}
 }
