@@ -1,11 +1,7 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,8 +9,6 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -22,10 +16,11 @@ import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.filecache.DistributedCache;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
@@ -36,9 +31,24 @@ import org.apache.hadoop.util.GenericOptionsParser;
 /* This program is one MapReduce implementation of Apriori algorithm */
 /* It implements the algorithm from the link below */
 /* http://www.ijric.org/volumes/Vo12/Vol12No7.pdf */
+
 /* This program is tested in Hadoop 2.2.0 */
+/* Input files are put in the input folder */
+/* Each input file will be treated as one FileSplit */
+/* Each input file's format is a boolean matrix */
+/* Row means transaction, column means item */
+/* For example */
+/* 1 0 1 1 1 1 0 */
+/* 0 0 1 1 0 0 0 */
+/* 1 1 1 0 1 0 1 */
+/* 1 1 0 1 0 1 1 */
+
+/* 1st Phase's output records the global candidates */
+/* 2nd Phase's output is the frequent itemset */
 
 public class MR2PhaseApriori {
+
+	private static String PREFIX = "[MR2PhaseApriori] ";
 
 	private static String inputpath;
 	private static String outputpath1stphase;
@@ -50,8 +60,14 @@ public class MR2PhaseApriori {
 	private static String ITEMS_CONFIG = "MR2PhaseApriori.items.value";
 	private static String MINSUPPORT_CONFIG = "MR2PhaseApriori.minsupport.value";
 
-	private static String SPLIT_NUM_ROWS = "split_num_rows";
-	private static String TOTAL_NUM_ROWS = "_totalrows.txt";
+	private static String SPLIT_NUM_ROWS = "split_num_rows.key";
+
+	private static enum TOTALROWCOUNTER {
+		TOTALROW
+	}
+
+	private static String TOTAL_ROW_CONFIG = "MR2PhaseApriori.totalrow.value";
+	private static long totalrows;
 
 	/* for phase 1 */
 
@@ -79,6 +95,12 @@ public class MR2PhaseApriori {
 		if (retval == 1) {
 			System.exit(1);
 		}
+
+		Counters counters = job.getCounters();
+		Counter c = counters.findCounter(TOTALROWCOUNTER.TOTALROW);
+		totalrows = c.getValue();
+
+		System.err.println(PREFIX + "Total rows: " + totalrows);
 	}
 
 	public static class FirstPhaseMapper extends
@@ -134,18 +156,13 @@ public class MR2PhaseApriori {
 				}
 			}
 
-			// write this InputSplit's rows, such that the whole
-			// number of transactions can be computed.
-			// this is based on the assumption that this map()
-			// will only be called once.
-			// context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(
-			// transactions));
+			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(
+					transactions));
 		}
 	}
 
 	public static class FirstPhaseReducer extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
-		// private IntWritable result = new IntWritable();
 		private IntWritable one = new IntWritable(1);
 
 		@Override
@@ -157,14 +174,8 @@ public class MR2PhaseApriori {
 				for (IntWritable val : values) {
 					totalrows += val.get();
 				}
-
-				// FileSystem fs = FileSystem.get(context.getConfiguration());
-				// Path filepath = new Path("./" + TOTAL_NUM_ROWS);
-				// fs.delete(filepath, true);
-				// FSDataOutputStream out = fs.create(new Path("./"
-				// + TOTAL_NUM_ROWS), true);
-				// out.writeUTF(Integer.toString(totalrows));
-				// out.close();
+				context.getCounter(TOTALROWCOUNTER.TOTALROW).increment(
+						totalrows);
 			} else {
 				// the following is for debugging purpose
 				// int sum = 0;
@@ -187,6 +198,8 @@ public class MR2PhaseApriori {
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
 		conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
 
+		conf.set(TOTAL_ROW_CONFIG, Long.toString(totalrows));
+
 		String jobname = "MapReduce 2Phase Apriori, Phase 2";
 		Job job = new Job(conf, jobname);
 		job.setJarByClass(MR2PhaseApriori.class);
@@ -206,7 +219,6 @@ public class MR2PhaseApriori {
 			if (path.getName().startsWith("_"))
 				continue;
 			job.addCacheFile(new URI(path.toString()));
-			// DistributedCache.addCacheFile(new URI(path.toString()), conf);
 		}
 
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
@@ -214,11 +226,8 @@ public class MR2PhaseApriori {
 
 	public static class SecondPhaseMapper extends
 			Mapper<NullWritable, BytesWritable, Text, IntWritable> {
-		private final static IntWritable one = new IntWritable(1);
 
-		private int transactions;
 		private int items;
-		private int minsupport;
 
 		private String[] localFileNames;
 		private File[] localFiles;
@@ -254,8 +263,6 @@ public class MR2PhaseApriori {
 					dataset.add(thisrow);
 				}
 			}
-			// get the number of rows from dataset itself
-			transactions = dataset.size();
 
 			if (localFiles != null) {
 				for (int i = 0; i < localFiles.length; i++) {
@@ -278,7 +285,6 @@ public class MR2PhaseApriori {
 					}
 				}
 				context.write(new Text(itemset), new IntWritable(count));
-
 			}
 			br.close();
 		}
@@ -307,20 +313,14 @@ public class MR2PhaseApriori {
 	public static class SecondPhaseReducer extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
 
-		private int totalrows = 8;
-
+		private long totalrows;
 		private int minsupport;
 
 		@Override
 		public void setup(Context context) throws IOException {
-			// FileSystem fs = FileSystem.get(context.getConfiguration());
-			// Path filepath = new Path("./" + TOTAL_NUM_ROWS);
-			// FSDataInputStream in = fs.open(filepath);
-			// totalrows = in.readUTF();
-
 			minsupport = context.getConfiguration()
 					.getInt(MINSUPPORT_CONFIG, 0);
-
+			totalrows = context.getConfiguration().getLong(TOTAL_ROW_CONFIG, 0);
 		}
 
 		@Override
@@ -344,7 +344,7 @@ public class MR2PhaseApriori {
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();
 		if (otherArgs.length != 4) {
-			System.err.print("Usage: MR2PhaseApriori <in> <out>");
+			System.err.print(PREFIX + "Usage: MR2PhaseApriori <in> <out>");
 			System.err.print(" <columns/items>");
 			System.err.println(" <minimum support>");
 			System.exit(2);
