@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -105,6 +107,8 @@ public class MR2PhaseApriori {
 
 	public static class FirstPhaseMapper extends
 			Mapper<NullWritable, BytesWritable, Text, IntWritable> {
+		
+		public static Log LOG = LogFactory.getLog(FirstPhaseMapper.class);
 
 		private int transactions;
 		private int items;

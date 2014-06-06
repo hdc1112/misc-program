@@ -3,6 +3,7 @@
 absme=`readlink -f $0`
 abshere=`dirname $absme`
 
+dataabspath=`readlink -f $1`
 cd $abshere
 
 if [ $# != 3 ]; then
@@ -11,5 +12,5 @@ if [ $# != 3 ]; then
 fi
 
 ./jar.sh
-./data.sh $1
+./data.sh $dataabspath
 ./remote-run.sh $2 $3
