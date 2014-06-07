@@ -9,18 +9,20 @@ import java.util.Random;
 
 public class ControlkRows {
 	public static void main(String[] args) throws IOException {
-		if (args.length != 2) {
+		if (args.length != 3) {
 			System.err.println("Usage: java ControlkRows outputfile k");
 			System.exit(1);
 		}
 
+		String filename = args[0];
 		int k = Integer.parseInt(args[1]);
-
+		int columns = Integer.parseInt(args[2]);
+		
 		// suppose #rows = 1000, all 1 = 500, one column 1 = 500
 		// suppose #columns = 30
 		// suppose #splits = 2
 
-		final int columns = 30;
+		// final int columns = 30;
 		final int splitrows = 500;
 		final int totalrows = 1000;
 
@@ -67,8 +69,8 @@ public class ControlkRows {
 			strs[splitrows + (splitrows - k) + i] = sb.toString();
 		}
 
-		String filename = args[0];
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filename)));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(
+				new File(filename)));
 
 		for (int i = 0; i < totalrows; i++) {
 			bw.write(strs[i]);

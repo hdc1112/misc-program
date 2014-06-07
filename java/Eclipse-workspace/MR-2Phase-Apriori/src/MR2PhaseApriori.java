@@ -86,7 +86,7 @@ public class MR2PhaseApriori {
 		job.setInputFormatClass(WholeFileInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		job.setMapperClass(FirstPhaseMapper.class);
-		job.setCombinerClass(FirstPhaseReducer.class);
+		// job.setCombinerClass(FirstPhaseReducer.class);
 		job.setReducerClass(FirstPhaseReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
@@ -125,7 +125,9 @@ public class MR2PhaseApriori {
 
 			starttime = System.currentTimeMillis();
 
-			System.err.println("Map Task start time: " + (starttime));
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map Task start time: " + (starttime));
 
 		}
 
@@ -175,14 +177,28 @@ public class MR2PhaseApriori {
 		@Override
 		public void cleanup(Context context) {
 			endtime = System.currentTimeMillis();
-			System.err.println("Map Task end time: " + (endtime));
-			System.err.println("Map Task execution time: " + (endtime - starttime));
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map Task end time: " + (endtime));
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map Task execution time: " + (endtime - starttime));
 		}
 	}
 
 	public static class FirstPhaseReducer extends
 			Reducer<Text, IntWritable, Text, IntWritable> {
 		private IntWritable one = new IntWritable(1);
+
+		private long reducestart, reduceend;
+
+		@Override
+		public void setup(Context context) {
+			reducestart = System.currentTimeMillis();
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce task start time: " + reducestart);
+		}
 
 		@Override
 		public void reduce(Text key, Iterable<IntWritable> values,
@@ -205,6 +221,17 @@ public class MR2PhaseApriori {
 				// the following is from paper's description
 				context.write(key, one);
 			}
+		}
+
+		@Override
+		public void cleanup(Context context) {
+			reduceend = System.currentTimeMillis();
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce task end time: " + reduceend);
+			System.err.println("(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce execution time: " + (reduceend - reducestart));
 		}
 	}
 
@@ -240,6 +267,8 @@ public class MR2PhaseApriori {
 			job.addCacheFile(new URI(path.toString()));
 		}
 
+		System.err.println("Just added " + fss.length
+				+ " files into distributed cache.");
 		int retval = job.waitForCompletion(true) ? 0 : 1;
 
 		// if (retval != 0) {
@@ -254,6 +283,8 @@ public class MR2PhaseApriori {
 
 		private String[] localFileNames;
 		private File[] localFiles;
+
+		private long mapstart, mapend;
 
 		@Override
 		public void setup(Context context) throws IOException {
@@ -270,6 +301,22 @@ public class MR2PhaseApriori {
 					localFiles[i] = new File(localFileNames[i]);
 				}
 			}
+
+			mapstart = System.currentTimeMillis();
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map task start time: " + mapstart);
+		}
+
+		@Override
+		public void cleanup(Context context) {
+			mapend = System.currentTimeMillis();
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map task end time: " + mapend);
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Map task execution time: " + (mapend - mapstart));
 		}
 
 		@Override
@@ -339,11 +386,30 @@ public class MR2PhaseApriori {
 		private long totalrows;
 		private int minsupport;
 
+		private long reducestart, reduceend;
+
 		@Override
 		public void setup(Context context) throws IOException {
 			minsupport = context.getConfiguration()
 					.getInt(MINSUPPORT_CONFIG, 0);
 			totalrows = context.getConfiguration().getLong(TOTAL_ROW_CONFIG, 0);
+
+			reducestart = System.currentTimeMillis();
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce task start time: " + reducestart);
+		}
+
+		@Override
+		public void cleanup(Context context) {
+			reduceend = System.currentTimeMillis();
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce task end time: " + reduceend);
+			System.err.println("(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Reduce task execution time: "
+					+ (reduceend - reducestart));
 		}
 
 		@Override

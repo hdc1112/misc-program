@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ $# != 2 ]; then
-  echo Usage $0 /path/to/file k
+if [ $# != 3 ]; then
+  echo Usage $0 /path/to/file k columns
   exit 1
 fi
 
@@ -18,7 +18,7 @@ absfilepath=`dirname $absfile`
 cd $abshere
 
 javac ControlkRows.java
-java ControlkRows `cygpath -wp $absfile` $2
+java ControlkRows `cygpath -wp $absfile` $2 $3
 head -n 500 $absfile > $absfilepath/${filename}-1
 head -n 1000 $absfile | tail -n 500 > $absfilepath/${filename}-2
 
@@ -28,5 +28,5 @@ rm -f $absfile
 mv $absfilepath/${filename}-1 /tmp/tempdatadir
 mv $absfilepath/${filename}-2 /tmp/tempdatadir
 
-./run.sh /tmp/tempdatadir 15 50
+./run.sh /tmp/tempdatadir $3 50
 echo k=$2

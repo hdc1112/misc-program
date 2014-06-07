@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 /* and imposing this condition on any subsequent users. */
 
 public class LocalApriori {
-	
+
 	private int items;
 	private int transactions;
 	private int minsupport;
@@ -40,14 +40,15 @@ public class LocalApriori {
 
 	public void apriori() {
 		int itemsetNumber = 0;
-		
+
 		int loop = 0;
 		do {
 			itemsetNumber++;
-			
+
 			loop++;
 			System.err.println("Starting loop: " + loop);
-			
+			long loopstart = System.currentTimeMillis();
+
 			// after these two calls
 			// candidates will store the frequent itemset
 			// count[] will store each one's occurrences
@@ -61,8 +62,10 @@ public class LocalApriori {
 			// is true.
 			g_candidates.add(candidates);
 			g_frequencies.add(frequencies);
-			
-			System.err.println("Ending loop: " + loop);
+
+			long loopend = System.currentTimeMillis();
+			System.err.println("Ending loop: " + loop + " Takes "
+					+ (loopend - loopstart));
 		} while (candidates.size() > 1);
 		// } while (itemsetNumber < 2); // debug
 	}
