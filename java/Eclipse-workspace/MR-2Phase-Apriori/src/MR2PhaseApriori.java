@@ -107,18 +107,26 @@ public class MR2PhaseApriori {
 
 	public static class FirstPhaseMapper extends
 			Mapper<NullWritable, BytesWritable, Text, IntWritable> {
-		
+
 		public static Log LOG = LogFactory.getLog(FirstPhaseMapper.class);
 
 		private int transactions;
 		private int items;
 		private int minsupport;
 
+		private long starttime;
+		private long endtime;
+
 		@Override
 		public void setup(Context context) {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			minsupport = context.getConfiguration()
 					.getInt(MINSUPPORT_CONFIG, 0);
+
+			starttime = System.currentTimeMillis();
+
+			System.err.println("Map Task start time: " + (starttime));
+
 		}
 
 		@Override
@@ -162,6 +170,13 @@ public class MR2PhaseApriori {
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(
 					transactions));
+		}
+
+		@Override
+		public void cleanup(Context context) {
+			endtime = System.currentTimeMillis();
+			System.err.println("Map Task end time: " + (endtime));
+			System.err.println("Map Task execution time: " + (endtime - starttime));
 		}
 	}
 
@@ -227,9 +242,9 @@ public class MR2PhaseApriori {
 
 		int retval = job.waitForCompletion(true) ? 0 : 1;
 
-//		if (retval != 0) {
-//			System.exit(retval);
-//		}
+		// if (retval != 0) {
+		// System.exit(retval);
+		// }
 	}
 
 	public static class SecondPhaseMapper extends
@@ -367,13 +382,25 @@ public class MR2PhaseApriori {
 
 		long starttime = System.currentTimeMillis();
 
+		long phase1starttime = System.currentTimeMillis();
+
 		run_on_hadoop_phase1();
 
+		long phase1endtime = System.currentTimeMillis();
+
+		long phase2starttime = System.currentTimeMillis();
+
 		run_on_hadoop_phase2();
+
+		long phase2endtime = System.currentTimeMillis();
 
 		long endtime = System.currentTimeMillis();
 
 		System.err.println(PREFIX + "Total execution time: "
 				+ (endtime - starttime));
+		System.err.println(PREFIX + "Phase 1 execution time: "
+				+ (phase1endtime - phase1starttime));
+		System.err.println(PREFIX + "Phase 2 execution time: "
+				+ (phase2endtime - phase2starttime));
 	}
 }
