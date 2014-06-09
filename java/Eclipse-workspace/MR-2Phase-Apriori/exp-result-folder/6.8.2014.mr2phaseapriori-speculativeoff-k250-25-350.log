@@ -1,0 +1,3233 @@
+250
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:44:12 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:44:45 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:44:57 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:45:10 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:45:44 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 13:45:45 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:45:45 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 13:45:45 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 13:45:45 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 13:45:45 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 13:45:45 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 13:45:45 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 13:45:45 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 13:45:46 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0001
+14/06/08 13:45:46 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0001 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:45:46 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0001/
+14/06/08 13:45:46 INFO mapreduce.Job: Running job: job_1402260142225_0001
+14/06/08 13:45:57 INFO mapreduce.Job: Job job_1402260142225_0001 running in uber mode : false
+14/06/08 13:45:57 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 13:46:16 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 13:55:32 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 13:55:33 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 13:55:40 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 13:55:40 INFO mapreduce.Job: Job job_1402260142225_0001 completed successfully
+14/06/08 13:55:40 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=3342380
+		FILE: Number of bytes written=6923575
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=1146347
+		Total time spent by all reduces in occupied slots (ms)=6109
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131072
+		Map output bytes=3080230
+		Map output materialized bytes=3342386
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=3342386
+		Reduce input records=131072
+		Reduce output records=65535
+		Spilled Records=262144
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=11763
+		CPU time spent (ms)=541350
+		Physical memory (bytes) snapshot=629161984
+		Virtual memory (bytes) snapshot=2510512128
+		Total committed heap usage (bytes)=482279424
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 13:55:40 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:55:40 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 13:55:40 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 13:55:41 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 13:55:41 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 13:55:41 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 13:55:41 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 13:55:41 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0002
+14/06/08 13:55:41 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0002 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:55:41 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0002/
+14/06/08 13:55:41 INFO mapreduce.Job: Running job: job_1402260142225_0002
+14/06/08 13:55:49 INFO mapreduce.Job: Job job_1402260142225_0002 running in uber mode : false
+14/06/08 13:55:49 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 13:56:05 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 13:57:18 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 13:57:26 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 13:57:27 INFO mapreduce.Job: Job job_1402260142225_0002 completed successfully
+14/06/08 13:57:27 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=174338
+		Total time spent by all reduces in occupied slots (ms)=6171
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2618
+		CPU time spent (ms)=78960
+		Physical memory (bytes) snapshot=545812480
+		Virtual memory (bytes) snapshot=2510962688
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 704115
+[MR2PhaseApriori] Phase 1 execution time: 597607
+[MR2PhaseApriori] Phase 2 execution time: 106508
+k=250
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:57:52 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 13:57:53 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 13:57:53 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 13:58:25 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 13:58:26 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:58:27 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 13:58:27 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 13:58:27 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 13:58:27 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 13:58:27 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 13:58:27 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 13:58:27 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 13:58:28 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0003
+14/06/08 13:58:28 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0003 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 13:58:28 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0003/
+14/06/08 13:58:28 INFO mapreduce.Job: Running job: job_1402260142225_0003
+14/06/08 13:58:36 INFO mapreduce.Job: Job job_1402260142225_0003 running in uber mode : false
+14/06/08 13:58:36 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 13:58:52 INFO mapreduce.Job:  map 33% reduce 0%
+14/06/08 13:58:53 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:08:10 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:08:14 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:08:19 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:08:19 INFO mapreduce.Job: Job job_1402260142225_0003 completed successfully
+14/06/08 14:08:19 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=3342380
+		FILE: Number of bytes written=6923575
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=1147800
+		Total time spent by all reduces in occupied slots (ms)=6248
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131072
+		Map output bytes=3080230
+		Map output materialized bytes=3342386
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=3342386
+		Reduce input records=131072
+		Reduce output records=65535
+		Spilled Records=262144
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=11969
+		CPU time spent (ms)=540850
+		Physical memory (bytes) snapshot=622460928
+		Virtual memory (bytes) snapshot=2510340096
+		Total committed heap usage (bytes)=482279424
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:08:19 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:08:19 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:08:19 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:08:20 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:08:20 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:08:20 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:08:20 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:08:20 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0004
+14/06/08 14:08:20 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0004 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:08:20 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0004/
+14/06/08 14:08:20 INFO mapreduce.Job: Running job: job_1402260142225_0004
+14/06/08 14:08:28 INFO mapreduce.Job: Job job_1402260142225_0004 running in uber mode : false
+14/06/08 14:08:28 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:08:45 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:09:58 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:09:59 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:10:06 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:10:07 INFO mapreduce.Job: Job job_1402260142225_0004 completed successfully
+14/06/08 14:10:07 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=176331
+		Total time spent by all reduces in occupied slots (ms)=6064
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2036
+		CPU time spent (ms)=78050
+		Physical memory (bytes) snapshot=580722688
+		Virtual memory (bytes) snapshot=2510348288
+		Total committed heap usage (bytes)=443285504
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 702644
+[MR2PhaseApriori] Phase 1 execution time: 594824
+[MR2PhaseApriori] Phase 2 execution time: 107820
+k=250
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:10:32 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:10:33 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:10:33 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:11:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:11:07 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:11:07 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:11:08 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:11:08 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:11:08 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:11:08 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:11:08 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:11:08 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:11:08 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0005
+14/06/08 14:11:08 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0005 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:11:08 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0005/
+14/06/08 14:11:08 INFO mapreduce.Job: Running job: job_1402260142225_0005
+14/06/08 14:11:17 INFO mapreduce.Job: Job job_1402260142225_0005 running in uber mode : false
+14/06/08 14:11:17 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:11:33 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:20:50 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:20:56 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:21:01 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:21:01 INFO mapreduce.Job: Job job_1402260142225_0005 completed successfully
+14/06/08 14:21:01 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=3342380
+		FILE: Number of bytes written=6923575
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=1149686
+		Total time spent by all reduces in occupied slots (ms)=7575
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131072
+		Map output bytes=3080230
+		Map output materialized bytes=3342386
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=3342386
+		Reduce input records=131072
+		Reduce output records=65535
+		Spilled Records=262144
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=11795
+		CPU time spent (ms)=553360
+		Physical memory (bytes) snapshot=624259072
+		Virtual memory (bytes) snapshot=2510065664
+		Total committed heap usage (bytes)=482279424
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:21:01 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:21:01 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:21:02 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:21:02 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:21:02 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:21:02 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:21:02 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:21:02 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0006
+14/06/08 14:21:02 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0006 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:21:02 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0006/
+14/06/08 14:21:02 INFO mapreduce.Job: Running job: job_1402260142225_0006
+14/06/08 14:21:10 INFO mapreduce.Job: Job job_1402260142225_0006 running in uber mode : false
+14/06/08 14:21:10 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:21:27 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:22:39 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:22:40 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:22:48 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:22:49 INFO mapreduce.Job: Job job_1402260142225_0006 completed successfully
+14/06/08 14:22:49 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=174661
+		Total time spent by all reduces in occupied slots (ms)=5824
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2621
+		CPU time spent (ms)=79080
+		Physical memory (bytes) snapshot=548802560
+		Virtual memory (bytes) snapshot=2510340096
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 704514
+[MR2PhaseApriori] Phase 1 execution time: 596789
+[MR2PhaseApriori] Phase 2 execution time: 107725
+k=250
+275
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:23:14 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:23:15 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:23:15 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:23:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:23:48 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /input-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:24:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:24:12 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:24:46 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:24:47 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:24:47 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:24:48 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:24:48 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:24:48 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:24:48 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:24:48 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:24:48 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:24:48 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0007
+14/06/08 14:24:49 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0007 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:24:49 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0007/
+14/06/08 14:24:49 INFO mapreduce.Job: Running job: job_1402260142225_0007
+14/06/08 14:24:57 INFO mapreduce.Job: Job job_1402260142225_0007 running in uber mode : false
+14/06/08 14:24:57 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:25:08 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 14:25:13 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:25:21 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 14:29:45 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 14:29:47 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:29:49 INFO mapreduce.Job: Job job_1402260142225_0007 completed successfully
+14/06/08 14:29:49 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=295620
+		Total time spent by all reduces in occupied slots (ms)=275813
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6381
+		CPU time spent (ms)=276810
+		Physical memory (bytes) snapshot=594526208
+		Virtual memory (bytes) snapshot=2510348288
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:29:49 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:29:49 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:29:49 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:29:49 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:29:49 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:29:49 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:29:49 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:29:49 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0008
+14/06/08 14:29:49 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0008 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:29:49 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0008/
+14/06/08 14:29:49 INFO mapreduce.Job: Running job: job_1402260142225_0008
+14/06/08 14:29:58 INFO mapreduce.Job: Job job_1402260142225_0008 running in uber mode : false
+14/06/08 14:29:58 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:30:15 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:31:29 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:31:30 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:31:38 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:31:38 INFO mapreduce.Job: Job job_1402260142225_0008 completed successfully
+14/06/08 14:31:38 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=179921
+		Total time spent by all reduces in occupied slots (ms)=6238
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2565
+		CPU time spent (ms)=79110
+		Physical memory (bytes) snapshot=546316288
+		Virtual memory (bytes) snapshot=2510639104
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 413392
+[MR2PhaseApriori] Phase 1 execution time: 303751
+[MR2PhaseApriori] Phase 2 execution time: 109641
+k=275
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:32:04 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:32:05 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:32:05 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:32:37 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:32:38 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:32:38 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:32:39 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:32:39 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:32:39 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:32:39 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:32:39 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:32:39 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:32:39 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0009
+14/06/08 14:32:39 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0009 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:32:39 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0009/
+14/06/08 14:32:39 INFO mapreduce.Job: Running job: job_1402260142225_0009
+14/06/08 14:32:48 INFO mapreduce.Job: Job job_1402260142225_0009 running in uber mode : false
+14/06/08 14:32:48 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:32:59 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 14:33:04 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:33:12 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 14:37:37 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 14:37:40 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:37:40 INFO mapreduce.Job: Job job_1402260142225_0009 completed successfully
+14/06/08 14:37:40 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=297016
+		Total time spent by all reduces in occupied slots (ms)=277831
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6308
+		CPU time spent (ms)=274970
+		Physical memory (bytes) snapshot=591323136
+		Virtual memory (bytes) snapshot=2510548992
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:37:40 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:37:40 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:37:40 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:37:40 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:37:40 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:37:40 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:37:40 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:37:40 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0010
+14/06/08 14:37:40 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0010 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:37:40 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0010/
+14/06/08 14:37:40 INFO mapreduce.Job: Running job: job_1402260142225_0010
+14/06/08 14:37:49 INFO mapreduce.Job: Job job_1402260142225_0010 running in uber mode : false
+14/06/08 14:37:49 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:38:05 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:39:17 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:39:18 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:39:25 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:39:25 INFO mapreduce.Job: Job job_1402260142225_0010 completed successfully
+14/06/08 14:39:25 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=174670
+		Total time spent by all reduces in occupied slots (ms)=5981
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2049
+		CPU time spent (ms)=78120
+		Physical memory (bytes) snapshot=574787584
+		Virtual memory (bytes) snapshot=2510798848
+		Total committed heap usage (bytes)=443285504
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 409383
+[MR2PhaseApriori] Phase 1 execution time: 303644
+[MR2PhaseApriori] Phase 2 execution time: 105739
+k=275
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:39:51 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:39:52 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:39:52 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:40:24 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:40:25 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:40:25 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:40:26 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:40:26 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:40:26 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:40:26 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:40:26 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:40:26 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:40:27 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0011
+14/06/08 14:40:27 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0011 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:40:27 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0011/
+14/06/08 14:40:27 INFO mapreduce.Job: Running job: job_1402260142225_0011
+14/06/08 14:40:35 INFO mapreduce.Job: Job job_1402260142225_0011 running in uber mode : false
+14/06/08 14:40:35 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:40:47 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 14:40:52 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:41:02 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 14:45:33 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 14:45:35 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:45:35 INFO mapreduce.Job: Job job_1402260142225_0011 completed successfully
+14/06/08 14:45:35 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=305310
+		Total time spent by all reduces in occupied slots (ms)=286029
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6233
+		CPU time spent (ms)=270810
+		Physical memory (bytes) snapshot=590839808
+		Virtual memory (bytes) snapshot=2509864960
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:45:35 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:45:35 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:45:35 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:45:35 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:45:36 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:45:36 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:45:36 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:45:36 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0012
+14/06/08 14:45:36 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0012 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:45:36 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0012/
+14/06/08 14:45:36 INFO mapreduce.Job: Running job: job_1402260142225_0012
+14/06/08 14:45:44 INFO mapreduce.Job: Job job_1402260142225_0012 running in uber mode : false
+14/06/08 14:45:44 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:46:00 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:47:14 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:47:15 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:47:22 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:47:22 INFO mapreduce.Job: Job job_1402260142225_0012 completed successfully
+14/06/08 14:47:22 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=176928
+		Total time spent by all reduces in occupied slots (ms)=5966
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2287
+		CPU time spent (ms)=79860
+		Physical memory (bytes) snapshot=570040320
+		Virtual memory (bytes) snapshot=2510266368
+		Total committed heap usage (bytes)=443285504
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 418805
+[MR2PhaseApriori] Phase 1 execution time: 312156
+[MR2PhaseApriori] Phase 2 execution time: 106649
+k=275
+300
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:47:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:47:48 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:47:48 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:48:20 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:48:21 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /input-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:48:33 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:48:45 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:49:19 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:49:20 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:49:20 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:49:20 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:49:20 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:49:20 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:49:20 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:49:20 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:49:20 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:49:21 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0013
+14/06/08 14:49:21 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0013 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:49:21 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0013/
+14/06/08 14:49:21 INFO mapreduce.Job: Running job: job_1402260142225_0013
+14/06/08 14:49:30 INFO mapreduce.Job: Job job_1402260142225_0013 running in uber mode : false
+14/06/08 14:49:30 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:49:41 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 14:49:46 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:49:54 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 14:54:23 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 14:54:25 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:54:25 INFO mapreduce.Job: Job job_1402260142225_0013 completed successfully
+14/06/08 14:54:26 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=301681
+		Total time spent by all reduces in occupied slots (ms)=281905
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6302
+		CPU time spent (ms)=279700
+		Physical memory (bytes) snapshot=584491008
+		Virtual memory (bytes) snapshot=2510548992
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 14:54:26 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:54:26 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:54:26 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:54:26 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:54:26 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 14:54:26 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 14:54:26 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 14:54:26 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0014
+14/06/08 14:54:26 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0014 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:54:26 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0014/
+14/06/08 14:54:26 INFO mapreduce.Job: Running job: job_1402260142225_0014
+14/06/08 14:54:34 INFO mapreduce.Job: Job job_1402260142225_0014 running in uber mode : false
+14/06/08 14:54:34 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:54:51 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 14:56:05 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:56:07 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 14:56:14 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 14:56:14 INFO mapreduce.Job: Job job_1402260142225_0014 completed successfully
+14/06/08 14:56:14 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=178384
+		Total time spent by all reduces in occupied slots (ms)=5879
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2573
+		CPU time spent (ms)=79240
+		Physical memory (bytes) snapshot=546656256
+		Virtual memory (bytes) snapshot=2510540800
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 416312
+[MR2PhaseApriori] Phase 1 execution time: 307931
+[MR2PhaseApriori] Phase 2 execution time: 108381
+k=300
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:56:39 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:56:40 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 14:56:40 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 14:57:12 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 14:57:13 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:57:14 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 14:57:14 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 14:57:14 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 14:57:14 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 14:57:14 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 14:57:14 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 14:57:14 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 14:57:15 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0015
+14/06/08 14:57:15 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0015 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 14:57:15 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0015/
+14/06/08 14:57:15 INFO mapreduce.Job: Running job: job_1402260142225_0015
+14/06/08 14:57:23 INFO mapreduce.Job: Job job_1402260142225_0015 running in uber mode : false
+14/06/08 14:57:23 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 14:57:35 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 14:57:40 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 14:57:48 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:02:14 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:02:16 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:02:16 INFO mapreduce.Job: Job job_1402260142225_0015 completed successfully
+14/06/08 15:02:16 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=298393
+		Total time spent by all reduces in occupied slots (ms)=278951
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6270
+		CPU time spent (ms)=271180
+		Physical memory (bytes) snapshot=593268736
+		Virtual memory (bytes) snapshot=2510348288
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:02:16 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:02:16 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:02:16 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:02:16 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:02:16 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:02:16 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:02:16 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:02:17 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0016
+14/06/08 15:02:17 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0016 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:02:17 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0016/
+14/06/08 15:02:17 INFO mapreduce.Job: Running job: job_1402260142225_0016
+14/06/08 15:02:24 INFO mapreduce.Job: Job job_1402260142225_0016 running in uber mode : false
+14/06/08 15:02:24 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:02:41 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:03:52 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:03:55 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:04:01 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:04:01 INFO mapreduce.Job: Job job_1402260142225_0016 completed successfully
+14/06/08 15:04:02 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=174907
+		Total time spent by all reduces in occupied slots (ms)=5935
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2636
+		CPU time spent (ms)=80350
+		Physical memory (bytes) snapshot=547233792
+		Virtual memory (bytes) snapshot=2510491648
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 410082
+[MR2PhaseApriori] Phase 1 execution time: 304598
+[MR2PhaseApriori] Phase 2 execution time: 105484
+k=300
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:04:27 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:04:28 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:04:28 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:05:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:05:01 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:05:01 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:05:02 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:05:02 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:05:02 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:05:02 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:05:02 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:05:02 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:05:02 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0017
+14/06/08 15:05:02 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0017 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:05:02 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0017/
+14/06/08 15:05:02 INFO mapreduce.Job: Running job: job_1402260142225_0017
+14/06/08 15:05:11 INFO mapreduce.Job: Job job_1402260142225_0017 running in uber mode : false
+14/06/08 15:05:11 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:05:22 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:05:27 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:05:35 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:10:06 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:10:08 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:10:09 INFO mapreduce.Job: Job job_1402260142225_0017 completed successfully
+14/06/08 15:10:10 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=302803
+		Total time spent by all reduces in occupied slots (ms)=283944
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6303
+		CPU time spent (ms)=275170
+		Physical memory (bytes) snapshot=591290368
+		Virtual memory (bytes) snapshot=2510151680
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:10:10 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:10:10 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:10:10 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:10:10 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:10:10 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:10:10 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:10:10 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:10:10 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0018
+14/06/08 15:10:10 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0018 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:10:10 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0018/
+14/06/08 15:10:10 INFO mapreduce.Job: Running job: job_1402260142225_0018
+14/06/08 15:10:17 INFO mapreduce.Job: Job job_1402260142225_0018 running in uber mode : false
+14/06/08 15:10:17 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:10:35 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:11:47 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:11:49 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:11:55 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:11:55 INFO mapreduce.Job: Job job_1402260142225_0018 completed successfully
+14/06/08 15:11:55 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=176394
+		Total time spent by all reduces in occupied slots (ms)=6000
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2564
+		CPU time spent (ms)=80220
+		Physical memory (bytes) snapshot=547004416
+		Virtual memory (bytes) snapshot=2510311424
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 416022
+[MR2PhaseApriori] Phase 1 execution time: 310558
+[MR2PhaseApriori] Phase 2 execution time: 105464
+k=300
+325
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:12:20 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:12:21 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:12:21 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:12:53 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:12:54 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /input-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:13:06 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:13:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:13:52 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:13:53 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:13:53 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:13:54 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:13:54 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:13:54 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:13:54 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:13:54 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:13:54 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:13:54 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0019
+14/06/08 15:13:54 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0019 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:13:54 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0019/
+14/06/08 15:13:54 INFO mapreduce.Job: Running job: job_1402260142225_0019
+14/06/08 15:14:02 INFO mapreduce.Job: Job job_1402260142225_0019 running in uber mode : false
+14/06/08 15:14:02 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:14:14 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:14:19 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:14:26 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:18:51 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:18:53 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:18:54 INFO mapreduce.Job: Job job_1402260142225_0019 completed successfully
+14/06/08 15:18:55 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=296937
+		Total time spent by all reduces in occupied slots (ms)=277854
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6316
+		CPU time spent (ms)=275520
+		Physical memory (bytes) snapshot=589070336
+		Virtual memory (bytes) snapshot=2510348288
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:18:55 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:18:55 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:18:55 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:18:55 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:18:55 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:18:55 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:18:55 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:18:55 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0020
+14/06/08 15:18:55 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0020 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:18:55 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0020/
+14/06/08 15:18:55 INFO mapreduce.Job: Running job: job_1402260142225_0020
+14/06/08 15:19:04 INFO mapreduce.Job: Job job_1402260142225_0020 running in uber mode : false
+14/06/08 15:19:04 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:19:20 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:20:30 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:20:32 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:20:38 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:20:39 INFO mapreduce.Job: Job job_1402260142225_0020 completed successfully
+14/06/08 15:20:39 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=171793
+		Total time spent by all reduces in occupied slots (ms)=6218
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2602
+		CPU time spent (ms)=79150
+		Physical memory (bytes) snapshot=551669760
+		Virtual memory (bytes) snapshot=2510471168
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 408191
+[MR2PhaseApriori] Phase 1 execution time: 303652
+[MR2PhaseApriori] Phase 2 execution time: 104539
+k=325
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:21:04 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:21:05 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:21:05 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:21:37 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:21:38 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:21:39 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:21:40 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:21:40 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:21:40 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:21:40 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:21:40 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:21:40 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:21:40 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0021
+14/06/08 15:21:40 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0021 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:21:40 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0021/
+14/06/08 15:21:40 INFO mapreduce.Job: Running job: job_1402260142225_0021
+14/06/08 15:21:49 INFO mapreduce.Job: Job job_1402260142225_0021 running in uber mode : false
+14/06/08 15:21:49 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:22:00 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:22:05 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:22:13 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:26:43 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:26:44 INFO mapreduce.Job:  map 100% reduce 73%
+14/06/08 15:26:45 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:26:45 INFO mapreduce.Job: Job job_1402260142225_0021 completed successfully
+14/06/08 15:26:46 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=301874
+		Total time spent by all reduces in occupied slots (ms)=282738
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6336
+		CPU time spent (ms)=283530
+		Physical memory (bytes) snapshot=585531392
+		Virtual memory (bytes) snapshot=2510266368
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:26:46 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:26:46 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:26:46 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:26:47 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:26:47 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:26:47 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:26:47 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:26:47 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0022
+14/06/08 15:26:47 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0022 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:26:47 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0022/
+14/06/08 15:26:47 INFO mapreduce.Job: Running job: job_1402260142225_0022
+14/06/08 15:26:56 INFO mapreduce.Job: Job job_1402260142225_0022 running in uber mode : false
+14/06/08 15:26:56 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:27:12 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:28:23 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:28:26 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:28:32 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:28:32 INFO mapreduce.Job: Job job_1402260142225_0022 completed successfully
+14/06/08 15:28:32 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=175034
+		Total time spent by all reduces in occupied slots (ms)=6170
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2635
+		CPU time spent (ms)=79430
+		Physical memory (bytes) snapshot=550096896
+		Virtual memory (bytes) snapshot=2509877248
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 415642
+[MR2PhaseApriori] Phase 1 execution time: 308974
+[MR2PhaseApriori] Phase 2 execution time: 106668
+k=325
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:28:58 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:28:58 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:28:58 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:29:31 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:29:32 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:29:32 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:29:33 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:29:33 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:29:33 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:29:33 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:29:33 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:29:33 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:29:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0023
+14/06/08 15:29:33 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0023 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:29:33 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0023/
+14/06/08 15:29:33 INFO mapreduce.Job: Running job: job_1402260142225_0023
+14/06/08 15:29:42 INFO mapreduce.Job: Job job_1402260142225_0023 running in uber mode : false
+14/06/08 15:29:42 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:29:53 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:29:58 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:30:06 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:34:34 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:34:35 INFO mapreduce.Job:  map 100% reduce 72%
+14/06/08 15:34:36 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:34:36 INFO mapreduce.Job: Job job_1402260142225_0023 completed successfully
+14/06/08 15:34:36 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=299418
+		Total time spent by all reduces in occupied slots (ms)=279746
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6316
+		CPU time spent (ms)=277630
+		Physical memory (bytes) snapshot=584237056
+		Virtual memory (bytes) snapshot=2510065664
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:34:36 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:34:36 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:34:36 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:34:36 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:34:36 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:34:36 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:34:36 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:34:36 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0024
+14/06/08 15:34:36 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0024 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:34:36 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0024/
+14/06/08 15:34:36 INFO mapreduce.Job: Running job: job_1402260142225_0024
+14/06/08 15:34:45 INFO mapreduce.Job: Job job_1402260142225_0024 running in uber mode : false
+14/06/08 15:34:45 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:35:01 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:36:12 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:36:16 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:36:21 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:36:21 INFO mapreduce.Job: Job job_1402260142225_0024 completed successfully
+14/06/08 15:36:21 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=175454
+		Total time spent by all reduces in occupied slots (ms)=6138
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2573
+		CPU time spent (ms)=78720
+		Physical memory (bytes) snapshot=539340800
+		Virtual memory (bytes) snapshot=2510483456
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 411672
+[MR2PhaseApriori] Phase 1 execution time: 306114
+[MR2PhaseApriori] Phase 2 execution time: 105558
+k=325
+350
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:36:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:36:48 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:36:48 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:37:20 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:37:21 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /input-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:37:32 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:37:45 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:38:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:38:19 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:38:20 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:38:20 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:38:20 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:38:20 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:38:20 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:38:20 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:38:20 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:38:21 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0025
+14/06/08 15:38:21 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0025 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:38:21 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0025/
+14/06/08 15:38:21 INFO mapreduce.Job: Running job: job_1402260142225_0025
+14/06/08 15:38:28 INFO mapreduce.Job: Job job_1402260142225_0025 running in uber mode : false
+14/06/08 15:38:28 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:38:41 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:38:46 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:38:56 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:43:39 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:43:41 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:43:42 INFO mapreduce.Job: Job job_1402260142225_0025 completed successfully
+14/06/08 15:43:42 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=317658
+		Total time spent by all reduces in occupied slots (ms)=298123
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6533
+		CPU time spent (ms)=282420
+		Physical memory (bytes) snapshot=585064448
+		Virtual memory (bytes) snapshot=2510065664
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:43:42 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:43:42 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:43:43 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:43:43 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:43:43 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:43:43 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:43:43 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:43:43 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0026
+14/06/08 15:43:43 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0026 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:43:43 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0026/
+14/06/08 15:43:43 INFO mapreduce.Job: Running job: job_1402260142225_0026
+14/06/08 15:43:51 INFO mapreduce.Job: Job job_1402260142225_0026 running in uber mode : false
+14/06/08 15:43:51 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:44:08 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:45:17 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:45:21 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:45:25 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:45:25 INFO mapreduce.Job: Job job_1402260142225_0026 completed successfully
+14/06/08 15:45:25 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=170220
+		Total time spent by all reduces in occupied slots (ms)=6127
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2593
+		CPU time spent (ms)=79040
+		Physical memory (bytes) snapshot=547454976
+		Virtual memory (bytes) snapshot=2510065664
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 427300
+[MR2PhaseApriori] Phase 1 execution time: 324605
+[MR2PhaseApriori] Phase 2 execution time: 102695
+k=350
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:45:50 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:45:51 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:45:51 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:46:23 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:46:24 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:46:25 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:46:25 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:46:25 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:46:25 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:46:25 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:46:25 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:46:25 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:46:26 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0027
+14/06/08 15:46:26 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0027 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:46:26 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0027/
+14/06/08 15:46:26 INFO mapreduce.Job: Running job: job_1402260142225_0027
+14/06/08 15:46:34 INFO mapreduce.Job: Job job_1402260142225_0027 running in uber mode : false
+14/06/08 15:46:34 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:46:45 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:46:51 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:46:59 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:51:30 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:51:32 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:51:32 INFO mapreduce.Job: Job job_1402260142225_0027 completed successfully
+14/06/08 15:51:32 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=303355
+		Total time spent by all reduces in occupied slots (ms)=283790
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6266
+		CPU time spent (ms)=276150
+		Physical memory (bytes) snapshot=578191360
+		Virtual memory (bytes) snapshot=2510708736
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:51:32 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:51:32 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:51:32 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:51:32 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:51:32 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:51:32 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:51:32 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:51:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0028
+14/06/08 15:51:33 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0028 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:51:33 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0028/
+14/06/08 15:51:33 INFO mapreduce.Job: Running job: job_1402260142225_0028
+14/06/08 15:51:41 INFO mapreduce.Job: Job job_1402260142225_0028 running in uber mode : false
+14/06/08 15:51:41 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:51:58 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 15:53:07 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:53:12 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 15:53:16 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:53:16 INFO mapreduce.Job: Job job_1402260142225_0028 completed successfully
+14/06/08 15:53:16 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=172610
+		Total time spent by all reduces in occupied slots (ms)=6250
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2598
+		CPU time spent (ms)=79170
+		Physical memory (bytes) snapshot=550547456
+		Virtual memory (bytes) snapshot=2510528512
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 413330
+[MR2PhaseApriori] Phase 1 execution time: 309664
+[MR2PhaseApriori] Phase 2 execution time: 103666
+k=350
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:53:41 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:53:42 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 15:53:42 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Skip data reupload, use previously uploaded input
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 15:54:14 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 15:54:15 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:54:16 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:54:16 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:54:16 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:54:16 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 15:54:16 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 15:54:16 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 15:54:16 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 15:54:16 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0029
+14/06/08 15:54:17 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0029 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:54:17 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0029/
+14/06/08 15:54:17 INFO mapreduce.Job: Running job: job_1402260142225_0029
+14/06/08 15:54:25 INFO mapreduce.Job: Job job_1402260142225_0029 running in uber mode : false
+14/06/08 15:54:25 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:54:36 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 15:54:41 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 15:54:49 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 15:59:18 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 15:59:20 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 15:59:21 INFO mapreduce.Job: Job job_1402260142225_0029 completed successfully
+14/06/08 15:59:21 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=300350
+		Total time spent by all reduces in occupied slots (ms)=281259
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6382
+		CPU time spent (ms)=281860
+		Physical memory (bytes) snapshot=589090816
+		Virtual memory (bytes) snapshot=2510548992
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 15:59:21 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:59:21 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 15:59:21 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 15:59:21 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 15:59:21 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 15:59:21 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 15:59:21 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 15:59:21 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0030
+14/06/08 15:59:21 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0030 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 15:59:21 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0030/
+14/06/08 15:59:21 INFO mapreduce.Job: Running job: job_1402260142225_0030
+14/06/08 15:59:30 INFO mapreduce.Job: Job job_1402260142225_0030 running in uber mode : false
+14/06/08 15:59:30 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 15:59:46 INFO mapreduce.Job:  map 67% reduce 0%
+14/06/08 16:00:54 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 16:00:59 INFO mapreduce.Job:  map 100% reduce 0%
+14/06/08 16:01:02 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 16:01:03 INFO mapreduce.Job: Job job_1402260142225_0030 completed successfully
+14/06/08 16:01:03 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=3342330
+		FILE: Number of bytes written=6927537
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1540093
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=170719
+		Total time spent by all reduces in occupied slots (ms)=6235
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=131070
+		Map output bytes=3080184
+		Map output materialized bytes=3342336
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65535
+		Reduce shuffle bytes=3342336
+		Reduce input records=131070
+		Reduce output records=65535
+		Spilled Records=262140
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2659
+		CPU time spent (ms)=79480
+		Physical memory (bytes) snapshot=550424576
+		Virtual memory (bytes) snapshot=2510065664
+		Total committed heap usage (bytes)=404291584
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1540093
+[MR2PhaseApriori] Total execution time: 410130
+[MR2PhaseApriori] Phase 1 execution time: 307627
+[MR2PhaseApriori] Phase 2 execution time: 102503
+k=350
+375
+Warning, this script only works for 1000 lines now
+Note: MR2PhaseApriori.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+added manifest
+adding: ControlkRows.class(in = 1678) (out= 973)(deflated 42%)
+adding: DatasetGenerator1.class(in = 1618) (out= 980)(deflated 39%)
+adding: DatasetGenerator2.class(in = 1618) (out= 981)(deflated 39%)
+adding: DatasetGenerator3.class(in = 1605) (out= 974)(deflated 39%)
+adding: FisherYatesShuffle.class(in = 1028) (out= 663)(deflated 35%)
+adding: LocalApriori.class(in = 4209) (out= 2091)(deflated 50%)
+adding: MR2PhaseApriori$FirstPhaseMapper.class(in = 4571) (out= 2031)(deflated 55%)
+adding: MR2PhaseApriori$FirstPhaseReducer.class(in = 3482) (out= 1448)(deflated 58%)
+adding: MR2PhaseApriori$SecondPhaseMapper.class(in = 5478) (out= 2424)(deflated 55%)
+adding: MR2PhaseApriori$SecondPhaseReducer.class(in = 3383) (out= 1409)(deflated 58%)
+adding: MR2PhaseApriori$TOTALROWCOUNTER.class(in = 944) (out= 487)(deflated 48%)
+adding: MR2PhaseApriori.class(in = 5951) (out= 2845)(deflated 52%)
+adding: PermuteRows.class(in = 1795) (out= 1075)(deflated 40%)
+adding: WholeFileInputFormat.class(in = 1065) (out= 447)(deflated 58%)
+adding: WholeFileRecordReader.class(in = 2588) (out= 1172)(deflated 54%)
+META-INF/
+META-INF/MANIFEST.MF
+ControlkRows.class
+DatasetGenerator1.class
+DatasetGenerator2.class
+DatasetGenerator3.class
+FisherYatesShuffle.class
+LocalApriori.class
+MR2PhaseApriori$FirstPhaseMapper.class
+MR2PhaseApriori$FirstPhaseReducer.class
+MR2PhaseApriori$SecondPhaseMapper.class
+MR2PhaseApriori$SecondPhaseReducer.class
+MR2PhaseApriori$TOTALROWCOUNTER.class
+MR2PhaseApriori.class
+PermuteRows.class
+WholeFileInputFormat.class
+WholeFileRecordReader.class
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 16:01:29 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 16:01:29 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test-1stphase
+14/06/08 16:01:30 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /output-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 16:02:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 16:02:02 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /input-test
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 16:02:14 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 16:02:27 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Java HotSpot(TM) 64-Bit Server VM warning: You have loaded library /home/dachuan/hadoop-2.2.0/lib/native/libhadoop.so.1.0.0 which might have disabled stack guard. The VM will try to fix the stack guard now.
+It's highly recommended that you fix the library with 'execstack -c <libfile>', or link it with '-z noexecstack'.
+14/06/08 16:03:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+14/06/08 16:03:01 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 16:03:02 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 16:03:02 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 16:03:02 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 16:03:02 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+14/06/08 16:03:02 INFO Configuration.deprecation: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapreduce.inputformat.class is deprecated. Instead, use mapreduce.job.inputformat.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+14/06/08 16:03:02 INFO Configuration.deprecation: mapreduce.outputformat.class is deprecated. Instead, use mapreduce.job.outputformat.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+14/06/08 16:03:02 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+14/06/08 16:03:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0031
+14/06/08 16:03:03 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0031 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 16:03:03 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0031/
+14/06/08 16:03:03 INFO mapreduce.Job: Running job: job_1402260142225_0031
+14/06/08 16:03:11 INFO mapreduce.Job: Job job_1402260142225_0031 running in uber mode : false
+14/06/08 16:03:11 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 16:03:22 INFO mapreduce.Job:  map 50% reduce 0%
+14/06/08 16:03:27 INFO mapreduce.Job:  map 83% reduce 0%
+14/06/08 16:03:35 INFO mapreduce.Job:  map 83% reduce 17%
+14/06/08 16:08:09 INFO mapreduce.Job:  map 100% reduce 17%
+14/06/08 16:08:11 INFO mapreduce.Job:  map 100% reduce 100%
+14/06/08 16:08:12 INFO mapreduce.Job: Job job_1402260142225_0031 completed successfully
+14/06/08 16:08:12 INFO mapreduce.Job: Counters: 44
+	File System Counters
+		FILE: Number of bytes read=1671226
+		FILE: Number of bytes written=3581267
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=33210
+		HDFS: Number of bytes written=1409022
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=305534
+		Total time spent by all reduces in occupied slots (ms)=286634
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=65538
+		Map output bytes=1540144
+		Map output materialized bytes=1671232
+		Input split bytes=210
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=65536
+		Reduce shuffle bytes=1671232
+		Reduce input records=65538
+		Reduce output records=65535
+		Spilled Records=131076
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=6447
+		CPU time spent (ms)=281210
+		Physical memory (bytes) snapshot=585482240
+		Virtual memory (bytes) snapshot=2510356480
+		Total committed heap usage (bytes)=443285504
+	MR2PhaseApriori$TOTALROWCOUNTER
+		TOTALROW=1000
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=33000
+	File Output Format Counters 
+		Bytes Written=1409022
+[MR2PhaseApriori] Total rows: 1000
+Just added 2 files into distributed cache.
+14/06/08 16:08:12 INFO client.RMProxy: Connecting to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 16:08:12 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+14/06/08 16:08:12 INFO input.FileInputFormat: Total input paths to process : 2
+14/06/08 16:08:13 INFO mapreduce.JobSubmitter: number of splits:2
+14/06/08 16:08:13 INFO Configuration.deprecation: mapred.cache.files.filesizes is deprecated. Instead, use mapreduce.job.cache.files.filesizes
+14/06/08 16:08:13 INFO Configuration.deprecation: mapred.cache.files is deprecated. Instead, use mapreduce.job.cache.files
+14/06/08 16:08:13 INFO Configuration.deprecation: mapred.cache.files.timestamps is deprecated. Instead, use mapreduce.job.cache.files.timestamps
+14/06/08 16:08:13 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1402260142225_0032
+14/06/08 16:08:13 INFO impl.YarnClientImpl: Submitted application application_1402260142225_0032 to ResourceManager at hadoop1/192.168.46.100:8032
+14/06/08 16:08:13 INFO mapreduce.Job: The url to track the job: http://hadoop1:8088/proxy/application_1402260142225_0032/
+14/06/08 16:08:13 INFO mapreduce.Job: Running job: job_1402260142225_0032
+14/06/08 16:08:21 INFO mapreduce.Job: Job job_1402260142225_0032 running in uber mode : false
+14/06/08 16:08:21 INFO mapreduce.Job:  map 0% reduce 0%
+14/06/08 16:08:37 INFO mapreduce.Job:  map 67% reduce 0%

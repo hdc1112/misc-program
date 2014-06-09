@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ $# != 3 ]; then
+if [ $# -lt 3 ]; then
   echo Usage $0 /path/to/file k columns
   exit 1
 fi
@@ -28,5 +28,5 @@ rm -f $absfile
 mv $absfilepath/${filename}-1 /tmp/tempdatadir
 mv $absfilepath/${filename}-2 /tmp/tempdatadir
 
-./run.sh /tmp/tempdatadir $3 50
+./run.sh /tmp/tempdatadir $3 50 $4
 echo k=$2
