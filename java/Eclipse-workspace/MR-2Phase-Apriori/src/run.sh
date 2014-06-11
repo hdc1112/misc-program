@@ -4,7 +4,7 @@ absme=`readlink -f $0`
 abshere=`dirname $absme`
 
 if [ $# -lt 3 ]; then
-  echo Usage input-folder items minsupport
+  echo Usage input-folder items minsupport [noreupload]
   exit
 fi
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ $# -lt 3 ]; then
-  echo Usage $0 /path/to/file k columns [noreupload]
+if [ $# -lt 2 ]; then
+  echo Usage $0 /path/to/file columns [noreupload]
   exit 1
 fi
 
@@ -17,8 +17,8 @@ absfilepath=`dirname $absfile`
 
 cd $abshere
 
-javac ControlkRows.java
-java ControlkRows `cygpath -wp $absfile` $2 $3
+javac RandomPermuteRows.java
+java RandomPermuteRows `cygpath -wp $absfile` $2
 head -n 500 $absfile > $absfilepath/${filename}-1
 head -n 1000 $absfile | tail -n 500 > $absfilepath/${filename}-2
 
@@ -28,6 +28,5 @@ rm -f $absfile
 mv $absfilepath/${filename}-1 /tmp/tempdatadir
 mv $absfilepath/${filename}-2 /tmp/tempdatadir
 
-./run.sh /tmp/tempdatadir $3 51 $4
-echo k=$2
+./run.sh /tmp/tempdatadir $2 51 $3
 date
