@@ -10,7 +10,8 @@ import java.util.Random;
 public class ControlkRows {
 	public static void main(String[] args) throws IOException {
 		if (args.length != 3) {
-			System.err.println("Usage: java ControlkRows outputfile k");
+			// the first split's first k rows are all "1"
+			System.err.println("Usage: java ControlkRows outputfile k columns");
 			System.exit(1);
 		}
 
