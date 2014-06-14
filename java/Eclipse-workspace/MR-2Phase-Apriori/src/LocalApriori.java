@@ -17,7 +17,8 @@ public class LocalApriori {
 
 	private int items;
 	private int transactions;
-	private int minsupport;
+//	private int minsupport;
+	private double minsupport;
 	private ArrayList<String> dataset;
 
 	private ArrayList<ArrayList<String>> g_candidates = new ArrayList<ArrayList<String>>();
@@ -30,7 +31,7 @@ public class LocalApriori {
 	public final static String SEPARATOR = ",";
 	public final static String PURCHASED = "1";
 
-	public LocalApriori(int transactions, int items, int minsupport,
+	public LocalApriori(int transactions, int items, double minsupport,
 			ArrayList<String> dataset) {
 		this.transactions = transactions;
 		this.items = items;

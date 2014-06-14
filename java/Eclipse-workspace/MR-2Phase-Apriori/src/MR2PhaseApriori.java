@@ -57,7 +57,8 @@ public class MR2PhaseApriori {
 	private static String outputpath;
 
 	private static int items;
-	private static int minsupport;
+//	private static int minsupport;
+	private static double minsupport;
 
 	private static String ITEMS_CONFIG = "MR2PhaseApriori.items.value";
 	private static String MINSUPPORT_CONFIG = "MR2PhaseApriori.minsupport.value";
@@ -78,7 +79,8 @@ public class MR2PhaseApriori {
 		Configuration conf = new Configuration();
 
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
-		conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
+//		conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
+		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 1";
 		Job job = new Job(conf, jobname);
@@ -112,7 +114,8 @@ public class MR2PhaseApriori {
 
 		private int transactions;
 		private int items;
-		private int minsupport;
+//		private int minsupport;
+		private double minsupport;
 
 		private long starttime;
 		private long endtime;
@@ -120,11 +123,12 @@ public class MR2PhaseApriori {
 		@Override
 		public void setup(Context context) {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
-			minsupport = context.getConfiguration().getInt(
+			minsupport = context.getConfiguration().getDouble(
 					MINSUPPORT_CONFIG, 0);
 
 			starttime = System.currentTimeMillis();
 
+			System.err.println("minsupport = " + minsupport);
 			System.err.println("(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task start time: " + (starttime));
@@ -242,7 +246,7 @@ public class MR2PhaseApriori {
 		Configuration conf = new Configuration();
 
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
-		conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
+		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 
 		conf.set(TOTAL_ROW_CONFIG, Long.toString(totalrows));
 
@@ -260,14 +264,16 @@ public class MR2PhaseApriori {
 
 		FileSystem fs = FileSystem.get(conf);
 		FileStatus[] fss = fs.listStatus(new Path(outputpath1stphase));
+		int filenum = 0;
 		for (FileStatus status : fss) {
 			Path path = status.getPath();
 			if (path.getName().startsWith("_"))
 				continue;
+			filenum++;
 			job.addCacheFile(new URI(path.toString()));
 		}
 
-		System.err.println("Just added " + fss.length
+		System.err.println("Just added " + filenum
 				+ " files into distributed cache.");
 		int retval = job.waitForCompletion(true) ? 0 : 1;
 
@@ -384,16 +390,18 @@ public class MR2PhaseApriori {
 			Reducer<Text, IntWritable, Text, IntWritable> {
 
 		private long totalrows;
-		private int minsupport;
+		private double minsupport;
 
 		private long reducestart, reduceend;
 
 		@Override
 		public void setup(Context context) throws IOException {
-			minsupport = context.getConfiguration().getInt(
+			minsupport = context.getConfiguration().getDouble(
 					MINSUPPORT_CONFIG, 0);
 			totalrows = context.getConfiguration().getLong(TOTAL_ROW_CONFIG, 0);
 
+			System.err.println("minsupport = " + minsupport);
+			
 			reducestart = System.currentTimeMillis();
 			System.err.println("(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
@@ -442,7 +450,10 @@ public class MR2PhaseApriori {
 		inputpath = otherArgs[0];
 		outputpath = otherArgs[1];
 		items = Integer.parseInt(otherArgs[2]);
-		minsupport = Integer.parseInt(otherArgs[3]);
+		minsupport = Double.parseDouble(otherArgs[3]);
+		
+		System.err.println("items = " + items);
+		System.err.println("minsupport = " + minsupport);
 
 		outputpath1stphase = outputpath + "-1stphase";
 
