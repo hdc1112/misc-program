@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 absme=`readlink -f $0`
 abshere=`dirname $absme`
 
@@ -22,3 +24,5 @@ ssh -n hadoop1 ./hadoop-2.2.0/sbin/start-dfs.sh
 echo hadoop1 && ssh -n hadoop1 jps
 echo hadoop2 && ssh -n hadoop2 jps
 echo hadoop3 && ssh -n hadoop3 jps
+
+set +x

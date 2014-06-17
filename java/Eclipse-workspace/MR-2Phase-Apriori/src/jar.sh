@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 absme=`readlink -f $0`
 abshere=`dirname $absme`
 
@@ -14,3 +16,5 @@ jar cvfe ./mr-2phase-apriori.jar MR2PhaseApriori *.class
 jar -tf ./mr-2phase-apriori.jar
 scp ./mr-2phase-apriori.jar hadoop1:/tmp/
 rm -f *.class
+
+set +x

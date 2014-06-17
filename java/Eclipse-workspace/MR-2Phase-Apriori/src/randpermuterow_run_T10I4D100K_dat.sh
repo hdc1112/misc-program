@@ -20,7 +20,7 @@ fi
 totallinenum=`cat $storedir/$filename | wc -l`
 linenum=$totallinenum
 linenum=$((linenum/2))
-#linenum=$((linenum/2))
+linenum=$((linenum/2))
 #linenum=$((linenum/2))
 
 realfile=$transf.realfile
@@ -39,7 +39,7 @@ cat $realfile | head -n $halflinenum > /tmp/tempdatafolder/1.txt
 cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.txt
 
 diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
-diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
+#diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 
 #minsupport=1
 #./run.sh /tmp/tempdatafolder $columns 1 $1

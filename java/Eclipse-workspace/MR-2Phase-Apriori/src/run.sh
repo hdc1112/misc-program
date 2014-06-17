@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 absme=`readlink -f $0`
 abshere=`dirname $absme`
 
@@ -18,3 +20,5 @@ else
   ./data.sh $dataabspath noreupload
 fi
 ./remote-run.sh $2 $3
+
+set +x

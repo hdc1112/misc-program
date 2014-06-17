@@ -44,7 +44,7 @@ public class ToBoolMatrix {
 				int tokenv = Integer.parseInt(st.nextToken());
 				linebool[tokenv] = true;
 			}
-			System.err.println(loopc);
+			// System.err.println(loopc);
 			for (int i = 1; i <= max; i++) {
 				if (linebool[i] == false) {
 					System.out.print("0 ");

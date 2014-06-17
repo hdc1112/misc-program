@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 absme=`readlink -f $0`
 abshere=`dirname $absme`
 
@@ -20,3 +22,5 @@ else
   ssh -n hadoop1 ./hadoop-2.2.0/bin/hdfs dfs -copyFromLocal /tmp/$folder/* /input-test/
 
 fi
+
+set +x

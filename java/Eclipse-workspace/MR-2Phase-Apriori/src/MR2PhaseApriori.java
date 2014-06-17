@@ -57,7 +57,7 @@ public class MR2PhaseApriori {
 	private static String outputpath;
 
 	private static int items;
-//	private static int minsupport;
+	// private static int minsupport;
 	private static double minsupport;
 
 	private static String ITEMS_CONFIG = "MR2PhaseApriori.items.value";
@@ -79,7 +79,7 @@ public class MR2PhaseApriori {
 		Configuration conf = new Configuration();
 
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
-//		conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
+		// conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 1";
@@ -114,7 +114,7 @@ public class MR2PhaseApriori {
 
 		private int transactions;
 		private int items;
-//		private int minsupport;
+		// private int minsupport;
 		private double minsupport;
 
 		private long starttime;
@@ -196,12 +196,17 @@ public class MR2PhaseApriori {
 
 		private long reducestart, reduceend;
 
+		private double minsupport;
+
 		@Override
 		public void setup(Context context) {
 			reducestart = System.currentTimeMillis();
 			System.err.println("(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task start time: " + reducestart);
+
+			minsupport = context.getConfiguration().getDouble(
+					MINSUPPORT_CONFIG, 0.0);
 		}
 
 		@Override
@@ -217,13 +222,16 @@ public class MR2PhaseApriori {
 						totalrows);
 			} else {
 				// the following is for debugging purpose
-				// int sum = 0;
-				// for (IntWritable val : values) {
-				// sum += val.get();
-				// }
-				// context.write(key, new IntWritable(sum));
+				int sum = 0;
+				for (IntWritable val : values) {
+					sum += val.get();
+				}
+
+				if (sum / 3196.0 < minsupport / 100.0) {
+					context.write(key, new IntWritable(sum));
+				}
 				// the following is from paper's description
-				context.write(key, one);
+				// context.write(key, one);
 			}
 		}
 
@@ -401,7 +409,7 @@ public class MR2PhaseApriori {
 			totalrows = context.getConfiguration().getLong(TOTAL_ROW_CONFIG, 0);
 
 			System.err.println("minsupport = " + minsupport);
-			
+
 			reducestart = System.currentTimeMillis();
 			System.err.println("(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
@@ -451,7 +459,7 @@ public class MR2PhaseApriori {
 		outputpath = otherArgs[1];
 		items = Integer.parseInt(otherArgs[2]);
 		minsupport = Double.parseDouble(otherArgs[3]);
-		
+
 		System.err.println("items = " + items);
 		System.err.println("minsupport = " + minsupport);
 
