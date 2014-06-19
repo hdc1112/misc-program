@@ -1,16 +1,22 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -24,6 +30,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
@@ -48,9 +55,15 @@ import org.apache.hadoop.util.GenericOptionsParser;
 /* 1st Phase's output records the global candidates */
 /* 2nd Phase's output is the frequent itemset */
 
-public class MR2PhaseApriori {
+// MR2PhaseApriori.java.BASE strictly follows the paper
+// this program did some optimization, code: OPT1
+// optimization includes: 
+// 1st, phase 1's mapper will write the local candidate file into HDFS
+// 2nd, phase 2's mapper will use that file as cache
+// optimization's goal:
+// to reduce the "counting" in phase 2's mapper
 
-	private static String PREFIX = "[MR2PhaseApriori] ";
+public class MR2PhaseApriori {
 
 	private static String inputpath;
 	private static String outputpath1stphase;
@@ -64,6 +77,11 @@ public class MR2PhaseApriori {
 	private static String MINSUPPORT_CONFIG = "MR2PhaseApriori.minsupport.value";
 
 	private static String SPLIT_NUM_ROWS = "split_num_rows.key";
+
+	// OPT1
+	private static String cachecountfile = "-cachecount.file";
+	private static String FIRSTPHASEOUTDIR = "MR2PhaseApriori.1stphase.outdir";
+	private static boolean enableOPT1 = true;
 
 	private static enum TOTALROWCOUNTER {
 		TOTALROW
@@ -81,6 +99,7 @@ public class MR2PhaseApriori {
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
 		// conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
+		conf.set(FIRSTPHASEOUTDIR, outputpath1stphase);
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 1";
 		Job job = new Job(conf, jobname);
@@ -104,7 +123,7 @@ public class MR2PhaseApriori {
 		Counter c = counters.findCounter(TOTALROWCOUNTER.TOTALROW);
 		totalrows = c.getValue();
 
-		System.err.println(PREFIX + "Total rows: " + totalrows);
+		System.err.println(Commons.PREFIX + "Total rows: " + totalrows);
 	}
 
 	public static class FirstPhaseMapper extends
@@ -116,22 +135,40 @@ public class MR2PhaseApriori {
 		private int items;
 		// private int minsupport;
 		private double minsupport;
+		private String output1stphasedir;
 
 		private long starttime;
 		private long endtime;
 
+		private BufferedWriter bw;
+
 		@Override
-		public void setup(Context context) {
+		public void setup(Context context) throws IOException {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			minsupport = context.getConfiguration().getDouble(
 					MINSUPPORT_CONFIG, 0);
+			output1stphasedir = context.getConfiguration()
+					.get(FIRSTPHASEOUTDIR);
 
 			starttime = System.currentTimeMillis();
 
-			System.err.println("minsupport = " + minsupport);
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task start time: " + (starttime));
+
+			if (enableOPT1) {
+				// prepare to write this counting statistics to hdfs
+				// int mapid = context.getTaskAttemptID().getTaskID().getId();
+				FileSystem fs = FileSystem.get(context.getConfiguration());
+				// the path is output1stphasedir / _${splitname}-cachecount.file
+				// this path's name should be changed.
+				String splitname = ((FileSplit) context.getInputSplit())
+						.getPath().getName();
+				FSDataOutputStream out = fs.create(new Path(output1stphasedir
+						+ "/_" + splitname + cachecountfile));
+				bw = new BufferedWriter(new OutputStreamWriter(out));
+			}
 
 		}
 
@@ -169,8 +206,14 @@ public class MR2PhaseApriori {
 				loopc2 = 0;
 				for (Iterator<String> it2 = thisitemset.iterator(); it2
 						.hasNext(); loopc2++) {
-					context.write(new Text(it2.next()), new IntWritable(
-							thisfreq.get(loopc2)));
+					String itemset = it2.next();
+					context.write(new Text(itemset),
+							new IntWritable(thisfreq.get(loopc2)));
+
+					if (enableOPT1) {
+						// write to hdfs
+						bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
+					}
 				}
 			}
 
@@ -179,14 +222,19 @@ public class MR2PhaseApriori {
 		}
 
 		@Override
-		public void cleanup(Context context) {
+		public void cleanup(Context context) throws IOException {
 			endtime = System.currentTimeMillis();
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task end time: " + (endtime));
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task execution time: " + (endtime - starttime));
+
+			if (enableOPT1) {
+				// close hdfs file handler
+				bw.close();
+			}
 		}
 	}
 
@@ -201,7 +249,7 @@ public class MR2PhaseApriori {
 		@Override
 		public void setup(Context context) {
 			reducestart = System.currentTimeMillis();
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task start time: " + reducestart);
 
@@ -222,26 +270,23 @@ public class MR2PhaseApriori {
 						totalrows);
 			} else {
 				// the following is for debugging purpose
-				int sum = 0;
-				for (IntWritable val : values) {
-					sum += val.get();
-				}
-
-				if (sum / 3196.0 < minsupport / 100.0) {
-					context.write(key, new IntWritable(sum));
-				}
+				// int sum = 0;
+				// for (IntWritable val : values) {
+				// sum += val.get();
+				// }
+				// context.write(key, new IntWritable(sum));
 				// the following is from paper's description
-				// context.write(key, one);
+				context.write(key, one);
 			}
 		}
 
 		@Override
 		public void cleanup(Context context) {
 			reduceend = System.currentTimeMillis();
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task end time: " + reduceend);
-			System.err.println("(1/2) "
+			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce execution time: " + (reduceend - reducestart));
 		}
@@ -257,6 +302,7 @@ public class MR2PhaseApriori {
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 
 		conf.set(TOTAL_ROW_CONFIG, Long.toString(totalrows));
+		conf.set(FIRSTPHASEOUTDIR, outputpath1stphase);
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 2";
 		Job job = new Job(conf, jobname);
@@ -281,7 +327,7 @@ public class MR2PhaseApriori {
 			job.addCacheFile(new URI(path.toString()));
 		}
 
-		System.err.println("Just added " + filenum
+		System.err.println(Commons.PREFIX + "Just added " + filenum
 				+ " files into distributed cache.");
 		int retval = job.waitForCompletion(true) ? 0 : 1;
 
@@ -300,11 +346,21 @@ public class MR2PhaseApriori {
 
 		private long mapstart, mapend;
 
+		private String output1stphasedir;
+
+		private BufferedReader br;
+
+		private HashMap<String, Integer> cache = new HashMap<String, Integer>();
+		private long total, hit;
+
 		@Override
 		public void setup(Context context) throws IOException {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			// minsupport = context.getConfiguration()
 			// .getInt(MINSUPPORT_CONFIG, 0);
+
+			output1stphasedir = context.getConfiguration()
+					.get(FIRSTPHASEOUTDIR);
 
 			Path[] cacheFiles = context.getLocalCacheFiles();
 			if (cacheFiles != null) {
@@ -317,20 +373,45 @@ public class MR2PhaseApriori {
 			}
 
 			mapstart = System.currentTimeMillis();
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map task start time: " + mapstart);
+
+			if (enableOPT1) {
+				// load the hdfs file into cache
+				// if this is skipped, then cache is empty
+				FileSystem fs = FileSystem.get(context.getConfiguration());
+				String splitname = ((FileSplit) context.getInputSplit())
+						.getPath().getName();
+				FSDataInputStream out = fs.open(new Path(output1stphasedir
+						+ "/_" + splitname + cachecountfile));
+				br = new BufferedReader(new InputStreamReader(out));
+
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					String[] two = line.split(" ");
+					cache.put(two[0], Integer.parseInt(two[1]));
+				}
+				br.close();
+			}
 		}
 
 		@Override
-		public void cleanup(Context context) {
+		public void cleanup(Context context) throws IOException {
 			mapend = System.currentTimeMillis();
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map task end time: " + mapend);
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map task execution time: " + (mapend - mapstart));
+
+			System.err.println(Commons.PREFIX + "(2/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Cache hit: " + hit + " / " + total + " = "
+					+ (total == 0 ? "N/A" : (hit / (double) total)));
+
+			// br.close();
 		}
 
 		@Override
@@ -348,6 +429,10 @@ public class MR2PhaseApriori {
 				}
 			}
 
+			// OPT1: here I should open the countcache file
+			// OPT1: load it into cache map
+			// OPT1: close the count cache file
+
 			if (localFiles != null) {
 				for (int i = 0; i < localFiles.length; i++) {
 					localCount(localFiles[i], dataset, context);
@@ -361,7 +446,18 @@ public class MR2PhaseApriori {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String itemset = line.split("\\t")[0];
+				// OPT1: ask the cache map whether it has my count
+				total++;
+				if (cache.containsKey(itemset)) {
+					hit++;
+					int num = cache.get(itemset);
+					context.write(new Text(itemset), new IntWritable(num));
+					continue;
+				}
+
 				int count = 0;
+				// the following op is expensive, because
+				// it iterates the whole dataset for the count
 				for (Iterator<String> it = dataset.iterator(); it.hasNext();) {
 					String transaction = it.next();
 					if (included(itemset, transaction)) {
@@ -376,13 +472,12 @@ public class MR2PhaseApriori {
 		private boolean included(String itemset, String transaction) {
 			boolean[] trans = new boolean[items];
 			StringTokenizer st = new StringTokenizer(transaction,
-					LocalApriori.DATASETSEPARATOR);
+					Commons.DATASETSEPARATOR);
 			for (int i = 0; i < items; i++) {
-				trans[i] = st.nextToken().equalsIgnoreCase(
-						LocalApriori.PURCHASED);
+				trans[i] = st.nextToken().equalsIgnoreCase(Commons.PURCHASED);
 			}
 			StringTokenizer st2 = new StringTokenizer(itemset,
-					LocalApriori.SEPARATOR);
+					Commons.SEPARATOR);
 			boolean match = false;
 			while (st2.hasMoreTokens()) {
 				match = trans[Integer.parseInt(st2.nextToken()) - 1];
@@ -408,10 +503,10 @@ public class MR2PhaseApriori {
 					MINSUPPORT_CONFIG, 0);
 			totalrows = context.getConfiguration().getLong(TOTAL_ROW_CONFIG, 0);
 
-			System.err.println("minsupport = " + minsupport);
+			System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
 
 			reducestart = System.currentTimeMillis();
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task start time: " + reducestart);
 		}
@@ -419,10 +514,10 @@ public class MR2PhaseApriori {
 		@Override
 		public void cleanup(Context context) {
 			reduceend = System.currentTimeMillis();
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task end time: " + reduceend);
-			System.err.println("(2/2) "
+			System.err.println(Commons.PREFIX + "(2/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Reduce task execution time: "
 					+ (reduceend - reducestart));
@@ -449,7 +544,8 @@ public class MR2PhaseApriori {
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();
 		if (otherArgs.length != 4) {
-			System.err.print(PREFIX + "Usage: MR2PhaseApriori <in> <out>");
+			System.err.print(Commons.PREFIX
+					+ "Usage: MR2PhaseApriori <in> <out>");
 			System.err.print(" <columns/items>");
 			System.err.println(" <minimum support>");
 			System.exit(2);
@@ -460,8 +556,9 @@ public class MR2PhaseApriori {
 		items = Integer.parseInt(otherArgs[2]);
 		minsupport = Double.parseDouble(otherArgs[3]);
 
-		System.err.println("items = " + items);
-		System.err.println("minsupport = " + minsupport);
+		System.err.println(Commons.PREFIX + "items = " + items);
+		System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
+		System.err.println(Commons.PREFIX + "enableOPT1: " + enableOPT1);
 
 		outputpath1stphase = outputpath + "-1stphase";
 
@@ -470,6 +567,8 @@ public class MR2PhaseApriori {
 		long phase1starttime = System.currentTimeMillis();
 
 		run_on_hadoop_phase1();
+
+		// System.exit(1);
 
 		long phase1endtime = System.currentTimeMillis();
 
@@ -481,11 +580,11 @@ public class MR2PhaseApriori {
 
 		long endtime = System.currentTimeMillis();
 
-		System.err.println(PREFIX + "Total execution time: "
+		System.err.println(Commons.PREFIX + "Total execution time: "
 				+ (endtime - starttime));
-		System.err.println(PREFIX + "Phase 1 execution time: "
+		System.err.println(Commons.PREFIX + "Phase 1 execution time: "
 				+ (phase1endtime - phase1starttime));
-		System.err.println(PREFIX + "Phase 2 execution time: "
+		System.err.println(Commons.PREFIX + "Phase 2 execution time: "
 				+ (phase2endtime - phase2starttime));
 	}
 }

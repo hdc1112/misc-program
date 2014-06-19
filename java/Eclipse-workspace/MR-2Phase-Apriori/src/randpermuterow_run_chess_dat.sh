@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# this script doesn't log anything to file
+# use 2>&1 | tee /tmp/abc.log by yourself
+
 set -x
 
 # first parameter could be "noreupload"
@@ -43,7 +46,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.
 diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 #diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 
-./run.sh /tmp/tempdatafolder $columns 65 $1
+./run.sh /tmp/tempdatafolder $columns 80 $1
 date
 
 set +x

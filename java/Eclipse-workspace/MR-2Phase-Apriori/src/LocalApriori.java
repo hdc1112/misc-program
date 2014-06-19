@@ -17,7 +17,7 @@ public class LocalApriori {
 
 	private int items;
 	private int transactions;
-//	private int minsupport;
+	// private int minsupport;
 	private double minsupport;
 	private ArrayList<String> dataset;
 
@@ -26,10 +26,6 @@ public class LocalApriori {
 
 	private ArrayList<String> candidates = new ArrayList<String>();
 	private ArrayList<Integer> frequencies = new ArrayList<Integer>();
-
-	public final static String DATASETSEPARATOR = " ";
-	public final static String SEPARATOR = ",";
-	public final static String PURCHASED = "1";
 
 	public LocalApriori(int transactions, int items, double minsupport,
 			ArrayList<String> dataset) {
@@ -47,7 +43,7 @@ public class LocalApriori {
 			itemsetNumber++;
 
 			loop++;
-			System.err.println("Starting loop: " + loop);
+			System.err.println(Commons.PREFIX + "Starting loop: " + loop);
 			long loopstart = System.currentTimeMillis();
 
 			// after these two calls
@@ -65,10 +61,11 @@ public class LocalApriori {
 			g_frequencies.add(frequencies);
 
 			long loopend = System.currentTimeMillis();
-			System.err.println("Ending loop: " + loop + " Takes "
-					+ (loopend - loopstart));
+			System.err.println(Commons.PREFIX + "Ending loop: " + loop
+					+ " Takes " + (loopend - loopstart));
 		} while (candidates.size() > 1);
 		// } while (itemsetNumber < 2); // debug
+		System.err.println(Commons.PREFIX + "Total loop: " + loop);
 	}
 
 	public ArrayList<ArrayList<String>> frequentItemset() {
@@ -98,10 +95,11 @@ public class LocalApriori {
 				// at this stage, candidates.get(i) contains
 				// only one token. The candidates.get(i)
 				// will look like "3 4 5"
-				st1 = new StringTokenizer(candidates.get(i), SEPARATOR);
+				st1 = new StringTokenizer(candidates.get(i), Commons.SEPARATOR);
 				str1 = st1.nextToken();
 				for (int j = i + 1; j < candidates.size(); j++) {
-					st2 = new StringTokenizer(candidates.get(j), SEPARATOR);
+					st2 = new StringTokenizer(candidates.get(j),
+							Commons.SEPARATOR);
 					str2 = st2.nextToken();
 					tempCandidates.add(concat(str1, str2));
 				}
@@ -113,8 +111,10 @@ public class LocalApriori {
 				for (int j = i + 1; j < candidates.size(); j++) {
 					str1 = new String();
 					str2 = new String();
-					st1 = new StringTokenizer(candidates.get(i), SEPARATOR);
-					st2 = new StringTokenizer(candidates.get(j), SEPARATOR);
+					st1 = new StringTokenizer(candidates.get(i),
+							Commons.SEPARATOR);
+					st2 = new StringTokenizer(candidates.get(j),
+							Commons.SEPARATOR);
 					for (int s = 0; s < number - 2; s++) {
 						if (s == 0) {
 							str1 = st1.nextToken();
@@ -144,14 +144,16 @@ public class LocalApriori {
 		int[] count = new int[candidates.size()];
 
 		for (int i = 0; i < transactions; i++) {
-			stFile = new StringTokenizer(dataset.get(i), DATASETSEPARATOR);
+			stFile = new StringTokenizer(dataset.get(i),
+					Commons.DATASETSEPARATOR);
 			for (int j = 0; j < items; j++) {
-				trans[j] = stFile.nextToken().equalsIgnoreCase(PURCHASED);
+				trans[j] = stFile.nextToken().equalsIgnoreCase(
+						Commons.PURCHASED);
 			}
 
 			for (int c = 0; c < candidates.size(); c++) {
 				match = false;
-				st = new StringTokenizer(candidates.get(c), SEPARATOR);
+				st = new StringTokenizer(candidates.get(c), Commons.SEPARATOR);
 				while (st.hasMoreTokens()) {
 					match = trans[Integer.parseInt(st.nextToken()) - 1];
 					if (!match) {
@@ -175,6 +177,6 @@ public class LocalApriori {
 	}
 
 	private String concat(String s1, String s2) {
-		return s1 + SEPARATOR + s2;
+		return s1 + Commons.SEPARATOR + s2;
 	}
 }

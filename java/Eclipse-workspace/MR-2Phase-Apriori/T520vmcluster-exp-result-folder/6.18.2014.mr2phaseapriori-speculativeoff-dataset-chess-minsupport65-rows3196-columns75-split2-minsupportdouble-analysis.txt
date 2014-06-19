@@ -1,0 +1,12 @@
+6.18.2014.mr2phaseapriori-speculativeoff-dataset-chess-minsupport65-rows3196-columns75-split2-minsupportdouble-analysis.txt
+
+with cache: cache hit ratio roughly 80%
+[MR2PhaseApriori] Total execution time: 1478430
+[MR2PhaseApriori] Phase 1 execution time: 1273074
+[MR2PhaseApriori] Phase 2 execution time: 205356
+
+
+without cache
+[MR2PhaseApriori] Total execution time: 2140612
+[MR2PhaseApriori] Phase 1 execution time: 1107895
+[MR2PhaseApriori] Phase 2 execution time: 1032717
