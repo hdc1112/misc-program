@@ -11,7 +11,7 @@ if [ ! -f $storedir/$filename ]; then
   wget http://fimi.ua.ac.be/data/chess.dat
 fi
 
-cd $abshere/../src
+cd $abshere/../../src
 
 pwd
 javac ToBoolMatrix.java
