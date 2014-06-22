@@ -30,7 +30,7 @@ linenum=$totallinenum
 realfile=$transf.realfile
 cat $transf | head -n $linenum > $realfile
 
-cd $abshere/../src/
+cd $abshere/../../src/
 javac PermuteRows.java
 java PermuteRows `cygpath -wp $realfile`
 cd $abshere
