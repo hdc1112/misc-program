@@ -8,7 +8,7 @@ abshere=`dirname $absme`
 cd $abshere/../../src
 
 if [ ! -f hadoopclasspath.txt ]; then
-  find /home/tempid/hadoop-2.2.0/share/hadoop -type f -name "*.jar" | ./concatenate.sh > hadoopclasspath.txt
+  find /home/tempid/hadoop-2.2.0/share/hadoop -type f -name "*.jar" | $abshere/concatenate.sh > hadoopclasspath.txt
 fi
 classes=`cat hadoopclasspath.txt`
 javac -classpath $classes *.java
