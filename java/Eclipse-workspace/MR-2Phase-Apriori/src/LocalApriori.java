@@ -26,6 +26,7 @@ public class LocalApriori {
 
 	private ArrayList<String> candidates = new ArrayList<String>();
 	private ArrayList<Integer> frequencies = new ArrayList<Integer>();
+	private int totalloops = 0;
 
 	public LocalApriori(int transactions, int items, double minsupport,
 			ArrayList<String> dataset) {
@@ -65,7 +66,8 @@ public class LocalApriori {
 					+ " Takes " + (loopend - loopstart));
 		} while (candidates.size() > 1);
 		// } while (itemsetNumber < 2); // debug
-		System.err.println(Commons.PREFIX + "Total loop: " + loop);
+		// System.err.println(Commons.PREFIX + "Total loop: " + loop);
+		totalloops = loop;
 	}
 
 	public ArrayList<ArrayList<String>> frequentItemset() {
@@ -74,6 +76,10 @@ public class LocalApriori {
 
 	public ArrayList<ArrayList<Integer>> frequencies() {
 		return g_frequencies;
+	}
+	
+	public int getTotalLoops() {
+		return totalloops;
 	}
 
 	private void generateCandidates(int number) {

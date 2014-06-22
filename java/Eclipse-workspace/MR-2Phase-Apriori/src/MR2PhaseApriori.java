@@ -219,6 +219,10 @@ public class MR2PhaseApriori {
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(
 					transactions));
+
+			System.err.println(Commons.PREFIX + "(1/2) "
+					+ context.getTaskAttemptID().getTaskID().getId()
+					+ " Total loops: " + localalg.getTotalLoops());
 		}
 
 		@Override

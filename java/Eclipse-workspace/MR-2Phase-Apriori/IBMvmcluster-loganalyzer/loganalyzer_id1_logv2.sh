@@ -47,7 +47,7 @@ done
 # this script assume log is in stderr in the following folder
 in_userlogs=userlogs
 # log version
-logv="logv 1"
+logv="logv 2"
 prefix="\[MR2PhaseApriori\]\[$logv\]\ "
 # this script assume that the remote logs are organized in:
 # logs-hadoop1 --> userlogs --> application_*_0001 --> container_*_0001 --> stderr,stdout
@@ -110,7 +110,7 @@ function get_m1_1_loop {
     #echo ${l_interestfiles[$i]}
     set +x
     while read line; do
-      [[ $line =~ $prefix\(1/2\)\ 0\ Map\ [tT]ask\ end\ time:\ ([0-9]*) ]]\
+      [[ $line =~ $prefix\(1/2\)\ 0\ Total\ loops:\ ([0-9]*) ]]\
         && m1_1_loop=${BASH_REMATCH[1]} && break
     done < <(cat ${l_interestfiles[$i]}/stderr)
     set -x
@@ -176,6 +176,25 @@ function get_m1_2_end {
     fi
   done
   echo $m1_2_end
+}
+
+function get_m1_2_loop {
+  l_totalcont=$1 && shift
+  l_interestfiles=($@)
+  m1_2_loop=""
+  for i in `seq 0 $((l_totalcont-1))`; do
+    #echo ${l_interestfiles[$i]}
+    set +x
+    while read line; do
+      [[ $line =~ $prefix\(1/2\)\ 0\ Total\ loops:\ ([0-9]*) ]]\
+        && m1_2_loop=${BASH_REMATCH[1]} && break
+    done < <(cat ${l_interestfiles[$i]}/stderr)
+    set -x
+    if [ ! -z $m1_2_loop ]; then
+      break
+    fi
+  done
+  echo $m1_2_loop
 }
 
 function get_m1_2 {
@@ -587,9 +606,8 @@ for run in `seq 1 $mid_totalrun`; do
   m1_1_end=$(get_m1_1_end $totalcont "${interestfiles[@]}")
   echo -n ${m1_1_end:-NULL}" " >> $user_statpath
 
-  # TODO in program, add map task id into log, and update log version
-  #m1_1_loop=$(get_m1_1_loop $totalcont "${interestfiles[@]}")
-  #echo -n $m1_1_loop" "
+  m1_1_loop=$(get_m1_1_loop $totalcont "${interestfiles[@]}")
+  echo -n ${m1_1_loop:-NULL}" " >> $user_statpath
 
   m1_1=$(get_m1_1 $totalcont "${interestfiles[@]}")
   echo -n ${m1_1:-NULL}" " >> $user_statpath
@@ -600,8 +618,8 @@ for run in `seq 1 $mid_totalrun`; do
   m1_2_end=$(get_m1_2_end $totalcont "${interestfiles[@]}")
   echo -n ${m1_2_end:-NULL}" " >> $user_statpath
 
-  #m1_2_loop=$(get_m1_2_loop $totalcont "${interestfiles[@]}")
-  #echo -n $m1_2_loop" "
+  m1_2_loop=$(get_m1_2_loop $totalcont "${interestfiles[@]}")
+  echo -n ${m1_2_loop:-NULL}" " >> $user_statpath
 
   m1_2=$(get_m1_2 $totalcont "${interestfiles[@]}")
   echo -n ${m1_2:-NULL}" " >> $user_statpath
@@ -645,6 +663,7 @@ for run in `seq 1 $mid_totalrun`; do
   #for j in `seq 1 $totalcont`; do
   #echo hahahaha ${interestfiles[$j]}
   #done
+
   m2_1_start=$(get_m2_1_start $totalcont "${interestfiles[@]}")
   echo -n ${m2_1_start:-NULL}" " >> $user_statpath
 
