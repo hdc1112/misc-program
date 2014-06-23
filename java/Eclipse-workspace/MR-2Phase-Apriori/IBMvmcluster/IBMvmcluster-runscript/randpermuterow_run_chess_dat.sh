@@ -51,7 +51,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.
 diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 #diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 
-./run.sh /tmp/tempdatafolder $columns 65 $1
+./run.sh /tmp/tempdatafolder $columns 70 $1
 date
 
 set +x
