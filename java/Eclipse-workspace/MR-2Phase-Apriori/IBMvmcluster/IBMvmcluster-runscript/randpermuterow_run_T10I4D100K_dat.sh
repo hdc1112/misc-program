@@ -19,8 +19,8 @@ fi
 
 totallinenum=`cat $storedir/$filename | wc -l`
 linenum=$totallinenum
-linenum=$((linenum/2))
-linenum=$((linenum/2))
+#linenum=$((linenum/2))
+#linenum=$((linenum/2))
 #linenum=$((linenum/2))
 
 realfile=$transf.realfile
