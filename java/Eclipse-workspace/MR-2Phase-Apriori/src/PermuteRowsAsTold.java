@@ -39,6 +39,7 @@ public class PermuteRowsAsTold {
 			newplace[i] = array.get(i);
 		}
 
+		System.out.println("Printing this designated permutation ...");
 		for (int i = 0; i < array.size(); i++) {
 			// for (int i = 0; i < Math.min(linesnum, 100); i++) {
 			System.out.print(newplace[i] + " ");

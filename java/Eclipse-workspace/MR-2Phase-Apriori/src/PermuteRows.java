@@ -35,6 +35,7 @@ public class PermuteRows {
 			newplace[i] = i;
 		}
 		FisherYatesShuffle.shuffleArray(newplace);
+		System.out.println("Printing this random permutation ...");
 		for (int i = 0; i < linesnum; i++) {
 			// for (int i = 0; i < Math.min(linesnum, 100); i++) {
 			System.out.print(newplace[i] + " ");
