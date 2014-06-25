@@ -73,15 +73,20 @@ public class MR2PhaseApriori {
 	// private static int minsupport;
 	private static double minsupport;
 
+	// OPT2
+	private static double tolerate = 1;
+
 	private static String ITEMS_CONFIG = "MR2PhaseApriori.items.value";
 	private static String MINSUPPORT_CONFIG = "MR2PhaseApriori.minsupport.value";
 
+	private static String FIRSTPHASEOUTDIR_CONFIG = "MR2PhaseApriori.1stphase.outdir";
+
+	private static String OPT2TOLERATE_CONFIG = "MR2PhaseApriori.opt2tolerate.value";
+
 	private static String SPLIT_NUM_ROWS = "split_num_rows.key";
 
-	// OPT1
+	// OPT1's cache file suffix
 	private static String cachecountfile = "-cachecount.file";
-	private static String FIRSTPHASEOUTDIR = "MR2PhaseApriori.1stphase.outdir";
-	private static boolean enableOPT1 = true;
 
 	private static enum TOTALROWCOUNTER {
 		TOTALROW
@@ -99,7 +104,8 @@ public class MR2PhaseApriori {
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
 		// conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
-		conf.set(FIRSTPHASEOUTDIR, outputpath1stphase);
+		conf.set(FIRSTPHASEOUTDIR_CONFIG, outputpath1stphase);
+		conf.set(OPT2TOLERATE_CONFIG, Double.toString(tolerate));
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 1";
 		Job job = new Job(conf, jobname);
@@ -137,6 +143,9 @@ public class MR2PhaseApriori {
 		private double minsupport;
 		private String output1stphasedir;
 
+		// OPT2
+		private double tolerate;
+
 		private long starttime;
 		private long endtime;
 
@@ -147,17 +156,25 @@ public class MR2PhaseApriori {
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			minsupport = context.getConfiguration().getDouble(
 					MINSUPPORT_CONFIG, 0);
-			output1stphasedir = context.getConfiguration()
-					.get(FIRSTPHASEOUTDIR);
+			output1stphasedir = context.getConfiguration().get(
+					FIRSTPHASEOUTDIR_CONFIG);
+
+			// OPT2
+			tolerate = context.getConfiguration().getDouble(
+					OPT2TOLERATE_CONFIG, 1);
 
 			starttime = System.currentTimeMillis();
 
 			System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
+
+			// OPT2
+			System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
+
 			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task start time: " + (starttime));
 
-			if (enableOPT1) {
+			if (Commons.enabledOPT1()) {
 				// prepare to write this counting statistics to hdfs
 				// int mapid = context.getTaskAttemptID().getTaskID().getId();
 				FileSystem fs = FileSystem.get(context.getConfiguration());
@@ -192,9 +209,19 @@ public class MR2PhaseApriori {
 			// from now on, the input split is a ArrayList<String>
 			// now call the local apriori algorithm
 
-			LocalApriori localalg = new LocalApriori(transactions, items,
-					minsupport, dataset);
+			LocalApriori localalg = null;
+
+			if (Commons.enabledOPT2()) {
+				localalg = new LocalApriori(transactions, items, minsupport,
+						dataset, tolerate);
+			} else {
+				localalg = new LocalApriori(transactions, items, minsupport,
+						dataset);
+			}
+
 			localalg.apriori();
+
+			// get the frequent itemset, i.e. >= minsup
 			ArrayList<ArrayList<String>> frequent = localalg.frequentItemset();
 			ArrayList<ArrayList<Integer>> occurrences = localalg.frequencies();
 
@@ -210,8 +237,39 @@ public class MR2PhaseApriori {
 					context.write(new Text(itemset),
 							new IntWritable(thisfreq.get(loopc2)));
 
-					if (enableOPT1) {
+					// freqs will be passed to reduce phase no matter what,
+					// but whether they need to be written to HDFS
+					// depends on this switch
+					if (Commons.enabledOPT1()) {
 						// write to hdfs
+						bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
+					}
+				}
+			}
+
+			// get the tolerating itemset, i.e. >= ratio * minsup
+			// and < minsup, 0 <= ratio < 1
+			if (Commons.enabledOPT2()) {
+				loopc = 0;
+				loopc2 = 0;
+				ArrayList<ArrayList<String>> tol_itemset = localalg
+						.tolerateItemset();
+				ArrayList<ArrayList<Integer>> tol_occurs = localalg
+						.tolerateFrequencies();
+
+				// if there's no tolerating candidate, then it's
+				// the same with OPT2 disabled.
+				for (Iterator<ArrayList<String>> it = tol_itemset.iterator(); it
+						.hasNext(); loopc++) {
+					ArrayList<String> thisitemset = it.next();
+					ArrayList<Integer> thisfreq = tol_occurs.get(loopc);
+					loopc2 = 0;
+					for (Iterator<String> it2 = thisitemset.iterator(); it2
+							.hasNext(); loopc2++) {
+						String itemset = it2.next();
+						// I don't need to check enabledOPT1 here anymore
+						// these candidates don't need to be written to reduce
+						// phase
 						bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
 					}
 				}
@@ -235,7 +293,7 @@ public class MR2PhaseApriori {
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task execution time: " + (endtime - starttime));
 
-			if (enableOPT1) {
+			if (Commons.enabledOPT1()) {
 				// close hdfs file handler
 				bw.close();
 			}
@@ -306,7 +364,7 @@ public class MR2PhaseApriori {
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 
 		conf.set(TOTAL_ROW_CONFIG, Long.toString(totalrows));
-		conf.set(FIRSTPHASEOUTDIR, outputpath1stphase);
+		conf.set(FIRSTPHASEOUTDIR_CONFIG, outputpath1stphase);
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 2";
 		Job job = new Job(conf, jobname);
@@ -363,8 +421,8 @@ public class MR2PhaseApriori {
 			// minsupport = context.getConfiguration()
 			// .getInt(MINSUPPORT_CONFIG, 0);
 
-			output1stphasedir = context.getConfiguration()
-					.get(FIRSTPHASEOUTDIR);
+			output1stphasedir = context.getConfiguration().get(
+					FIRSTPHASEOUTDIR_CONFIG);
 
 			Path[] cacheFiles = context.getLocalCacheFiles();
 			if (cacheFiles != null) {
@@ -381,9 +439,12 @@ public class MR2PhaseApriori {
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map task start time: " + mapstart);
 
-			if (enableOPT1) {
+			if (Commons.enabledOPT1()) {
 				// load the hdfs file into cache
 				// if this is skipped, then cache is empty
+				// OPT2: this mapper doesn't know whether this
+				// cache contains tolerating candidates or not
+				// so OPT2 is transparent to Phase 2
 				FileSystem fs = FileSystem.get(context.getConfiguration());
 				String splitname = ((FileSplit) context.getInputSplit())
 						.getPath().getName();
@@ -547,11 +608,15 @@ public class MR2PhaseApriori {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();
-		if (otherArgs.length != 4) {
+		if (otherArgs.length < 4) {
+			// first kind of input: 4 params
 			System.err.print(Commons.PREFIX
 					+ "Usage: MR2PhaseApriori <in> <out>");
 			System.err.print(" <columns/items>");
-			System.err.println(" <minimum support>");
+			System.err.print(" <minimum support>");
+			// second kind of input: 5 params
+			System.err.println(" [<tolerate ratio>]");
+			// be careful when params need to be >= 6
 			System.exit(2);
 		}
 
@@ -560,9 +625,18 @@ public class MR2PhaseApriori {
 		items = Integer.parseInt(otherArgs[2]);
 		minsupport = Double.parseDouble(otherArgs[3]);
 
+		if (otherArgs.length == 5) {
+			tolerate = Double.parseDouble(otherArgs[4]);
+			System.err.println(Commons.PREFIX + "tolerate set by user");
+		}
+
 		System.err.println(Commons.PREFIX + "items = " + items);
 		System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
-		System.err.println(Commons.PREFIX + "enableOPT1: " + enableOPT1);
+		System.err.println(Commons.PREFIX + "enabledOPT1 = "
+				+ Commons.enabledOPT1());
+		System.err.println(Commons.PREFIX + "enabledOPT2 = "
+				+ Commons.enabledOPT2());
+		System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
 
 		outputpath1stphase = outputpath + "-1stphase";
 

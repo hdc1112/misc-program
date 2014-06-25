@@ -34,6 +34,9 @@ public class LocalApriori {
 		this.items = items;
 		this.minsupport = minsupport;
 		this.dataset = dataset;
+		// if you use this constructor, then tolerate will be 1,
+		// so no matter OPT2 is enabled or not, the final tolerate
+		// candidates will be empty, the same with OPT2 disabled.
 	}
 
 	public void apriori() {
@@ -61,6 +64,13 @@ public class LocalApriori {
 			g_candidates.add(candidates);
 			g_frequencies.add(frequencies);
 
+			// OPT2, if disabled, there won't be any
+			// tolerating candidates
+			if (Commons.enabledOPT2()) {
+				g_tol_candidates.add(tol_candidates);
+				g_tol_frequencies.add(tol_frequencies);
+			}
+
 			long loopend = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "Ending loop: " + loop
 					+ " Takes " + (loopend - loopstart));
@@ -77,7 +87,7 @@ public class LocalApriori {
 	public ArrayList<ArrayList<Integer>> frequencies() {
 		return g_frequencies;
 	}
-	
+
 	public int getTotalLoops() {
 		return totalloops;
 	}
@@ -172,11 +182,27 @@ public class LocalApriori {
 			}
 		}
 
+		// OPT2
+		if (Commons.enabledOPT2()) {
+			tol_candidates = new ArrayList<String>();
+			tol_frequencies = new ArrayList<Integer>();
+		}
+
 		frequencies = new ArrayList<Integer>();
 		for (int i = 0; i < candidates.size(); i++) {
 			if ((count[i] / (double) transactions) >= (minsupport / 100.0)) {
 				frequentCandidates.add(candidates.get(i));
 				frequencies.add(count[i]);
+			} else {
+				if (Commons.enabledOPT2()) {
+					if ((count[i] / (double) transactions) >= (tolerate
+							* minsupport / 100.0)) {
+						tol_candidates.add(candidates.get(i));
+						tol_frequencies.add(count[i]);
+					} else {
+						// even in tolerance mode, this candidate didn't pass
+					}
+				}
 			}
 		}
 		candidates = frequentCandidates;
@@ -184,5 +210,38 @@ public class LocalApriori {
 
 	private String concat(String s1, String s2) {
 		return s1 + Commons.SEPARATOR + s2;
+	}
+
+	// OPT2
+	// correctness of one constructor depends on this default value
+	private double tolerate = 1; // by default zero tolerance
+	private ArrayList<String> tol_candidates = new ArrayList<String>();
+	private ArrayList<Integer> tol_frequencies = new ArrayList<Integer>();
+
+	private ArrayList<ArrayList<String>> g_tol_candidates = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<Integer>> g_tol_frequencies = new ArrayList<ArrayList<Integer>>();
+
+	// OPT2
+	// tolerate must be >=0, and <1, otherwise it would be treated as 1
+	public LocalApriori(int transactions, int items, double minsupport,
+			ArrayList<String> dataset, double tolerate) {
+		this(transactions, items, minsupport, dataset);
+		this.tolerate = tolerate;
+		if (tolerate >= 1 || tolerate < 0) {
+			System.err.println(Commons.PREFIX
+					+ "Warning: Invalid tolerate, set to default value");
+			this.tolerate = 1;
+		}
+		System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
+	}
+
+	// OPT2
+	public ArrayList<ArrayList<String>> tolerateItemset() {
+		return g_tol_candidates;
+	}
+
+	// OPT2
+	public ArrayList<ArrayList<Integer>> tolerateFrequencies() {
+		return g_tol_frequencies;
 	}
 }
