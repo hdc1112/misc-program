@@ -9,10 +9,9 @@ abshere=`dirname $absme`
 if [ ! -f $storedir/$filename ]; then
   cd $storedir
   wget http://fimi.ua.ac.be/data/accidents.dat
-  cd $abshere
-else
-  cd $abshere
 fi
+
+cd $abshere/../../../src
 
 pwd
 javac ToBoolMatrix.java

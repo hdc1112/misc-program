@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+# this script doesn't log anything to file
+# use 2>&1 | tee /tmp/abc.log by yourself
+
 set -x
 
-# first parameter could be "noreupload"
+# second parameter could be "noreupload"
+if [ $# -lt 1]; then
+  echo Usage `basename $0` tolerate [noreupload]
+  exit 1
+fi
 
 absme=`readlink -f $0`
 abshere=`dirname $absme`
@@ -29,8 +36,10 @@ echo linenum=$linenum
 realfile=$transf.realfile
 cat $transf | head -n $linenum > $realfile
 
+cd $abshere/../../../src/
 javac PermuteRows.java
 java PermuteRows `cygpath -wp $realfile`
+cd $abshere
 
 realfile=${realfile}-randpermute
 
@@ -45,12 +54,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.
 diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 #diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 
-#minsupport=51
-./run.sh /tmp/tempdatafolder $columns 80 $1
-#minsupport=1
-#./run.sh /tmp/tempdatafolder $columns 1 $1
-#minsupport=0.52
-#./run.sh /tmp/tempdatafolder $columns 0.52 $1
+./run.sh /tmp/tempdatafolder $columns 80 $1 $2
 date
 
 set +x
