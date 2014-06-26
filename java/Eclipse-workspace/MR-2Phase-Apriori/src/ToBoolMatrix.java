@@ -35,10 +35,16 @@ public class ToBoolMatrix {
 
 		int loopc = 0;
 
+		boolean[] linebool = new boolean[max + 1];
+
 		br = new BufferedReader(new FileReader(new File(filepath)));
 		while ((line = br.readLine()) != null) {
 			loopc++;
-			boolean[] linebool = new boolean[max + 1];
+
+			for (int i = 0; i < linebool.length; i++) {
+				linebool[i] = false;
+			}
+
 			StringTokenizer st = new StringTokenizer(line);
 			while (st.hasMoreTokens()) {
 				int tokenv = Integer.parseInt(st.nextToken());
