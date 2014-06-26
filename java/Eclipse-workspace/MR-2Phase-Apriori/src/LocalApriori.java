@@ -74,6 +74,8 @@ public class LocalApriori {
 			long loopend = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "Ending loop: " + loop
 					+ " Takes " + (loopend - loopstart));
+			System.err.println(Commons.PREFIX + "After loop " + loop
+					+ " number of candidates: " + candidates.size());
 		} while (candidates.size() > 1);
 		// } while (itemsetNumber < 2); // debug
 		// System.err.println(Commons.PREFIX + "Total loop: " + loop);
