@@ -13,11 +13,17 @@ public class ToBoolMatrix {
 		}
 		String filepath = args[0];
 
+		System.err.println("ToBoolMatrix");
+		System.err.println(filepath);
+
 		BufferedReader br = new BufferedReader(new FileReader(
 				new File(filepath)));
 		String line;
 		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE; // assume the min >= 0
+		int rows = 0;
 		while ((line = br.readLine()) != null) {
+			rows++;
 			StringTokenizer st = new StringTokenizer(line);
 
 			while (st.hasMoreTokens()) {
@@ -26,10 +32,15 @@ public class ToBoolMatrix {
 				if (tokenv > max) {
 					max = tokenv;
 				}
+				if (tokenv < min) {
+					min = tokenv;
+				}
 			}
 		}
 
-		System.err.println(max);
+		System.err.println("max = " + max);
+		System.err.println("min = " + min);
+		System.err.println("rows = " + rows);
 
 		br.close();
 
@@ -51,7 +62,7 @@ public class ToBoolMatrix {
 				linebool[tokenv] = true;
 			}
 			// System.err.println(loopc);
-			for (int i = 1; i <= max; i++) {
+			for (int i = min; i <= max; i++) {
 				if (linebool[i] == false) {
 					System.out.print("0 ");
 				} else {
