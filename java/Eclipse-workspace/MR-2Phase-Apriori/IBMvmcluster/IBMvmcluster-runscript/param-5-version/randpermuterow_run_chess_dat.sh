@@ -22,7 +22,13 @@ cd $abshere
 pwd
 
 if [ ! -f $transf ]; then
+  echo did not find $transf, transform now
   ./transform_chess.sh
+elif [ `cat $storedir/$filename | wc -l` != `cat $transf | wc -l` ]; then
+  echo found $transf, but it is corrupted
+  ./transform_chess.sh
+else
+  echo found $transf, it looks good
 fi
 
 totallinenum=`cat $storedir/$filename | wc -l`
