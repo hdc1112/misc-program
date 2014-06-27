@@ -257,6 +257,9 @@ public class MR2PhaseApriori {
 				ArrayList<ArrayList<Integer>> tol_occurs = localalg
 						.tolerateFrequencies();
 
+				// for bookkeeping
+				long tolerateitemsets = 0;
+
 				// if there's no tolerating candidate, then it's
 				// the same with OPT2 disabled.
 				for (Iterator<ArrayList<String>> it = tol_itemset.iterator(); it
@@ -271,8 +274,16 @@ public class MR2PhaseApriori {
 						// these candidates don't need to be written to reduce
 						// phase
 						bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
+
+						// for bookkeeping
+						tolerateitemsets++;
 					}
 				}
+
+				// this log is only available in enabledOPT2
+				System.err.println(Commons.PREFIX + "(1/2) "
+						+ context.getTaskAttemptID().getTaskID().getId()
+						+ " Tolerate itemsets: " + tolerateitemsets);
 			}
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(
