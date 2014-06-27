@@ -12,6 +12,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -615,32 +622,35 @@ public class MR2PhaseApriori {
 	/* main function */
 
 	public static void main(String[] args) throws IOException,
-			ClassNotFoundException, InterruptedException, URISyntaxException {
+			ClassNotFoundException, InterruptedException, URISyntaxException,
+			ParseException {
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args)
 				.getRemainingArgs();
-		if (otherArgs.length < 4) {
-			// first kind of input: 4 params
-			System.err.print(Commons.PREFIX
-					+ "Usage: MR2PhaseApriori <in> <out>");
-			System.err.print(" <columns/items>");
-			System.err.print(" <minimum support>");
-			// second kind of input: 5 params
-			System.err.println(" [<tolerate ratio>]");
-			// be careful when params need to be >= 6
-			System.exit(2);
+
+		// Definition stage
+		Options options = buildOptions();
+
+		// Parsing stage
+		CommandLineParser parser = new BasicParser();
+		CommandLine cmd = parser.parse(options, otherArgs);
+
+		// Interrogation stage
+		inputpath = cmd.getOptionValue("inpath");
+		outputpath = cmd.getOptionValue("outpath");
+		items = Integer.parseInt(cmd.getOptionValue("columns"));
+		minsupport = Double.parseDouble(cmd.getOptionValue("minsupport"));
+		tolerate = Double.parseDouble(cmd.getOptionValue("tolerate", "1"));
+		if (cmd.hasOption("enableOPT1")) {
+			Commons.enabledOPT1(true);
+		}
+		if (cmd.hasOption("enableOPT2")) {
+			Commons.enabledOPT2(true);
 		}
 
-		inputpath = otherArgs[0];
-		outputpath = otherArgs[1];
-		items = Integer.parseInt(otherArgs[2]);
-		minsupport = Double.parseDouble(otherArgs[3]);
-
-		if (otherArgs.length == 5) {
-			tolerate = Double.parseDouble(otherArgs[4]);
-			System.err.println(Commons.PREFIX + "tolerate set by user");
-		}
-
+		// command line show stage
+		System.err.println(Commons.PREFIX + "inpath = " + inputpath);
+		System.err.println(Commons.PREFIX + "outpath = " + outputpath);
 		System.err.println(Commons.PREFIX + "items = " + items);
 		System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
 		System.err.println(Commons.PREFIX + "enabledOPT1 = "
@@ -648,6 +658,8 @@ public class MR2PhaseApriori {
 		System.err.println(Commons.PREFIX + "enabledOPT2 = "
 				+ Commons.enabledOPT2());
 		System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
+
+		// the main logic
 
 		outputpath1stphase = outputpath + "-1stphase";
 
@@ -675,5 +687,47 @@ public class MR2PhaseApriori {
 				+ (phase1endtime - phase1starttime));
 		System.err.println(Commons.PREFIX + "Phase 2 execution time: "
 				+ (phase2endtime - phase2starttime));
+	}
+
+	private static Options buildOptions() {
+		Options options = new Options();
+
+		Option option1 = OptionBuilder.withArgName("inpath").hasArg()
+				.isRequired().withDescription("hdfs input folder")
+				.create("inpath");
+
+		Option option2 = OptionBuilder.withArgName("outpath").hasArg()
+				.isRequired().withDescription("hdfs output folder")
+				.create("outpath");
+
+		Option option3 = OptionBuilder.withArgName("columns").hasArg()
+				.isRequired().withDescription("columns/items in the input")
+				.create("columns");
+
+		Option option4 = OptionBuilder.withArgName("minsupport").hasArg()
+				.isRequired().withDescription("minimum support in percentage")
+				.create("minsupport");
+
+		Option option5 = OptionBuilder.withArgName("tolerate").hasArg()
+				.withDescription("tolerate ratio, default 1")
+				.create("tolerate");
+
+		Option option6 = OptionBuilder.withArgName("enableOPT1").hasArg(false)
+				.withDescription("enable OPT1 (cache), default false")
+				.create("enableOPT1");
+
+		Option option7 = OptionBuilder.withArgName("enableOPT2").hasArg(false)
+				.withDescription("enable OPT2 (tolerate), default false")
+				.create("enableOPT2");
+
+		options.addOption(option1);
+		options.addOption(option2);
+		options.addOption(option3);
+		options.addOption(option4);
+		options.addOption(option5);
+		options.addOption(option6);
+		options.addOption(option7);
+
+		return options;
 	}
 }
