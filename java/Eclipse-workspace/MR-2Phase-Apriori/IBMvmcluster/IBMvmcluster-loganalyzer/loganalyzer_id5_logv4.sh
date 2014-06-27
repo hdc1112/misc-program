@@ -605,7 +605,7 @@ if [ $((mid_maxjobid%2)) -eq 0 ]; then
 else
   mid_maxjobid=$((mid_maxjobid-1))
 fi
-mid_maxjobid=2
+mid_maxjobid=10
 
 if [ $mid_maxjobid -lt 0 ]; then
   echo Exit, sample space too small

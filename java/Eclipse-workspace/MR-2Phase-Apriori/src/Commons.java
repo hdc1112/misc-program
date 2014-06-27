@@ -45,7 +45,7 @@ public class Commons {
 	// -- then it doesn't exist.
 	// i.e. OPT2 relies on OPT1
 	// The intuition is that OPT2 is designed to cache more.
-	private static final boolean enableOPT2 = false;
+	private static final boolean enableOPT2 = true;
 
 	// OPT2 switch judge
 	public static boolean enabledOPT2() {
