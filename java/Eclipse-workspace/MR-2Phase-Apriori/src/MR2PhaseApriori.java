@@ -658,9 +658,10 @@ public class MR2PhaseApriori {
 		System.err.println(Commons.PREFIX + "enabledOPT2 = "
 				+ Commons.enabledOPT2());
 		System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
+		
+		// command line verify stage (skip)
 
 		// the main logic
-
 		outputpath1stphase = outputpath + "-1stphase";
 
 		long starttime = System.currentTimeMillis();

@@ -53,7 +53,7 @@ public class CmdLineTest {
 		System.out.println(cmd.getOptionValue("outpath"));
 		System.out.println(cmd.getOptionValue("columns"));
 		System.out.println(cmd.getOptionValue("minsupport"));
-		System.out.println(cmd.getOptionValue("tolerate", "1"));
+		System.out.println(cmd.getOptionValue("tolerate", "0.8"));
 		System.out.println(cmd.hasOption("enableOPT1"));
 		System.out.println(cmd.hasOption("enableOPT2"));
 	}

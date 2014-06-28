@@ -1,22 +1,62 @@
 #!/usr/bin/env bash
 
-set -x
+# default value stage
+tolerate=
+noreupload=
+minsupport=
+enableopt1=
+enableopt2=
 
-# second parameter could be "noreupload"
-if [ $# -lt 1 ]; then
-  echo Usage `basename $0` tolerate [noreupload]
-  exit 1
-fi
+# definition, parsing, interrogation stages
+while getopts ":t:m:npq" o; do
+  case $o in
+    t)
+      tolerate=$OPTARG
+      ;;
+    m)
+      minsupport=$OPTARG
+      ;;
+    n)
+      noreupload="-n"
+      ;;
+    p)
+      enableopt1="-p"
+      ;;
+    q)
+      enableopt2="-q"
+      ;;
+    *)
+      echo invalid argument >&2
+      exit 1
+      ;;
+  esac
+done
 
+# arguments show stage
+echo `basename $0` arguments list
+echo tolerate=$tolerate
+echo noreupload=$noreupload
+echo minsupport=$minsupport
+echo enableopt1=$enableopt1
+echo enableopt2=$enableopt2
+
+# verify arguments stage (skip)
+
+# standard header
 absme=`readlink -f $0`
 abshere=`dirname $absme`
+
+# arg path absolutify
+
+# entery wkdir
+cd $abshere
+
+# main logic
+set -x
 
 storedir=/tmp
 filename=pumsb.dat
 transf=$storedir/$filename.transf
-
-cd $abshere
-pwd
 
 if [ ! -f $transf ]; then
   echo did not find $transf, transform now
@@ -55,7 +95,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.
 diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 #diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
 
-./run.sh /tmp/tempdatafolder $columns 90 $1 $2
+./run.sh -d /tmp/tempdatafolder -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload
 date
 
 set +x
