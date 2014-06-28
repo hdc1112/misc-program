@@ -80,40 +80,46 @@ public class MR2PhaseApriori {
 	// private static int minsupport;
 	private static double minsupport;
 
-	// OPT2
-	private static double tolerate = 1;
-
 	private static String ITEMS_CONFIG = "MR2PhaseApriori.items.value";
 	private static String MINSUPPORT_CONFIG = "MR2PhaseApriori.minsupport.value";
 
 	private static String FIRSTPHASEOUTDIR_CONFIG = "MR2PhaseApriori.1stphase.outdir";
 
+	private static String OPT1SWITCH_CONFIG = "MR2PhaseApriori.opt1switch.onoff";
+	private static String OPT2SWITCH_CONFIG = "MR2PhaseApriori.opt2switch.onoff";
+
 	private static String OPT2TOLERATE_CONFIG = "MR2PhaseApriori.opt2tolerate.value";
 
 	private static String SPLIT_NUM_ROWS = "split_num_rows.key";
 
+	private static String TOTAL_ROW_CONFIG = "MR2PhaseApriori.totalrow.value";
+	private static long totalrows;
+
 	// OPT1's cache file suffix
 	private static String cachecountfile = "-cachecount.file";
+
+	// OPT2
+	private static double tolerate = 1;
 
 	private static enum TOTALROWCOUNTER {
 		TOTALROW
 	}
 
-	private static String TOTAL_ROW_CONFIG = "MR2PhaseApriori.totalrow.value";
-	private static long totalrows;
-
 	/* for phase 1 */
 
 	public static void run_on_hadoop_phase1() throws IllegalArgumentException,
 			IOException, ClassNotFoundException, InterruptedException {
+		// set up variables passed to remote task
 		Configuration conf = new Configuration();
-
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
 		// conf.set(MINSUPPORT_CONFIG, Integer.toString(minsupport));
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
 		conf.set(FIRSTPHASEOUTDIR_CONFIG, outputpath1stphase);
 		conf.set(OPT2TOLERATE_CONFIG, Double.toString(tolerate));
+		conf.set(OPT1SWITCH_CONFIG, Boolean.toString(Commons.enabledOPT1()));
+		conf.set(OPT2SWITCH_CONFIG, Boolean.toString(Commons.enabledOPT2()));
 
+		// set up Job object
 		String jobname = "MapReduce 2Phase Apriori, Phase 1";
 		Job job = new Job(conf, jobname);
 		job.setJarByClass(MR2PhaseApriori.class);
@@ -127,11 +133,13 @@ public class MR2PhaseApriori {
 		FileInputFormat.addInputPath(job, new Path(inputpath));
 		FileOutputFormat.setOutputPath(job, new Path(outputpath1stphase));
 
+		// fire the job
 		int retval = job.waitForCompletion(true) ? 0 : 1;
 		if (retval != 0) {
 			System.exit(retval);
 		}
 
+		// get counter
 		Counters counters = job.getCounters();
 		Counter c = counters.findCounter(TOTALROWCOUNTER.TOTALROW);
 		totalrows = c.getValue();
@@ -142,14 +150,14 @@ public class MR2PhaseApriori {
 	public static class FirstPhaseMapper extends
 			Mapper<NullWritable, BytesWritable, Text, IntWritable> {
 
-		public static Log LOG = LogFactory.getLog(FirstPhaseMapper.class);
-
+		// stub program config
 		private int transactions;
 		private int items;
 		// private int minsupport;
 		private double minsupport;
 		private String output1stphasedir;
-
+		private boolean enableopt1;
+		private boolean enableopt2;
 		// OPT2
 		private double tolerate;
 
@@ -160,23 +168,32 @@ public class MR2PhaseApriori {
 
 		@Override
 		public void setup(Context context) throws IOException {
+			// download stub config
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			minsupport = context.getConfiguration().getDouble(
 					MINSUPPORT_CONFIG, 0);
 			output1stphasedir = context.getConfiguration().get(
 					FIRSTPHASEOUTDIR_CONFIG);
-
+			enableopt1 = context.getConfiguration().getBoolean(
+					OPT1SWITCH_CONFIG, false);
+			enableopt2 = context.getConfiguration().getBoolean(
+					OPT2SWITCH_CONFIG, false);
+			Commons.enabledOPT1(enableopt1);
+			Commons.enabledOPT2(enableopt2);
 			// OPT2
 			tolerate = context.getConfiguration().getDouble(
 					OPT2TOLERATE_CONFIG, 1);
 
-			starttime = System.currentTimeMillis();
-
+			// arguments show stage
 			System.err.println(Commons.PREFIX + "minsupport = " + minsupport);
-
+			System.err.println(Commons.PREFIX + "enabledOPT1 = "
+					+ Commons.enabledOPT1());
+			System.err.println(Commons.PREFIX + "enabledOPT2 = "
+					+ Commons.enabledOPT2());
 			// OPT2
 			System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
 
+			starttime = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "(1/2) "
 					+ context.getTaskAttemptID().getTaskID().getId()
 					+ " Map Task start time: " + (starttime));
@@ -376,13 +393,14 @@ public class MR2PhaseApriori {
 
 	public static void run_on_hadoop_phase2() throws IOException,
 			ClassNotFoundException, InterruptedException, URISyntaxException {
+		// stub program config passed to remote task
 		Configuration conf = new Configuration();
-
 		conf.set(ITEMS_CONFIG, Integer.toString(items));
 		conf.set(MINSUPPORT_CONFIG, Double.toString(minsupport));
-
 		conf.set(TOTAL_ROW_CONFIG, Long.toString(totalrows));
 		conf.set(FIRSTPHASEOUTDIR_CONFIG, outputpath1stphase);
+		conf.set(OPT1SWITCH_CONFIG, Boolean.toString(Commons.enabledOPT1()));
+		conf.set(OPT2SWITCH_CONFIG, Boolean.toString(Commons.enabledOPT2()));
 
 		String jobname = "MapReduce 2Phase Apriori, Phase 2";
 		Job job = new Job(conf, jobname);
@@ -433,14 +451,23 @@ public class MR2PhaseApriori {
 		private HashMap<String, Integer> cache = new HashMap<String, Integer>();
 		private long total, hit;
 
+		private boolean enableopt1;
+		private boolean enableopt2;
+
 		@Override
 		public void setup(Context context) throws IOException {
+			// download stub config
 			items = context.getConfiguration().getInt(ITEMS_CONFIG, 0);
 			// minsupport = context.getConfiguration()
 			// .getInt(MINSUPPORT_CONFIG, 0);
-
 			output1stphasedir = context.getConfiguration().get(
 					FIRSTPHASEOUTDIR_CONFIG);
+			enableopt1 = context.getConfiguration().getBoolean(
+					OPT1SWITCH_CONFIG, false);
+			enableopt2 = context.getConfiguration().getBoolean(
+					OPT2SWITCH_CONFIG, false);
+			Commons.enabledOPT1(enableopt1);
+			Commons.enabledOPT2(enableopt2);
 
 			Path[] cacheFiles = context.getLocalCacheFiles();
 			if (cacheFiles != null) {
@@ -511,10 +538,6 @@ public class MR2PhaseApriori {
 					dataset.add(thisrow);
 				}
 			}
-
-			// OPT1: here I should open the countcache file
-			// OPT1: load it into cache map
-			// OPT1: close the count cache file
 
 			if (localFiles != null) {
 				for (int i = 0; i < localFiles.length; i++) {
@@ -658,7 +681,7 @@ public class MR2PhaseApriori {
 		System.err.println(Commons.PREFIX + "enabledOPT2 = "
 				+ Commons.enabledOPT2());
 		System.err.println(Commons.PREFIX + "tolerate = " + tolerate);
-		
+
 		// command line verify stage (skip)
 
 		// the main logic

@@ -16,7 +16,7 @@ public class Commons {
 	//
 	// Once it's committed, any further change to logging is in the next
 	// version. Prepare that any change will entail a new loganalyzer
-	private static final int log_ver = 6;
+	private static final int log_ver = 7;
 	public static final String PREFIX = "[MR2PhaseApriori][logv " + log_ver
 			+ "] ";
 
@@ -62,6 +62,3 @@ public class Commons {
 		return enableOPT1 && enableOPT2;
 	}
 }
-
-// logv1, finished at b1666a7598188829df69eb3b9c0e0f477f42c52d
-// logv2, finished at d162ba65148e29a8025423404c8ba18b7e3e5afe
