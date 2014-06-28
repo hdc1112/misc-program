@@ -62,6 +62,7 @@ dataabspath=`readlink -f $dataabspath`
 # enter my work directory
 cd $abshere
 
+# main logic
 set -x
 
 ./jar.sh

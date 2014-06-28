@@ -42,8 +42,8 @@ done
 
 # arguments show stage
 echo `basename $0` arguments list
-echo inputpath=$inputpath
-echo outputpath=$outputpath
+echo inputpath=$inpath
+echo outputpath=$outpath
 echo columns=$columns
 echo minsupport=$minsupport
 echo tolerate=$tolerate

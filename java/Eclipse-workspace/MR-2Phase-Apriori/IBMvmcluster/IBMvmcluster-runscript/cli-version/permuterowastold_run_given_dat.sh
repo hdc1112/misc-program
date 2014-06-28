@@ -7,10 +7,14 @@ noreupload=
 minsupport=
 enableopt1=
 enableopt2=
+datname=
 
 # definition, parsing, interrogation stages
-while getopts ":f:t:m:pqn" o; do
+while getopts ":d:f:t:m:pqn" o; do
   case $o in 
+    d)
+      datname=$OPTARG
+      ;;
     f)
       permutefile=$OPTARG
       ;;
@@ -38,6 +42,7 @@ done
 
 # arguments show stage
 echo `basename $0` arguments list
+echo datname=$datname
 echo permutefile=$permutefile
 echo tolerate=$tolerate
 echo noreupload=$noreupload
@@ -59,24 +64,21 @@ cd $abshere
 # main logic
 set -x
 storedir=/tmp
-filename=pumsb.dat
+filename=$datname.dat
 transf=$storedir/$filename.transf
 
 if [ ! -f $transf ]; then
   echo did not find $transf, transform now
-  ./transform_pumsb.sh
+  ./transform_given_dat.sh -d $datname
 elif [ `cat $storedir/$filename | wc -l` != `cat $transf | wc -l` ]; then
   echo found $transf, but it is corrupted
-  ./transform_pumsb.sh
+  ./transform_given_dat.sh -d $datname
 else
   echo found $transf, it looks good
 fi
 
-# now we have pumsb.dat
-
 filenameastold=$transf-permuteastold
 
-permutefile=$1
 permutefile=`readlink -f $permutefile`
 
 cd $abshere/../../../src

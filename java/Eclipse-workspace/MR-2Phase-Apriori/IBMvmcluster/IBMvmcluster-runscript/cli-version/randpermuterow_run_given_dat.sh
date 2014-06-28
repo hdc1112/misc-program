@@ -6,10 +6,14 @@ noreupload=
 minsupport=
 enableopt1=
 enableopt2=
+datname=
 
 # definition, parsing, interrogation stages
-while getopts ":t:m:npq" o; do
+while getopts ":d:t:m:npq" o; do
   case $o in
+    d)
+      datname=$OPTARG
+      ;;
     t)
       tolerate=$OPTARG
       ;;
@@ -34,6 +38,7 @@ done
 
 # arguments show stage
 echo `basename $0` arguments list
+echo datname=$datname
 echo tolerate=$tolerate
 echo noreupload=$noreupload
 echo minsupport=$minsupport
@@ -55,15 +60,15 @@ cd $abshere
 set -x
 
 storedir=/tmp
-filename=pumsb.dat
+filename=$datname.dat
 transf=$storedir/$filename.transf
 
 if [ ! -f $transf ]; then
   echo did not find $transf, transform now
-  ./transform_pumsb.sh
+  ./transform_given_dat.sh -d $datname
 elif [ `cat $storedir/$filename | wc -l` != `cat $transf | wc -l` ]; then
   echo found $transf, but it is corrupted
-  ./transform_pumsb.sh
+  ./transform_given_dat.sh -d $datname
 else
   echo found $transf, it looks good
 fi
