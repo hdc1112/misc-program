@@ -54,6 +54,11 @@ public class LocalApriori {
 			// candidates will store the frequent itemset
 			// count[] will store each one's occurrences
 			generateCandidates(itemsetNumber);
+
+			System.err.println(Commons.PREFIX + "Before filtering in loop "
+					+ loop + " number of candidates: " + candidates.size());
+			long loopmid = System.currentTimeMillis();
+
 			calculateFrequentItemsets(itemsetNumber);
 
 			// add this iteration's result into global result
@@ -72,13 +77,16 @@ public class LocalApriori {
 			}
 
 			long loopend = System.currentTimeMillis();
-			System.err.println(Commons.PREFIX + "Ending loop: " + loop
-					+ " Takes " + (loopend - loopstart));
 			System.err.println(Commons.PREFIX + "After loop " + loop
 					+ " number of candidates: " + candidates.size());
+			System.err.println(Commons.PREFIX + "Ending loop: " + loop
+					+ " Takes " + (loopend - loopstart) + ", filtering takes "
+					+ (loopend - loopmid) + " Percentage: "
+					+ ((loopend - loopmid) / (double) (loopend - loopstart)));
+			System.err.println();
+
 		} while (candidates.size() > 1);
-		// } while (itemsetNumber < 2); // debug
-		// System.err.println(Commons.PREFIX + "Total loop: " + loop);
+
 		totalloops = loop;
 	}
 
