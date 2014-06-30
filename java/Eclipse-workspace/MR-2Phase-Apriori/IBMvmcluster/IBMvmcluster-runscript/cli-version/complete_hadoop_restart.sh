@@ -1,5 +1,53 @@
 #!/usr/bin/env bash
 
+# default value stage
+deletelogs=
+deletedata=
+# the following makes lots of assumptions
+# to the cluster arch, but it works
+# for me so far
+masternode=ibmvm1
+slavenodes=ibmvm1,ibmvm2,ibmvm3
+user=dachuan
+bruteforce=
+
+# definition, parsing, interrogation stages
+while getopts ":m:s:u:ldb" o; do
+  case $o in
+    m)
+      masternode=$OPTARG
+      ;;
+    s)
+      slavenodes=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
+      ;;
+    l)
+      deletelogs="yes"
+      ;;
+    d)
+      deletedata="yes"
+      ;;
+    b)
+      bruteforce="yes"
+      ;;
+    *)
+      echo Invalid arguments >&2
+      ;;
+  esac
+done
+
+# arguments show stage
+echo `basename $0` arguments list
+echo deletelogs=$deletelogs
+echo deleteadata=$deletedata
+echo masternode=$masternode
+echo slavenodes=$slavenodes
+echo user=$user
+
+# verify arguments stage (skip)
+
 set -x
 
 absme=`readlink -f $0`
@@ -7,22 +55,42 @@ abshere=`dirname $absme`
 
 cd $abshere
 
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/sbin/stop-yarn.sh
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/sbin/stop-dfs.sh
-ssh -n dachuan@ibmvm1 killall -9 java
-ssh -n dachuan@ibmvm2 killall -9 java
-ssh -n dachuan@ibmvm3 killall -9 java
+# main logic
 
-for node in dachuan@ibmvm1 dachuan@ibmvm2 dachuan@ibmvm3; do 
-  echo $node
-  ssh -n $node rm -rf hadoop-2.2.0/logs/* dfs/name/* dfs/data/* temp/*
+IFS=', ' read -a slaves <<< $slavenodes
+
+ssh -n $user@$masternode ./hadoop-2.2.0/sbin/stop-yarn.sh
+ssh -n $user@$masternode ./hadoop-2.2.0/sbin/stop-dfs.sh
+
+if [ $bruteforce = "yes" ]; 
+  for slave in "${slaves[@]}"; do
+    ssh -n $user@$slave killall -9 java
+  done
+fi
+
+if [ $deletelogs = "yes" ]; then
+  for slave in "${slaves[@]}"; do
+    ssh -n $user@$slave rm -r -f hadoop-2.2.0/logs/*
+  done
+fi
+
+if [ $deletedata = "yes" ]; then
+  for slave in "${slaves[@]}"; do
+    ssh -n $user@$slave rm -r -f dfs/name/* dfs/data/* temp/*
+  done
+  ssh -n $user@$masternode ./hadoop-2.2.0/bin/hadoop namenode -format
+fi
+
+ssh -n $user@$masternode ./hadoop-2.2.0/sbin/start-yarn.sh
+ssh -n $user@$masternode ./hadoop-2.2.0/sbin/start-dfs.sh
+
+echo Masternode jps
+echo $user@$masternode && ssh -n $user@$masternode jps
+
+echo
+echo Slavenode jps
+for slave in "${slaves[@]}"; do
+  echo $user@$slave && ssh -n $user@$slave jps
 done
-
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hadoop namenode -format
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/sbin/start-yarn.sh
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/sbin/start-dfs.sh
-echo dachuan@ibmvm1 && ssh -n dachuan@ibmvm1 jps
-echo dachuan@ibmvm2 && ssh -n dachuan@ibmvm2 jps
-echo dachuan@ibmvm3 && ssh -n dachuan@ibmvm3 jps
 
 set +x

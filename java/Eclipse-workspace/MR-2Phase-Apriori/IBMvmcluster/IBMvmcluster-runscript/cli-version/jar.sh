@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+# default value stage
+worknode=ibmvm1
+user=dachuan
+
+# definition, parsing, interrogation stages
+while getopts ":w:u:" o; do
+  case $o in
+    o)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
+      ;;
+    *)
+      echo invalid argument >&2
+      exit 1
+      ;;
+  esac
+done
+
+# arguments show stage
+echo worknode=$worknode
+echo user=$user
+
+# verify arguments stage (skip)
+
 set -x
 
 absme=`readlink -f $0`
@@ -14,7 +40,7 @@ classes=`cat hadoopclasspath.txt`
 javac -classpath $classes *.java
 jar cvfe ./mr-2phase-apriori.jar MR2PhaseApriori *.class
 jar -tf ./mr-2phase-apriori.jar
-scp ./mr-2phase-apriori.jar dachuan@ibmvm1:/tmp/
+scp ./mr-2phase-apriori.jar $user@$worknode:/tmp/
 rm -f *.class
 
 set +x

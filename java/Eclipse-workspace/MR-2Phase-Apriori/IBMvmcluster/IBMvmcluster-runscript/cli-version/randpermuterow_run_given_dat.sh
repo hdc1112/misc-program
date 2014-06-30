@@ -7,9 +7,10 @@ minsupport=
 enableopt1=
 enableopt2=
 datname=
+permutefile=
 
 # definition, parsing, interrogation stages
-while getopts ":d:t:m:npq" o; do
+while getopts ":d:t:m:o:npq" o; do
   case $o in
     d)
       datname=$OPTARG
@@ -19,6 +20,9 @@ while getopts ":d:t:m:npq" o; do
       ;;
     m)
       minsupport=$OPTARG
+      ;;
+    o)
+      permutefile=$OPTARG
       ;;
     n)
       noreupload="-n"
@@ -59,6 +63,8 @@ cd $abshere
 # main logic
 set -x
 
+platform=`uname -o`
+
 storedir=/tmp
 filename=$datname.dat
 transf=$storedir/$filename.transf
@@ -84,7 +90,19 @@ cat $transf | head -n $linenum > $realfile
 
 cd $abshere/../../../src
 javac PermuteRows.java
-java PermuteRows `cygpath -wp $realfile`
+if [ -z $permutefile ]; then
+  if [ $platform = "Cygwin" ]; then
+    java PermuteRows --datafile `cygpath -wp $realfile`
+  else
+    java PermuteRows --datafile $realfile
+  fi
+else
+  if [ $platform = "Cygwin" ]; then
+    java PermuteRows --datafile `cygpath -wp $realfile` --permutefile `cygpath -wp $permutefile`
+  else
+    java PermuteRows --datafile $realfile --permutefile $permutefile
+  fi
+fi
 cd $abshere
 
 realfile=${realfile}-randpermute

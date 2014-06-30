@@ -19,6 +19,7 @@ done
 echo `basename $0` arguments list
 echo datname=$datname
 
+platform=`uname -o`
 storedir=/tmp
 filename=$datname.dat
 
@@ -34,4 +35,8 @@ cd $abshere/../../../src
 
 pwd
 javac ToBoolMatrix.java
-java ToBoolMatrix `cygpath -wp $storedir/$filename` > `cygpath -wp $storedir/$filename.transf`
+if [ $platform = "Cygwin" ]; then
+  java ToBoolMatrix `cygpath -wp $storedir/$filename` > `cygpath -wp $storedir/$filename.transf`
+else 
+  java ToBoolMatrix $storedir/$filename > $storedir/$filename.transf
+fi

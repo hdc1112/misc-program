@@ -63,6 +63,7 @@ cd $abshere
 
 # main logic
 set -x
+platform=`uname -o`
 storedir=/tmp
 filename=$datname.dat
 transf=$storedir/$filename.transf
@@ -83,7 +84,11 @@ permutefile=`readlink -f $permutefile`
 
 cd $abshere/../../../src
 javac PermuteRowsAsTold.java
-java PermuteRowsAsTold `cygpath -wp $transf` `cygpath -wp $permutefile`
+if [ $platform = "Cygwin" ]; then
+  java PermuteRowsAsTold `cygpath -wp $transf` `cygpath -wp $permutefile`
+else
+  java PermuteRowsAsTold $transf $permutefile
+fi
 cd $abshere
 
 totallinenum=`cat $storedir/$filename | wc -l`

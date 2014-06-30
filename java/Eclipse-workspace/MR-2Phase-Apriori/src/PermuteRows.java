@@ -7,13 +7,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 public class PermuteRows {
-	public static void main(String[] args) throws IOException {
-		if (args.length != 1) {
-			System.err.println("Usage: java PermuteRows inputfile");
-			System.exit(1);
-		}
-		String filename = args[0];
+	public static void main(String[] args) throws IOException, ParseException {
+
+		// definition stage
+		Options options = buildOptions();
+
+		// parsing stage
+		CommandLineParser parser = new BasicParser();
+		CommandLine cmd = parser.parse(options, args);
+
+		// interrogatin stage
+		String filename = cmd.getOptionValue("datafile");
+		String dumpfile = cmd.getOptionValue("permutefile", null);
+
+		// cmd show stage
+		System.err.println("filename: " + filename);
+		System.err.println("dumpfile: " + dumpfile);
+
+		// cmd verify stage (skip)
+
+		// main logic
 		File file = new File(filename);
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
@@ -42,6 +64,16 @@ public class PermuteRows {
 		}
 		System.out.println();
 
+		// dump permutation to a file
+		if (dumpfile != null) {
+			BufferedWriter perbw = new BufferedWriter(new FileWriter(new File(
+					dumpfile)));
+			for (int i = 0; i < linesnum; i++) {
+				perbw.write(Integer.toString(newplace[i]) + " ");
+			}
+			perbw.close();
+		}
+
 		int pointer = -1;
 		while ((line = br.readLine()) != null) {
 			pointer++;
@@ -59,5 +91,22 @@ public class PermuteRows {
 		}
 
 		bw.close();
+	}
+
+	private static Options buildOptions() {
+		Options options = new Options();
+
+		Option option1 = OptionBuilder.withArgName("permutefile").hasArg()
+				.withDescription("Dump permutation to a file")
+				.create("permutefile");
+
+		Option option2 = OptionBuilder.withArgName("datafile").hasArg()
+				.isRequired().withDescription("Data input file")
+				.create("datafile");
+
+		options.addOption(option1);
+		options.addOption(option2);
+
+		return options;
 	}
 }

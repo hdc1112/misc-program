@@ -3,12 +3,20 @@
 # default value stage
 folder=
 noreupload=
+worknode=ibmvm1
+user=dachuan
 
 # definition, parsing, interrogation stages
-while getopts ":f:n" o; do
+while getopts ":f:w:u:n" o; do
   case $o in
     f) 
       folder=$OPTARG
+      ;;
+    w)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
       ;;
     n)
       noreupload=noreupload
@@ -24,6 +32,8 @@ done
 echo `basename $0` arguments list
 echo folder=$folder
 echo noreupload=$noreupload
+echo worknode=$worknode
+echo user=$user
 
 #verify arguments stage (skip)
 
@@ -41,19 +51,19 @@ cd $abshere
 # main logic
 set -x
 
-ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stphase /output-test
+ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stphase /output-test
 
 if [ "$noreupload" = "noreupload" ]; then
   echo Skip data reupload, use previously uploaded input
 else
-  ssh -n dachuan@ibmvm1 rm -rf /tmp/$foldername
+  ssh -n $user@$worknode rm -rf /tmp/$foldername
   echo start uploading data to hdfs && date
-  scp -r $folder dachuan@ibmvm1:/tmp/
+  scp -r $folder $user@$worknode:/tmp/
   echo data uploaded to hdfs && date
-  ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /input-test
+  ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /input-test
 
-  ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -mkdir /input-test
-  ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -copyFromLocal /tmp/$foldername/* /input-test/
+  ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -mkdir /input-test
+  ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -copyFromLocal /tmp/$foldername/* /input-test/
 
 fi
 

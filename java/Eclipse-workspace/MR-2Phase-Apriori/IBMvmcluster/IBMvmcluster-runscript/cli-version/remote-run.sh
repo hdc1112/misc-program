@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
 # default value stage
-inpath=hdfs://ibmvm1:9000/input-test 
-outpath=hdfs://ibmvm1:9000/output-test 
 columns=
 minsupport=
 tolerate=
 enableopt1=
 enableopt2=
+worknode=ibmvm1
+user=dachuan
+inpath=hdfs://$worknode:9000/input-test 
+outpath=hdfs://$worknode:9000/output-test 
 
 # definition, parsing, interrogation stages
-while getopts ":i:o:c:m:t:pq" o; do
+while getopts ":i:o:c:m:t:w:u:pq" o; do
   case $o in
     i)
       inpath=$OPTARG
@@ -26,6 +28,12 @@ while getopts ":i:o:c:m:t:pq" o; do
       ;;
     t)
       tolerate=$OPTARG
+      ;;
+    w)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
       ;;
     p)
       enableopt1="--enableOPT1"
@@ -49,6 +57,8 @@ echo minsupport=$minsupport
 echo tolerate=$tolerate
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
+echo worknode=$worknode
+echo user=$user
 
 # verify arguments stage, exit if necessary (skip)
 
@@ -64,9 +74,9 @@ cd $abshere
 # main logic
 set -x
 
-echo "/home/dachuan/hadoop-2.2.0/bin/hadoop jar /tmp/mr-2phase-apriori.jar --inpath $inpath --outpath $outpath --columns $columns --minsupport $minsupport --tolerate $tolerate $enableopt1 $enableopt2" > /tmp/remote-exe.sh
-scp /tmp/remote-exe.sh dachuan@ibmvm1:/tmp/
-ssh -n dachuan@ibmvm1 chmod +x /tmp/remote-exe.sh
-ssh -n dachuan@ibmvm1 /tmp/remote-exe.sh
+echo "/home/$user/hadoop-2.2.0/bin/hadoop jar /tmp/mr-2phase-apriori.jar --inpath $inpath --outpath $outpath --columns $columns --minsupport $minsupport --tolerate $tolerate $enableopt1 $enableopt2" > /tmp/remote-exe.sh
+scp /tmp/remote-exe.sh $user@$worknode:/tmp/
+ssh -n $user@$worknode chmod +x /tmp/remote-exe.sh
+ssh -n $user@$worknode /tmp/remote-exe.sh
 
 set +x
