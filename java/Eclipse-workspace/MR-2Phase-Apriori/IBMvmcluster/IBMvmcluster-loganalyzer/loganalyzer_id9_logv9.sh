@@ -5,13 +5,15 @@
 # running another group of experiment
 
 # default value stage
-running=
+running=no
 executions=
 cli_slavenodes=ibmvm1,ibmvm2,ibmvm3 #s
 cli_user=dachuan  #u
+deb_clean=yes #k to keep log files
+
 
 # definition, parsing, interrogation stages
-while getopts ":re:s:u:" o; do
+while getopts ":re:s:u:k" o; do
   case $o in
     r)
       running=yes
@@ -24,6 +26,9 @@ while getopts ":re:s:u:" o; do
       ;;
     u)
       cli_user=$OPTARG
+      ;;
+    k)
+      deb_clean=no
       ;;
     *)
       echo invalid arguments >&2
@@ -83,6 +88,12 @@ user_statpath=`readlink -f $user_statpath`
 # this method will prevent any future scanning to
 # stub program log
 echo Preprocessing the stub program log
+# bad practice, this var should not be here
+in_localrepo=/tmp/${me}.$$.localrepo
+if [ -d $in_localrepo ]; then
+  rm -r -f $in_localrepo
+fi
+mkdir $in_localrepo
 cat $stubprogram_log | grep "${prefix}Total\ execution time:\ " > $in_localrepo/stub_t.log
 cat $stubprogram_log | grep "${prefix}Phase\ 1\ execution time:\ " > $in_localrepo/stub_t1.log
 cat $stubprogram_log | grep "${prefix}Phase\ 2\ execution time:\ " > $in_localrepo/stub_t2.log
@@ -118,11 +129,6 @@ IFS=', ' read -a slavesarr <<< $cli_slavenodes
 in_nodes=`echo -n ${slavesarr[@]}`
 in_user=$cli_user
 in_sshnodes=`for i in "${in_nodes[@]}"; do echo -n $in_user@$i" "; done`
-in_localrepo=/tmp/${me}.$$.localrepo
-if [ -d $in_localrepo ]; then
-  rm -r -f $in_localrepo
-fi
-mkdir $in_localrepo
 in_remotehadoop=/home/$in_user/hadoop-2.2.0
 in_remotehadooplogs=$in_remotehadoop/logs
 in_remotehadoopbakuplogs=/home/$in_user/hadoop-logs
@@ -142,9 +148,6 @@ prefix="\[MR2PhaseApriori\]\[$logv\]\ "
 # #reducers are 1, no speculative, etc.
 # Just remember, whenever there is some change, no matter what change,
 # the first thought should be whether this script would still work.
-
-# debug param
-deb_clean=yes
 
 # entering this script folder
 cd $abshere

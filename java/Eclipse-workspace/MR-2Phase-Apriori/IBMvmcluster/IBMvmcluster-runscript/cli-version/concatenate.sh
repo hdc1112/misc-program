@@ -9,7 +9,7 @@ do
   if [ $platform = "Cygwin" ]; then
     retval=`cygpath -wp $line`\;$retval
   else
-    retval=$line\;$retval
+    retval=$line:$retval
   fi
 done < "${1:-/proc/${$}/fd/0}"
 

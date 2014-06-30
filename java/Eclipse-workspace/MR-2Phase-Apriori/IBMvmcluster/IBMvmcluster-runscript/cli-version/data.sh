@@ -56,14 +56,14 @@ ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stpha
 if [ "$noreupload" = "noreupload" ]; then
   echo Skip data reupload, use previously uploaded input
 else
-  ssh -n $user@$worknode rm -rf /tmp/$foldername
+  ssh -n $user@$worknode "rm -rf /tmp/${foldername}dif && mkdir /tmp/${foldername}dif"
   echo start uploading data to hdfs && date
-  scp -r $folder $user@$worknode:/tmp/
+  scp -r $folder/* $user@$worknode:/tmp/${foldername}dif/
   echo data uploaded to hdfs && date
   ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /input-test
 
   ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -mkdir /input-test
-  ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -copyFromLocal /tmp/$foldername/* /input-test/
+  ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -copyFromLocal /tmp/${foldername}dif/* /input-test/
 
 fi
 
