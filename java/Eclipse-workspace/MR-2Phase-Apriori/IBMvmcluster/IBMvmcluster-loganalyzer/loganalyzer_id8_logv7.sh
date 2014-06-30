@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# script warning
+# make sure you clean all nodes' the logs/userlogs/ folder before
+# running another group of experiment
+
 # default value stage
 running=
 executions=

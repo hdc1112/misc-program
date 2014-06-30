@@ -47,7 +47,9 @@ if [ "$noreupload" = "noreupload" ]; then
   echo Skip data reupload, use previously uploaded input
 else
   ssh -n dachuan@ibmvm1 rm -rf /tmp/$foldername
+  echo start uploading data to hdfs && date
   scp -r $folder dachuan@ibmvm1:/tmp/
+  echo data uploaded to hdfs && date
   ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /input-test
 
   ssh -n dachuan@ibmvm1 ./hadoop-2.2.0/bin/hdfs dfs -mkdir /input-test
