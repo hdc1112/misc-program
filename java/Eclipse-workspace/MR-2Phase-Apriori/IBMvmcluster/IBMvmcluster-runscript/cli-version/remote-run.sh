@@ -31,6 +31,8 @@ while getopts ":i:o:c:m:t:w:u:pq" o; do
       ;;
     w)
       worknode=$OPTARG
+      inpath=hdfs://$worknode:9000/input-test 
+      outpath=hdfs://$worknode:9000/output-test 
       ;;
     u)
       user=$OPTARG

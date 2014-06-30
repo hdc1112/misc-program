@@ -7,10 +7,12 @@ minsupport=
 enableopt1=
 enableopt2=
 datname=
-permutefile=
+permutefile=    #o
+worknode=ibmvm1
+user=dachuan
 
 # definition, parsing, interrogation stages
-while getopts ":d:t:m:o:npq" o; do
+while getopts ":d:t:m:o:w:u:npq" o; do
   case $o in
     d)
       datname=$OPTARG
@@ -23,6 +25,12 @@ while getopts ":d:t:m:o:npq" o; do
       ;;
     o)
       permutefile=$OPTARG
+      ;;
+    w)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
       ;;
     n)
       noreupload="-n"
@@ -48,6 +56,9 @@ echo noreupload=$noreupload
 echo minsupport=$minsupport
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
+echo permutefile=$permutefile
+echo worknode=$worknode
+echo user=$user
 
 # verify arguments stage (skip)
 
@@ -89,18 +100,23 @@ realfile=$transf.realfile
 cat $transf | head -n $linenum > $realfile
 
 cd $abshere/../../../src
-javac PermuteRows.java
+if [ ! -f hadoopclasspath.txt ]; then
+  find $HOME/hadoop-2.2.0/share/hadoop -type f -name "*.jar" | $abshere/concatenate.sh > hadoopclasspath.txt
+fi
+classes=`cat hadoopclasspath.txt`
+javac -classpath $classes PermuteRows.java
 if [ -z $permutefile ]; then
   if [ $platform = "Cygwin" ]; then
-    java PermuteRows --datafile `cygpath -wp $realfile`
+    java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile`
   else
-    java PermuteRows --datafile $realfile
+    java -classpath $classes PermuteRows --datafile $realfile
   fi
 else
+  rm -f $permutefile
   if [ $platform = "Cygwin" ]; then
-    java PermuteRows --datafile `cygpath -wp $realfile` --permutefile `cygpath -wp $permutefile`
+    java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile` --permutefile `cygpath -wp $permutefile`
   else
-    java PermuteRows --datafile $realfile --permutefile $permutefile
+    java -classpath $classes PermuteRows --datafile $realfile --permutefile $permutefile
   fi
 fi
 cd $abshere
@@ -111,14 +127,17 @@ halflinenum=$((linenum/2))
 columns=`head -1 $transf | awk '{print NF}'`
 echo columns=$columns
 
-rm -rf /tmp/tempdatafolder/*
-cat $realfile | head -n $halflinenum > /tmp/tempdatafolder/1.txt
-cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.txt
+datapath=/tmp/tempdatafolder/
+rm -rf $datapath
+if [ ! -d $datapath ]; then
+  mkdir $datapath
+fi
+cat $realfile | head -n $halflinenum > $datapath/1.txt
+cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 
-diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
-#diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
+diff -q $datapath/1.txt $datapath/2.txt
 
-./run.sh -d /tmp/tempdatafolder -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload
+./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
 date
 
 set +x

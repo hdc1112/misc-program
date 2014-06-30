@@ -8,9 +8,11 @@ tolerate=
 enableopt1=
 enableopt2=
 noreupload=
+worknode=ibmvm1
+user=dachuan
 
 # definition, parsing, interrogation stages
-while getopts ":d:c:m:t:pqn" o; do
+while getopts ":d:c:m:t:w:u:pqn" o; do
   case $o in
     d)
       dataabspath=$OPTARG
@@ -23,6 +25,12 @@ while getopts ":d:c:m:t:pqn" o; do
       ;;
     t)
       tolerate=$OPTARG
+      ;;
+    w)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
       ;;
     p)
       enableopt1="-p"
@@ -49,6 +57,8 @@ echo tolerate=$tolerate
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
 echo noreupload=$noreupload
+echo worknode=$worknode
+echo user=$user
 
 # verify arguments stage (skip)
 
@@ -65,8 +75,8 @@ cd $abshere
 # main logic
 set -x
 
-./jar.sh
-./data.sh -f $dataabspath $noreupload
-./remote-run.sh -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2
+./jar.sh -w $worknode -u $user
+./data.sh -f $dataabspath $noreupload -w $worknode -u $user
+./remote-run.sh -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 -w $worknode -u $user
 
 set +x

@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
 # default value stage
-permutefile=
+permutefile=  #f
 tolerate=
 noreupload=
 minsupport=
 enableopt1=
 enableopt2=
 datname=
+worknode=ibmvm1
+user=dachuan
 
 # definition, parsing, interrogation stages
-while getopts ":d:f:t:m:pqn" o; do
+while getopts ":d:f:t:m:w:u:pqn" o; do
   case $o in 
     d)
       datname=$OPTARG
@@ -23,6 +25,12 @@ while getopts ":d:f:t:m:pqn" o; do
       ;;
     m)
       minsupport=$OPTARG
+      ;;
+    w)
+      worknode=$OPTARG
+      ;;
+    u)
+      user=$OPTARG
       ;;
     p)
       enableopt1="-p"
@@ -49,6 +57,8 @@ echo noreupload=$noreupload
 echo minsupport=$minsupport
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
+echo worknode=$worknode
+echo user=$user
 
 # verify arguments stage (skip)
 
@@ -103,14 +113,17 @@ halflinenum=$((linenum/2))
 columns=`head -1 $transf | awk '{print NF}'`
 echo columns=$columns
 
-rm -rf /tmp/tempdatafolder/*
-cat $realfile | head -n $halflinenum > /tmp/tempdatafolder/1.txt
-cat $realfile | head -n $linenum | tail -n $halflinenum > /tmp/tempdatafolder/2.txt
+datapath=/tmp/tempdatafolder/
+rm -rf $datapath
+if [ ! -d $datapath ]; then
+  mkdir $datapath
+fi
+cat $realfile | head -n $halflinenum > $datapath/1.txt
+cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 
-diff -q /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
-#diff -s /tmp/tempdatafolder/1.txt /tmp/tempdatafolder/2.txt
+diff -q $datapath/1.txt $datapath/2.txt
 
-./run.sh -d /tmp/tempdatafolder -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload
+./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
 date
 
 set +x

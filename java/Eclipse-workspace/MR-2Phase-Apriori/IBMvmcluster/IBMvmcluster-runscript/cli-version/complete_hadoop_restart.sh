@@ -45,6 +45,7 @@ echo deleteadata=$deletedata
 echo masternode=$masternode
 echo slavenodes=$slavenodes
 echo user=$user
+echo bruteforce=$bruteforce
 
 # verify arguments stage (skip)
 
@@ -62,7 +63,7 @@ IFS=', ' read -a slaves <<< $slavenodes
 ssh -n $user@$masternode ./hadoop-2.2.0/sbin/stop-yarn.sh
 ssh -n $user@$masternode ./hadoop-2.2.0/sbin/stop-dfs.sh
 
-if [ $bruteforce = "yes" ]; 
+if [ $bruteforce = "yes" ]; then
   for slave in "${slaves[@]}"; do
     ssh -n $user@$slave killall -9 java
   done
