@@ -136,28 +136,77 @@ public class LocalApriori {
 			}
 		}
 
+		// old method
+		// if (number > 2) {
+		// for (int i = 0; i < candidates.size(); i++) {
+		// for (int j = i + 1; j < candidates.size(); j++) {
+		// str1 = new String();
+		// str2 = new String();
+		// st1 = new StringTokenizer(candidates.get(i),
+		// Commons.SEPARATOR);
+		// st2 = new StringTokenizer(candidates.get(j),
+		// Commons.SEPARATOR);
+		// for (int s = 0; s < number - 2; s++) {
+		// if (s == 0) {
+		// str1 = st1.nextToken();
+		// str2 = st2.nextToken();
+		// } else {
+		// str1 = concat(str1, st1.nextToken());
+		// str2 = concat(str2, st2.nextToken());
+		// }
+		// }
+		// if (str2.compareToIgnoreCase(str1) == 0) {
+		// String can = concat(concat(str1, st1.nextToken()),
+		// st2.nextToken());
+		// tempCandidates.add(can.trim());
+		// }
+		// }
+		// }
+		// }
+
+		// new method
 		if (number > 2) {
+			StringBuilder strb1 = new StringBuilder();
+			StringBuilder strb2 = new StringBuilder();
+			String t1 = null, t2 = null, go2add;
+			boolean joinable = false;
 			for (int i = 0; i < candidates.size(); i++) {
 				for (int j = i + 1; j < candidates.size(); j++) {
-					str1 = new String();
-					str2 = new String();
 					st1 = new StringTokenizer(candidates.get(i),
 							Commons.SEPARATOR);
 					st2 = new StringTokenizer(candidates.get(j),
 							Commons.SEPARATOR);
+
+					strb1.setLength(0);
+					strb2.setLength(0);
 					for (int s = 0; s < number - 2; s++) {
-						if (s == 0) {
-							str1 = st1.nextToken();
-							str2 = st2.nextToken();
+						t1 = st1.nextToken();
+						t2 = st2.nextToken();
+						if (!t1.equals(t2)) {
+							joinable = false;
+							break;
 						} else {
-							str1 = concat(str1, st1.nextToken());
-							str2 = concat(str2, st2.nextToken());
+							joinable = true;
+						}
+						if (s == 0) {
+							strb1.append(t1);
+							strb2.append(t2);
+						} else {
+							strb1.append(Commons.SEPARATOR);
+							strb1.append(t1);
+
+							strb2.append(Commons.SEPARATOR);
+							strb2.append(t2);
 						}
 					}
-					if (str2.compareToIgnoreCase(str1) == 0) {
-						String can = concat(concat(str1, st1.nextToken()),
-								st2.nextToken());
-						tempCandidates.add(can.trim());
+					if (joinable == true) {
+						strb1.append(Commons.SEPARATOR);
+						strb1.append(st1.nextToken());
+						strb1.append(Commons.SEPARATOR);
+						strb1.append(st2.nextToken());
+
+						go2add = strb1.toString();
+						tempCandidates.add(go2add);
 					}
 				}
 			}
