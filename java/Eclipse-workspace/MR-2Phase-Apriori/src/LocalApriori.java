@@ -1,8 +1,12 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.StringTokenizer;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /* this program is adapted from Apriori.java whose author is Nathan Magnus */
 /* the original link is http://www2.cs.uregina.ca/~dbd/cs831/notes/itemsets/Apriori.java */
@@ -253,5 +257,102 @@ public class LocalApriori {
 	// OPT2
 	public ArrayList<ArrayList<Integer>> tolerateFrequencies() {
 		return g_tol_frequencies;
+	}
+
+	// main function, used for local debug
+	// Command 1:
+	// folder=/tmp/tempdatafolder/ && java LocalApriori `cygpath -wp
+	// $folder/1.txt` `cat $folder/1.txt | wc -l` `head -1 $folder/1.txt | awk
+	// '{print NF}'` 50 0 `cygpath -wp /tmp/intermediate.txt`
+	public static void main(String[] args) throws IOException {
+		if (args.length != 6) {
+			System.err.println("Your length: " + args.length);
+			System.err
+					.println("Usage ./a.exe datafile rows columns minsupport tolerate outputfile");
+			System.exit(1);
+		}
+		System.out.println("Entering main logic ...");
+		System.out.flush();
+
+		String filename = args[0];
+		int rows = Integer.parseInt(args[1]);
+		int columns = Integer.parseInt(args[2]);
+		double minsupport = Double.parseDouble(args[3]);
+		double tolerate = Double.parseDouble(args[4]);
+		String outputfile = args[5];
+
+		BufferedReader br = new BufferedReader(new FileReader(
+				new File(filename)));
+		String line = null;
+		ArrayList<String> dataset = new ArrayList<String>();
+		while ((line = br.readLine()) != null) {
+			dataset.add(line);
+		}
+
+		br.close();
+
+		Commons.enabledOPT1(true);
+		Commons.enabledOPT2(true);
+
+		System.out.println("enabledOPT1: " + Commons.enabledOPT1());
+		System.out.println("enabledOPT2: " + Commons.enabledOPT2());
+
+		LocalApriori localalg = new LocalApriori(rows, columns, minsupport,
+				dataset, tolerate);
+		localalg.apriori();
+
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+				outputfile)));
+		// get the frequent itemset, i.e. >= minsup
+		ArrayList<ArrayList<String>> frequent = localalg.frequentItemset();
+		ArrayList<ArrayList<Integer>> occurrences = localalg.frequencies();
+
+		int loopc = 0, loopc2 = 0;
+		for (Iterator<ArrayList<String>> it = frequent.iterator(); it.hasNext(); loopc++) {
+			ArrayList<String> thisitemset = it.next();
+			ArrayList<Integer> thisfreq = occurrences.get(loopc);
+			loopc2 = 0;
+			for (Iterator<String> it2 = thisitemset.iterator(); it2.hasNext(); loopc2++) {
+				String itemset = it2.next();
+
+				// freqs will be passed to reduce phase no matter what,
+				// but whether they need to be written to HDFS
+				// depends on this switch
+				if (Commons.enabledOPT1()) {
+					// write to hdfs
+					bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
+				}
+			}
+		}
+
+		// get the tolerating itemset, i.e. >= ratio * minsup
+		// and < minsup, 0 <= ratio < 1
+		if (Commons.enabledOPT2()) {
+			loopc = 0;
+			loopc2 = 0;
+			ArrayList<ArrayList<String>> tol_itemset = localalg
+					.tolerateItemset();
+			ArrayList<ArrayList<Integer>> tol_occurs = localalg
+					.tolerateFrequencies();
+
+			// if there's no tolerating candidate, then it's
+			// the same with OPT2 disabled.
+			for (Iterator<ArrayList<String>> it = tol_itemset.iterator(); it
+					.hasNext(); loopc++) {
+				ArrayList<String> thisitemset = it.next();
+				ArrayList<Integer> thisfreq = tol_occurs.get(loopc);
+				loopc2 = 0;
+				for (Iterator<String> it2 = thisitemset.iterator(); it2
+						.hasNext(); loopc2++) {
+					String itemset = it2.next();
+					// I don't need to check enabledOPT1 here anymore
+					// these candidates don't need to be written to reduce
+					// phase
+					bw.write(itemset + " " + thisfreq.get(loopc2) + "\n");
+				}
+			}
+		}
+
+		bw.close();
 	}
 }
