@@ -19,10 +19,10 @@ import java.util.StringTokenizer;
 
 public class LocalApriori {
 
-	private int items;
-	private int transactions;
-	// private int minsupport;
-	private double minsupport;
+	private final int items;
+	private final int transactions;
+	// private final int minsupport;
+	private final double minsupport;
 	private ArrayList<String> dataset;
 
 	private ArrayList<ArrayList<String>> g_candidates = new ArrayList<ArrayList<String>>();
@@ -217,33 +217,13 @@ public class LocalApriori {
 
 	private void calculateFrequentItemsets(int number) {
 		ArrayList<String> frequentCandidates = new ArrayList<String>();
-		StringTokenizer st, stFile;
-		boolean match;
-		boolean[] trans = new boolean[items];
 		int[] count = new int[candidates.size()];
 
-		for (int i = 0; i < transactions; i++) {
-			stFile = new StringTokenizer(dataset.get(i),
-					Commons.DATASETSEPARATOR);
-			for (int j = 0; j < items; j++) {
-				trans[j] = stFile.nextToken().equalsIgnoreCase(
-						Commons.PURCHASED);
-			}
+		// old method
+		// countCandidates(count);
 
-			for (int c = 0; c < candidates.size(); c++) {
-				match = false;
-				st = new StringTokenizer(candidates.get(c), Commons.SEPARATOR);
-				while (st.hasMoreTokens()) {
-					match = trans[Integer.parseInt(st.nextToken()) - 1];
-					if (!match) {
-						break;
-					}
-				}
-				if (match) {
-					count[c]++;
-				}
-			}
-		}
+		// new method
+		countCandidates2(count, number);
 
 		// OPT2
 		if (Commons.enabledOPT2()) {
@@ -269,6 +249,76 @@ public class LocalApriori {
 			}
 		}
 		candidates = frequentCandidates;
+	}
+
+	private void countCandidates(int[] count) {
+		StringTokenizer stFile, st;
+		boolean[] trans = new boolean[items];
+		boolean match;
+
+		for (int i = 0; i < transactions; i++) {
+			stFile = new StringTokenizer(dataset.get(i),
+					Commons.DATASETSEPARATOR);
+			for (int j = 0; j < items; j++) {
+				trans[j] = stFile.nextToken().equalsIgnoreCase(
+						Commons.PURCHASED);
+			}
+
+			for (int c = 0; c < candidates.size(); c++) {
+				match = false;
+				st = new StringTokenizer(candidates.get(c), Commons.SEPARATOR);
+				while (st.hasMoreTokens()) {
+					match = trans[Integer.parseInt(st.nextToken()) - 1];
+					if (!match) {
+						break;
+					}
+				}
+				if (match) {
+					count[c]++;
+				}
+			}
+		}
+	}
+
+	private void countCandidates2(int[] count, int number) {
+		if (candidates.size() == 0) {
+			return;
+		}
+		int[][] c = new int[candidates.size()][number];
+		StringTokenizer st;
+		for (int i = 0; i < candidates.size(); i++) {
+			st = new StringTokenizer(candidates.get(i), Commons.SEPARATOR);
+			int colind = 0;
+			while (st.hasMoreTokens()) {
+				int t = Integer.parseInt(st.nextToken());
+				c[i][colind] = t;
+				colind++;
+			}
+		}
+
+		StringTokenizer stFile;
+		boolean[] trans = new boolean[items];
+		boolean match;
+		for (int i = 0; i < transactions; i++) {
+			stFile = new StringTokenizer(dataset.get(i),
+					Commons.DATASETSEPARATOR);
+			for (int j = 0; j < items; j++) {
+				trans[j] = stFile.nextToken().equalsIgnoreCase(
+						Commons.PURCHASED);
+			}
+			for (int k = 0; k < candidates.size(); k++) {
+				match = false;
+				for (int x = 0; x < number; x++) {
+					match = trans[c[k][x] - 1];
+					if (!match) {
+						break;
+					}
+				}
+				if (match) {
+					count[k]++;
+				}
+			}
+		}
 	}
 
 	private String concat(String s1, String s2) {
