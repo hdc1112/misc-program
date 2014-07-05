@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
@@ -41,8 +40,6 @@ import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 public class MR2PhaseFPGrowth {
 
 	// hadoop params
-	private static final String PHASE1OUTDIR_CONFIG = Commons.PROGNAME
-			+ ".phase1.outdir";
 	private static final String PHASE1MINSUP_CONFIG = Commons.PROGNAME
 			+ ".phase1.minsup";
 	private static final String MINSUP_CONFIG = Commons.PROGNAME + ".minsup";
@@ -54,11 +51,13 @@ public class MR2PhaseFPGrowth {
 		TOTALROW
 	}
 
+	private static final double DISABLECACHE = 200;
+
 	public static void run_on_hadoop_phase1() throws IOException,
 			ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.set(PHASE1OUTDIR_CONFIG, inputpath);
 		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
+		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 
 		String jobname = Commons.PROGNAME + " Phase 1";
 		Job job = new Job(conf, jobname);
@@ -134,8 +133,8 @@ public class MR2PhaseFPGrowth {
 		}
 
 		// download param
+		private double phase1minsup;
 		private double minsup;
-		private String output1stphasedir;
 
 		// bookkeeping
 		private long starttime, endtime;
@@ -147,15 +146,14 @@ public class MR2PhaseFPGrowth {
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
 			// download
-			minsup = context.getConfiguration().getDouble(PHASE1MINSUP_CONFIG,
-					100);
-			output1stphasedir = context.getConfiguration().get(
-					PHASE1OUTDIR_CONFIG);
+			phase1minsup = context.getConfiguration().getDouble(
+					PHASE1MINSUP_CONFIG, 100);
+			minsup = context.getConfiguration().getDouble(MINSUP_CONFIG, 100);
 
 			// show params
-			System.err.println(Commons.PREFIX + "minsupport: " + minsup);
-			System.err.println(Commons.PREFIX + "output1stphasedir: "
-					+ output1stphasedir);
+			System.err
+					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
+			System.err.println(Commons.PREFIX + "minsup: " + minsup);
 
 			// bookkeeping
 			starttime = System.currentTimeMillis();
@@ -191,9 +189,6 @@ public class MR2PhaseFPGrowth {
 			}
 		}
 
-		// download params
-		double minsup;
-
 		// bookkeeping
 		private long reducestart, reduceend;
 		private int taskid;
@@ -203,10 +198,6 @@ public class MR2PhaseFPGrowth {
 
 		@Override
 		public void setup(Context context) {
-			// download params
-			minsup = context.getConfiguration().getDouble(PHASE1MINSUP_CONFIG,
-					100);
-
 			// my id
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
@@ -231,7 +222,6 @@ public class MR2PhaseFPGrowth {
 	public static void run_on_hadoop_phase2() throws IOException,
 			URISyntaxException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 		conf.set(TOTALROW_CONFIG, Long.toString(totalrows));
 
@@ -317,19 +307,16 @@ public class MR2PhaseFPGrowth {
 				while (st.hasMoreTokens()) {
 					myset.add(st.nextToken());
 				}
+				// for each candidate, go over the dataset
 				for (HashSet<String> set : split) {
 					if (set.containsAll(myset)) {
 						count++;
 					}
-					context.write(new Text(candidate), new IntWritable(count));
 				}
+				context.write(new Text(candidate), new IntWritable(count));
 			}
 			br.close();
 		}
-
-		// download params
-		private double minsup;
-		private String output1stphasedir;
 
 		// for distributed cache
 		private File[] localFiles;
@@ -345,16 +332,6 @@ public class MR2PhaseFPGrowth {
 		public void setup(Context context) throws IOException {
 			// my id
 			taskid = context.getTaskAttemptID().getTaskID().getId();
-
-			// download
-			minsup = context.getConfiguration().getDouble(MINSUP_CONFIG, 100);
-			output1stphasedir = context.getConfiguration().get(
-					PHASE1OUTDIR_CONFIG);
-
-			// show params
-			System.err.println(Commons.PREFIX + "minsupport: " + minsup);
-			System.err.println(Commons.PREFIX + "output1stphasedir: "
-					+ output1stphasedir);
 
 			// bookkeeping
 			starttime = System.currentTimeMillis();
@@ -464,24 +441,39 @@ public class MR2PhaseFPGrowth {
 		inputpath = cmd.getOptionValue("inpath");
 		outputpath = cmd.getOptionValue("outpath");
 		minsup = Double.parseDouble(cmd.getOptionValue("minsupport"));
-		if (cmd.hasOption("phase1minsup")) {
-			phase1minsup = Double.parseDouble(cmd
-					.getOptionValue("phase1minsup"));
-		} else {
-			phase1minsup = minsup;
-		}
 		double beta = 1;
-		if (cmd.hasOption("phase1minsupbeta")) {
+		if (cmd.hasOption("phase1minsup") && cmd.hasOption("phase1minsupbeta")) {
+			// skip phase1minsup
+			System.err.println(Commons.PREFIX
+					+ "phase1minsup cmd param is skipped");
 			beta = Double.parseDouble(cmd.getOptionValue("phase1minsupbeta"));
 			phase1minsup = beta * minsup;
+		} else if (cmd.hasOption("phase1minsup")
+				&& !cmd.hasOption("phase1minsupbeta")) {
+			phase1minsup = Double.parseDouble(cmd
+					.getOptionValue("phase1minsup"));
+		} else if (!cmd.hasOption("phase1minsup")
+				&& cmd.hasOption("phase1minsupbeta")) {
+			beta = Double.parseDouble(cmd.getOptionValue("phase1minsupbeta"));
+			phase1minsup = beta * minsup;
+		} else {
+			phase1minsup = DISABLECACHE;
 		}
 
-		// verify stage
+		// verify stage, semantic check
 		// skip minsup's verification
-		if (phase1minsup > 100 || phase1minsup < 0) {
-			System.err.println(Commons.PREFIX + "phase1minsup out of range");
-			System.err.println(Commons.PREFIX + "phase1minsup set to minsup");
-			phase1minsup = minsup;
+		if (phase1minsup > 100) {
+			phase1minsup = DISABLECACHE;
+			System.err.println(Commons.PREFIX
+					+ "Cache optimization is disalbed");
+		} else if (phase1minsup < 0) {
+			System.err.println(Commons.PREFIX + "phase1minsup is less than 0");
+			System.err.println(Commons.PREFIX + "phase1minsup set to 0");
+			phase1minsup = 0;
+		}
+		if (phase1minsup <= 100 && phase1minsup >= 0) {
+			System.err
+					.println(Commons.PREFIX + "Cache optimization is enabled");
 		}
 
 		// show stage
