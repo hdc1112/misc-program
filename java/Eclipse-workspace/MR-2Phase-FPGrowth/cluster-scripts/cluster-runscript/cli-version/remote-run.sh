@@ -10,9 +10,11 @@ worknode=ibmvm1
 user=dachuan
 inpath=hdfs://$worknode:9000/input-test 
 outpath=hdfs://$worknode:9000/output-test 
+phase1minsup= #x
+phase1minsupbeta= #y
 
 # definition, parsing, interrogation stages
-while getopts ":i:o:c:m:t:w:u:pq" o; do
+while getopts ":i:o:c:m:t:w:u:x:y:pq" o; do
   case $o in
     i)
       inpath=$OPTARG
@@ -36,6 +38,12 @@ while getopts ":i:o:c:m:t:w:u:pq" o; do
       ;;
     u)
       user=$OPTARG
+      ;;
+    x)
+      phase1minsup="--phase1minsup $OPTARG"
+      ;;
+    y)
+      phase1minsupbeta="--phase1minsupbeta $OPTARG"
       ;;
     p)
       enableopt1="--enableOPT1"
@@ -61,6 +69,8 @@ echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
 echo worknode=$worknode
 echo user=$user
+echo phase1minsup=$phase1minsup
+echo phase1minsupbeta=$phase1minsupbeta
 
 # verify arguments stage, exit if necessary (skip)
 
@@ -77,7 +87,7 @@ cd $abshere
 set -x
 
 #echo "/home/$user/hadoop-2.2.0/bin/hadoop jar /tmp/mr-2phase-fpgrowth.jar --inpath $inpath --outpath $outpath --columns $columns --minsupport $minsupport --tolerate $tolerate $enableopt1 $enableopt2" > /tmp/remote-exe.sh
-echo "/home/$user/hadoop-2.2.0/bin/hadoop jar /tmp/mr-2phase-fpgrowth.jar --inpath $inpath --outpath $outpath --minsupport $minsupport" > /tmp/remote-exe.sh
+echo "/home/$user/hadoop-2.2.0/bin/hadoop jar /tmp/mr-2phase-fpgrowth.jar --inpath $inpath --outpath $outpath --minsupport $minsupport $phase1minsup $phase1minsupbeta" > /tmp/remote-exe.sh
 scp /tmp/remote-exe.sh $user@$worknode:/tmp/
 ssh -n $user@$worknode chmod +x /tmp/remote-exe.sh
 ssh -n $user@$worknode /tmp/remote-exe.sh

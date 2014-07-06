@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "Update this script by following rand...sh"
+exit
+
 # default value stage
 permutefile=  #f
 tolerate=

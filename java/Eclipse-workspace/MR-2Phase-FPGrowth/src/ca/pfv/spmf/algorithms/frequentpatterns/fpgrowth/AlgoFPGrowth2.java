@@ -200,6 +200,34 @@ public class AlgoFPGrowth2 {
 		return patterns;
 	}
 
+	private Itemsets higher, lower;
+	private double minsup, phase1minsup;
+
+	public Itemsets getHigher() {
+		return higher;
+	}
+
+	public Itemsets getLower() {
+		return lower;
+	}
+
+	public void runAlgorithm3(ArrayList<String> dataset, double minsup,
+			double phase1minsup) throws FileNotFoundException, IOException {
+		higher = new Itemsets("Higher");
+		lower = new Itemsets("Lower");
+
+		this.minsup = minsup;
+		this.phase1minsup = phase1minsup;
+
+		if (phase1minsup <= minsup) {
+			System.err.println("use phase1minsup as the final alg minsup");
+			runAlgorithm2(dataset, null, phase1minsup);
+		} else {
+			System.err.println("use minsup as the final alg minsup");
+			runAlgorithm2(dataset, null, minsup);
+		}
+	}
+
 	public Itemsets runAlgorithm2(ArrayList<String> dataset, String output,
 			double minsupp) throws FileNotFoundException, IOException {
 		// record start time
@@ -601,7 +629,26 @@ public class AlgoFPGrowth2 {
 			// found.
 			Itemset itemsetObj = new Itemset(itemset);
 			itemsetObj.setAbsoluteSupport(support);
-			patterns.addItemset(itemsetObj, itemsetObj.size());
+
+			// my update to this algorithm
+			// because this seems to be the sole entry
+			// point to patterns itemsets insertion
+			if (phase1minsup <= minsup) {
+				if (itemsetObj.getAbsoluteSupport() >= minsup
+						* transactionCount) {
+					higher.addItemset(itemsetObj, itemsetObj.size());
+				} else {
+					lower.addItemset(itemsetObj, itemsetObj.size());
+				}
+			} else {
+				if (itemsetObj.getAbsoluteSupport() >= phase1minsup
+						* transactionCount) {
+					higher.addItemset(itemsetObj, itemsetObj.size());
+				} else {
+					lower.addItemset(itemsetObj, itemsetObj.size());
+				}
+			}
+			// patterns.addItemset(itemsetObj, itemsetObj.size());
 		}
 	}
 

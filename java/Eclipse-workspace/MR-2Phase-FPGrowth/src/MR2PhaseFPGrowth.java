@@ -1,10 +1,14 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -16,6 +20,8 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -29,6 +35,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
@@ -45,6 +52,9 @@ public class MR2PhaseFPGrowth {
 	private static final String MINSUP_CONFIG = Commons.PROGNAME + ".minsup";
 	private static final String TOTALROW_CONFIG = Commons.PROGNAME
 			+ ".totalrow";
+	private static final String PHASE1OUTDIR_CONFIG = Commons.PROGNAME
+			+ ".phase1.outdir";
+	private static String cachefilesuffix = "-cachecount.file";
 	private static long totalrows;
 
 	private static enum RowCounter {
@@ -58,6 +68,7 @@ public class MR2PhaseFPGrowth {
 		Configuration conf = new Configuration();
 		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
+		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
 
 		String jobname = Commons.PROGNAME + " Phase 1";
 		Job job = new Job(conf, jobname);
@@ -106,28 +117,133 @@ public class MR2PhaseFPGrowth {
 
 			// use fp-growth alg
 			AlgoFPGrowth2 localalgm = new AlgoFPGrowth2();
-			Itemsets itemsets = localalgm.runAlgorithm2(dataset, null,
-					minsup / 100.0);
+			// Itemsets itemsets = localalgm.runAlgorithm2(dataset, null,
+			// minsup / 100.0);
 
-			// output intermediate data
+			// use cache version algorithm
+			localalgm.runAlgorithm3(dataset, minsup / 100.0,
+					phase1minsup / 100.0);
+
+			// get two range itemsets
+			Itemsets higher = localalgm.getHigher();
+			Itemsets lower = localalgm.getLower();
+
+			System.err.println("higher size: " + higher.getItemsetsCount());
+			System.err.println("lower size: " + lower.getItemsetsCount());
+
 			int[] items = null;
 			StringBuilder sb = new StringBuilder();
-			for (List<Itemset> itemsetlist : itemsets.getLevels()) {
-				for (Itemset itemset : itemsetlist) {
-					items = itemset.getItems();
-					sb.setLength(0);
-					for (int i = 0; i < items.length; i++) {
-						if (i == 0) {
-							sb.append(items[i]);
-						} else {
-							sb.append(",");
-							sb.append(items[i]);
+			if (phase1minsup <= minsup) {
+				// output intermediate data to reduce phase
+				for (List<Itemset> itemsetlist : higher.getLevels()) {
+					for (Itemset itemset : itemsetlist) {
+						items = itemset.getItems();
+						sb.setLength(0);
+						for (int i = 0; i < items.length; i++) {
+							if (i == 0) {
+								sb.append(items[i]);
+							} else {
+								sb.append(Commons.SEPARATOR);
+								sb.append(items[i]);
+							}
+						}
+						context.write(new Text(sb.toString()), new IntWritable(
+								itemset.getAbsoluteSupport()));
+					}
+				}
+
+				if (cacheEnabled(phase1minsup)) {
+					// output cache to hdfs
+					for (List<Itemset> itemsetlist : higher.getLevels()) {
+						for (Itemset itemset : itemsetlist) {
+							items = itemset.getItems();
+							sb.setLength(0);
+							for (int i = 0; i < items.length; i++) {
+								if (i == 0) {
+									sb.append(items[i]);
+								} else {
+									sb.append(Commons.SEPARATOR);
+									sb.append(items[i]);
+								}
+							}
+							bw.write(sb.toString() + " "
+									+ itemset.getAbsoluteSupport() + "\n");
 						}
 					}
-					context.write(new Text(sb.toString()), new IntWritable(
-							itemset.getAbsoluteSupport()));
+					for (List<Itemset> itemsetlist : lower.getLevels()) {
+						for (Itemset itemset : itemsetlist) {
+							items = itemset.getItems();
+							sb.setLength(0);
+							for (int i = 0; i < items.length; i++) {
+								if (i == 0) {
+									sb.append(items[i]);
+								} else {
+									sb.append(Commons.SEPARATOR);
+									sb.append(items[i]);
+								}
+							}
+							bw.write(sb.toString() + " "
+									+ itemset.getAbsoluteSupport() + "\n");
+						}
+					} // end of for
+				} // end of if
+
+			} else {
+				// phase1minsup > minsup, including cachedisabled
+				// output intermediate data to reduce phase
+				for (List<Itemset> itemsetlist : higher.getLevels()) {
+					for (Itemset itemset : itemsetlist) {
+						items = itemset.getItems();
+						sb.setLength(0);
+						for (int i = 0; i < items.length; i++) {
+							if (i == 0) {
+								sb.append(items[i]);
+							} else {
+								sb.append(Commons.SEPARATOR);
+								sb.append(items[i]);
+							}
+						}
+						context.write(new Text(sb.toString()), new IntWritable(
+								itemset.getAbsoluteSupport()));
+					}
 				}
-			}
+				for (List<Itemset> itemsetlist : lower.getLevels()) {
+					for (Itemset itemset : itemsetlist) {
+						items = itemset.getItems();
+						sb.setLength(0);
+						for (int i = 0; i < items.length; i++) {
+							if (i == 0) {
+								sb.append(items[i]);
+							} else {
+								sb.append(Commons.SEPARATOR);
+								sb.append(items[i]);
+							}
+						}
+						context.write(new Text(sb.toString()), new IntWritable(
+								itemset.getAbsoluteSupport()));
+					}
+				}
+
+				if (cacheEnabled(phase1minsup)) {
+					// output cache to hdfs
+					for (List<Itemset> itemsetlist : higher.getLevels()) {
+						for (Itemset itemset : itemsetlist) {
+							items = itemset.getItems();
+							sb.setLength(0);
+							for (int i = 0; i < items.length; i++) {
+								if (i == 0) {
+									sb.append(items[i]);
+								} else {
+									sb.append(Commons.SEPARATOR);
+									sb.append(items[i]);
+								}
+							}
+							bw.write(sb.toString() + " "
+									+ itemset.getAbsoluteSupport() + "\n");
+						}
+					} // end of for
+				} // end of if
+			} // end of else
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(numrows));
 		}
@@ -135,13 +251,17 @@ public class MR2PhaseFPGrowth {
 		// download param
 		private double phase1minsup;
 		private double minsup;
+		private String output1stphasedir;
 
 		// bookkeeping
 		private long starttime, endtime;
 		private int taskid;
 
+		// cache
+		private BufferedWriter bw;
+
 		@Override
-		public void setup(Context context) {
+		public void setup(Context context) throws IOException {
 			// my id
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
@@ -149,26 +269,45 @@ public class MR2PhaseFPGrowth {
 			phase1minsup = context.getConfiguration().getDouble(
 					PHASE1MINSUP_CONFIG, 100);
 			minsup = context.getConfiguration().getDouble(MINSUP_CONFIG, 100);
+			output1stphasedir = context.getConfiguration().get(
+					PHASE1OUTDIR_CONFIG);
 
 			// show params
 			System.err
 					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
 			System.err.println(Commons.PREFIX + "minsup: " + minsup);
+			System.err.println(Commons.PREFIX + "cacheEnabled: "
+					+ cacheEnabled(phase1minsup));
 
 			// bookkeeping
 			starttime = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "(1/2) " + taskid
 					+ " Map Task start time: " + starttime);
+
+			// open cache file for write
+			if (cacheEnabled(phase1minsup)) {
+				FileSystem fs = FileSystem.get(context.getConfiguration());
+				String splitname = ((FileSplit) context.getInputSplit())
+						.getPath().getName();
+				FSDataOutputStream out = fs.create(new Path(output1stphasedir
+						+ "/_" + splitname + cachefilesuffix));
+				bw = new BufferedWriter(new OutputStreamWriter(out));
+			}
 		}
 
 		@Override
-		public void cleanup(Context context) {
+		public void cleanup(Context context) throws IOException {
 			// bookkeeping
 			endtime = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "(1/2) " + taskid
 					+ " Map Task end time: " + endtime);
 			System.err.println(Commons.PREFIX + "(1/2) " + taskid
 					+ " Map Task execution time: " + (endtime - starttime));
+
+			// close cache stream
+			if (cacheEnabled(phase1minsup)) {
+				bw.close();
+			}
 		}
 	}
 
@@ -222,8 +361,10 @@ public class MR2PhaseFPGrowth {
 	public static void run_on_hadoop_phase2() throws IOException,
 			URISyntaxException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
+		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 		conf.set(TOTALROW_CONFIG, Long.toString(totalrows));
+		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
 
 		String jobname = Commons.PROGNAME + " Phase 2";
 		Job job = new Job(conf, jobname);
@@ -300,6 +441,15 @@ public class MR2PhaseFPGrowth {
 			while ((line = br.readLine()) != null) {
 				// \t comes from hadoop framework
 				String candidate = line.split("\\t")[0];
+				total++;
+				if (cache.containsKey(candidate)) {
+					hit++;
+					context.write(
+							new Text(candidate),
+							new IntWritable(Integer.parseInt(cache
+									.get(candidate))));
+					continue;
+				}
 				StringTokenizer st = new StringTokenizer(candidate,
 						Commons.SEPARATOR);
 				myset.clear();
@@ -318,8 +468,16 @@ public class MR2PhaseFPGrowth {
 			br.close();
 		}
 
-		// for distributed cache
+		// download params
+		private String output1stphasedir;
+		private double phase1minsup;
+
+		// for distributed cache, global candidate
 		private File[] localFiles;
+
+		// for cache, only parse value when needed
+		private long total, hit;
+		private HashMap<String, String> cache = new HashMap<String, String>();
 
 		// for parse once
 		private ArrayList<HashSet<String>> split = new ArrayList<HashSet<String>>();
@@ -330,6 +488,20 @@ public class MR2PhaseFPGrowth {
 
 		@Override
 		public void setup(Context context) throws IOException {
+			// download params
+			output1stphasedir = context.getConfiguration().get(
+					PHASE1OUTDIR_CONFIG);
+			phase1minsup = context.getConfiguration().getDouble(
+					PHASE1MINSUP_CONFIG, DISABLECACHE);
+
+			// show params
+			System.err
+					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
+			System.err.println(Commons.PREFIX + "output1stphasedir: "
+					+ output1stphasedir);
+			System.err.println(Commons.PREFIX + "cacheEnabled: "
+					+ cacheEnabled(phase1minsup));
+
 			// my id
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
@@ -338,7 +510,7 @@ public class MR2PhaseFPGrowth {
 			System.err.println(Commons.PREFIX + "(2/2) " + taskid
 					+ " Map Task start time: " + starttime);
 
-			// for cache files
+			// for global candidate file
 			Path[] cacheFiles = context.getLocalCacheFiles();
 			String[] localFileNames;
 			if (cacheFiles != null) {
@@ -348,6 +520,23 @@ public class MR2PhaseFPGrowth {
 					localFileNames[i] = cacheFiles[i].toString();
 					localFiles[i] = new File(localFileNames[i]);
 				}
+			}
+
+			// for cache file
+			if (cacheEnabled(phase1minsup)) {
+				FileSystem fs = FileSystem.get(context.getConfiguration());
+				String splitname = ((FileSplit) context.getInputSplit())
+						.getPath().getName();
+				FSDataInputStream in = fs.open(new Path(output1stphasedir
+						+ "/_" + splitname + cachefilesuffix));
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(in));
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					String[] two = line.split(" ");
+					cache.put(two[0], two[1]);
+				}
+				br.close();
 			}
 		}
 
@@ -359,6 +548,9 @@ public class MR2PhaseFPGrowth {
 					+ " Map Task end time: " + endtime);
 			System.err.println(Commons.PREFIX + "(2/2) " + taskid
 					+ " Map Task execution time: " + (endtime - starttime));
+			System.err.println(Commons.PREFIX + "(2/2) " + taskid
+					+ " Cache hit: " + hit + " / " + total + " = "
+					+ (total == 0 ? "N/A" : (hit / (double) total)));
 		}
 	}
 
@@ -413,6 +605,11 @@ public class MR2PhaseFPGrowth {
 					+ "Reduce Task execution time: "
 					+ (reduceend - reducestart));
 		}
+	}
+
+	// don't use the stub program's phase1minsup
+	public static boolean cacheEnabled(double phase1minsup) {
+		return phase1minsup <= 100;
 	}
 
 	// cmd line params

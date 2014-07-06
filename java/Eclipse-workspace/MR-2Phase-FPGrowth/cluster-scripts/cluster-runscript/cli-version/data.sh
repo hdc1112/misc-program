@@ -51,7 +51,7 @@ cd $abshere
 # main logic
 set -x
 
-ssh -n $user@$worknode ./hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stphase /output-test
+ssh -n $user@$worknode /home/$user/hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stphase /output-test
 
 if [ "$noreupload" = "noreupload" ]; then
   echo Skip data reupload, use previously uploaded input

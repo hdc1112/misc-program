@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # default value stage
-deletelogs=
-deletedata=
+deletelogs=no
+deletedata=no
 # the following makes lots of assumptions
 # to the cluster arch, but it works
 # for me so far
