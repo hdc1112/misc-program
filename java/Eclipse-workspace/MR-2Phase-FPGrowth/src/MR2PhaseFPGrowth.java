@@ -351,9 +351,9 @@ public class MR2PhaseFPGrowth {
 			// bookkeeping
 			reduceend = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "(1/2) " + taskid
-					+ "Reduce Task end time: " + reduceend);
+					+ " Reduce Task end time: " + reduceend);
 			System.err.println(Commons.PREFIX + "(1/2) " + taskid
-					+ "Reduce Task execution time: "
+					+ " Reduce Task execution time: "
 					+ (reduceend - reducestart));
 		}
 	}
@@ -586,8 +586,8 @@ public class MR2PhaseFPGrowth {
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
 			// show params
-			System.err.println("minsup: " + minsup);
-			System.err.println("totalrows: " + totalrows);
+			System.err.println(Commons.PREFIX + "minsup: " + minsup);
+			System.err.println(Commons.PREFIX + "totalrows: " + totalrows);
 
 			// bookkeeping
 			reducestart = System.currentTimeMillis();
@@ -600,9 +600,9 @@ public class MR2PhaseFPGrowth {
 			// bookkeeping
 			reduceend = System.currentTimeMillis();
 			System.err.println(Commons.PREFIX + "(2/2) " + taskid
-					+ "Reduce Task end time: " + reduceend);
+					+ " Reduce Task end time: " + reduceend);
 			System.err.println(Commons.PREFIX + "(2/2) " + taskid
-					+ "Reduce Task execution time: "
+					+ " Reduce Task execution time: "
 					+ (reduceend - reducestart));
 		}
 	}
