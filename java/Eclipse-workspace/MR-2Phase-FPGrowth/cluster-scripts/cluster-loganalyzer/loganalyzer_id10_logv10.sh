@@ -467,7 +467,7 @@ for i in `seq 0 $((l_totalcont-1))`; do
   #echo ${l_interestfiles[$i]}
   set +x
   while read line; do
-    [[ $line =~ $prefix\(2/2\)\ 0\ Cache\ hit:\ [0-9]*\ /\ ([0-9]*)\ =\ [01]\.[0-9]* ]]\
+    [[ $line =~ $prefix\(2/2\)\ 0\ Cache\ hit:\ [0-9]*\ /\ ([0-9]*)\ =\ .*$ ]]\
       && m2_1_cache_total=${BASH_REMATCH[1]} && break
   done < <(cat ${l_interestfiles[$i]}/stderr)
   set -x
@@ -486,7 +486,7 @@ for i in `seq 0 $((l_totalcont-1))`; do
   #echo ${l_interestfiles[$i]}
   set +x
   while read line; do
-    [[ $line =~ $prefix\(2/2\)\ 0\ Cache\ hit:\ [0-9]*\ /\ [0-9]*\ =\ ([01]\.[0-9]*) ]]\
+    [[ $line =~ $prefix\(2/2\)\ 0\ Cache\ hit:\ [0-9]*\ /\ [0-9]*\ =\ (.*)$ ]]\
       && m2_1_cache_hit=${BASH_REMATCH[1]} && break
   done < <(cat ${l_interestfiles[$i]}/stderr)
   set -x
@@ -562,7 +562,7 @@ for i in `seq 0 $((l_totalcont-1))`; do
   #echo ${l_interestfiles[$i]}
   set +x
   while read line; do
-    [[ $line =~ $prefix\(2/2\)\ 1\ Cache\ hit:\ [0-9]*\ /\ ([0-9]*)\ =\ [01]\.[0-9]* ]]\
+    [[ $line =~ $prefix\(2/2\)\ 1\ Cache\ hit:\ [0-9]*\ /\ ([0-9]*)\ =\ .*$ ]]\
       && m2_2_cache_total=${BASH_REMATCH[1]} && break
   done < <(cat ${l_interestfiles[$i]}/stderr)
   set -x
@@ -581,7 +581,7 @@ for i in `seq 0 $((l_totalcont-1))`; do
   #echo ${l_interestfiles[$i]}
   set +x
   while read line; do
-    [[ $line =~ $prefix\(2/2\)\ 1\ Cache\ hit:\ [0-9]*\ /\ [0-9]*\ =\ ([01]\.[0-9]*) ]]\
+    [[ $line =~ $prefix\(2/2\)\ 1\ Cache\ hit:\ [0-9]*\ /\ [0-9]*\ =\ (.*)$ ]]\
       && m2_2_cache_hit=${BASH_REMATCH[1]} && break
   done < <(cat ${l_interestfiles[$i]}/stderr)
   set -x

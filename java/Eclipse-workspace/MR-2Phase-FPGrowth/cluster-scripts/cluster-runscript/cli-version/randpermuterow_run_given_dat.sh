@@ -113,7 +113,7 @@ linenum=$totallinenum
 #linenum=$((linenum/2))
 
 #realfile=$transf.realfile
-realfile=$filename.realfile
+realfile=$storedir/$filename.realfile
 #cat $transf | head -n $linenum > $realfile
 cat $storedir/$filename | head -n $linenum > $realfile
 
