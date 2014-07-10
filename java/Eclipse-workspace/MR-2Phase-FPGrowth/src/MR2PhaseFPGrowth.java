@@ -729,7 +729,7 @@ public class MR2PhaseFPGrowth {
 
 		options.addOption(OptionBuilder.withArgName("phase1minsupbeta")
 				.hasArg().withDescription("phase 1 minsup ratio")
-				.create("phase2minsupbeta"));
+				.create("phase1minsupbeta"));
 
 		return options;
 	}
