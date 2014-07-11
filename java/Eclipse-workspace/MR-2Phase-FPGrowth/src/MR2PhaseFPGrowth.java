@@ -117,10 +117,12 @@ public class MR2PhaseFPGrowth {
 
 			// use fp-growth alg
 			AlgoFPGrowth2 localalgm = new AlgoFPGrowth2();
+			// the vanilla version
 			// Itemsets itemsets = localalgm.runAlgorithm2(dataset, null,
 			// minsup / 100.0);
 
 			// use cache version algorithm
+			// this includes the vanilla version as a special case
 			localalgm.runAlgorithm3(dataset, minsup / 100.0,
 					phase1minsup / 100.0);
 
@@ -134,7 +136,9 @@ public class MR2PhaseFPGrowth {
 			int[] items = null;
 			StringBuilder sb = new StringBuilder();
 			if (phase1minsup <= minsup) {
+				// minsup --- phase1minsup
 				// output intermediate data to reduce phase
+				// higher includes all global candidates
 				for (List<Itemset> itemsetlist : higher.getLevels()) {
 					for (Itemset itemset : itemsetlist) {
 						items = itemset.getItems();
@@ -154,6 +158,7 @@ public class MR2PhaseFPGrowth {
 
 				if (cacheEnabled(phase1minsup)) {
 					// output cache to hdfs
+					// higher + lower is the cache
 					for (List<Itemset> itemsetlist : higher.getLevels()) {
 						for (Itemset itemset : itemsetlist) {
 							items = itemset.getItems();
@@ -189,8 +194,9 @@ public class MR2PhaseFPGrowth {
 				} // end of if
 
 			} else {
-				// phase1minsup > minsup, including cachedisabled
+				// phase1minsup --- minsup (including cachedisabled)
 				// output intermediate data to reduce phase
+				// higher + lower is the global candidate
 				for (List<Itemset> itemsetlist : higher.getLevels()) {
 					for (Itemset itemset : itemsetlist) {
 						items = itemset.getItems();
@@ -226,6 +232,7 @@ public class MR2PhaseFPGrowth {
 
 				if (cacheEnabled(phase1minsup)) {
 					// output cache to hdfs
+					// higher is the cache
 					for (List<Itemset> itemsetlist : higher.getLevels()) {
 						for (Itemset itemset : itemsetlist) {
 							items = itemset.getItems();
@@ -246,7 +253,7 @@ public class MR2PhaseFPGrowth {
 			} // end of else
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(numrows));
-		}
+		} // end of map function
 
 		// download param
 		private double phase1minsup;
@@ -607,7 +614,9 @@ public class MR2PhaseFPGrowth {
 		}
 	}
 
-	// don't use the stub program's phase1minsup
+	// this function is called in map/reduce task
+	// function, not in stub program.
+	// TODO change to solution0Enabled
 	public static boolean cacheEnabled(double phase1minsup) {
 		return phase1minsup <= 100;
 	}
@@ -616,8 +625,12 @@ public class MR2PhaseFPGrowth {
 	private static String inputpath;
 	private static String outputpath;
 	private static double minsup;
-	private static double phase1minsup;
+	// param induced by cmd line params
 	private static String outputpath1stphase;
+	// solution0
+	private static double phase1minsup;
+
+	// solution1
 
 	public static void main(String[] args) throws IOException, ParseException,
 			ClassNotFoundException, InterruptedException, URISyntaxException {
@@ -635,9 +648,12 @@ public class MR2PhaseFPGrowth {
 		CommandLine cmd = parser.parse(options, otherArgs);
 
 		// interrogation stage
+		// these params must exist
 		inputpath = cmd.getOptionValue("inpath");
 		outputpath = cmd.getOptionValue("outpath");
 		minsup = Double.parseDouble(cmd.getOptionValue("minsupport"));
+		// solution0
+		// manually set the phase1minsup
 		double beta = 1;
 		if (cmd.hasOption("phase1minsup") && cmd.hasOption("phase1minsupbeta")) {
 			// skip phase1minsup
@@ -656,9 +672,12 @@ public class MR2PhaseFPGrowth {
 		} else {
 			phase1minsup = DISABLECACHE;
 		}
+		// solution1
+		// automatically find the threshold for cache
 
 		// verify stage, semantic check
-		// skip minsup's verification
+		// skip basic param's verification
+		// solution0
 		if (phase1minsup > 100) {
 			phase1minsup = DISABLECACHE;
 			System.err.println(Commons.PREFIX
@@ -677,7 +696,9 @@ public class MR2PhaseFPGrowth {
 		System.err.println(Commons.PREFIX + "inpath: " + inputpath);
 		System.err.println(Commons.PREFIX + "outpath: " + outputpath);
 		System.err.println(Commons.PREFIX + "minsupport: " + minsup);
+		// solution0
 		System.err.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
+		// solution1
 
 		// main logic
 		outputpath1stphase = outputpath + "-1stphase";
@@ -711,25 +732,54 @@ public class MR2PhaseFPGrowth {
 	private static Options buildOptions() {
 		Options options = new Options();
 
+		// this param must exist
 		options.addOption(OptionBuilder.withArgName("inpath").hasArg()
 				.isRequired().withDescription("hdfs input folder")
 				.create("inpath"));
 
+		// this param must exist
 		options.addOption(OptionBuilder.withArgName("outpath").hasArg()
 				.isRequired().withDescription("hdfs ouput folder")
 				.create("outpath"));
 
+		// this param must exist
 		options.addOption(OptionBuilder.withArgName("minsupport").hasArg()
 				.isRequired().withDescription("minimum support in percentage")
 				.create("minsupport"));
 
+		// the following things are different solutions
+		// solution that comes afterwards has higher visibility
+		// main logic will use if (!solution2) { if (!solution1) { solution0; }
+		// else { solution1; }} else { solution2; }
+
+		// this param is optional (solution0)
+		// manually set the cache threshold by absolute value
+		// phase1minsup is only useful in manual cache mode
+		// let's call this as "solution0"
 		options.addOption(OptionBuilder.withArgName("phase1minsup").hasArg()
 				.withDescription("phase 1 minsupport in percentage")
 				.create("phase1minsup"));
 
+		// this param is optional (solution0)
+		// manually set the cache threshold by relative ratio
+		// override "phase1minsup"
+		// phase1minsupbeta is only useful in manual cache mode
 		options.addOption(OptionBuilder.withArgName("phase1minsupbeta")
 				.hasArg().withDescription("phase 1 minsup ratio")
 				.create("phase1minsupbeta"));
+
+		// this param is optional (solution1)
+		// automatically find a good cache threshold
+		// the switch to open solution1
+		options.addOption(OptionBuilder.withArgName("solution1").hasArg(false)
+				.withDescription("solution1").create("solution1"));
+
+		// this param is optional (solution1)
+		// the lowest limit to consider
+		// if set, solution1 will use it as the low limit
+		// solution1param1 is only useful in solution1 mode
+		options.addOption(OptionBuilder.withArgName("solution1param1").hasArg()
+				.withDescription("solution1param1").create("solution1param1"));
 
 		return options;
 	}
