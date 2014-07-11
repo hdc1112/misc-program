@@ -47,28 +47,40 @@ import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 public class MR2PhaseFPGrowth {
 
 	// hadoop params
-	private static final String PHASE1MINSUP_CONFIG = Commons.PROGNAME
-			+ ".phase1.minsup";
 	private static final String MINSUP_CONFIG = Commons.PROGNAME + ".minsup";
 	private static final String TOTALROW_CONFIG = Commons.PROGNAME
 			+ ".totalrow";
 	private static final String PHASE1OUTDIR_CONFIG = Commons.PROGNAME
 			+ ".phase1.outdir";
-	private static String cachefilesuffix = "-cachecount.file";
 	private static long totalrows;
 
 	private static enum RowCounter {
 		TOTALROW
 	}
 
+	// solution0
 	private static final double DISABLECACHE = 200;
+	private static final String PHASE1MINSUP_CONFIG = Commons.PROGNAME
+			+ ".phase1.minsup";
+	// solution1
+	private static final String SOLUTION1_CONFIG = Commons.PROGNAME
+			+ ".solution1";
+	private static final String SOLUTION1PARAM1_CONFIG = Commons.PROGNAME
+			+ ".solution1param1";
+
+	// solution0, solution1
+	private static String cachefilesuffix = "-cachecount.file";
 
 	public static void run_on_hadoop_phase1() throws IOException,
 			ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
+		// solution0
+		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
+		// solution1
+		conf.set(SOLUTION1_CONFIG, Boolean.toString(solution1));
+		conf.set(SOLUTION1PARAM1_CONFIG, Double.toString(solution1param1));
 
 		String jobname = Commons.PROGNAME + " Phase 1";
 		Job job = new Job(conf, jobname);
@@ -115,50 +127,35 @@ public class MR2PhaseFPGrowth {
 			}
 			int numrows = dataset.size();
 
-			// use fp-growth alg
-			AlgoFPGrowth2 localalgm = new AlgoFPGrowth2();
-			// the vanilla version
-			// Itemsets itemsets = localalgm.runAlgorithm2(dataset, null,
-			// minsup / 100.0);
+			if (!solution1Enabled(solution1)) {
+				// this is a big "if"
+				// when solution1 is not enabled, we use solution0
 
-			// use cache version algorithm
-			// this includes the vanilla version as a special case
-			localalgm.runAlgorithm3(dataset, minsup / 100.0,
-					phase1minsup / 100.0);
+				// start of solution0
+				// use fp-growth alg
+				AlgoFPGrowth2 localalgm = new AlgoFPGrowth2();
+				// the vanilla version
+				// Itemsets itemsets = localalgm.runAlgorithm2(dataset, null,
+				// minsup / 100.0);
 
-			// get two range itemsets
-			Itemsets higher = localalgm.getHigher();
-			Itemsets lower = localalgm.getLower();
+				// use cache version algorithm
+				// this includes the vanilla version as a special case
+				localalgm.runAlgorithm3(dataset, minsup / 100.0,
+						phase1minsup / 100.0);
 
-			System.err.println("higher size: " + higher.getItemsetsCount());
-			System.err.println("lower size: " + lower.getItemsetsCount());
+				// get two range itemsets
+				Itemsets higher = localalgm.getHigher();
+				Itemsets lower = localalgm.getLower();
 
-			int[] items = null;
-			StringBuilder sb = new StringBuilder();
-			if (phase1minsup <= minsup) {
-				// minsup --- phase1minsup
-				// output intermediate data to reduce phase
-				// higher includes all global candidates
-				for (List<Itemset> itemsetlist : higher.getLevels()) {
-					for (Itemset itemset : itemsetlist) {
-						items = itemset.getItems();
-						sb.setLength(0);
-						for (int i = 0; i < items.length; i++) {
-							if (i == 0) {
-								sb.append(items[i]);
-							} else {
-								sb.append(Commons.SEPARATOR);
-								sb.append(items[i]);
-							}
-						}
-						context.write(new Text(sb.toString()), new IntWritable(
-								itemset.getAbsoluteSupport()));
-					}
-				}
+				System.err.println("higher size: " + higher.getItemsetsCount());
+				System.err.println("lower size: " + lower.getItemsetsCount());
 
-				if (cacheEnabled(phase1minsup)) {
-					// output cache to hdfs
-					// higher + lower is the cache
+				int[] items = null;
+				StringBuilder sb = new StringBuilder();
+				if (phase1minsup <= minsup) {
+					// minsup --- phase1minsup
+					// output intermediate data to reduce phase
+					// higher includes all global candidates
 					for (List<Itemset> itemsetlist : higher.getLevels()) {
 						for (Itemset itemset : itemsetlist) {
 							items = itemset.getItems();
@@ -171,10 +168,72 @@ public class MR2PhaseFPGrowth {
 									sb.append(items[i]);
 								}
 							}
-							bw.write(sb.toString() + " "
-									+ itemset.getAbsoluteSupport() + "\n");
+							context.write(
+									new Text(sb.toString()),
+									new IntWritable(itemset
+											.getAbsoluteSupport()));
 						}
 					}
+
+					if (solution0Enabled(phase1minsup)) {
+						// output cache to hdfs
+						// higher + lower is the cache
+						for (List<Itemset> itemsetlist : higher.getLevels()) {
+							for (Itemset itemset : itemsetlist) {
+								items = itemset.getItems();
+								sb.setLength(0);
+								for (int i = 0; i < items.length; i++) {
+									if (i == 0) {
+										sb.append(items[i]);
+									} else {
+										sb.append(Commons.SEPARATOR);
+										sb.append(items[i]);
+									}
+								}
+								bw.write(sb.toString() + " "
+										+ itemset.getAbsoluteSupport() + "\n");
+							}
+						}
+						for (List<Itemset> itemsetlist : lower.getLevels()) {
+							for (Itemset itemset : itemsetlist) {
+								items = itemset.getItems();
+								sb.setLength(0);
+								for (int i = 0; i < items.length; i++) {
+									if (i == 0) {
+										sb.append(items[i]);
+									} else {
+										sb.append(Commons.SEPARATOR);
+										sb.append(items[i]);
+									}
+								}
+								bw.write(sb.toString() + " "
+										+ itemset.getAbsoluteSupport() + "\n");
+							}
+						} // end of for
+					} // end of if
+
+				} else {
+					// phase1minsup --- minsup (including cachedisabled)
+					// output intermediate data to reduce phase
+					// higher + lower is the global candidate
+					for (List<Itemset> itemsetlist : higher.getLevels()) {
+						for (Itemset itemset : itemsetlist) {
+							items = itemset.getItems();
+							sb.setLength(0);
+							for (int i = 0; i < items.length; i++) {
+								if (i == 0) {
+									sb.append(items[i]);
+								} else {
+									sb.append(Commons.SEPARATOR);
+									sb.append(items[i]);
+								}
+							}
+							context.write(
+									new Text(sb.toString()),
+									new IntWritable(itemset
+											.getAbsoluteSupport()));
+						} // end of inner for
+					} // end of outer for
 					for (List<Itemset> itemsetlist : lower.getLevels()) {
 						for (Itemset itemset : itemsetlist) {
 							items = itemset.getItems();
@@ -187,78 +246,53 @@ public class MR2PhaseFPGrowth {
 									sb.append(items[i]);
 								}
 							}
-							bw.write(sb.toString() + " "
-									+ itemset.getAbsoluteSupport() + "\n");
-						}
-					} // end of for
-				} // end of if
+							context.write(
+									new Text(sb.toString()),
+									new IntWritable(itemset
+											.getAbsoluteSupport()));
+						} // end of inner for
+					} // end of outer for
 
-			} else {
-				// phase1minsup --- minsup (including cachedisabled)
-				// output intermediate data to reduce phase
-				// higher + lower is the global candidate
-				for (List<Itemset> itemsetlist : higher.getLevels()) {
-					for (Itemset itemset : itemsetlist) {
-						items = itemset.getItems();
-						sb.setLength(0);
-						for (int i = 0; i < items.length; i++) {
-							if (i == 0) {
-								sb.append(items[i]);
-							} else {
-								sb.append(Commons.SEPARATOR);
-								sb.append(items[i]);
-							}
-						}
-						context.write(new Text(sb.toString()), new IntWritable(
-								itemset.getAbsoluteSupport()));
-					}
-				}
-				for (List<Itemset> itemsetlist : lower.getLevels()) {
-					for (Itemset itemset : itemsetlist) {
-						items = itemset.getItems();
-						sb.setLength(0);
-						for (int i = 0; i < items.length; i++) {
-							if (i == 0) {
-								sb.append(items[i]);
-							} else {
-								sb.append(Commons.SEPARATOR);
-								sb.append(items[i]);
-							}
-						}
-						context.write(new Text(sb.toString()), new IntWritable(
-								itemset.getAbsoluteSupport()));
-					}
-				}
-
-				if (cacheEnabled(phase1minsup)) {
-					// output cache to hdfs
-					// higher is the cache
-					for (List<Itemset> itemsetlist : higher.getLevels()) {
-						for (Itemset itemset : itemsetlist) {
-							items = itemset.getItems();
-							sb.setLength(0);
-							for (int i = 0; i < items.length; i++) {
-								if (i == 0) {
-									sb.append(items[i]);
-								} else {
-									sb.append(Commons.SEPARATOR);
-									sb.append(items[i]);
+					if (solution0Enabled(phase1minsup)) {
+						// output cache to hdfs
+						// higher is the cache
+						for (List<Itemset> itemsetlist : higher.getLevels()) {
+							for (Itemset itemset : itemsetlist) {
+								items = itemset.getItems();
+								sb.setLength(0);
+								for (int i = 0; i < items.length; i++) {
+									if (i == 0) {
+										sb.append(items[i]);
+									} else {
+										sb.append(Commons.SEPARATOR);
+										sb.append(items[i]);
+									}
 								}
+								bw.write(sb.toString() + " "
+										+ itemset.getAbsoluteSupport() + "\n");
 							}
-							bw.write(sb.toString() + " "
-									+ itemset.getAbsoluteSupport() + "\n");
-						}
-					} // end of for
-				} // end of if
-			} // end of else
+						} // end of for
+					} // end of if
+				} // end of else
+
+				// the end for solution0
+			} else {
+				// start of solution1
+
+				// end of solution1
+			}
 
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(numrows));
 		} // end of map function
 
 		// download param
-		private double phase1minsup;
 		private double minsup;
 		private String output1stphasedir;
+		// solution0
+		private double phase1minsup;
+		// solution1
+		private boolean solution1;
+		private double solution1param1;
 
 		// bookkeeping
 		private long starttime, endtime;
@@ -273,18 +307,31 @@ public class MR2PhaseFPGrowth {
 			taskid = context.getTaskAttemptID().getTaskID().getId();
 
 			// download
-			phase1minsup = context.getConfiguration().getDouble(
-					PHASE1MINSUP_CONFIG, 100);
 			minsup = context.getConfiguration().getDouble(MINSUP_CONFIG, 100);
 			output1stphasedir = context.getConfiguration().get(
 					PHASE1OUTDIR_CONFIG);
+			// solution0
+			phase1minsup = context.getConfiguration().getDouble(
+					PHASE1MINSUP_CONFIG, 100);
+			// solution1
+			solution1 = context.getConfiguration().getBoolean(SOLUTION1_CONFIG,
+					false);
+			solution1param1 = context.getConfiguration().getDouble(
+					SOLUTION1PARAM1_CONFIG, solution1param1default);
 
 			// show params
+			System.err.println(Commons.PREFIX + "minsup: " + minsup);
+			// solution0
 			System.err
 					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
-			System.err.println(Commons.PREFIX + "minsup: " + minsup);
-			System.err.println(Commons.PREFIX + "cacheEnabled: "
-					+ cacheEnabled(phase1minsup));
+			System.err.println(Commons.PREFIX + "solution0Enabled: "
+					+ solution0Enabled(phase1minsup));
+			// solution1
+			System.err.println(Commons.PREFIX + "solution1: " + solution1);
+			System.err.println(Commons.PREFIX + "solution1param1: "
+					+ solution1param1);
+			System.err.println(Commons.PREFIX + "solution1Enabled: "
+					+ solution1Enabled(solution1));
 
 			// bookkeeping
 			starttime = System.currentTimeMillis();
@@ -292,7 +339,7 @@ public class MR2PhaseFPGrowth {
 					+ " Map Task start time: " + starttime);
 
 			// open cache file for write
-			if (cacheEnabled(phase1minsup)) {
+			if (solution0Enabled(phase1minsup) || solution1Enabled(solution1)) {
 				FileSystem fs = FileSystem.get(context.getConfiguration());
 				String splitname = ((FileSplit) context.getInputSplit())
 						.getPath().getName();
@@ -312,8 +359,10 @@ public class MR2PhaseFPGrowth {
 					+ " Map Task execution time: " + (endtime - starttime));
 
 			// close cache stream
-			if (cacheEnabled(phase1minsup)) {
-				bw.close();
+			if (solution0Enabled(phase1minsup) || solution1Enabled(solution1)) {
+				if (bw != null) {
+					bw.close();
+				}
 			}
 		}
 	}
@@ -368,10 +417,14 @@ public class MR2PhaseFPGrowth {
 	public static void run_on_hadoop_phase2() throws IOException,
 			URISyntaxException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 		conf.set(TOTALROW_CONFIG, Long.toString(totalrows));
 		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
+		// solution0
+		conf.set(PHASE1MINSUP_CONFIG, Double.toString(phase1minsup));
+		// solution1
+		conf.set(SOLUTION1_CONFIG, Boolean.toString(solution1));
+		conf.set(SOLUTION1PARAM1_CONFIG, Double.toString(solution1param1));
 
 		String jobname = Commons.PROGNAME + " Phase 2";
 		Job job = new Job(conf, jobname);
@@ -477,7 +530,11 @@ public class MR2PhaseFPGrowth {
 
 		// download params
 		private String output1stphasedir;
+		// solution0
 		private double phase1minsup;
+		// solution1
+		private boolean solution1;
+		private double solution1param1;
 
 		// for distributed cache, global candidate
 		private File[] localFiles;
@@ -498,16 +555,29 @@ public class MR2PhaseFPGrowth {
 			// download params
 			output1stphasedir = context.getConfiguration().get(
 					PHASE1OUTDIR_CONFIG);
+			// solution0
 			phase1minsup = context.getConfiguration().getDouble(
 					PHASE1MINSUP_CONFIG, DISABLECACHE);
+			// solution1
+			solution1 = context.getConfiguration().getBoolean(SOLUTION1_CONFIG,
+					false);
+			solution1param1 = context.getConfiguration().getDouble(
+					SOLUTION1PARAM1_CONFIG, solution1param1default);
 
 			// show params
-			System.err
-					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
 			System.err.println(Commons.PREFIX + "output1stphasedir: "
 					+ output1stphasedir);
-			System.err.println(Commons.PREFIX + "cacheEnabled: "
-					+ cacheEnabled(phase1minsup));
+			// solution0
+			System.err
+					.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
+			System.err.println(Commons.PREFIX + "solution0Enabled: "
+					+ solution0Enabled(phase1minsup));
+			// solution1
+			System.err.println(Commons.PREFIX + "solution1: " + solution1);
+			System.err.println(Commons.PREFIX + "solution1param1: "
+					+ solution1param1);
+			System.err.println(Commons.PREFIX + "solution1Enabled: "
+					+ solution1Enabled(solution1));
 
 			// my id
 			taskid = context.getTaskAttemptID().getTaskID().getId();
@@ -530,7 +600,7 @@ public class MR2PhaseFPGrowth {
 			}
 
 			// for cache file
-			if (cacheEnabled(phase1minsup)) {
+			if (solution0Enabled(phase1minsup) || solution1Enabled(solution1)) {
 				FileSystem fs = FileSystem.get(context.getConfiguration());
 				String splitname = ((FileSplit) context.getInputSplit())
 						.getPath().getName();
@@ -615,10 +685,13 @@ public class MR2PhaseFPGrowth {
 	}
 
 	// this function is called in map/reduce task
-	// function, not in stub program.
-	// TODO change to solution0Enabled
-	public static boolean cacheEnabled(double phase1minsup) {
+	public static boolean solution0Enabled(double phase1minsup) {
 		return phase1minsup <= 100;
+	}
+
+	// this function is called in map/reduce task
+	public static boolean solution1Enabled(boolean solution1) {
+		return solution1;
 	}
 
 	// cmd line params
@@ -629,6 +702,10 @@ public class MR2PhaseFPGrowth {
 	private static String outputpath1stphase;
 	// solution0
 	private static double phase1minsup;
+	// solution1
+	private static boolean solution1;
+	private static double solution1param1;
+	private static final double solution1param1default = 0.5;
 
 	// solution1
 
@@ -674,6 +751,15 @@ public class MR2PhaseFPGrowth {
 		}
 		// solution1
 		// automatically find the threshold for cache
+		solution1 = false;
+		if (cmd.hasOption("solution1")) {
+			solution1 = true;
+			solution1param1 = solution1param1default;
+		}
+		if (cmd.hasOption("solution1param1")) {
+			solution1param1 = Double.parseDouble(cmd
+					.getOptionValue("solution1param1"));
+		}
 
 		// verify stage, semantic check
 		// skip basic param's verification
@@ -691,6 +777,18 @@ public class MR2PhaseFPGrowth {
 			System.err
 					.println(Commons.PREFIX + "Cache optimization is enabled");
 		}
+		// solution1
+		if (solution1) {
+			// solution1 will only starts from less than minsup
+			// solution1 assumes the optimum is always in the right side
+			if (solution1param1 < 0 || solution1param1 > 1) {
+				System.err.println(Commons.PREFIX
+						+ "solution1param1 is < 0 or > 1");
+				System.err.println(Commons.PREFIX
+						+ "solution1param1 set to default");
+				solution1param1 = solution1param1default;
+			}
+		}
 
 		// show stage
 		System.err.println(Commons.PREFIX + "inpath: " + inputpath);
@@ -699,6 +797,9 @@ public class MR2PhaseFPGrowth {
 		// solution0
 		System.err.println(Commons.PREFIX + "phase1minsup: " + phase1minsup);
 		// solution1
+		System.err.println(Commons.PREFIX + "solution1: " + solution1);
+		System.err.println(Commons.PREFIX + "solution1param1: "
+				+ solution1param1);
 
 		// main logic
 		outputpath1stphase = outputpath + "-1stphase";
