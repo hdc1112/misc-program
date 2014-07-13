@@ -47,7 +47,7 @@ import ca.pfv.spmf.tools.MemoryLogger;
  * This is an optimized version that saves the result to a file or keep it into
  * memory if no output path is provided by the user to the runAlgorithm
  * method().
- *
+ * 
  * @see FPTree
  * @see Itemset
  * @see Itemsets
@@ -200,8 +200,12 @@ public class AlgoFPGrowth2 {
 		return patterns;
 	}
 
+	// added by me
+	private double minsup;
+
+	// solution0
 	private Itemsets higher, lower;
-	private double minsup, phase1minsup;
+	private double phase1minsup;
 
 	public Itemsets getHigher() {
 		return higher;
@@ -211,8 +215,9 @@ public class AlgoFPGrowth2 {
 		return lower;
 	}
 
-	public void runAlgorithm3(ArrayList<String> dataset, double minsup,
-			double phase1minsup) throws FileNotFoundException, IOException {
+	public void runAlgorithm_solution0(ArrayList<String> dataset,
+			double minsup, double phase1minsup) throws FileNotFoundException,
+			IOException {
 		higher = new Itemsets("Higher");
 		lower = new Itemsets("Lower");
 
@@ -228,6 +233,69 @@ public class AlgoFPGrowth2 {
 		}
 	}
 
+	// solution1
+	// solution1 assumes it's always good to go beyond minsup
+	// that is to say, it's always good to put at least minsup
+	// itemsets into cache
+	private boolean solution1;
+	private double solution1param1;
+	// remember the 0th bucket is for global candidate
+	private int buckets = 31;
+	private ArrayList<Itemsets> bucketItemsets = new ArrayList<Itemsets>();
+	private ArrayList<Itemsets> cacheItemsets = new ArrayList<Itemsets>();
+
+	// cacheItemsets is from index 1 ~ threshold
+	// inside bucketItemsets
+	public ArrayList<Itemsets> getCacheItemsets() {
+		return cacheItemsets;
+	}
+
+	public Itemsets getRetItemsets() {
+		return bucketItemsets.get(0);
+	}
+
+	public void runAlgorithm_solution1(ArrayList<String> dataset,
+			double minsup, boolean solution1, double solution1param1)
+			throws FileNotFoundException, IOException {
+		this.minsup = minsup;
+		this.solution1 = solution1;
+		this.solution1param1 = solution1param1;
+
+		for (int i = 0; i < buckets; i++) {
+			bucketItemsets.add(new Itemsets("bucket-" + Integer.toString(i)));
+		}
+
+		// let this algorithm run, and put the itemsets into buckets
+		runAlgorithm2(dataset, null, minsup * solution1param1);
+
+		int retBuckets = 0;
+		// use the buckets' length as input to r-square to get the real
+		// threshold
+		// be careful about whether using length directly or using
+		// cdf length
+		// r-square alg
+		// print out the real threshold
+		// put those data >= threshold into return ds
+
+		// debug print out all bucket size
+		// for (int i = 0; i < buckets; i++) {
+		// System.err.println("bucket " + i + " size: " +
+		// bucketItemsets.get(i).getItemsetsCount());
+		// }
+
+		// debug, suppose the real threshold is 10
+		// [0, retBuckets] will be put into cache
+		retBuckets = 10;
+		for (int i = 0; i <= retBuckets; i++) {
+			cacheItemsets.add(bucketItemsets.get(i));
+		}
+	}
+
+	// solutions end at here
+
+	// copied from runAlgorithm, difference is
+	// runAlgorithm use file as input, runAlgorithm2 use memory as input
+	// runAlgorithm is specially changed for MR2PhaseFPGrowth project
 	public Itemsets runAlgorithm2(ArrayList<String> dataset, String output,
 			double minsupp) throws FileNotFoundException, IOException {
 		// record start time
@@ -629,27 +697,66 @@ public class AlgoFPGrowth2 {
 			// found.
 			Itemset itemsetObj = new Itemset(itemset);
 			itemsetObj.setAbsoluteSupport(support);
+			// patterns.addItemset(itemsetObj, itemsetObj.size());
 
-			// my update to this algorithm
-			// because this seems to be the sole entry
-			// point to patterns itemsets insertion
-			if (phase1minsup <= minsup) {
+			if (!solution1Enabled(solution1)) {
+				// start of solution0
+
+				// remember at any time there's only one effective
+				// solution, so don't worry about NPE in higher/lower
+				if (phase1minsup <= minsup) {
+					if (itemsetObj.getAbsoluteSupport() >= minsup
+							* transactionCount) {
+						higher.addItemset(itemsetObj, itemsetObj.size());
+					} else {
+						lower.addItemset(itemsetObj, itemsetObj.size());
+					}
+				} else {
+					if (itemsetObj.getAbsoluteSupport() >= phase1minsup
+							* transactionCount) {
+						higher.addItemset(itemsetObj, itemsetObj.size());
+					} else {
+						lower.addItemset(itemsetObj, itemsetObj.size());
+					}
+				}
+
+				// end of solution0
+			} else {
+				// start of solution1
+
 				if (itemsetObj.getAbsoluteSupport() >= minsup
 						* transactionCount) {
-					higher.addItemset(itemsetObj, itemsetObj.size());
+					bucketItemsets.get(0).addItemset(itemsetObj,
+							itemsetObj.size());
 				} else {
-					lower.addItemset(itemsetObj, itemsetObj.size());
+					// throw the itemset into the correct bucket
+					int index = (int) Math
+							.ceil((minsup * transactionCount - itemsetObj
+									.getAbsoluteSupport())
+									/ ((minsup * transactionCount - minsup
+											* transactionCount
+											* solution1param1) / (buckets - 1))) - 1;
+					bucketItemsets.get(index + 1).addItemset(itemsetObj,
+							itemsetObj.size());
 				}
-			} else {
-				if (itemsetObj.getAbsoluteSupport() >= phase1minsup
-						* transactionCount) {
-					higher.addItemset(itemsetObj, itemsetObj.size());
-				} else {
-					lower.addItemset(itemsetObj, itemsetObj.size());
-				}
+
+				// end of solution1
 			}
-			// patterns.addItemset(itemsetObj, itemsetObj.size());
+
+			// solution1
 		}
+	}
+
+	// copied from MRPhaseFPGrowth.java
+	// remember to sync with source
+	public static boolean solution0Enabled(double phase1minsup) {
+		return phase1minsup <= 100;
+	}
+
+	// copied from MRPhaseFPGrowth.java
+	// remember to sync with source
+	public static boolean solution1Enabled(boolean solution1) {
+		return solution1;
 	}
 
 	/**

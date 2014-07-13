@@ -12,9 +12,11 @@ worknode=ibmvm1
 user=dachuan
 phase1minsup=
 phase1minsupbeta=
+solution1=  #j
+solution1param1=  #k
 
 # definition, parsing, interrogation stages
-while getopts ":d:c:m:t:w:u:x:y:pqn" o; do
+while getopts ":d:c:m:t:w:u:x:y:k:pqnj" o; do
   case $o in
     d)
       dataabspath=$OPTARG
@@ -40,6 +42,9 @@ while getopts ":d:c:m:t:w:u:x:y:pqn" o; do
     y)
       phase1minsupbeta="-y $OPTARG"
       ;;
+    k)
+      solution1param1="-k $OPTARG"
+      ;;
     p)
       enableopt1="-p"
       ;;
@@ -48,6 +53,9 @@ while getopts ":d:c:m:t:w:u:x:y:pqn" o; do
       ;;
     n)
       noreupload="-n"
+      ;;
+    j)
+      solution1="-j"
       ;;
     *)
       echo invalid argument >&2
@@ -69,6 +77,8 @@ echo worknode=$worknode
 echo user=$user
 echo phase1minsup=$phase1minsup
 echo phase1minsupbeta=$phase1minsupbeta
+echo solution1=$solution1
+echo solution1param1=$solution1param1
 
 # verify arguments stage (skip)
 
@@ -88,6 +98,6 @@ set -x
 ./jar.sh -w $worknode -u $user
 ./data.sh -f $dataabspath $noreupload -w $worknode -u $user
 #./remote-run.sh -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 -w $worknode -u $user
-./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta
+./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1
 
 set +x

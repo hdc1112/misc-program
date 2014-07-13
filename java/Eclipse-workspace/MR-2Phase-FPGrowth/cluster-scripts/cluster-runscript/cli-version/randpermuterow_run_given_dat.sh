@@ -11,11 +11,13 @@ permutefile=    #o
 worknode=ibmvm1
 user=dachuan
 skip= #skip permuting rows
-phase1minsup=
-phase1minsupbeta=
+phase1minsup= #x
+phase1minsupbeta= #y
+solution1=  #j
+solution1param1=  #k
 
 # definition, parsing, interrogation stages
-while getopts ":d:t:m:o:w:u:x:y:snpq" o; do
+while getopts ":d:t:m:o:w:u:x:y:k:snpqj" o; do
   case $o in
     d)
       datname=$OPTARG
@@ -53,6 +55,12 @@ while getopts ":d:t:m:o:w:u:x:y:snpq" o; do
     q)
       enableopt2="-q"
       ;;
+    j)
+      solution1="-j"
+      ;;
+    k)
+      solution1param1="-k $OPTARG"
+      ;;
     *)
       echo invalid argument >&2
       exit 1
@@ -74,6 +82,8 @@ echo user=$user
 echo skip=$skip
 echo phase1minsup=$phase1minsup
 echo phase1minsupbeta=$phase1minsupbeta
+echo solution1=$solution1
+echo solution1param1=$solution1param1
 
 # verify arguments stage (skip)
 
@@ -158,7 +168,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 diff -q $datapath/1.txt $datapath/2.txt
 
 #./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
-./run.sh -d $datapath -m $minsupport $enableopt1 $enableopt2 $noreupload -w $worknode -u $user $phase1minsup $phase1minsupbeta
+./run.sh -d $datapath -m $minsupport $enableopt1 $enableopt2 $noreupload -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1
 date
 
 set +x

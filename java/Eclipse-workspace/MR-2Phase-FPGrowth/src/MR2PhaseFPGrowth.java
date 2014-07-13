@@ -140,7 +140,7 @@ public class MR2PhaseFPGrowth {
 
 				// use cache version algorithm
 				// this includes the vanilla version as a special case
-				localalgm.runAlgorithm3(dataset, minsup / 100.0,
+				localalgm.runAlgorithm_solution0(dataset, minsup / 100.0,
 						phase1minsup / 100.0);
 
 				// get two range itemsets
@@ -279,9 +279,58 @@ public class MR2PhaseFPGrowth {
 			} else {
 				// start of solution1
 
+				AlgoFPGrowth2 localalg = new AlgoFPGrowth2();
+
+				localalg.runAlgorithm_solution1(dataset, minsup / 100.0,
+						solution1, solution1param1);
+
+				int[] items = null;
+				StringBuilder sb = new StringBuilder();
+
+				// write things into global candidate
+				Itemsets retItemsets = localalg.getRetItemsets();
+				for (List<Itemset> itemsetlist : retItemsets.getLevels()) {
+					for (Itemset itemset : itemsetlist) {
+						items = itemset.getItems();
+						sb.setLength(0);
+						for (int i = 0; i < items.length; i++) {
+							if (i == 0) {
+								sb.append(items[i]);
+							} else {
+								sb.append(Commons.SEPARATOR);
+								sb.append(items[i]);
+							}
+						}
+						context.write(new Text(sb.toString()), new IntWritable(
+								itemset.getAbsoluteSupport()));
+					}
+				}
+
+				// write things into cache file
+				ArrayList<Itemsets> cacheItemsets = localalg.getCacheItemsets();
+				for (Itemsets itemsets : cacheItemsets) {
+					for (List<Itemset> itemsetlist : itemsets.getLevels()) {
+						for (Itemset itemset : itemsetlist) {
+							items = itemset.getItems();
+							sb.setLength(0);
+							for (int i = 0; i < items.length; i++) {
+								if (i == 0) {
+									sb.append(items[i]);
+								} else {
+									sb.append(Commons.SEPARATOR);
+									sb.append(items[i]);
+								}
+							}
+							bw.write(sb.toString() + " "
+									+ itemset.getAbsoluteSupport() + "\n");
+						}
+					}
+				}
+
 				// end of solution1
 			}
 
+			// for any solution, we have to calculate the #rows
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(numrows));
 		} // end of map function
 
@@ -685,11 +734,13 @@ public class MR2PhaseFPGrowth {
 	}
 
 	// this function is called in map/reduce task
+	// this function has a shadow in AlgoFPGrowth2.java
 	public static boolean solution0Enabled(double phase1minsup) {
 		return phase1minsup <= 100;
 	}
 
 	// this function is called in map/reduce task
+	// this function has a shadow in AlgoFPGrowth2.java
 	public static boolean solution1Enabled(boolean solution1) {
 		return solution1;
 	}
@@ -766,16 +817,14 @@ public class MR2PhaseFPGrowth {
 		// solution0
 		if (phase1minsup > 100) {
 			phase1minsup = DISABLECACHE;
-			System.err.println(Commons.PREFIX
-					+ "Cache optimization is disalbed");
+			System.err.println(Commons.PREFIX + "solution0 is disabled");
 		} else if (phase1minsup < 0) {
 			System.err.println(Commons.PREFIX + "phase1minsup is less than 0");
 			System.err.println(Commons.PREFIX + "phase1minsup set to 0");
 			phase1minsup = 0;
 		}
 		if (phase1minsup <= 100 && phase1minsup >= 0) {
-			System.err
-					.println(Commons.PREFIX + "Cache optimization is enabled");
+			System.err.println(Commons.PREFIX + "solution0 is enabled");
 		}
 		// solution1
 		if (solution1) {
@@ -788,6 +837,9 @@ public class MR2PhaseFPGrowth {
 						+ "solution1param1 set to default");
 				solution1param1 = solution1param1default;
 			}
+			System.err.println(Commons.PREFIX + "solution1 is enabled");
+		} else {
+			System.err.println(Commons.PREFIX + "solution1 is disabled");
 		}
 
 		// show stage
