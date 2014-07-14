@@ -67,6 +67,10 @@ public class MR2PhaseFPGrowth {
 			+ ".solution1";
 	private static final String SOLUTION1PARAM1_CONFIG = Commons.PROGNAME
 			+ ".solution1param1";
+	private static final String SOLUTION1PARAM2_CONFIG = Commons.PROGNAME
+			+ ".solution1param2";
+	private static final String SOLUTION1PARAM3_CONFIG = Commons.PROGNAME
+			+ ".solution1param3";
 
 	// solution0, solution1
 	private static String cachefilesuffix = "-cachecount.file";
@@ -81,6 +85,8 @@ public class MR2PhaseFPGrowth {
 		// solution1
 		conf.set(SOLUTION1_CONFIG, Boolean.toString(solution1));
 		conf.set(SOLUTION1PARAM1_CONFIG, Double.toString(solution1param1));
+		conf.set(SOLUTION1PARAM2_CONFIG, Integer.toString(solution1param2));
+		conf.set(SOLUTION1PARAM3_CONFIG, Double.toString(solution1param3));
 
 		String jobname = Commons.PROGNAME + " Phase 1";
 		Job job = new Job(conf, jobname);
@@ -282,7 +288,8 @@ public class MR2PhaseFPGrowth {
 				AlgoFPGrowth2 localalg = new AlgoFPGrowth2();
 
 				localalg.runAlgorithm_solution1(dataset, minsup / 100.0,
-						solution1, solution1param1);
+						solution1, solution1param1, solution1param2,
+						solution1param3);
 
 				int[] items = null;
 				StringBuilder sb = new StringBuilder();
@@ -342,6 +349,8 @@ public class MR2PhaseFPGrowth {
 		// solution1
 		private boolean solution1;
 		private double solution1param1;
+		private int solution1param2;
+		private double solution1param3;
 
 		// bookkeeping
 		private long starttime, endtime;
@@ -367,6 +376,10 @@ public class MR2PhaseFPGrowth {
 					false);
 			solution1param1 = context.getConfiguration().getDouble(
 					SOLUTION1PARAM1_CONFIG, solution1param1default);
+			solution1param2 = context.getConfiguration().getInt(
+					SOLUTION1PARAM2_CONFIG, solution1param2default);
+			solution1param3 = context.getConfiguration().getDouble(
+					SOLUTION1PARAM3_CONFIG, solution1param3default);
 
 			// show params
 			System.err.println(Commons.PREFIX + "minsup: " + minsup);
@@ -379,6 +392,10 @@ public class MR2PhaseFPGrowth {
 			System.err.println(Commons.PREFIX + "solution1: " + solution1);
 			System.err.println(Commons.PREFIX + "solution1param1: "
 					+ solution1param1);
+			System.err.println(Commons.PREFIX + "solution1param2: "
+					+ solution1param2);
+			System.err.println(Commons.PREFIX + "solution1param3: "
+					+ solution1param3);
 			System.err.println(Commons.PREFIX + "solution1Enabled: "
 					+ solution1Enabled(solution1));
 
@@ -757,8 +774,10 @@ public class MR2PhaseFPGrowth {
 	private static boolean solution1;
 	private static double solution1param1;
 	private static final double solution1param1default = 0.5;
-
-	// solution1
+	private static int solution1param2;
+	private static final int solution1param2default = 21;
+	private static double solution1param3;
+	private static final double solution1param3default = 0.8;
 
 	public static void main(String[] args) throws IOException, ParseException,
 			ClassNotFoundException, InterruptedException, URISyntaxException {
@@ -806,10 +825,20 @@ public class MR2PhaseFPGrowth {
 		if (cmd.hasOption("solution1")) {
 			solution1 = true;
 			solution1param1 = solution1param1default;
+			solution1param2 = solution1param2default;
+			solution1param3 = solution1param3default;
 		}
 		if (cmd.hasOption("solution1param1")) {
 			solution1param1 = Double.parseDouble(cmd
 					.getOptionValue("solution1param1"));
+		}
+		if (cmd.hasOption("solution1param2")) {
+			solution1param2 = Integer.parseInt(cmd
+					.getOptionValue("solution1param2"));
+		}
+		if (cmd.hasOption("solution1param3")) {
+			solution1param3 = Double.parseDouble(cmd
+					.getOptionValue("solution1param3"));
 		}
 
 		// verify stage, semantic check
@@ -837,6 +866,20 @@ public class MR2PhaseFPGrowth {
 						+ "solution1param1 set to default");
 				solution1param1 = solution1param1default;
 			}
+			if (solution1param2 < 2) {
+				System.err.println(Commons.PREFIX + "solution1param2 is < 2");
+				System.err.println(Commons.PREFIX
+						+ "solution1param2 set to default");
+				solution1param2 = solution1param2default;
+			}
+			if (solution1param3 < 0 || solution1param3 > 1) {
+				System.err.println(Commons.PREFIX
+						+ "solution1param3 is < 0 or > 1");
+				System.err.println(Commons.PREFIX
+						+ "solution1param3 set to default");
+				solution1param3 = solution1param3default;
+			}
+
 			System.err.println(Commons.PREFIX + "solution1 is enabled");
 		} else {
 			System.err.println(Commons.PREFIX + "solution1 is disabled");
@@ -852,6 +895,10 @@ public class MR2PhaseFPGrowth {
 		System.err.println(Commons.PREFIX + "solution1: " + solution1);
 		System.err.println(Commons.PREFIX + "solution1param1: "
 				+ solution1param1);
+		System.err.println(Commons.PREFIX + "solution1param2: "
+				+ solution1param2);
+		System.err.println(Commons.PREFIX + "solution1param3: "
+				+ solution1param3);
 
 		// main logic
 		outputpath1stphase = outputpath + "-1stphase";
@@ -933,6 +980,18 @@ public class MR2PhaseFPGrowth {
 		// solution1param1 is only useful in solution1 mode
 		options.addOption(OptionBuilder.withArgName("solution1param1").hasArg()
 				.withDescription("solution1param1").create("solution1param1"));
+
+		// this param is optional (solution1)
+		// number of buckets (remember the 0th bucket is for global candidate)
+		// solution1param2
+		options.addOption(OptionBuilder.withArgName("solution1param2").hasArg()
+				.withDescription("solution1param2").create("solution1param2"));
+
+		// this param is optional (solution1)
+		// r-square threshold
+		// solution1param3
+		options.addOption(OptionBuilder.withArgName("solution1param3").hasArg()
+				.withDescription("solution1param3").create("solution1param3"));
 
 		return options;
 	}

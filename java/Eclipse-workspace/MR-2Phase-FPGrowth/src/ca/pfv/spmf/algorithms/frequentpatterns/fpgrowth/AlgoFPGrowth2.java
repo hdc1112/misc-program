@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math.stat.regression.SimpleRegression;
+
 import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
 import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 import ca.pfv.spmf.tools.MemoryLogger;
@@ -237,10 +239,11 @@ public class AlgoFPGrowth2 {
 	// solution1 assumes it's always good to go beyond minsup
 	// that is to say, it's always good to put at least minsup
 	// itemsets into cache
-	private boolean solution1;
-	private double solution1param1;
+	private boolean solution1; // the switch
+	private double solution1param1; // lower limit, in percentage
+	private int solution1param2; // buckets number, in integer
+	private double solution1param3; // rsquare threshold, in percentage
 	// remember the 0th bucket is for global candidate
-	private int buckets = 31;
 	private ArrayList<Itemsets> bucketItemsets = new ArrayList<Itemsets>();
 	private ArrayList<Itemsets> cacheItemsets = new ArrayList<Itemsets>();
 
@@ -255,20 +258,28 @@ public class AlgoFPGrowth2 {
 	}
 
 	public void runAlgorithm_solution1(ArrayList<String> dataset,
-			double minsup, boolean solution1, double solution1param1)
+			double minsup, boolean solution1, double solution1param1,
+			int solution1param2, double solution1param3)
 			throws FileNotFoundException, IOException {
 		this.minsup = minsup;
 		this.solution1 = solution1;
 		this.solution1param1 = solution1param1;
 
-		for (int i = 0; i < buckets; i++) {
+		for (int i = 0; i < solution1param2; i++) {
 			bucketItemsets.add(new Itemsets("bucket-" + Integer.toString(i)));
 		}
 
 		// let this algorithm run, and put the itemsets into buckets
 		runAlgorithm2(dataset, null, minsup * solution1param1);
 
-		int retBuckets = 0;
+		// debug print out all bucket size
+		System.err.println("All buckets size: ");
+		for (int i = 1; i < solution1param2; i++) {
+			System.err.println(bucketItemsets.get(i).getItemsetsCount());
+		}
+
+		int retBuckets = -1;
+		boolean fixed = false;
 		// use the buckets' length as input to r-square to get the real
 		// threshold
 		// be careful about whether using length directly or using
@@ -276,16 +287,40 @@ public class AlgoFPGrowth2 {
 		// r-square alg
 		// print out the real threshold
 		// put those data >= threshold into return ds
-
-		// debug print out all bucket size
-		// for (int i = 0; i < buckets; i++) {
-		// System.err.println("bucket " + i + " size: " +
-		// bucketItemsets.get(i).getItemsetsCount());
-		// }
-
 		// debug, suppose the real threshold is 10
 		// [0, retBuckets] will be put into cache
-		retBuckets = 10;
+
+		int[] cdf = new int[solution1param2];
+		for (int i = 1; i < solution1param2; i++) {
+			if (i == 1) {
+				cdf[i] = bucketItemsets.get(i + 1).getItemsetsCount();
+			} else {
+				cdf[i] = cdf[i - 1]
+						+ bucketItemsets.get(i + 1).getItemsetsCount();
+			}
+		}
+
+		SimpleRegression sr = new SimpleRegression();
+		System.err.println("RSquare test: ");
+		for (int i = 1; i < solution1param2; i++) {
+			sr.addData(i, cdf[i]);
+			if (i > 0) {
+				System.err.println(sr.getRSquare());
+			} else {
+				System.err.println("1.0");
+			}
+
+			if (fixed == false) {
+				if (sr.getRSquare() <= solution1param3) {
+					fixed = true;
+				} else {
+					retBuckets = i;
+				}
+			}
+		}
+
+		System.err.println("retBuckets: " + retBuckets);
+		// retBuckets = 10;
 		for (int i = 0; i <= retBuckets; i++) {
 			cacheItemsets.add(bucketItemsets.get(i));
 		}
@@ -735,7 +770,7 @@ public class AlgoFPGrowth2 {
 									.getAbsoluteSupport())
 									/ ((minsup * transactionCount - minsup
 											* transactionCount
-											* solution1param1) / (buckets - 1))) - 1;
+											* solution1param1) / (solution1param2 - 1))) - 1;
 					bucketItemsets.get(index + 1).addItemset(itemsetObj,
 							itemsetObj.size());
 				}
