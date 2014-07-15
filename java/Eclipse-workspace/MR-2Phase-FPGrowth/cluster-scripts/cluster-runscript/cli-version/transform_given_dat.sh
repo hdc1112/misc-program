@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # default value stage
-datname=
-transform=no
+datname=  #d
+transform=no  #t
 
 # definition, parsing, interrogation stages
 while getopts ":d:t" o; do

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # default value stage
-worknode=ibmvm1
-user=dachuan
+worknode=ibmvm1 #w
+user=dachuan  #u
 
 # definition, parsing, interrogation stages
 while getopts ":w:u:" o; do
@@ -42,6 +42,7 @@ javac -classpath $classes *.java
 jar cvfe ./mr-2phase-fpgrowth.jar MR2PhaseFPGrowth -C . .
 jar -tf ./mr-2phase-fpgrowth.jar
 scp ./mr-2phase-fpgrowth.jar $user@$worknode:/tmp/
-rm -f *.class
+#rm -f *.class
+find -type f -name "*.class" | xargs rm -f
 
 set +x

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # default value stage
-folder=
-noreupload=
-worknode=ibmvm1
-user=dachuan
+folder= #f
+noreupload= #n
+worknode=ibmvm1 #w
+user=dachuan  #u
 
 # definition, parsing, interrogation stages
 while getopts ":f:w:u:n" o; do

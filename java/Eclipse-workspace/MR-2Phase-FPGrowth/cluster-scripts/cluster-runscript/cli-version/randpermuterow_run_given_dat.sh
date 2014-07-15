@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # default value stage
-tolerate=
-noreupload=
-minsupport=
-enableopt1=
-enableopt2=
-datname=
+tolerate= #t
+noreupload= #n
+minsupport= #m
+enableopt1= #p
+enableopt2= #q
+datname=  #d
 permutefile=    #o
-worknode=ibmvm1
-user=dachuan
-skip= #skip permuting rows
-phase1minsup= #x
+worknode=ibmvm1 #w
+user=dachuan  #u
+skip= #s, skip permuting rows
+phase1minsup= #x 
 phase1minsupbeta= #y
 solution1=  #j
 solution1param1=  #k

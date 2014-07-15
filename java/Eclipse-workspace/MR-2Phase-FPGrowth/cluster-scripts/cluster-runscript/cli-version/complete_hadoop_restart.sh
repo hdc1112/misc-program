@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # default value stage
-deletelogs=no
-deletedata=no
+deletelogs=no #l
+deletedata=no #d
 # the following makes lots of assumptions
 # to the cluster arch, but it works
 # for me so far
-masternode=ibmvm1
-slavenodes=ibmvm1,ibmvm2,ibmvm3
-user=dachuan
-bruteforce=
+masternode=ibmvm1 #m
+slavenodes=ibmvm1,ibmvm2,ibmvm3 #s
+user=dachuan  #u
+bruteforce= #b
 
 # definition, parsing, interrogation stages
 while getopts ":m:s:u:ldb" o; do

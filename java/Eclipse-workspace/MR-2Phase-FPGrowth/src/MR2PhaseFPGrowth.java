@@ -46,7 +46,7 @@ import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 
 public class MR2PhaseFPGrowth {
 
-	// hadoop params
+	// hadoop params, for uploading params
 	private static final String MINSUP_CONFIG = Commons.PROGNAME + ".minsup";
 	private static final String TOTALROW_CONFIG = Commons.PROGNAME
 			+ ".totalrow";
@@ -77,6 +77,7 @@ public class MR2PhaseFPGrowth {
 
 	public static void run_on_hadoop_phase1() throws IOException,
 			ClassNotFoundException, InterruptedException {
+		// upload the params, because this is distributed program
 		Configuration conf = new Configuration();
 		conf.set(MINSUP_CONFIG, Double.toString(minsup));
 		conf.set(PHASE1OUTDIR_CONFIG, outputpath1stphase);
@@ -106,6 +107,8 @@ public class MR2PhaseFPGrowth {
 			System.exit(retval);
 		}
 
+		// phase1 mr job is piggybacked with another task:
+		// count the total rows. here we get the result
 		Counters counters = job.getCounters();
 		Counter counter = counters.findCounter(RowCounter.TOTALROW);
 		totalrows = counter.getValue();
@@ -113,6 +116,7 @@ public class MR2PhaseFPGrowth {
 		System.err.println(Commons.PREFIX + "Total rows: " + totalrows);
 	}
 
+	// this is a fake key, only for counting rows purpose
 	private static final String SPLIT_NUM_ROWS = "split_num_rows.key";
 
 	public static class Phase1Mapper extends

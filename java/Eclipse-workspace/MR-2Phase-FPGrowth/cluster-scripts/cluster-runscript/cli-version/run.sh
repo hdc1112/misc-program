@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # default value stage
-dataabspath=
-columns=
-minsupport=
-tolerate=
-enableopt1=
-enableopt2=
-noreupload=
-worknode=ibmvm1
-user=dachuan
-phase1minsup=
-phase1minsupbeta=
+dataabspath=  #d
+columns=  #c
+minsupport= #m
+tolerate= #t
+enableopt1= #p
+enableopt2= #q
+noreupload= #n
+worknode=ibmvm1 #w
+user=dachuan  #u
+phase1minsup= #x
+phase1minsupbeta= #y
 solution1=  #j
 solution1param1=  #k
 solution1param2=  #r

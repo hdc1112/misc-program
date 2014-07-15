@@ -13,6 +13,9 @@ public class WholeFileInputFormat extends
 		FileInputFormat<NullWritable, BytesWritable> {
 	@Override
 	protected boolean isSplitable(JobContext context, Path filename) {
+		// this function means whenever there is a file,
+		// no matter how large it is, it will be treated
+		// as one split, instead of two or more.
 		return false;
 	}
 

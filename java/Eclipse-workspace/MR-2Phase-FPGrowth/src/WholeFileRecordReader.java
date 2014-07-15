@@ -35,6 +35,7 @@ public class WholeFileRecordReader extends
 			FSDataInputStream in = null;
 			try {
 				in = fs.open(file);
+				// the key logic in this java file
 				IOUtils.readFully(in, contents, 0, contents.length);
 				value.set(contents, 0, contents.length);
 			} finally {

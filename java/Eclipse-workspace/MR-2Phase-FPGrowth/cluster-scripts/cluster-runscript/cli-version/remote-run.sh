@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # default value stage
-columns=
-minsupport=
-tolerate=
-enableopt1=
-enableopt2=
-worknode=ibmvm1
-user=dachuan
-inpath=hdfs://$worknode:9000/input-test 
-outpath=hdfs://$worknode:9000/output-test 
+columns=  #c
+minsupport= #m
+tolerate= #t
+enableopt1= #p
+enableopt2= #q
+worknode=ibmvm1 #w
+user=dachuan  #u
+inpath=hdfs://$worknode:9000/input-test  #i
+outpath=hdfs://$worknode:9000/output-test   #o
 phase1minsup= #x
 phase1minsupbeta= #y
 solution1=  #j
