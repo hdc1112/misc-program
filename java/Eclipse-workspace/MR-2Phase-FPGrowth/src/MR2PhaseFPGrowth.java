@@ -133,6 +133,9 @@ public class MR2PhaseFPGrowth {
 			}
 			int numrows = dataset.size();
 
+			// for local alg time
+			long t2, t1;
+
 			if (!solution1Enabled(solution1)) {
 				// this is a big "if"
 				// when solution1 is not enabled, we use solution0
@@ -146,8 +149,11 @@ public class MR2PhaseFPGrowth {
 
 				// use cache version algorithm
 				// this includes the vanilla version as a special case
+
+				t1 = System.currentTimeMillis();
 				localalgm.runAlgorithm_solution0(dataset, minsup / 100.0,
 						phase1minsup / 100.0);
+				t2 = System.currentTimeMillis();
 
 				// get two range itemsets
 				Itemsets higher = localalgm.getHigher();
@@ -287,9 +293,11 @@ public class MR2PhaseFPGrowth {
 
 				AlgoFPGrowth2 localalg = new AlgoFPGrowth2();
 
+				t1 = System.currentTimeMillis();
 				localalg.runAlgorithm_solution1(dataset, minsup / 100.0,
 						solution1, solution1param1, solution1param2,
 						solution1param3);
+				t2 = System.currentTimeMillis();
 
 				int[] items = null;
 				StringBuilder sb = new StringBuilder();
@@ -334,8 +342,15 @@ public class MR2PhaseFPGrowth {
 					}
 				}
 
+				System.err.println(Commons.PREFIX + "(1/2) " + taskid
+						+ " Map Task solution1 phase1minsup: "
+						+ localalg.getSolution1phase1minsup());
+
 				// end of solution1
 			}
+
+			System.err.println(Commons.PREFIX + "(1/2) " + taskid
+					+ " Local algorithm run time: " + (t2 - t1));
 
 			// for any solution, we have to calculate the #rows
 			context.write(new Text(SPLIT_NUM_ROWS), new IntWritable(numrows));
@@ -491,6 +506,8 @@ public class MR2PhaseFPGrowth {
 		// solution1
 		conf.set(SOLUTION1_CONFIG, Boolean.toString(solution1));
 		conf.set(SOLUTION1PARAM1_CONFIG, Double.toString(solution1param1));
+		// since phase2 only needs to know whether solution1 is enabled or not
+		// I don't need to upload solution1param2, solution1param3 for now
 
 		String jobname = Commons.PROGNAME + " Phase 2";
 		Job job = new Job(conf, jobname);
@@ -769,7 +786,7 @@ public class MR2PhaseFPGrowth {
 	// param induced by cmd line params
 	private static String outputpath1stphase;
 	// solution0
-	private static double phase1minsup;
+	private static double phase1minsup; // for example, 63
 	// solution1
 	private static boolean solution1;
 	private static double solution1param1;

@@ -246,6 +246,8 @@ public class AlgoFPGrowth2 {
 	// remember the 0th bucket is for global candidate
 	private ArrayList<Itemsets> bucketItemsets = new ArrayList<Itemsets>();
 	private ArrayList<Itemsets> cacheItemsets = new ArrayList<Itemsets>();
+	// for return value, bookkeeping purpose
+	private double solution1phase1minsup;
 
 	// cacheItemsets is from index 1 ~ threshold
 	// inside bucketItemsets
@@ -257,6 +259,10 @@ public class AlgoFPGrowth2 {
 		return bucketItemsets.get(0);
 	}
 
+	public double getSolution1phase1minsup() {
+		return solution1phase1minsup;
+	}
+
 	public void runAlgorithm_solution1(ArrayList<String> dataset,
 			double minsup, boolean solution1, double solution1param1,
 			int solution1param2, double solution1param3)
@@ -264,6 +270,8 @@ public class AlgoFPGrowth2 {
 		this.minsup = minsup;
 		this.solution1 = solution1;
 		this.solution1param1 = solution1param1;
+		this.solution1param2 = solution1param2;
+		this.solution1param3 = solution1param3;
 
 		for (int i = 0; i < solution1param2; i++) {
 			bucketItemsets.add(new Itemsets("bucket-" + Integer.toString(i)));
@@ -275,8 +283,11 @@ public class AlgoFPGrowth2 {
 		// debug print out all bucket size
 		System.err.println("All buckets size: ");
 		for (int i = 1; i < solution1param2; i++) {
-			System.err.println(bucketItemsets.get(i).getItemsetsCount());
+			// System.err.println(bucketItemsets.get(i).getItemsetsCount());
+			System.err.println(i + ": "
+					+ bucketItemsets.get(i).getItemsetsCount());
 		}
+		System.err.println();
 
 		int retBuckets = -1;
 		boolean fixed = false;
@@ -293,33 +304,45 @@ public class AlgoFPGrowth2 {
 		int[] cdf = new int[solution1param2];
 		for (int i = 1; i < solution1param2; i++) {
 			if (i == 1) {
-				cdf[i] = bucketItemsets.get(i + 1).getItemsetsCount();
+				cdf[i] = bucketItemsets.get(i).getItemsetsCount();
 			} else {
-				cdf[i] = cdf[i - 1]
-						+ bucketItemsets.get(i + 1).getItemsetsCount();
+				cdf[i] = cdf[i - 1] + bucketItemsets.get(i).getItemsetsCount();
 			}
 		}
+
+		// debug print out all cdf size
+		System.err.println("Cdf size: ");
+		for (int i = 1; i < solution1param2; i++) {
+			// System.err.println(cdf[i]);
+			System.err.println(i + ": " + cdf[i]);
+		}
+		System.err.println();
 
 		SimpleRegression sr = new SimpleRegression();
 		System.err.println("RSquare test: ");
 		for (int i = 1; i < solution1param2; i++) {
 			sr.addData(i, cdf[i]);
-			if (i > 0) {
-				System.err.println(sr.getRSquare());
+			if (i > 1) {
+				// System.err.println(sr.getRSquare());
+				System.err.println(i + ": " + sr.getRSquare());
 			} else {
-				System.err.println("1.0");
+				// System.err.println("1.0");
+				System.err.println(i + ": " + "1.0");
 			}
 
 			if (fixed == false) {
-				if (sr.getRSquare() <= solution1param3) {
+				if (sr.getRSquare() < solution1param3) {
 					fixed = true;
 				} else {
 					retBuckets = i;
 				}
 			}
 		}
+		System.err.println();
 
 		System.err.println("retBuckets: " + retBuckets);
+		solution1phase1minsup = minsup - retBuckets
+				* (minsup - minsup * solution1param1) / (solution1param2 - 1);
 		// retBuckets = 10;
 		for (int i = 0; i <= retBuckets; i++) {
 			cacheItemsets.add(bucketItemsets.get(i));
@@ -758,7 +781,6 @@ public class AlgoFPGrowth2 {
 				// end of solution0
 			} else {
 				// start of solution1
-
 				if (itemsetObj.getAbsoluteSupport() >= minsup
 						* transactionCount) {
 					bucketItemsets.get(0).addItemset(itemsetObj,

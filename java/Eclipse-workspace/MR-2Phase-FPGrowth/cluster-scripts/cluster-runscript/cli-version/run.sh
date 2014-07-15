@@ -14,9 +14,11 @@ phase1minsup=
 phase1minsupbeta=
 solution1=  #j
 solution1param1=  #k
+solution1param2=  #r
+solution1param3=  #s
 
 # definition, parsing, interrogation stages
-while getopts ":d:c:m:t:w:u:x:y:k:pqnj" o; do
+while getopts ":d:c:m:t:w:u:x:y:k:r:s:pqnj" o; do
   case $o in
     d)
       dataabspath=$OPTARG
@@ -44,6 +46,12 @@ while getopts ":d:c:m:t:w:u:x:y:k:pqnj" o; do
       ;;
     k)
       solution1param1="-k $OPTARG"
+      ;;
+    r)
+      solution1param2="-r $OPTARG"
+      ;;
+    s)
+      solution1param3="-s $OPTARG"
       ;;
     p)
       enableopt1="-p"
@@ -79,6 +87,8 @@ echo phase1minsup=$phase1minsup
 echo phase1minsupbeta=$phase1minsupbeta
 echo solution1=$solution1
 echo solution1param1=$solution1param1
+echo solution1param2=$solution1param2
+echo solution1param3=$solution1param3
 
 # verify arguments stage (skip)
 
@@ -98,6 +108,6 @@ set -x
 ./jar.sh -w $worknode -u $user
 ./data.sh -f $dataabspath $noreupload -w $worknode -u $user
 #./remote-run.sh -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 -w $worknode -u $user
-./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1
+./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3
 
 set +x

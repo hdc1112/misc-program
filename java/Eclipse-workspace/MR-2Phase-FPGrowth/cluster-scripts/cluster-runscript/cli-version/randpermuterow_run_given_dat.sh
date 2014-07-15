@@ -15,9 +15,11 @@ phase1minsup= #x
 phase1minsupbeta= #y
 solution1=  #j
 solution1param1=  #k
+solution1param2=  #v
+solution1param3=  #z
 
 # definition, parsing, interrogation stages
-while getopts ":d:t:m:o:w:u:x:y:k:snpqj" o; do
+while getopts ":d:t:m:o:w:u:x:y:k:v:z:snpqj" o; do
   case $o in
     d)
       datname=$OPTARG
@@ -61,6 +63,12 @@ while getopts ":d:t:m:o:w:u:x:y:k:snpqj" o; do
     k)
       solution1param1="-k $OPTARG"
       ;;
+    v)
+      solution1param2="-r $OPTARG"
+      ;;
+    z)
+      solution1param3="-s $OPTARG"
+      ;;
     *)
       echo invalid argument >&2
       exit 1
@@ -84,6 +92,8 @@ echo phase1minsup=$phase1minsup
 echo phase1minsupbeta=$phase1minsupbeta
 echo solution1=$solution1
 echo solution1param1=$solution1param1
+echo solution1param2=$solution1param2
+echo solution1param3=$solution1param3
 
 # verify arguments stage (skip)
 
@@ -168,7 +178,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 diff -q $datapath/1.txt $datapath/2.txt
 
 #./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
-./run.sh -d $datapath -m $minsupport $enableopt1 $enableopt2 $noreupload -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1
+./run.sh -d $datapath -m $minsupport $enableopt1 $enableopt2 $noreupload -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3
 date
 
 set +x
