@@ -250,6 +250,25 @@ done
 echo $m1_1_sol1_ph1mins
 }
 
+function get_m1_1_tt {
+l_totalcont=$1 && shift
+l_interestfiles=($@)
+m1_1_tt=""
+for i in `seq 0 $((l_totalcont-1))`; do
+  #echo ${l_interestfiles[$i]}
+  set +x
+  while read line; do
+    [[ $line =~ $prefix\(1/2\)\ 0\ Map\ [tT]ask\ (.*) ]]\
+      && m1_1_tt=${BASH_REMATCH[1]} && break
+  done < <(cat ${l_interestfiles[$i]}/stderr)
+  set -x
+  if [ ! -z $m1_1_tt ]; then
+    break
+  fi
+done
+echo $m1_1_tt
+}
+
 function get_m1_1_tolerate {
 l_totalcont=$1 && shift
 l_interestfiles=($@)
@@ -787,7 +806,7 @@ for run in `seq 1 $mid_totalrun`; do
   m1_1=$(get_m1_1 $totalcont "${interestfiles[@]}")
   echo -n ${m1_1:-NULL}" " >> $user_statpath
 
-  m1_1_sol1_ph1mins=$(get_m1_1_sol1_ph1mins "${interestfiles[@]}")
+  m1_1_sol1_ph1mins=$(get_m1_1_sol1_ph1mins $totalcont "${interestfiles[@]}")
   echo -n ${m1_1_sol1_ph1mins:-NULL}" " >> $user_statpath
 
   #m1_1_tolerate=$(get_m1_1_tolerate $totalcont "${interestfiles[@]}")
@@ -805,7 +824,7 @@ for run in `seq 1 $mid_totalrun`; do
   m1_2=$(get_m1_2 $totalcont "${interestfiles[@]}")
   echo -n ${m1_2:-NULL}" " >> $user_statpath
 
-  m1_2_sol1_ph1mins=$(get_m1_2_sol1_ph1mins "${interestfiles[@]}")
+  m1_2_sol1_ph1mins=$(get_m1_2_sol1_ph1mins $totalcont "${interestfiles[@]}")
   echo -n ${m1_2_sol1_ph1mins:-NULL}" " >> $user_statpath
 
   #m1_2_tolerate=$(get_m1_2_tolerate $totalcont "${interestfiles[@]}")
