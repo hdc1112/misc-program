@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Update this script by following rand...sh"
+echo "This script is out of date for a long time"
+echo "Update this script by following randpermuterow_run_given_dat.sh"
 exit
 
 # default value stage

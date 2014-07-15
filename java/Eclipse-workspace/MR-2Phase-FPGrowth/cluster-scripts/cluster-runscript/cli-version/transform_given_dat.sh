@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# this script accepts the dataset name,
+# and assume this dataset can be fetched
+# from http://fimi.ua.ac.be/data/
+
 # default value stage
 datname=  #d
 transform=no  #t

@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# this script is based on the relative path
+# to the src/ folder, so don't move this script
+# unless you know what you are doing
+
+# this script assumes the main java class
+# is in the src/ root folder, so don't move the
+# main java file to other folder
+
 # default value stage
 worknode=ibmvm1 #w
 user=dachuan  #u

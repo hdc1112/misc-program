@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# this script assumes the hadoop cluster
+# is installed in this way:
+# http://blog.csdn.net/licongcong_0224/article/details/12972889
+# hadoop folder is under home directory
+# hadoop version is 2.2.0
+
 # default value stage
 deletelogs=no #l
 deletedata=no #d

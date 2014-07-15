@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# script warning
 # make sure you clean all nodes' the logs/userlogs/ folder before
-# running another group of experiment
+# running another group of experiment, otherwise the previous
+# experiments' log analysis will be there to confuse you
 
 # default value stage
-running=no
-executions=
+running=no  #r
+executions= #e
 cli_slavenodes=ibmvm1,ibmvm2,ibmvm3 #s
 cli_user=dachuan  #u
 deb_clean=yes #k to keep log files locally
