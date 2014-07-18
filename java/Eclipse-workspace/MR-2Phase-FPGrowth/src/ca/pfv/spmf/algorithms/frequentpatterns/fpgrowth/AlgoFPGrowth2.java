@@ -793,6 +793,13 @@ public class AlgoFPGrowth2 {
 									/ ((minsup * transactionCount - minsup
 											* transactionCount
 											* solution1param1) / (solution1param2 - 1))) - 1;
+					if (index == solution1param2 - 1) {
+						System.err
+								.println("this should not happen ideally,"
+										+ "but possibly due to double type computation,"
+										+ " it will get here occasionally (rarely)");
+						index = solution1param2 - 2;
+					}
 					bucketItemsets.get(index + 1).addItemset(itemsetObj,
 							itemsetObj.size());
 				}
