@@ -1,0 +1,24 @@
+digraph G {
+  // spark-0.9.0-incubating
+  size = "8, 15";
+  ranksep=.75;
+  //StorageLevel -> Externalizable;
+  MRPrePost -> BigFIM;
+  MRPrePost -> PFP;
+  BigFIM -> BPFP;
+  BigFIM -> PFP;
+  Zahra2 -> BPFP;
+  Zahra2 -> PFP;
+  Zahra2 -> MRApriori;
+  Zahra2 -> Zahra1;
+  Zahra1 -> BPFP;
+  Zahra1 -> MRApriori;
+  MRApriori -> OnePhase;
+  MRApriori -> KPhase;
+  MRApriori -> PFP;
+  May2014 -> BPFP;
+  May2014 -> PFP;
+  // the following line is added by me, author omitted this
+  May2014 -> MRApriori;
+  BPFP -> PFP;
+}
