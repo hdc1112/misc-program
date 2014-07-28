@@ -27,12 +27,12 @@ digraph G {
   "Jinggui Liao et al. 2014" -> "Haoyuan Li et al. 2008";
   "Sandy Moens et al. 2013" -> "Le Zhou et al. 2010";
   "Sandy Moens et al. 2013" -> "Haoyuan Li et al. 2008";
-  "Zahra Farzanyar el al. 2013 2" -> "Le Zhou et al. 2010";
-  "Zahra Farzanyar el al. 2013 2" -> "Haoyuan Li et al. 2008";
-  "Zahra Farzanyar el al. 2013 2" -> "Othman Yahya et al. 2012";
-  "Zahra Farzanyar el al. 2013 2" -> "Zahra Farzanyar el al. 2013 1";
-  "Zahra Farzanyar el al. 2013 1" -> "Le Zhou et al. 2010";
-  "Zahra Farzanyar el al. 2013 1" -> "Othman Yahya et al. 2012";
+  "Zahra Farzanyar et al. 2013 2" -> "Le Zhou et al. 2010";
+  "Zahra Farzanyar et al. 2013 2" -> "Haoyuan Li et al. 2008";
+  "Zahra Farzanyar et al. 2013 2" -> "Othman Yahya et al. 2012";
+  "Zahra Farzanyar et al. 2013 2" -> "Zahra Farzanyar et al. 2013 1";
+  "Zahra Farzanyar et al. 2013 1" -> "Le Zhou et al. 2010";
+  "Zahra Farzanyar et al. 2013 1" -> "Othman Yahya et al. 2012";
   "Othman Yahya et al. 2012" -> "One Phase MR FIM";
   "Othman Yahya et al. 2012" -> "K Phases MR FIM";
   "Othman Yahya et al. 2012" -> "Haoyuan Li et al. 2008";
