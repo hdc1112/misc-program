@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
+# this script is only a wrapper for randpermuterow_run_given_dat.sh
+# you can use randpermuterow_run_given_dat.sh directly instead
+
 # this script takes a property file as input,
 # for example, configuration.txt.template,
 # and run the MR-2Phase-FPGrowth program on Hadoop cluster
 
-# this script has strict assumptions about
-# how you install the hadoop cluster.
 # this script assumes you are using hadoop-2.2.0
 # we divide the nodes into two groups:
 # 1) hadoop cluster node
@@ -26,6 +27,8 @@
 # that is to say, nodes that talk to each other
 # by hostname in its /etc/hosts, and mutually
 # trust each other so that SSH doesn't need password
+
+set -x
 
 absme=`readlink -f $0`
 abshere=`dirname $absme`
@@ -59,7 +62,7 @@ while read line; do
   value=$(echo $line | cut -f2 -d' ')
   
   case $key in
-    noreupload)
+    noupload)
       if [ $value = "yes" ]; then
         args=$args"-n "
       fi
@@ -101,6 +104,12 @@ while read line; do
     solution1param3)
       args=$args"-z $value "
       ;;
+    inpath)
+      args=$args"-a $value "
+      ;;
+    outpath)
+      args=$args"-b $value "
+      ;;
     *)
       echo haha
       ;;
@@ -109,3 +118,5 @@ done < <(cat $configfile)
 
 echo $args
 ./randpermuterow_run_given_dat.sh $args
+
+set +x

@@ -2,7 +2,7 @@
 
 # default value stage
 folder= #f
-noreupload= #n
+noupload= #n
 worknode=ibmvm1 #w
 user=dachuan  #u
 
@@ -19,7 +19,7 @@ while getopts ":f:w:u:n" o; do
       user=$OPTARG
       ;;
     n)
-      noreupload=noreupload
+      noupload=noupload
       ;;
     *)
       echo invalid argument >&2
@@ -31,7 +31,7 @@ done
 # arguments show stage
 echo `basename $0` arguments list
 echo folder=$folder
-echo noreupload=$noreupload
+echo noupload=$noupload
 echo worknode=$worknode
 echo user=$user
 
@@ -53,8 +53,8 @@ set -x
 
 ssh -n $user@$worknode /home/$user/hadoop-2.2.0/bin/hdfs dfs -rm -r -f /output-test-1stphase /output-test
 
-if [ "$noreupload" = "noreupload" ]; then
-  echo Skip data reupload, use previously uploaded input
+if [ "$noupload" = "noupload" ]; then
+  echo Data upload is skipped, user assumes the input is ready in HDFS
 else
   ssh -n $user@$worknode "rm -rf /tmp/${foldername}dif && mkdir /tmp/${foldername}dif"
   echo start uploading data to hdfs && date

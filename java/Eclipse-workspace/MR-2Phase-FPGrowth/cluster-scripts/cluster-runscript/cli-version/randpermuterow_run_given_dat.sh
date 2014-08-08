@@ -2,7 +2,7 @@
 
 # default value stage
 tolerate= #t
-noreupload= #n
+noupload= #n
 minsupport= #m
 enableopt1= #p
 enableopt2= #q
@@ -17,10 +17,18 @@ solution1=  #j
 solution1param1=  #k
 solution1param2=  #v
 solution1param3=  #z
+inpath= #a
+outpath=  #b
 
 # definition, parsing, interrogation stages
-while getopts ":d:t:m:o:w:u:x:y:k:v:z:snpqj" o; do
+while getopts ":d:t:m:o:w:u:x:y:k:v:z:a:b:snpqj" o; do
   case $o in
+    a)
+      inpath="-a $OPTARG"
+      ;;
+    b)
+      outpath="-b $OPTARG"
+      ;;
     d)
       datname=$OPTARG
       ;;
@@ -49,7 +57,7 @@ while getopts ":d:t:m:o:w:u:x:y:k:v:z:snpqj" o; do
       phase1minsupbeta="-y $OPTARG"
       ;;
     n)
-      noreupload="-n"
+      noupload="-n"
       ;;
     p)
       enableopt1="-p"
@@ -80,7 +88,7 @@ done
 echo `basename $0` arguments list
 echo datname=$datname
 echo tolerate=$tolerate
-echo noreupload=$noreupload
+echo noupload=$noupload
 echo minsupport=$minsupport
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
@@ -94,6 +102,8 @@ echo solution1=$solution1
 echo solution1param1=$solution1param1
 echo solution1param2=$solution1param2
 echo solution1param3=$solution1param3
+echo inpath=$inpath
+echo outpath=$outpath
 
 # verify arguments stage (skip)
 
@@ -111,74 +121,83 @@ set -x
 
 platform=`uname -o`
 
-storedir=/tmp
-filename=$datname.dat
-transf=$storedir/$filename.transf
+if [ -z $noupload ]; then
 
-if [ ! -f $transf ]; then
-  echo did not find $transf, transform now
-  ./transform_given_dat.sh -d $datname
-elif [ `cat $storedir/$filename | wc -l` != `cat $transf | wc -l` ]; then
-  echo found $transf, but it is corrupted
-  ./transform_given_dat.sh -d $datname
-else
-  echo found $transf, it looks good
-fi
+  storedir=/tmp
+  filename=$datname.dat
+  transf=$storedir/$filename.transf
 
-totallinenum=`cat $storedir/$filename | wc -l`
-echo totallinenum=$totallinenum
-linenum=$totallinenum
-#linenum=$((linenum/2))
-#linenum=$((linenum/2))
-#linenum=$((linenum/2))
-
-#realfile=$transf.realfile
-realfile=$storedir/$filename.realfile
-#cat $transf | head -n $linenum > $realfile
-cat $storedir/$filename | head -n $linenum > $realfile
-
-if [ -z $skip ]; then
-  cd $abshere/../../../src
-  if [ ! -f hadoopclasspath.txt ]; then
-    find $HOME/hadoop-2.2.0/share/hadoop -type f -name "*.jar" | $abshere/concatenate.sh > hadoopclasspath.txt
-  fi
-  classes=`cat hadoopclasspath.txt`
-  javac -classpath $classes PermuteRows.java
-  if [ -z $permutefile ]; then
-    if [ $platform = "Cygwin" ]; then
-      java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile`
-    else
-      java -classpath $classes PermuteRows --datafile $realfile
-    fi
+  if [ ! -f $transf ]; then
+    echo did not find $transf, transform now
+    ./transform_given_dat.sh -d $datname
+  elif [ `cat $storedir/$filename | wc -l` != `cat $transf | wc -l` ]; then
+    echo found $transf, but it is corrupted
+    ./transform_given_dat.sh -d $datname
   else
-    rm -f $permutefile
-    if [ $platform = "Cygwin" ]; then
-      java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile` --permutefile `cygpath -wp $permutefile`
-    else
-      java -classpath $classes PermuteRows --datafile $realfile --permutefile $permutefile
-    fi
+    echo found $transf, it looks good
   fi
-  cd $abshere
 
-  realfile=${realfile}-randpermute
+  totallinenum=`cat $storedir/$filename | wc -l`
+  echo totallinenum=$totallinenum
+  linenum=$totallinenum
+  #linenum=$((linenum/2))
+  #linenum=$((linenum/2))
+  #linenum=$((linenum/2))
+
+  #realfile=$transf.realfile
+  realfile=$storedir/$filename.realfile
+  #cat $transf | head -n $linenum > $realfile
+  cat $storedir/$filename | head -n $linenum > $realfile
+
+  if [ -z $skip ]; then
+    cd $abshere/../../../src
+    if [ ! -f hadoopclasspath.txt ]; then
+      find $HOME/hadoop-2.2.0/share/hadoop -type f -name "*.jar" | $abshere/concatenate.sh > hadoopclasspath.txt
+    fi
+    classes=`cat hadoopclasspath.txt`
+    javac -classpath $classes PermuteRows.java
+    if [ -z $permutefile ]; then
+      if [ $platform = "Cygwin" ]; then
+        java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile`
+      else
+        java -classpath $classes PermuteRows --datafile $realfile
+      fi
+    else
+      rm -f $permutefile
+      if [ $platform = "Cygwin" ]; then
+        java -classpath $classes PermuteRows --datafile `cygpath -wp $realfile` --permutefile `cygpath -wp $permutefile`
+      else
+        java -classpath $classes PermuteRows --datafile $realfile --permutefile $permutefile
+      fi
+    fi
+    cd $abshere
+
+    realfile=${realfile}-randpermute
+  fi
+
+  halflinenum=$((linenum/2))
+  #columns=`head -1 $transf | awk '{print NF}'`
+  #echo columns=$columns
+
+  datapath=/tmp/tempdatafolder/
+  rm -rf $datapath
+  if [ ! -d $datapath ]; then
+    mkdir $datapath
+  fi
+  cat $realfile | head -n $halflinenum > $datapath/1.txt
+  cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
+
+  diff -q $datapath/1.txt $datapath/2.txt
+
 fi
 
-halflinenum=$((linenum/2))
-#columns=`head -1 $transf | awk '{print NF}'`
-#echo columns=$columns
-
-datapath=/tmp/tempdatafolder/
-rm -rf $datapath
-if [ ! -d $datapath ]; then
-  mkdir $datapath
+datafolder=
+if [ ! -z $datapath ]; then
+  datafolder="-d $datapath"
 fi
-cat $realfile | head -n $halflinenum > $datapath/1.txt
-cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 
-diff -q $datapath/1.txt $datapath/2.txt
-
-#./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
-./run.sh -d $datapath -m $minsupport $enableopt1 $enableopt2 $noreupload -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3
+#./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noupload -w $worknode -u $user
+./run.sh $datafolder -m $minsupport $enableopt1 $enableopt2 $noupload -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3 $inpath $outpath
 date
 
 set +x

@@ -7,7 +7,7 @@ exit
 # default value stage
 permutefile=  #f
 tolerate=
-noreupload=
+noupload=
 minsupport=
 enableopt1=
 enableopt2=
@@ -43,7 +43,7 @@ while getopts ":d:f:t:m:w:u:pqn" o; do
       enableopt2="-q"
       ;;
     n)
-      noreupload="-n"
+      noupload="-n"
       ;;
     *)
       echo invalid argument >&2
@@ -57,7 +57,7 @@ echo `basename $0` arguments list
 echo datname=$datname
 echo permutefile=$permutefile
 echo tolerate=$tolerate
-echo noreupload=$noreupload
+echo noupload=$noupload
 echo minsupport=$minsupport
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
@@ -127,7 +127,7 @@ cat $realfile | head -n $linenum | tail -n $halflinenum > $datapath/2.txt
 
 diff -q $datapath/1.txt $datapath/2.txt
 
-./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noreupload -w $worknode -u $user
+./run.sh -d $datapath -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 $noupload -w $worknode -u $user
 date
 
 set +x

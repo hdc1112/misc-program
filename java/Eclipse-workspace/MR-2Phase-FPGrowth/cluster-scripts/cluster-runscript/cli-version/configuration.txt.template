@@ -4,11 +4,20 @@
 # Empty line will not be parsed
 # Effective line consists of key and value
 
-# noreupload [yes/no]
-# yes: data input is already in HDFS, you don't need to re-upload
+# inpath
+# currently we only support input folder instead of input file,
+# so make sure there is no other unnecessary file
+# in this folder
+inpath  hdfs://ibmvm1:9000/input-test
+
+# outpath
+outpath hdfs://ibmvm1:9000/output-test
+
+# noupload [yes/no]
+# yes: data input is already in HDFS, you don't need to upload
 # no: you want to over-write an old version or upload a new version
 # possible value: yes, no
-noreupload  no
+noupload  yes
 
 # minimum support
 # 90 means 90%

@@ -7,7 +7,7 @@ minsupport= #m
 tolerate= #t
 enableopt1= #p
 enableopt2= #q
-noreupload= #n
+noupload= #n
 worknode=ibmvm1 #w
 user=dachuan  #u
 phase1minsup= #x
@@ -16,12 +16,20 @@ solution1=  #j
 solution1param1=  #k
 solution1param2=  #r
 solution1param3=  #s
+inpath= #a
+outpath=  #b
 
 # definition, parsing, interrogation stages
-while getopts ":d:c:m:t:w:u:x:y:k:r:s:pqnj" o; do
+while getopts ":a:b:d:c:m:t:w:u:x:y:k:r:s:pqnj" o; do
   case $o in
+    a)
+      inpath="-i $OPTARG"
+      ;;
+    b)
+      outpath="-o $OPTARG"
+      ;;
     d)
-      dataabspath=$OPTARG
+      dataabspath="-f $(readlink -f $OPTARG)"
       ;;
     c)
       columns=$OPTARG
@@ -60,7 +68,7 @@ while getopts ":d:c:m:t:w:u:x:y:k:r:s:pqnj" o; do
       enableopt2="-q"
       ;;
     n)
-      noreupload="-n"
+      noupload="-n"
       ;;
     j)
       solution1="-j"
@@ -80,7 +88,7 @@ echo minsupport=$minsupport
 echo tolerate=$tolerate
 echo enableopt1=$enableopt1
 echo enableopt2=$enableopt2
-echo noreupload=$noreupload
+echo noupload=$noupload
 echo worknode=$worknode
 echo user=$user
 echo phase1minsup=$phase1minsup
@@ -89,6 +97,8 @@ echo solution1=$solution1
 echo solution1param1=$solution1param1
 echo solution1param2=$solution1param2
 echo solution1param3=$solution1param3
+echo inpath=$inpath
+echo outpath=$outpath
 
 # verify arguments stage (skip)
 
@@ -97,7 +107,7 @@ absme=`readlink -f $0`
 abshere=`dirname $absme`
 
 # argument path absolutify
-dataabspath=`readlink -f $dataabspath`
+#dataabspath=`readlink -f $dataabspath`
 
 # enter my work directory
 cd $abshere
@@ -106,8 +116,8 @@ cd $abshere
 set -x
 
 ./jar.sh -w $worknode -u $user
-./data.sh -f $dataabspath $noreupload -w $worknode -u $user
+./data.sh $dataabspath $noupload -w $worknode -u $user
 #./remote-run.sh -c $columns -m $minsupport -t $tolerate $enableopt1 $enableopt2 -w $worknode -u $user
-./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3
+./remote-run.sh -m $minsupport $enableopt1 $enableopt2 -w $worknode -u $user $phase1minsup $phase1minsupbeta $solution1 $solution1param1 $solution1param2 $solution1param3 $inpath $outpath
 
 set +x
