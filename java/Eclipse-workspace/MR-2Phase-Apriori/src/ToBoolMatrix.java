@@ -49,6 +49,9 @@ public class ToBoolMatrix {
 		boolean[] linebool = new boolean[max + 1];
 
 		br = new BufferedReader(new FileReader(new File(filepath)));
+
+		int nozero = 0;
+		int noone = 0;
 		while ((line = br.readLine()) != null) {
 			loopc++;
 
@@ -64,13 +67,23 @@ public class ToBoolMatrix {
 			// System.err.println(loopc);
 			for (int i = min; i <= max; i++) {
 				if (linebool[i] == false) {
+					nozero++;
 					System.out.print("0 ");
 				} else {
+					noone++;
 					System.out.print("1 ");
 				}
 			}
 			System.out.println();
 		}
+
+		System.err.println("number of zero = " + nozero);
+		System.err.println("number of one = " + noone);
+		System.err.println("number of cell = " + (nozero + noone));
+		System.err.println("zero percentage = "
+				+ (nozero * (1.0) / (nozero + noone)));
+		System.err.println("one percentage = "
+				+ (noone * (1.0) / (nozero + noone)));
 
 		br.close();
 	}
