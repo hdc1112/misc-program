@@ -96,6 +96,8 @@ public class DatasetFeature1Analyzer {
 			}
 		}
 
+		System.err.println("distinct = " + distinct);
+
 		Arrays.sort(array, new Comparator<Long>() {
 
 			@Override
@@ -122,10 +124,10 @@ public class DatasetFeature1Analyzer {
 		}
 
 		int points = 100;
-		int step = 1;
+		double step = 100.0 / points;
 		int cursor = 0;
-		int denominator = distinct;
-		int percent = 100;
+		// int denominator = distinct;
+		double percent = 100.0;
 
 		// small test input
 		// rows = 5;
@@ -170,8 +172,14 @@ public class DatasetFeature1Analyzer {
 			res[i] = result[i] * 1.0 / distinct;
 		}
 
-		for (int i = 0; i <= points; i++) {
-			System.out.println(res[i]);
+		// for (int i = 0; i <= points; i++) {
+		// System.out.println(res[i]);
+		// }
+
+		percent = 0.0;
+		for (int i = points; i >= 0; i--) {
+			System.out.println(percent + " " + res[i]);
+			percent += step;
 		}
 
 		double area = 0.0;
