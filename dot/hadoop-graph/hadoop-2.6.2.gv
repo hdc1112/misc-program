@@ -1,6 +1,6 @@
-digraph G {
-  size = 8, 15
-  ranksep=.75
+# copy the following content to this website
+# http://dagitty.net/dags.html#
+# only copy the following content
 
 hadoop-main hadoop-project
 hadoop-main hadoop-project-dist
@@ -72,5 +72,3 @@ hadoop-tools hadoop-pipes
 hadoop-tools hadoop-openstack
 hadoop-tools hadoop-sls
 hadoop-tools hadoop-aws
-
-}
