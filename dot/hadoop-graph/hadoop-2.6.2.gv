@@ -1,76 +1,76 @@
 digraph G {
-  size = "8, 15";
-  ranksep=.75;
+  size = 8, 15
+  ranksep=.75
 
-"hadoop-main" -> "hadoop-project";
-"hadoop-main" -> "hadoop-project-dist";
-"hadoop-main" -> "hadoop-assemblies";
-"hadoop-main" -> "hadoop-maven-plugins";
-"hadoop-main" -> "hadoop-common-project";
-"hadoop-main" -> "hadoop-hdfs-project";
-"hadoop-main" -> "hadoop-yarn-project";
-"hadoop-main" -> "hadoop-mapreduce-project";
-"hadoop-main" -> "hadoop-tools";
-"hadoop-main" -> "hadoop-dist";
-"hadoop-main" -> "hadoop-client";
-"hadoop-main" -> "hadoop-minicluster";
+hadoop-main hadoop-project
+hadoop-main hadoop-project-dist
+hadoop-main hadoop-assemblies
+hadoop-main hadoop-maven-plugins
+hadoop-main hadoop-common-project
+hadoop-main hadoop-hdfs-project
+hadoop-main hadoop-yarn-project
+hadoop-main hadoop-mapreduce-project
+hadoop-main hadoop-tools
+hadoop-main hadoop-dist
+hadoop-main hadoop-client
+hadoop-main hadoop-minicluster
 
-"hadoop-common-project" -> "hadoop-auth";
-"hadoop-common-project" -> "hadoop-auth-examples";
-"hadoop-common-project" -> "hadoop-common";
-"hadoop-common-project" -> "hadoop-annotations";
-"hadoop-common-project" -> "hadoop-nfs";
-"hadoop-common-project" -> "hadoop-minikdc";
-"hadoop-common-project" -> "hadoop-kms";
+hadoop-common-project hadoop-auth
+hadoop-common-project hadoop-auth-examples
+hadoop-common-project hadoop-common
+hadoop-common-project hadoop-annotations
+hadoop-common-project hadoop-nfs
+hadoop-common-project hadoop-minikdc
+hadoop-common-project hadoop-kms
 
-"hadoop-hdfs-project" -> "hadoop-hdfs";
-"hadoop-hdfs-project" -> "hadoop-hdfs-httpfs";
-"hadoop-hdfs-project" -> "hadoop-hdfs/src/contrib/bkjournal";
-"hadoop-hdfs-project" -> "hadoop-hdfs-nfs";
+hadoop-hdfs-project hadoop-hdfs
+hadoop-hdfs-project hadoop-hdfs-httpfs
+hadoop-hdfs-project hadoop-hdfs/src/contrib/bkjournal
+hadoop-hdfs-project hadoop-hdfs-nfs
 
-"hadoop-yarn-project" -> "hadoop-yarn";
+hadoop-yarn-project hadoop-yarn
 
-"hadoop-yarn" -> "hadoop-yarn-api";
-"hadoop-yarn" -> "hadoop-yarn-common";
-"hadoop-yarn" -> "hadoop-yarn-server";
-"hadoop-yarn" -> "hadoop-yarn-applications";
-"hadoop-yarn" -> "hadoop-yarn-site";
-"hadoop-yarn" -> "hadoop-yarn-client";
-"hadoop-yarn" -> "hadoop-yarn-registry";
+hadoop-yarn hadoop-yarn-api
+hadoop-yarn hadoop-yarn-common
+hadoop-yarn hadoop-yarn-server
+hadoop-yarn hadoop-yarn-applications
+hadoop-yarn hadoop-yarn-site
+hadoop-yarn hadoop-yarn-client
+hadoop-yarn hadoop-yarn-registry
 
-"hadoop-yarn-server" -> "hadoop-yarn-server-common";
-"hadoop-yarn-server" -> "hadoop-yarn-server-nodemanager";
-"hadoop-yarn-server" -> "hadoop-yarn-server-web-proxy";
-"hadoop-yarn-server" -> "hadoop-yarn-server-resourcemanager";
-"hadoop-yarn-server" -> "hadoop-yarn-server-tests";
-"hadoop-yarn-server" -> "hadoop-yarn-server-applicationhistoryservice";
+hadoop-yarn-server hadoop-yarn-server-common
+hadoop-yarn-server hadoop-yarn-server-nodemanager
+hadoop-yarn-server hadoop-yarn-server-web-proxy
+hadoop-yarn-server hadoop-yarn-server-resourcemanager
+hadoop-yarn-server hadoop-yarn-server-tests
+hadoop-yarn-server hadoop-yarn-server-applicationhistoryservice
 
-"hadoop-yarn-applications" -> "hadoop-yarn-applications-distributedshell";
-"hadoop-yarn-applications" -> "hadoop-yarn-applications-unmanaged-am-launcher";
+hadoop-yarn-applications hadoop-yarn-applications-distributedshell
+hadoop-yarn-applications hadoop-yarn-applications-unmanaged-am-launcher
 
-"hadoop-mapreduce-project" -> "hadoop-mapreduce-client";
-"hadoop-mapreduce-project" -> "hadoop-mapreduce-examples";
+hadoop-mapreduce-project hadoop-mapreduce-client
+hadoop-mapreduce-project hadoop-mapreduce-examples
 
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-core";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-common";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-shuffle";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-app";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-jobclient";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-hs";
-"hadoop-mapreduce-client" -> "hadoop-mapreduce-client-hs-plugins";
+hadoop-mapreduce-client hadoop-mapreduce-client-core
+hadoop-mapreduce-client hadoop-mapreduce-client-common
+hadoop-mapreduce-client hadoop-mapreduce-client-shuffle
+hadoop-mapreduce-client hadoop-mapreduce-client-app
+hadoop-mapreduce-client hadoop-mapreduce-client-jobclient
+hadoop-mapreduce-client hadoop-mapreduce-client-hs
+hadoop-mapreduce-client hadoop-mapreduce-client-hs-plugins
 
-"hadoop-tools" -> "hadoop-streaming";
-"hadoop-tools" -> "hadoop-distcp";
-"hadoop-tools" -> "hadoop-archives";
-"hadoop-tools" -> "hadoop-rumen";
-"hadoop-tools" -> "hadoop-gridmix";
-"hadoop-tools" -> "hadoop-datajoin";
-"hadoop-tools" -> "hadoop-ant";
-"hadoop-tools" -> "hadoop-tools-dist";
-"hadoop-tools" -> "hadoop-extras";
-"hadoop-tools" -> "hadoop-pipes";
-"hadoop-tools" -> "hadoop-openstack";
-"hadoop-tools" -> "hadoop-sls";
-"hadoop-tools" -> "hadoop-aws";
+hadoop-tools hadoop-streaming
+hadoop-tools hadoop-distcp
+hadoop-tools hadoop-archives
+hadoop-tools hadoop-rumen
+hadoop-tools hadoop-gridmix
+hadoop-tools hadoop-datajoin
+hadoop-tools hadoop-ant
+hadoop-tools hadoop-tools-dist
+hadoop-tools hadoop-extras
+hadoop-tools hadoop-pipes
+hadoop-tools hadoop-openstack
+hadoop-tools hadoop-sls
+hadoop-tools hadoop-aws
 
 }
