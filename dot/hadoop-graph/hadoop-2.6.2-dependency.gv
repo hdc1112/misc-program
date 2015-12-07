@@ -1,0 +1,159 @@
+hadoop-client hadoop-common
+hadoop-client hadoop-hdfs
+hadoop-client hadoop-mapreduce-client-app
+hadoop-client hadoop-yarn-api
+hadoop-client hadoop-mapreduce-client-core
+hadoop-client hadoop-mapreduce-client-jobclient
+hadoop-client hadoop-annotations
+
+hadoop-auth hadoop-annotations
+hadoop-auth hadoop-minikdc
+
+hadoop-auth-examples hadoop-auth
+
+hadoop-common hadoop-annotations
+hadoop-common hadoop-auth
+hadoop-common hadoop-minikdc
+
+hadoop-kms hadoop-minikdc
+hadoop-kms hadoop-auth
+hadoop-kms hadoop-common
+
+hadoop-nfs hadoop-annotations
+hadoop-nfs hadoop-common
+
+hadoop-dist hadoop-common
+hadoop-dist hadoop-hdfs
+hadoop-dist hadoop-mapreduce-client-app
+hadoop-dist hadoop-yarn-api
+
+hadoop-hdfs hadoop-annotations
+hadoop-hdfs hadoop-auth
+hadoop-hdfs hadoop-common
+hadoop-hdfs hadoop-minikdc
+hadoop-hdfs hadoop-kms
+
+hadoop-hdfs/src/contrib/bkjournal hadoop-common
+hadoop-hdfs/src/contrib/bkjournal hadoop-hdfs
+
+hadoop-hdfs-httpfs hadoop-auth
+hadoop-hdfs-httpfs hadoop-common
+hadoop-hdfs-httpfs hadoop-hdfs
+
+hadoop-hdfs-nfs hadoop-annotations
+hadoop-hdfs-nfs hadoop-auth
+hadoop-hdfs-nfs hadoop-nfs
+hadoop-hdfs-nfs hadoop-hdfs
+hadoop-hdfs-nfs hadoop-common
+
+hadoop-mapreduce-client-app hadoop-yarn-common
+hadoop-mapreduce-client-app hadoop-mapreduce-client-common
+hadoop-mapreduce-client-app hadoop-yarn-server-web-proxy
+hadoop-mapreduce-client-app hadoop-yarn-server-common
+hadoop-mapreduce-client-app hadoop-yarn-server-nodemanager
+hadoop-mapreduce-client-app hadoop-yarn-server-resourcemanager
+hadoop-mapreduce-client-app hadoop-mapreduce-client-shuffle
+hadoop-mapreduce-client-app hadoop-hdfs
+hadoop-mapreduce-client-app hadoop-yarn-server-tests
+
+hadoop-mapreduce-client-common hadoop-yarn-common
+hadoop-mapreduce-client-common hadoop-yarn-client
+hadoop-mapreduce-client-common hadoop-mapreduce-client-core
+hadoop-mapreduce-client-common hadoop-yarn-server-common
+
+hadoop-mapreduce-client-core hadoop-yarn-common
+hadoop-mapreduce-client-core hadoop-hdfs
+
+hadoop-mapreduce-client-hs hadoop-hdfs
+hadoop-mapreduce-client-hs hadoop-mapreduce-client-common
+hadoop-mapreduce-client-hs hadoop-mapreduce-client-app
+hadoop-mapreduce-client-hs hadoop-yarn-common
+
+hadoop-mapreduce-client-hs-plugins hadoop-yarn-common
+hadoop-mapreduce-client-hs-plugins hadoop-mapreduce-client-common
+
+hadoop-mapreduce-client-jobclient hadoop-mapreduce-client-common
+hadoop-mapreduce-client-jobclient hadoop-mapreduce-client-shuffle
+hadoop-mapreduce-client-jobclient hadoop-mapreduce-client-app
+hadoop-mapreduce-client-jobclient hadoop-mapreduce-client-hs
+hadoop-mapreduce-client-jobclient hadoop-yarn-common
+hadoop-mapreduce-client-jobclient hadoop-yarn-server-nodemanager
+hadoop-mapreduce-client-jobclient hadoop-yarn-server-resourcemanager
+hadoop-mapreduce-client-jobclient hadoop-yarn-server-common
+hadoop-mapreduce-client-jobclient hadoop-yarn-server-tests
+hadoop-mapreduce-client-jobclient hadoop-hdfs
+
+hadoop-mapreduce-client-shuffle hadoop-yarn-server-common
+hadoop-mapreduce-client-shuffle hadoop-yarn-server-nodemanager
+hadoop-mapreduce-client-shuffle hadoop-mapreduce-client-common
+
+hadoop-mapreduce-client hadoop-common
+hadoop-mapreduce-client hadoop-annotations
+hadoop-mapreduce-client hadoop-hdfs
+
+hadoop-mapreduce-examples hadoop-mapreduce-client-jobclient
+hadoop-mapreduce-examples hadoop-common
+hadoop-mapreduce-examples hadoop-hdfs
+hadoop-mapreduce-examples hadoop-yarn-server-tests
+hadoop-mapreduce-examples hadoop-mapreduce-client-app
+hadoop-mapreduce-examples hadoop-mapreduce-client-hs
+
+hadoop-mapreduce-project hadoop-common
+hadoop-mapreduce-project hadoop-annotations
+hadoop-mapreduce-project hadoop-hdfs
+
+hadoop-minicluster hadoop-common
+hadoop-minicluster hadoop-hdfs
+hadoop-minicluster hadoop-yarn-server-tests
+hadoop-minicluster hadoop-mapreduce-client-jobclient
+hadoop-minicluster hadoop-mapreduce-client-app
+hadoop-minicluster hadoop-yarn-api
+hadoop-minicluster hadoop-mapreduce-client-core
+hadoop-minicluster hadoop-mapreduce-client-hs
+
+hadoop-project hadoop-assemblies
+hadoop-project hadoop-annotations
+hadoop-project hadoop-common
+hadoop-project hadoop-auth
+hadoop-project hadoop-nfs
+hadoop-project hadoop-hdfs
+hadoop-project hadoop-mapreduce-client-app
+hadoop-project hadoop-mapreduce-client-common
+hadoop-project hadoop-yarn-api
+hadoop-project hadoop-yarn-client
+hadoop-project hadoop-mapreduce-client-core
+hadoop-project hadoop-mapreduce-client-jobclient
+hadoop-project hadoop-mapreduce-client-shuffle
+hadoop-project hadoop-yarn
+hadoop-project hadoop-yarn-server
+hadoop-project hadoop-yarn-server-web-proxy
+hadoop-project hadoop-yarn-server-common
+hadoop-project hadoop-yarn-server-tests
+hadoop-project hadoop-yarn-common
+hadoop-project hadoop-yarn-registry
+hadoop-project hadoop-yarn-server-nodemanager
+hadoop-project hadoop-yarn-server-resourcemanager
+hadoop-project hadoop-yarn-applications-distributedshell
+hadoop-project hadoop-mapreduce-client-hs
+hadoop-project hadoop-mapreduce-examples
+hadoop-project hadoop-gridmix
+hadoop-project hadoop-streaming
+hadoop-project hadoop-archives
+hadoop-project hadoop-distcp
+hadoop-project hadoop-datajoin
+hadoop-project hadoop-rumen
+hadoop-project hadoop-extras
+hadoop-project hadoop-ant
+hadoop-project hadoop-client
+hadoop-project hadoop-minicluster
+hadoop-project hadoop-minikdc
+hadoop-project hadoop-openstack
+hadoop-project hadoop-aws
+hadoop-project hadoop-kms
+hadoop-project hadoop-sls
+
+hadoop-project-dist hadoop-annotations
+
+hadoop-ant hadoop-annotations
+hadoop-ant hadoop-common
+hadoop-ant hadoop-hdfs
