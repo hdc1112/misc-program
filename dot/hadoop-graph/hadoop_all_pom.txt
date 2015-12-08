@@ -29,21 +29,21 @@
 -- ./hadoop-project/pom.xml
 -- ./hadoop-project-dist/pom.xml
 -- ./hadoop-tools/hadoop-ant/pom.xml
-./hadoop-tools/hadoop-archives/pom.xml
-./hadoop-tools/hadoop-aws/pom.xml
-./hadoop-tools/hadoop-datajoin/pom.xml
-./hadoop-tools/hadoop-distcp/pom.xml
-./hadoop-tools/hadoop-extras/pom.xml
-./hadoop-tools/hadoop-gridmix/pom.xml
-./hadoop-tools/hadoop-openstack/pom.xml
-./hadoop-tools/hadoop-pipes/pom.xml
-./hadoop-tools/hadoop-rumen/pom.xml
-./hadoop-tools/hadoop-sls/pom.xml
-./hadoop-tools/hadoop-streaming/pom.xml
-./hadoop-tools/hadoop-tools-dist/pom.xml
-./hadoop-tools/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
+-- ./hadoop-tools/hadoop-archives/pom.xml
+-- ./hadoop-tools/hadoop-aws/pom.xml
+-- ./hadoop-tools/hadoop-datajoin/pom.xml
+-- ./hadoop-tools/hadoop-distcp/pom.xml
+-- ./hadoop-tools/hadoop-extras/pom.xml
+-- ./hadoop-tools/hadoop-gridmix/pom.xml
+-- ./hadoop-tools/hadoop-openstack/pom.xml
+-- ./hadoop-tools/hadoop-pipes/pom.xml
+-- ./hadoop-tools/hadoop-rumen/pom.xml
+-- ./hadoop-tools/hadoop-sls/pom.xml
+-- ./hadoop-tools/hadoop-streaming/pom.xml
+-- ./hadoop-tools/hadoop-tools-dist/pom.xml
+-- ./hadoop-tools/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
 ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-unmanaged-am-launcher/pom.xml
 ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/pom.xml
 ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml

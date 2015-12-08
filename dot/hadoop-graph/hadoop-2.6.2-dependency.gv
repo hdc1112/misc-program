@@ -157,3 +157,95 @@ hadoop-project-dist hadoop-annotations
 hadoop-ant hadoop-annotations
 hadoop-ant hadoop-common
 hadoop-ant hadoop-hdfs
+
+hadoop-archives hadoop-annotations
+hadoop-archives hadoop-mapreduce-client-hs
+hadoop-archives hadoop-mapreduce-client-core
+hadoop-archives hadoop-mapreduce-client-jobclient
+hadoop-archives hadoop-common
+hadoop-archives hadoop-hdfs
+hadoop-archives hadoop-yarn-server-tests
+
+hadoop-aws hadoop-common
+
+hadoop-datajoin hadoop-annotations
+hadoop-datajoin hadoop-mapreduce-client-hs
+hadoop-datajoin hadoop-mapreduce-client-core
+hadoop-datajoin hadoop-mapreduce-client-jobclient
+hadoop-datajoin hadoop-common
+hadoop-datajoin hadoop-hdfs
+hadoop-datajoin hadoop-yarn-server-tests
+
+hadoop-distcp hadoop-common
+hadoop-distcp hadoop-annotations
+hadoop-distcp hadoop-mapreduce-client-app
+hadoop-distcp hadoop-mapreduce-client-hs
+hadoop-distcp hadoop-mapreduce-client-core
+hadoop-distcp hadoop-mapreduce-client-jobclient
+hadoop-distcp hadoop-hdfs
+
+hadoop-extras hadoop-annotations
+hadoop-extras hadoop-mapreduce-client-hs
+hadoop-extras hadoop-mapreduce-client-core
+hadoop-extras hadoop-mapreduce-client-jobclient
+hadoop-extras hadoop-mapreduce-common
+hadoop-extras hadoop-common
+hadoop-extras hadoop-hdfs
+hadoop-extras hadoop-yarn-server-tests
+
+hadoop-gridmix hadoop-annotations
+hadoop-gridmix hadoop-mapreduce-client-hs
+hadoop-gridmix hadoop-mapreduce-client-core
+hadoop-gridmix hadoop-mapreduce-client-jobclient
+hadoop-gridmix hadoop-common
+hadoop-gridmix hadoop-rumen
+hadoop-gridmix hadoop-hdfs
+hadoop-gridmix hadoop-yarn-server-tests
+
+hadoop-openstack hadoop-common
+
+hadoop-rumen hadoop-annotations
+hadoop-rumen hadoop-mapreduce-client-hs
+hadoop-rumen hadoop-mapreduce-client-core
+hadoop-rumen hadoop-mapreduce-client-jobclient
+hadoop-rumen hadoop-common
+hadoop-rumen hadoop-hdfs
+hadoop-rumen hadoop-yarn-server-tests
+
+hadoop-sls hadoop-client
+hadoop-sls hadoop-minicluster
+hadoop-sls hadoop-rumen
+
+hadoop-streaming hadoop-annotations
+hadoop-streaming hadoop-mapreduce-client-app
+hadoop-streaming hadoop-mapreduce-client-hs
+hadoop-streaming hadoop-mapreduce-client-core
+hadoop-streaming hadoop-mapreduce-client-jobclient
+hadoop-streaming hadoop-common
+hadoop-streaming hadoop-hdfs
+hadoop-streaming hadoop-yarn-server-tests
+
+hadoop-tools-dist hadoop-streaming
+hadoop-tools-dist hadoop-distcp
+hadoop-tools-dist hadoop-archives
+hadoop-tools-dist hadoop-rumen
+hadoop-tools-dist hadoop-datajoin
+hadoop-tools-dist hadoop-extras
+hadoop-tools-dist hadoop-gridmix
+hadoop-tools-dist hadoop-pipes
+hadoop-tools-dist hadoop-openstack
+hadoop-tools-dist hadoop-aws
+hadoop-tools-dist hadoop-sls
+hadoop-tools-dist hadoop-ant
+
+hadoop-yarn-api hadoop-common
+hadoop-yarn-api hadoop-annotations
+
+hadoop-yarn-applications-distributedshell hadoop-common
+hadoop-yarn-applications-distributedshell hadoop-annotations
+hadoop-yarn-applications-distributedshell hadoop-yarn-api
+hadoop-yarn-applications-distributedshell hadoop-yarn-common
+hadoop-yarn-applications-distributedshell hadoop-yarn-client
+hadoop-yarn-applications-distributedshell hadoop-yarn-server-nodemanager
+hadoop-yarn-applications-distributedshell hadoop-yarn-server-resourcemanager
+hadoop-yarn-applications-distributedshell hadoop-yarn-server-tests
