@@ -249,3 +249,79 @@ hadoop-yarn-applications-distributedshell hadoop-yarn-client
 hadoop-yarn-applications-distributedshell hadoop-yarn-server-nodemanager
 hadoop-yarn-applications-distributedshell hadoop-yarn-server-resourcemanager
 hadoop-yarn-applications-distributedshell hadoop-yarn-server-tests
+
+hadoop-yarn-applications-unmanaged-am-launcher hadoop-common
+hadoop-yarn-applications-unmanaged-am-launcher hadoop-yarn-client
+hadoop-yarn-applications-unmanaged-am-launcher hadoop-yarn-api
+hadoop-yarn-applications-unmanaged-am-launcher hadoop-yarn-common
+hadoop-yarn-applications-unmanaged-am-launcher hadoop-yarn-server-tests
+
+hadoop-yarn-client hadoop-common
+hadoop-yarn-client hadoop-annotations
+hadoop-yarn-client hadoop-yarn-api
+hadoop-yarn-client hadoop-yarn-common
+hadoop-yarn-client hadoop-yarn-server-common
+hadoop-yarn-client hadoop-yarn-server-resourcemanager
+hadoop-yarn-client hadoop-yarn-server-tests
+
+hadoop-yarn-common hadoop-common
+hadoop-yarn-common hadoop-yarn-api
+hadoop-yarn-common hadoop-annotations
+
+hadoop-yarn-registry hadoop-yarn-api
+hadoop-yarn-registry hadoop-yarn-common
+hadoop-yarn-registry hadoop-common
+hadoop-yarn-registry hadoop-minikdc
+
+hadoop-yarn-server-applicationhistoryservice hadoop-common
+hadoop-yarn-server-applicationhistoryservice hadoop-annotations
+hadoop-yarn-server-applicationhistoryservice hadoop-yarn-common
+hadoop-yarn-server-applicationhistoryservice hadoop-yarn-api
+hadoop-yarn-server-applicationhistoryservice hadoop-yarn-server-common
+hadoop-yarn-server-applicationhistoryservice hadoop-minikdc
+hadoop-yarn-server-applicationhistoryservice hadoop-auth
+
+hadoop-yarn-server-common hadoop-common
+hadoop-yarn-server-common hadoop-yarn-api
+hadoop-yarn-server-common hadoop-yarn-common
+hadoop-yarn-server-common hadoop-annotations
+
+hadoop-yarn-server-nodemanager hadoop-common
+hadoop-yarn-server-nodemanager hadoop-yarn-common
+hadoop-yarn-server-nodemanager hadoop-yarn-api
+hadoop-yarn-server-nodemanager hadoop-annotations
+hadoop-yarn-server-nodemanager hadoop-yarn-server-common
+
+hadoop-yarn-server-resourcemanager hadoop-common
+hadoop-yarn-server-resourcemanager hadoop-annotations
+hadoop-yarn-server-resourcemanager hadoop-hdfs
+hadoop-yarn-server-resourcemanager hadoop-yarn-common
+hadoop-yarn-server-resourcemanager hadoop-yarn-api
+hadoop-yarn-server-resourcemanager hadoop-yarn-server-common
+hadoop-yarn-server-resourcemanager hadoop-yarn-server-applicationhistoryservice
+hadoop-yarn-server-resourcemanager hadoop-yarn-server-web-proxy
+hadoop-yarn-server-resourcemanager hadoop-hdfs
+hadoop-yarn-server-resourcemanager hadoop-minikdc
+hadoop-yarn-server-resourcemanager hadoop-auth
+
+hadoop-yarn-server-tests hadoop-common
+hadoop-yarn-server-tests hadoop-annotations
+hadoop-yarn-server-tests hadoop-yarn-common
+hadoop-yarn-server-tests hadoop-yarn-server-common
+hadoop-yarn-server-tests hadoop-yarn-server-nodemanager
+hadoop-yarn-server-tests hadoop-yarn-server-resourcemanager
+hadoop-yarn-server-tests hadoop-minikdc
+hadoop-yarn-server-tests hadoop-yarn-api
+
+hadoop-yarn-server-web-proxy hadoop-common
+hadoop-yarn-server-web-proxy hadoop-yarn-server-common
+hadoop-yarn-server-web-proxy hadoop-yarn-common
+hadoop-yarn-server-web-proxy hadoop-yarn-api
+
+hadoop-yarn-project hadoop-yarn-api
+hadoop-yarn-project hadoop-yarn-client
+hadoop-yarn-project hadoop-yarn-common
+hadoop-yarn-project hadoop-yarn-server-common
+hadoop-yarn-project hadoop-yarn-server-nodemanager
+hadoop-yarn-project hadoop-yarn-server-resourcemanager
+hadoop-yarn-project hadoop-yarn-server-web-proxy

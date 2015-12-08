@@ -44,19 +44,19 @@
 -- ./hadoop-tools/pom.xml
 -- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-api/pom.xml
 -- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-unmanaged-am-launcher/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-registry/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-applicationhistoryservice/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-common/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-web-proxy/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/pom.xml
-./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-site/pom.xml
-./hadoop-yarn-project/hadoop-yarn/pom.xml
-./hadoop-yarn-project/pom.xml
-./pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-unmanaged-am-launcher/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-registry/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-applicationhistoryservice/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-common/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-web-proxy/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/hadoop-yarn-site/pom.xml
+-- ./hadoop-yarn-project/hadoop-yarn/pom.xml
+-- ./hadoop-yarn-project/pom.xml
+-- ./pom.xml
