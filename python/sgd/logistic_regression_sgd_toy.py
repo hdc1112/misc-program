@@ -17,7 +17,8 @@ def coefficients_sgd(train, l_rate, n_epoch):
             coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat) * 1.0
             for i in range(len(row) - 1):
                 coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
-        print('>epoch = %d, lrate = %.3f, error = %.3f' % (epoch, l_rate, sum_error))
+        print('>epoch = %d, lrate = %.3f, error = %.3f, b0 = %.3f b1 = %.3f b2 = %.3f' % (epoch, l_rate, sum_error,
+                coef[0], coef[1], coef[2]))
     return coef
 
 dataset = [[2.7810836,2.550537003,0],
