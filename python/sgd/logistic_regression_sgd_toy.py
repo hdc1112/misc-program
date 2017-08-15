@@ -32,7 +32,16 @@ dataset = [[2.7810836,2.550537003,0],
 	[8.675418651,-0.242068655,1],
 	[7.673756466,3.508563011,1]]
 
+dataset2 = [[1,1,0],
+            [0,0,1],
+            [0,1,1],
+            [1,0,0]]
+
 l_rate = 0.3
 n_epoch = 100
-coef = coefficients_sgd(dataset, l_rate, n_epoch)
+# coef = coefficients_sgd(dataset, l_rate, n_epoch)
+coef = coefficients_sgd(dataset2, l_rate, n_epoch)
 print(coef)
+
+for row in dataset2:
+    print(predict(row, coef))
