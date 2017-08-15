@@ -115,3 +115,7 @@ a.exe.stackdump
 /tokyo-cabinet/casket.tct
 
 /mysql/*.x
+
+*.aux
+*.log
+*.out

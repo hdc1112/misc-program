@@ -1,0 +1,82 @@
+% https://latexbase.com/
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+
+\title{Notes on Youtube's probability primer}
+\date{\today}
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+\maketitle
+
+\section{Definition of $\sigma$-algebra}
+
+Given a set $\Omega$, a $\sigma$-algebra $\A$ is a non-empty subset of $2^\Omega$ such that:
+
+\begin{enumerate}
+    \item closed under complement, $E\in \A \implies E^c \in \A$ 
+
+    \item closed under countable unions, $E_1\in \A, E_2\in \A \implies E_1\cup E_2\in \A$
+\end{enumerate}
+
+\par \noindent
+
+\textbf{Theorem 1} $\Omega\in \A$
+
+Proof: since $\A$ is non-empty, there must exist one element $E\in \A$. Because $\A$ is closed
+under complement, so $E^c\in \A$. Because of $\A$ is closed under countable unions, so
+$E \cup E^c \in \A$. Hence $\Omega\in A$.
+
+\textbf{Theorem 2} $\phi \in \A$
+
+Proof: because $\Omega \in \A$ and $\A$ is closed under complement, so $\Omega^c=\phi\in \A$.
+
+\textbf{Theorem 3} $\A$ is closed under countable intersections.
+
+Proof: $\bigcap\limits_{i=1}^{\infty} E_i = $(\bigcup\limits_{i=1}^{\infty} E_i^c)^c$
+From this equation we can see that $\A$ is closed under intersections.
+
+\section{Definition of generated $\sigma$-algebra}
+
+Given a $\C\in 2^\Omega$, the generated $\sigma$-algebra $\C$, or $\sigma(\C)$, is the smallest
+$\sigma$-algebra containing $\C$.
+Or, $\sigma(\C)=\bigcap\limits_{\A\ is\ \sigma-algebra\ on\ \Omega,\ \C\subseteq \A} \A$.
+
+\textbf{Theorem 4} $\sigma(\C)$ always exists
+
+Proof: $2^\Omega$ is a $\sigma$-algebra, and any intersections of $\sigma$-algebra is also
+$\sigma$-algebra (needed by the mathematical ``smallest" definition). (These two can be easily proved.)
+
+Example of $\sigma$-algebra:
+\begin{enumerate}
+    \item $\A=\{\phi, \Omega\}$
+    \item $\A=\{\phi,E, E^c, \Omega\}$
+    \item if $\Omega = \mathbb{R}$, the Borel $\sigma$-algebra $\B=\sigma(\T)$ where
+        $\T=\{open\ sets\ of\ \mathbb{R}\}$.
+\end{enumerate}
+
+\section{Definition of measure}
+
+A measure $\mu$ on $\Omega$ with $\sigma$-algebra $\A$ is a function
+$\mu: \A \rightarrow [0,\infty]$ such that:
+
+\begin{enumerate}
+    \item $\mu(\phi) = 0$
+    \item ``countable additivity" $\mu(\bigcup\limits_{i=1}^{\infty} E_i)=\sum\limits_{i=1}^{\infty} \mu(E_i)$ for any pairwise disjoint sets $E_1, E_2, ... \in \A$ 
+\end{enumerate}
+
+\section{Definition of probability measure}
+
+A probability measure is a measure $P$ such that $P(\Omega) = 1$. (Notice that $\Omega\in \A$).
+
+\end{document}
+
