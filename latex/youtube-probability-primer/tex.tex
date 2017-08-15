@@ -76,7 +76,26 @@ $\mu: \A \rightarrow [0,\infty]$ such that:
 
 \section{Definition of probability measure}
 
-A probability measure is a measure $P$ such that $P(\Omega) = 1$. (Notice that $\Omega\in \A$).
+A probability measure is a measure $P$ such that $P(\Omega) = 1$. (Notice that $\Omega\in \A$). Also known as Kolmogorov's axioms.
+
+\section{Example of measures}
+
+\begin{enumerate}
+\item $\Omega=\{1,2,...,n\}$, $\A=2^\Omega$, 
+$P(\{k\})=P(k)=1/n,\forall k\in\Omega$. Uniform distribution. We do
+not need to define other element $E\in\A$ because of countable
+additivity.
+
+\item Countable infinite. \Omega=\{1,2,3,...\}, $\A=2^\Omega$,
+$P(\{k\})=P(k)=\\ probability\ it\ takes\ k\ coinflips\ to\ get\ heads
+=\alpha * (1-\alpha)^{k-1}=1/2 * (1 - 1/2)^{k-1}$. Geometric distribution.
+
+\item Uncountable infinite. $\Omega=[0,\infty)$, $\A=\B(\Omega)$,
+$P([0,x))=1-e^{-x}$, \forall x>0$. Exponential distribution. Note
+that $P({x})=0,\forall x\ge 0$ because this is a continuous distribution.
+
+\item Lebesgue measure. $\Omega=\mathbb{R}$, $\A=\B(\mathbb{R})$,
+\end{enumerate}
 
 \end{document}
 
