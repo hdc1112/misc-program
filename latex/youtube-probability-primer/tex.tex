@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[latin1]{inputenc}
 
@@ -42,7 +43,7 @@ Proof: because $\Omega \in \A$ and $\A$ is closed under complement, so $\Omega^c
 
 \textbf{Theorem 3} $\A$ is closed under countable intersections.
 
-Proof: $\bigcap\limits_{i=1}^{\infty} E_i = $(\bigcup\limits_{i=1}^{\infty} E_i^c)^c$
+Proof: $\bigcap\limits_{i=1}^{\infty} E_i = (\bigcup\limits_{i=1}^{\infty} E_i^c)^c$
 From this equation we can see that $\A$ is closed under intersections.
 
 \section{Definition of generated $\sigma$-algebra}
@@ -86,16 +87,19 @@ $P(\{k\})=P(k)=1/n,\forall k\in\Omega$. Uniform distribution. We do
 not need to define other element $E\in\A$ because of countable
 additivity.
 
-\item Countable infinite. \Omega=\{1,2,3,...\}, $\A=2^\Omega$,
+\item Countable infinite. $\Omega=\{1,2,3,...\}$, $\A=2^\Omega$,
 $P(\{k\})=P(k)=\\ probability\ it\ takes\ k\ coinflips\ to\ get\ heads
 =\alpha * (1-\alpha)^{k-1}=1/2 * (1 - 1/2)^{k-1}$. Geometric distribution.
 
 \item Uncountable infinite. $\Omega=[0,\infty)$, $\A=\B(\Omega)$,
-$P([0,x))=1-e^{-x}$, \forall x>0$. Exponential distribution. Note
+$P([0,x))=1-e^{-x}, \forall x>0$. Exponential distribution. Note
 that $P({x})=0,\forall x\ge 0$ because this is a continuous distribution.
 
 \item Lebesgue measure. $\Omega=\mathbb{R}$, $\A=\B(\mathbb{R})$,
+$\mu((a,b)) = b - a,\forall a,b\in\mathbb{R},a<b$. 
 \end{enumerate}
+
+\section{Basic properties of measures}
 
 \end{document}
 
