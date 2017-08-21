@@ -101,5 +101,131 @@ $\mu((a,b)) = b - a,\forall a,b\in\mathbb{R},a<b$.
 
 \section{Basic properties of measures}
 
+Let $(\Omega,\A,\mu)$ be a measure space.
+
+\begin{enumerate}
+    \item Monoticity: If $E,F\in\A$ and $E\subset F$, then $\mu(E)\le\mu(F)$
+    \item Subadditivity: If $E_1,E_2,...\in\A$, then
+        $\mu(\bigcup\limits_{i=1}^{\infty} E_i)\le \sum\limits_{i=1}^{\infty} \mu(E_i)$
+
+    \item Continuity from below: If $E_1,E_2,...\in\A$ and $E_1\subset E_2\subset ...$,
+        then $\mu(\bigcup\limits_{i=1}^{\infty} E_i)=\lim\limits_{i\rightarrow\infty} \mu(E_i)$
+
+    \item Continuity from above: If $E_1,E_2,...\in\A$ and $E_1\supset E_2\supset ...$
+        and $\mu(E_1)<\infty$, then
+        $\mu(\bigcap\limits_{i=1}^{\infty} E_i)=\lim\limits_{i\rightarrow\infty} \mu(E_i)$
+\end{enumerate}
+
+\section{Facts}
+
+Let $(\Omega,\A,P)$ be probability measure space with $E,F,E_i\in\A$.
+
+\begin{enumerate}
+    \item $P(E\cup F)=P(E)+P(F)$ if $E\cap F=\phi$
+    \item $P(E\cup F)=P(E)+P(F)-P(E\cap F)$
+    \item $P(E)=1-P(E^c)$
+    \item $P(E\cap F^c)=P(E) - P(E\cap F)$
+    \item (Inclusion-Exclusion formula)
+        $P(\bigcup\limits_{i=1}^{n} E_i)=\sum\limits_{i} P(E_i) - \sum\limits_{i<j} P(E_i\cap E_j) 
+        + \sum\limits_{i<j<k} P(E_i\cap E_j\cap E_k) - ... + (-1)^{n+1}P(E_1\cap E_2\cap ... \cap E_n)$
+
+    \item $P(\bigcup\limits_{i=1}^{n} E_i)\le \sum\limits_{i=1}^{n} P(E_i)$ and
+          $P(\bigcup\limits_{i=1}^{\infty} E_i)\le \sum\limits_{i=1}^{\infty} P(E_i)$
+\end{enumerate}
+
+\section {$\mathbb{R}$ and $\B(\mathbb{R})$}
+
+Definition: A Borel measure on $\mathbb{R}$ is a measure on $(\mathbb{R},\B(\mathbb{R}))$.
+
+Definition: A CDF (cumulative distribution function) is a function $F:\mathbb{R}\rightarrow\mathbb{R}$
+such that 
+\begin{enumerate}
+    \item $F$ is nondecreasing $(x\le y \Rightarrow F(x)\le F(y))$
+    \item $F$ is right continuous $(\lim\limits_{x\searrow a} F(x)=F(a))$
+    \item $\lim\limits_{x\rightarrow\infty} F(x)=1$
+    \item $\lim\limits_{x\rightarrow -\infty} F(x)=0$
+\end{enumerate}
+
+\textbf{Theorem} There is an equivalence between CDFs and Borel probability measures.
+
+\begin{enumerate}
+    \item If $F$ is a CDF then there is a unique Borel probability measure on $\mathbb{R}$
+such that $P((-\infty,x]))=F(x), \forall x\in\mathbb{R}$
+
+\item If $P$ is a Borel probability measure on $\mathbb{R}$ then there is a unique CDF $F$ such
+that $F(x)=P((-\infty,x]), \forall x\in\mathbb{R}$
+
+\end{enumerate}
+
+\section{References on measure theory}
+
+Real analysis (Undergrad)
+\begin{enumerate}
+\item Rudin's ``Principles of Mathematical Analysis"
+\end{enumerate}
+
+Probability (grad)
+
+\begin{enumerate}
+    \item Jacod \& Protter "Probability Essentials"
+    \item Durrett ``Probability Theory and Examples"
+    \item Grimmett \& Stirzaker ``Probability \& Random Processes"
+\end{enumerate}
+
+Real analysis (Grad)
+
+\begin{enumerate}
+    \item Fdlord's ``Real Analysis"
+    \item Rudin ``Real \& Complex Analysis"
+\end{enumerate}
+
+\section{Summary}
+
+Definition: A $\sigma-algebra$ on $\Omega$ is a collection $\A\subset 2^\Omega$ such that
+\begin{enumerate}
+    \item $E\in\A \Rightarrow E^c\in\A$
+    \item $E_1,E_2,...\in\A\Rightarrow \bigcup\limits_{i=1}^{\infty} E_i\in\A$ Also closed under finite unions
+\end{enumerate}
+
+Definition: A probability measure $P$ on $(\Omega,\A)$ is a function $P:\A\rightarrow [0,1]$
+such that
+\begin{enumerate}
+    \item $P(\phi)=0$, and $P(\Omega)=1$.
+    \item $P(\bigcup\limits_{i=1}^{\infty} E_i)=\sum\limits_{i=1}^{\infty} P(E_i)$
+        for any $E_1,E_2,...\in\A$ pairwise disjoint set
+\end{enumerate}
+
+Remarks:
+\begin{enumerate}
+    \item $P(E\cup F)=P(E)+P(F)-P(E\cap F), E,F\in\A$
+    \item $P(E)=1-P(E^c), \forall E\in \A$
+    \item $E\subset F$ then $P(E)\le P(F)$
+    \item If $E_1,E_2,...\in\A$ then $P(\bigcup\limits_{i=1}^{\infty} E_i)\le
+        \sum\limits_{i=1}^{\infty} P(E_i)$
+
+    \item If $E_1\subset E_2\subset... $ then $P(\bigcup\limits_{i=1}^{\infty} E_i)
+        =\lim\limits_{i\rightarrow \infty} P(E_i)$
+
+    \item If $E_1\supset E_2\supset...$ then $P(\bigcap\limits_{i=1}^{\infty} E_i)
+        =\lim\limits_{i\rightarrow \infty} P(E_i)$
+
+\end{enumerate}
+
+Definition: A CDF is a function $F:\mathbb{R}\rightarrow\mathbb{R}$ such that
+\begin{enumerate}
+    \item $x\le y \Rightarrow F(x)\le F(y) (x,y\in \mathbb{R})$
+    \item $\lim\limits_{x\searrow a} = F(a)$
+    \item $\lim\limits_{x\rightarrow \infty} F(x) = 1$
+    \item $\lim\limits_{x\rightarrow -\infty} F(x)=0$
+\end{enumerate}
+
+Theorem: $F(x)=P((-\infty,x])$ defines an equivalence between CDF $F$ and Borel probability measure $P$ on
+$\mathbb{R}$.
+
+
+
+
+
+
 \end{document}
 
