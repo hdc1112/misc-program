@@ -29,17 +29,19 @@ Given a set $\Omega$, a $\sigma$-algebra $\A$ is a non-empty subset of $2^\Omega
     \item closed under countable unions, $E_1\in \A, E_2\in \A \implies E_1\cup E_2\in \A$
 \end{enumerate}
 
-\par \noindent
+\bigbreak
 
 \textbf{Theorem 1} $\Omega\in \A$
 
 Proof: since $\A$ is non-empty, there must exist one element $E\in \A$. Because $\A$ is closed
 under complement, so $E^c\in \A$. Because of $\A$ is closed under countable unions, so
 $E \cup E^c \in \A$. Hence $\Omega\in A$.
+\bigbreak
 
 \textbf{Theorem 2} $\phi \in \A$
 
 Proof: because $\Omega \in \A$ and $\A$ is closed under complement, so $\Omega^c=\phi\in \A$.
+\bigbreak
 
 \textbf{Theorem 3} $\A$ is closed under countable intersections.
 
@@ -51,11 +53,13 @@ From this equation we can see that $\A$ is closed under intersections.
 Given a $\C\in 2^\Omega$, the generated $\sigma$-algebra $\C$, or $\sigma(\C)$, is the smallest
 $\sigma$-algebra containing $\C$.
 Or, $\sigma(\C)=\bigcap\limits_{\A\ is\ \sigma-algebra\ on\ \Omega,\ \C\subseteq \A} \A$.
+\bigbreak
 
 \textbf{Theorem 4} $\sigma(\C)$ always exists
 
 Proof: $2^\Omega$ is a $\sigma$-algebra, and any intersections of $\sigma$-algebra is also
 $\sigma$-algebra (needed by the mathematical ``smallest" definition). (These two can be easily proved.)
+\bigbreak
 
 Example of $\sigma$-algebra:
 \begin{enumerate}
@@ -146,7 +150,8 @@ such that
     \item $\lim\limits_{x\rightarrow -\infty} F(x)=0$
 \end{enumerate}
 
-\textbf{Theorem} There is an equivalence between CDFs and Borel probability measures.
+\bigbreak
+\textbf{Theorem}: There is an equivalence between CDFs and Borel probability measures.
 
 \begin{enumerate}
     \item If $F$ is a CDF then there is a unique Borel probability measure on $\mathbb{R}$
@@ -223,9 +228,88 @@ Theorem: $F(x)=P((-\infty,x])$ defines an equivalence between CDF $F$ and Borel 
 $\mathbb{R}$.
 
 
+\section{Conditional Probability and Independence}
 
+Notation: hidden $(\Omega,\A)$ and $P(E)$.
 
+Terminology: event = measurable set = set in $\A$. sample space = $\Omega$. 
+\bigbreak
 
+Definition: If $P(B)>0$, then $P(A|B)=\frac{P(A\cap B)}{P(B)}$.
+\bigbreak
+
+Definition: Events $A, B$ are independent if $P(A\cap B) = P(A) P(B)$.
+\bigbreak
+
+Theorem: Suppose $P(B)>0$, then $A,B$ are indep. iff $P(A|B)=P(A)$
+
+Proof: (trivial, by def. of $|$ and def. of indep.)
+\bigbreak
+
+Definition: $A_1,A_2,...,A_n$ are mutually independent if $\forall S\subseteq \{1,2,...,n\}$,
+$P(\bigcap\limits_{i\in S} A_i) = \prod\limits_{i\in S} P(A_i)$
+
+Remark: mutually independence $\Rightarrow$ pairwise indepenjdence
+
+Remark: pairwise independence $\nRightarrow$ mutually independence
+
+Remark: One interesting picture to show $n$ mutually independent sets (PP 2.2).
+\bigbreak
+
+Definition: $A_1, A_2,...$ are MI if $\forall\ finite\ S\in \{1,2,...\}$ (like above).
+\bigbreak
+
+Definition: Events $A,B$ are conditionally independent given $C$ if
+$P(A\cap B | C) = P(A|C) P (B|C)$.
+
+Remark: $A,B$ are conditionally independent given $C$ does not always mean that $A$ and $B$
+are independent.
+\bigbreak
+
+Definition: $A_1, A_2,...,A_n$ are CI given $C$ if $\forall\ finite\ S\in \{1,2,...,n\}$,
+$P(\bigcap\limits_{i\in S} A_i|C)=\prod\limits_{i\in S} P(A_i|C)$. ($P(C) > 0$ for all conditional
+independence definition).
+
+\section{Bayes' rule}
+
+Remind: $P(A\cap B) = P(A|B)P(B)$ if $P(B) > 0$ (from def. of $|$)
+
+Rewrite: $P(B\cap A) = P(B|A) P(A)$ if $P(A) > 0$ (from def. of $|$)
+\bigbreak
+
+\textbf{The Bayes' rule}: $P(B|A)=\frac{P(A|B)P(B)}{P(A)}$ if $P(A)>0$ and $P(B)>0$
+
+\section{Chain rule}
+
+\textbf{Chain rule}: If $A_1,A_2,...,A_n$ and $P(A_1\cap A_2...\cap A_{n-1}) > 0$,
+then $P(A_1\cap A_2...\cap A_n) = P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)...P(A_n|A_1\cap ... \cap A_{n-1})$.
+
+Proof: (trivial, induction over $n$)
+
+Remark: $P(A_1\cap A_2\cap ... \cap A_{n-1})>0$ already implies that $\forall s\in \{2,...n\}$,
+$P(A_1\cap A_2\cap ...\cap A_{s-1}) > 0$.
+
+\section{Partition rule}
+
+Definition: A partition of $\Omega$ is a finite or countable infinite collection
+of $\{B_i\}\subset 2^{\Omega}$, such that
+\begin{enumerate}
+    \item $\bigcup\limits_i B_i = \Omega$
+    \item $B_i\cap B_j = \phi, i\neq j$
+\end{enumerate}
+
+\textbf{Partition rule}: $P(A) = \sum\limits_i P(A\cap B_i)$ for any paritition $\{B_i\}$ of $\Omega$.
+
+Proof: $A=A\cap \Omega=A\cap (\bigcup\limits_i B_i)=\bigcup\limits_i (A\cap B_i)$, and
+$(A\cap B_i)\cap (A\cap B_j)=\phi, i\neq j$, so because of additivity of measure,
+we have $P(A) = \sum\limits_i P(A\cap B_i)$.
+
+\section{Conditional measure}
+
+Theorem: If $P(B)>0$, then $Q(A)=P(A|B)$ defines a probability measure $Q$ (conditional
+probability measure given $B$.
+
+Proof: (trivial, use Partition rule)
 
 \end{document}
 
