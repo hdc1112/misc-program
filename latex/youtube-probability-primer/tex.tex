@@ -219,13 +219,15 @@ Remarks:
 Definition: A CDF is a function $F:\mathbb{R}\rightarrow\mathbb{R}$ such that
 \begin{enumerate}
     \item $x\le y \Rightarrow F(x)\le F(y) (x,y\in \mathbb{R})$
-    \item $\lim\limits_{x\searrow a} = F(a)$
+    \item $\lim\limits_{x\searrow a} F(x) = F(a)$
     \item $\lim\limits_{x\rightarrow \infty} F(x) = 1$
     \item $\lim\limits_{x\rightarrow -\infty} F(x)=0$
 \end{enumerate}
 
-Theorem: $F(x)=P((-\infty,x])$ defines an equivalence between CDF $F$ and Borel probability measure $P$ on
-$\mathbb{R}$.
+Theorem: $F(x)=P((-\infty,x])$ defines a one-to-one mapping from CDF function $F$
+to Borel probability measure function $P$. That is to say, if
+we have a CDF function $F$, then we have a probability measure $P$, and vice versa.
+This simplies lots of things, and deserves a theorem.
 
 
 \section{Conditional Probability and Independence}
@@ -310,6 +312,81 @@ Theorem: If $P(B)>0$, then $Q(A)=P(A|B)$ defines a probability measure $Q$ (cond
 probability measure given $B$.
 
 Proof: (trivial, use Partition rule)
+
+\section{Random Variables}
+
+Definition: Given $(\Omega, \A, P)$, a random variable is a function $X:\Omega \rightarrow \mathbb{R}$
+such that $\{w\in \Omega: X(w)\le x\} \in \A$ $\forall x\in \mathbb{R}$
+\bigbreak
+
+Remarks
+\begin{enumerate}
+    \item $X$ is called a measurable function if $X$ satisfies that $\{w\in \Omega: X(w)\le x\} \in \A$ $\forall x\in \mathbb{R}$
+    \item Notation: capital letters $X, Y$ for random variables, little letters $x,y$ for values
+    \item Notation: $\{X\le x\}=\{w\in\Omega:X(w)\le x\}$; $\{...X...\}=\{w\in\Omega:...X(w)...\}$
+    \item Notation: $P(X\le x)=P(\{X\le x\})$; $P(...)=P(\{...\})$
+\end{enumerate}
+\bigbreak
+
+Definition (ext.): The CDF of a random variable $X$ is the function $F:\mathbb{R}\rightarrow [0,1]$
+such that $F(x)=P(X\le x)$ (this definition fits the old CDF definition above, proof trivial)
+
+Warning: before this, we have the definition of probability measure, and the definition
+of CDF. now, this new function $F(x)=P(X\le x)$, which is defined on top of probability measure
+and random variable,
+is actually a CDF because it fits the old CDF definition. 
+\bigbreak
+
+Definition (ext.): The distribution of $X$ is the function $P^X: \B(\mathbb{R})\rightarrow \mathbb{R}$
+such that $P^{X}(A)=P(X\in A)$ where $A\in \B(\mathbb{R})$. Proof that $P^X$ is a
+probability measure function is trivial.
+\bigbreak
+
+Claim: $P^X$ is the probability measure induced by $F$ (because previously we mentioned that
+there is a one-to-one mapping between CDF and probability measure, we need to prove
+that the $P^X$ is exactly the same with that probability measure)
+
+Proof: $Q((-\infty,x])=F(x)=P(X\le x)=P(X\in(-\infty,x])=P^{X}((-\infty,x])$
+this implies that $Q=P^X$.
+\bigbreak
+
+\textbf{Summary} After defining random variable $X$, we defined two new functions on top of it:
+\begin{enumerate}
+    \item $P^X(A) = P(X\in A), A\in\B(\mathbb{R})$. It turns out this is a probability measure function.
+        We call it ``the distribution of random variable $X$".
+    \item $F(x) = P(X\le x), x\in \mathbb{R}$. It turns out this is a CDF function.
+        We call it ``CDF of the random variable $X$".
+\end{enumerate}
+And finally it turns out they form a pair, and each of them can be induced from the other.
+
+\section{Types of Random Variables}
+
+Definition: A random variable $X$ is discrete if $X(\Omega)=\{X(w):w\in\Omega\}$ is countable.
+e.g., $X(\Omega)=\{x_1, x_2,...\}$.
+\bigbreak
+
+Definition: A random variable $X$ has a density $f$ if $F(x)=\int\limits_{-\infty}^x f(u)du, \forall x\in \mathbb{R}$ 
+(for some integrable $f:\mathbb{R}\rightarrow [0,\infty)$). (so density function is defined after CDF)
+\bigbreak
+
+Advanced part below.
+
+Let $Q=P^X$. Let $J=\{x\in\mathbb{R}:Q(\{x\})>0\}$. Let $Q_d(A)=Q(A\cap J)$.
+Let $Q_c(A) = Q(A) - Q(A\cap J)$. So $Q= Q_d + Q_c$.
+
+$Q_d$ is the discrete part of this measure $Q$,
+and $Q_c$ is the continuous part of this measure $Q$.
+
+$Q_c=Q_{ac} + Q_{sc}$ (by R-N theorem) where $Q_{ac}((-\infty,x])=\int\limits_{-\infty}^{x} f(u)du$
+for some $f:\mathbb{R}\rightarrow [0,\infty)$.
+
+Claim: $X$ is discrete $\Rightarrow$ $Q=Q_d$; $X$ has density $\Leftrightarrow$ $Q=Q_{ac}$. (Proof omitted).
+
+Warning: beware of the singular part! $Q=Q_c \nRightarrow X$ has a density.
+One counter-example is: cantor function as CDF, which $Q_d=0,Q_{ac}=0$
+\bigbreak
+
+Remark: need to learn mathematics..
 
 \end{document}
 
