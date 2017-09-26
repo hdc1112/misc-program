@@ -3,6 +3,7 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{url}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -50,7 +51,7 @@ From this equation we can see that $\A$ is closed under intersections.
 
 \section{Definition of generated $\sigma$-algebra}
 
-Given a $\C\in 2^\Omega$, the generated $\sigma$-algebra $\C$, or $\sigma(\C)$, is the smallest
+Given a $\C\subseteq 2^\Omega$, the generated $\sigma$-algebra $\C$, or $\sigma(\C)$, is the smallest
 $\sigma$-algebra containing $\C$.
 Or, $\sigma(\C)=\bigcap\limits_{\A\ is\ \sigma-algebra\ on\ \Omega,\ \C\subseteq \A} \A$.
 \bigbreak
@@ -65,7 +66,7 @@ Example of $\sigma$-algebra:
 \begin{enumerate}
     \item $\A=\{\phi, \Omega\}$
     \item $\A=\{\phi,E, E^c, \Omega\}$
-    \item if $\Omega = \mathbb{R}$, the Borel $\sigma$-algebra $\B=\sigma(\T)$ where
+    \item if $\Omega = \mathbb{R}$, the Borel $\sigma$-algebra $\B(\mathbb{R})=\sigma(\T)$ where
         $\T=\{open\ sets\ of\ \mathbb{R}\}$.
 \end{enumerate}
 
@@ -342,6 +343,9 @@ such that $P^{X}(A)=P(X\in A)$ where $A\in \B(\mathbb{R})$. Proof that $P^X$ is 
 probability measure function is trivial.
 \bigbreak
 
+Useful link: \url{http://math.arizona.edu/~tgk/mc/prob_background.pdf}
+\bigbreak
+
 Claim: $P^X$ is the probability measure induced by $F$ (because previously we mentioned that
 there is a one-to-one mapping between CDF and probability measure, we need to prove
 that the $P^X$ is exactly the same with that probability measure)
@@ -387,6 +391,18 @@ One counter-example is: cantor function as CDF, which $Q_d=0,Q_{ac}=0$
 \bigbreak
 
 Remark: need to learn mathematics..
+
+\section{Discrete Random Variable}
+
+Recall that $X$ is a random variable if $X(\Omega)$ is countable.
+
+Definition: The probability mass function (pmf) of a discrete random variable
+is the function $p:\mathbb{R}\rightarrow [0,1]$ such that $p(x)=P(X=x)$.
+
+Remarks:
+%\begin{enumerate}
+%\end{enumerate}
+
 
 \end{document}
 
