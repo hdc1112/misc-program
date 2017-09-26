@@ -429,6 +429,40 @@ Examples:
     \item $X\sim Poisson(\lambda),\lambda\ge 0$, $p(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$ where $k\in\{0,1,2,...\}$.
 \end{enumerate}
 
+\section{Random variables with densities}
+
+Recall CDF $F(x)=P(X\le x)=\int\limits_{-\infty}^{x} f(u)du$
+\bigbreak
+
+Notation:
+\begin{enumerate}
+    \item $f$ is the probability density function (pdf) of $X$, and 
+        we write $X\sim f$.
+
+    \item $P$ for probability measure, $p$ for pmf, $f$ for pdf. Some places use $p$ for pdf.
+
+    \item Indicator function of $A$.
+        \begin{equation}
+            I_{A}(x)=\begin{cases}
+                1, & \text{if $x\in A$}. \\
+                0, & \text{otherwise}.
+            \end{cases}
+        \end{equation}
+\end{enumerate}
+\bigbreak
+
+Examples:
+\begin{enumerate}
+    \item $X\sim Uniform(a,b), a<b$, $f(x)=\frac{1}{b-a}, x\in[a,b]$, and $f(x)=0$ otherwise.
+
+    \item $X\sim Exponential(\lambda),\lambda>0$, $f(x)=\lambda e^{-\lambda x},x\ge 0$, and $f(x)=0$ otherwise. ``memoryless" property.
+
+    \item $X\sim Beta(\alpha,\beta),\alpha>0,\beta>0$, $f(x)=\frac{x^{\alpha - 1}(1-x)^{\beta - 1}}{B(\alpha,\beta)},x\in[0,1]$,
+        and $f(x)=0$ otherwise.
+
+    \item $X\sim Normal(\mu,\sigma^2),\mu\in \mathbb{R},\sigma^2>0$, 
+        $f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},x\in\mathbb{R}$. a.k.a. Gaussian distribution.
+\end{enumerate}
 
 
 \end{document}
