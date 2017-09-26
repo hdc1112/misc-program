@@ -399,13 +399,36 @@ Remark: need to learn mathematics..
 \section{Discrete Random Variable}
 
 Recall that $X$ is a random variable if $X(\Omega)$ is countable.
+\bigbreak
 
 Definition: The probability mass function (pmf) of a discrete random variable
 is the function $p:\mathbb{R}\rightarrow [0,1]$ such that $p(x)=P(X=x)$.
 
 Remarks:
-%\begin{enumerate}
-%\end{enumerate}
+$P(X\in A)=\sum\limits_{x\in A\cap S} p(x)$ where $S=X(\Omega)$. 
+
+Reasons: Because $P(X\in A)=P^{X}(A)=P^{X}(A\cap S)+P^{X}(A\cap S^c)$.
+        But $S^c=\phi$, so $P^{X}(A\cap S^c)=0$. So $P^{X}(A)=P^{X}(A\cap S)=\sum\limits_{x\in A\cap S}P(X=x)=
+        \sum\limits_{x\in A\cap S} p(x)$.
+        
+Lemma: $P(X\in \mathbb{R})=\sum\limits_{x\in S} p(x)=1$.
+\bigbreak
+
+Notation: $X\sim p$ or $X\sim F$ (it is either pmf (or density) or CDF) or $X\sim Q$ where $Q$ is distribution of random variable.
+\bigbreak
+
+Examples:
+\begin{enumerate}
+    \item $X\sim Bernoulli(\alpha)$, $\alpha \in[0,1]$, $p(1)=\alpha$, $p(0)=1-\alpha$.
+        
+    \item $X\sim Binomial(n,\alpha)$, $\alpha \in [0,1]$, $p(k)=\binom{n}{k}\alpha^k (1-\alpha)^{n-k}$ where
+        $k\in\{0,1,2,...,n\}$.
+        
+    \item $X\sim Geometric(\alpha)$, $\alpha\in [0,1]$, $p(k)=(1-\alpha)^{k-1}\alpha$ where $k\in\{1,2,...\}$.
+
+    \item $X\sim Poisson(\lambda),\lambda\ge 0$, $p(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$ where $k\in\{0,1,2,...\}$.
+\end{enumerate}
+
 
 
 \end{document}
