@@ -464,6 +464,37 @@ Examples:
         $f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},x\in\mathbb{R}$. a.k.a. Gaussian distribution.
 \end{enumerate}
 
+\section{Expectation for discrete random variables}
+
+Intuition: expectation is ``average value".
+
+Let $\mathfrak{X}=X(\Omega)$.
+
+Definition: the expectation of a discrete random variable with pmf $p$ is
+$E(X)=\sum\limits_{x\in\mathfrak{X}} xp(x)$ when this sum is ``well-defined".
+Otherwise, expectation does not exist.
+\bigbreak
+
+Examples:
+$X\sim Bernoulli(\alpha),\mathfrak{X}=\{0,1\}$.
+$E(X)=0*p(0)+1*p(1)=\alpha$
+\bigbreak
+
+Well-defined: $1-1+1-1+1-1....$ is not well-defined.
+\bigbreak
+
+Let $a_1,a_2,...\in\mathbb{R}$, $\sum\limits_{i=1}^{\infty}a_i=\sum\limits_{i:a_i\ge 0}a_i
++\sum\limits_{i:a_i<0}a_i=b+c$. Then $\sum\limits_{i=1}^{\infty}a_i$ is well-defined if 
+either $b$ or $c$ is finite.
+\bigbreak
+
+Example: $E(X)$ may exist and could be $\infty$.
+We know that $c=\sum\limits_{k=1}^{\infty}\frac{1}{k^2}$ where $c$ is a proved constant and
+$c<\infty$. We can construct a pmf with $p(k)=\frac{1}{ck^2}$ for $k\in\{1,2,...\}$.
+This is good because $\sum\limits_{k=1}{\infty}p(k)=1$.
+But $E(X)=\sum\limits_{k=1}^{\infty}\frac{k}{ck^2}=
+
+
 
 \end{document}
 
