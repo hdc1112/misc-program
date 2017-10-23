@@ -536,6 +536,9 @@ Fact: $g(X)$ is a random variable if $X$ is a random variable and $g:\mathbb{R}\
 
 Notation: $EX=E(X)$.
 
+Remark: $g(X)$ only means a random variable, it does not mean mapping from $X$ to something. That is to say,
+$g(X)$ is a whole symbol and do not divide it into function $g$ and parameter $X$.
+
 Theorem (Expectation rule): if $X$ is a random variable and $g:\mathbb{R}\rightarrow\mathbb{R}$ is a (measurable) function,
 then
 \begin{enumerate}
@@ -548,17 +551,31 @@ then
 Notation: $X:\Omega\rightarrow\mathbb{R}$ so $X(\Omega)$ means the set of all possible values in $X(w)$,
 $g(X):\mathbb{R}\rightarrow\mathbb{R}$ so $g(\mathfrak{X})$ means the set all possible values in $g(x)$.
 
+\bigbreak
+Suppose $Y=g(X)$
+
 Proof of discrete case:
 
-$Eg(X)=\sum\limits_{y\in g(\mathfrak{X})} y P(g(X)=y) \\
-=\sum\limits_{y\in g(\mathfrak{X})} y \sum\limits_{x\in\mathfrak{X}:g(x)=y} p(x) \\
-=\sum\limits_{y\in g(\mathfrak{X})} \sum\limits_{x\in\mathfrak{X}:g(x)=y} y p(x) \\
-=\sum\limits_{y\in g(\mathfrak{X})} \sum\limits_{x\in\mathfrak{X}:g(x)=y} g(x) p(x) \\
-=\sum\limits_{x\in\mathfrak{X}} g(x)p(x)$
+$EY=\sum\limits_{y\in g(\mathfrak{X})} y P(Y=y) \\ 
+= \sum\limits_{y\in g(\mathfrak{X})} y \sum\limits_{x:g(x)=y} p(x) \\ 
+= \sum\limits_{y\in g(\mathfrak{X})}\sum\limits_{x:g(x)=y} y p(x) \\
+= \sum\limits_{y\in g(\mathfrak{X})} \sum\limits_{x:g(x)=y} g(x) p(x) \\
+= \sum\limits_{x\in \mathfrak{X}} g(x)p(x)$
 
 \bigbreak
-Warning: needs extra time and effort to understand ``expectation rule".
+Proof of density case:
+
+The key step is $f_Y(y) dy = \int\limits_{x=-\infty,g(x)=y}^{x=\infty} f_X(x) dx$
+
+$EY = \int\limits_{y=-\infty}^{y=\infty} y f_{Y}(y) dy \\ 
+= \int\limits_{y=-\infty}^{y=\infty} y \int\limits_{x=-\infty,g(x)=y}^{x=\infty} f_X(x)dx \\ 
+= \int\limits_{y=-\infty}^{y=\infty} \int\limits_{x=-\infty,g(x)=y}^{x=\infty} y f_X(x)dx \\
+= \int\limits_{y=-\infty}^{y=\infty} \int\limits_{x=-\infty,g(x)=y}^{x=\infty} g(x) f_X(x)dx \\
+= \int\limits_{x=-\infty}^{x=\infty} g(x) f_X(x)dx$
+
+\section{Properties of Expectation}
+
+
 
 
 \end{document}
-
