@@ -1,0 +1,81 @@
+digraph G {
+  // dot -Tps mrfim.gv -o graph1.ps
+  // spark-0.9.0-incubating
+  size = "8, 15";
+  ranksep=.75;
+
+  "DdmlOnReceiveRandomImpl" -> "RandomDataWriter";
+  "DdmlOnReceiveRandomImpl" -> "RandomInput";
+  "DdmlOnReceiveRandomImpl" -> "DdmlPseudoDataManagerLinear3P";
+  "DdmlOnReceiveRandomImpl" -> "RandomConstants";
+
+  "DdmlTriggerPoint" -> "DdmlTriggerPointInterface";
+  "DdmlTriggerPoint" -> "DdmlToken";
+  "DdmlTriggerPoint" -> "DdmlTrainGetModelsTask";
+  "DdmlTriggerPoint" -> "DdmlTriggerConstants";
+
+  "DdmlAbstractDataWriter" -> "DdmlDataSchema";
+  "DdmlAbstractDataWriter" -> "DdmlDataManagerSqlite";
+  "DdmlAbstractDataWriter" -> "DdmlDataEntry";
+
+  "DdmlDataEntrySqlite" -> "DdmlDataEntry";
+
+  "DdmlDataIdCollector" -> "DdmlSQLiteTableManager";
+
+  "DdmlDataManagerInterface" -> "DdmlDataSchema";
+  "DdmlDataManagerInterface" -> "DdmlDataEntry";
+
+  "DdmlDataManagerSqlite" -> "DdmlDataManagerInterface";
+  "DdmlDataManagerSqlite" -> "DdmlSQLiteConstants";
+  "DdmlDataManagerSqlite" -> "DdmlSQLiteTableManager";
+  "DdmlDataManagerSqlite" -> "DdmlDataEntry";
+  "DdmlDataManagerSqlite" -> "DdmlDataSchema";
+
+  "DdmlSQLiteTableManager" -> "DdmlSQLiteConstants";
+  "DdmlSQLiteTableManager" -> "SQLiteOpenHelper";
+
+  "DdmlDataSchema" -> "DdmlDataSchemaValueType";
+
+  "DdmlPseudoDataManager" -> "DdmlDataManagerInterface";
+  "DdmlPseudoDataManager" -> "DdmlDataSchema";
+  "DdmlPseudoDataManager" -> "DdmlDataEntry";
+
+  "DdmlPseudoDataManagerLinear3P" -> "DdmlPseudoDataManager";
+  "DdmlPseudoDataManagerLinear3P" -> "DdmlDataEntry";
+
+  "RandomDataWriter" -> "DdmlAbstractDataWriter";
+  "RandomDataWriter" -> "DdmlDataEntry";
+  "RandomDataWriter" -> "DdmlDataManagerSqlite";
+  "RandomDataWriter" -> "DdmlDataSchema";
+  "RandomDataWriter" -> "DdmlDataSchemaValueType";
+  "RandomDataWriter" -> "RandomInput";
+  "RandomDataWriter" -> "RandomConstants";
+
+  "DdmlLinearModelExpander" -> "DdmlDataEntry";
+
+  "DdmlLinearModelPredictor" -> "DdmlDataEntry";
+  "DdmlLinearModelPredictor" -> "DdmlLinearModelExpander";
+
+  "DdmlLinearModelTrainer" -> "DdmlLinearModelTrainerReturn";
+  "DdmlLinearModelTrainer" -> "DdmlDataEntry";
+  "DdmlLinearModelTrainer" -> "DdmlLinearModelExpander";
+  "DdmlLinearModelTrainer" -> "DdmlLinearModelPredictor";
+  
+  "DdmlTrainGetModelsTask" -> "DdmlDataManagerInterface";
+  "DdmlTrainGetModelsTask" -> "DdmlDataManagerSqlite";
+  "DdmlTrainGetModelsTask" -> "DdmlDataEntry";
+  "DdmlTrainGetModelsTask" -> "DdmlDataIdCollector";
+  "DdmlTrainGetModelsTask" -> "DdmlDataManagerInterface";
+  "DdmlTrainGetModelsTask" -> "DdmlLinearModelTrainer";
+  "DdmlTrainGetModelsTask" -> "DdmlLinearModelTrainerReturn";
+  "DdmlTrainGetModelsTask" -> "DdmlTrainPutModelsTask";
+  "DdmlTrainGetModelsTask" -> "DdmlCommConstants";
+
+  "DdmlTrainPutModelsTask" -> "DdmlCommConstants";
+
+  "SnapchatAppInitializer" -> "DdmlOnReceiveRandomImpl";
+  "SnapchatAppInitializer" -> "DdmlTriggerPoint";
+  
+  "DdmlDataManagerSqlite" -> "DdmlDataEntrySqlite";
+
+}
