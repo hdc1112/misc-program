@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{dsfont}
 \usepackage[latin1]{inputenc}
 
 \title{Notes on Youtube's probability primer}
@@ -480,21 +481,101 @@ $X\sim Bernoulli(\alpha),\mathfrak{X}=\{0,1\}$.
 $E(X)=0*p(0)+1*p(1)=\alpha$
 \bigbreak
 
-Well-defined: $1-1+1-1+1-1....$ is not well-defined.
+What is ``well-defined"?
+
+One example of not Well-defined: $1-1+1-1+1-1....$ is not well-defined.
 \bigbreak
 
-Let $a_1,a_2,...\in\mathbb{R}$, $\sum\limits_{i=1}^{\infty}a_i=\sum\limits_{i:a_i\ge 0}a_i
+Definition: Let $a_1,a_2,...\in\mathbb{R}$, $\sum\limits_{i=1}^{\infty}a_i=\sum\limits_{i:a_i\ge 0}a_i
 +\sum\limits_{i:a_i<0}a_i=b+c$. Then $\sum\limits_{i=1}^{\infty}a_i$ is well-defined if 
 either $b$ or $c$ is finite.
 \bigbreak
 
-Example: $E(X)$ may exist and could be $\infty$.
+$E(X)$ may exist and could be $\infty$. Example:
 We know that $c=\sum\limits_{k=1}^{\infty}\frac{1}{k^2}$ where $c$ is a proved constant and
 $c<\infty$. We can construct a pmf with $p(k)=\frac{1}{ck^2}$ for $k\in\{1,2,...\}$.
-This is good because $\sum\limits_{k=1}{\infty}p(k)=1$.
-But $E(X)=\sum\limits_{k=1}^{\infty}\frac{k}{ck^2}=
+This is good because $\sum\limits_{k=1}^{\infty}p(k)=1$.
+But $E(X)=\sum\limits_{k=1}^{\infty}\frac{k}{ck^2}=\sum\limits_{k=1}^{\infty}\frac{1}{ck}=\infty=\infty$.
+\bigbreak
+
+$E(X)$ might not exist.
+\begin{equation}
+    p(k)=\begin{cases}
+        \frac{1}{2ck^2}, & \text{if $k\in \mathds{Z}$, $k \neq 0$} \\
+        0, & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+$E(X)=\sum\limits_{k\in\mathds{Z}}kp(k)=\infty-\infty=undefined$.
+
+\section{Expectation for random variables with densities}
+
+Definition: The expectation of a random variable $X$ with density $f$
+is $E(X)=\int\limits_{-\infty}^{\infty}xf(x)dx$ when this integral is well defined.
+Otherwise, the expectation does not exist.
+
+Example: $X\sim Uniform(a,b)$ $E(X)=\int\limits_{a}^{b}\frac{x}{b-a}dx=\frac{a+b}{2}$
+\bigbreak
+
+What is ``Well-defined"?: $a=\int\limits_{-\infty}^{0}xf(x)dx$, $b=\int\limits_{0}^{\infty}xf(x)dx$
+because $f(x)>=0$. The integral of $\int\limits_{-\infty}^{\infty}xf(x)dx$ is well-defined if either
+$a$ or $b$ is finite.
+\bigbreak
+
+So $E(X)$ may exist and be $\infty$, and might not exist at all.
+
+Example: $X\sim Cauchy$ or $f(x)=\frac{1}{\pi(1+x^2)}$ then
+$E(X)=\int\limits_{-\infty}^{\infty}\frac{x}{\pi (1+x^2)}=\int\limits_{-\infty}^{-1} +
+\int\limits_{-1}^{1}+\int\limits_{1}^{\infty}=-\infty + ... + \infty = undefined$.
+Because $\int\limits_{1}^{a}\frac{x}{1+x^2}\ge\int\limits_{1}^{a}\frac{x}{2x^2}=\frac{1}{2}lna$
+so it goes to $\infty$ if $a\rightarrow\infty$.
+
+\section{Expectation rule}
+
+Fact: $g(X)$ is a random variable if $X$ is a random variable and $g:\mathbb{R}\rightarrow\mathbb{R}$ is a measurable function.
+
+Notation: $EX=E(X)$.
+
+Remark: $g(X)$ only means a random variable, it does not mean mapping from $X$ to something. That is to say,
+$g(X)$ is a whole symbol and do not divide it into function $g$ and parameter $X$.
+
+Theorem (Expectation rule): if $X$ is a random variable and $g:\mathbb{R}\rightarrow\mathbb{R}$ is a (measurable) function,
+then
+\begin{enumerate}
+    \item $Eg(X)=\sum\limits_{x\in\mathfrak{X}}g(x)p(x)$ if $X$ is discrete with pmf $p$, and if well-defined,
+    \item $Eg(X)=\int\limits_{-\infty}^{\infty}g(x)f(x)$ if $X$ has density with pdf $f$, and if well-defined
+\end{enumerate}
+
+\bigbreak
+
+Notation: $X:\Omega\rightarrow\mathbb{R}$ so $X(\Omega)$ means the set of all possible values in $X(w)$,
+$g(X):\mathbb{R}\rightarrow\mathbb{R}$ so $g(\mathfrak{X})$ means the set all possible values in $g(x)$.
+
+\bigbreak
+Suppose $Y=g(X)$
+
+Proof of discrete case:
+
+$EY=\sum\limits_{y\in g(\mathfrak{X})} y P(Y=y) \\ 
+= \sum\limits_{y\in g(\mathfrak{X})} y \sum\limits_{x:g(x)=y} p(x) \\ 
+= \sum\limits_{y\in g(\mathfrak{X})}\sum\limits_{x:g(x)=y} y p(x) \\
+= \sum\limits_{y\in g(\mathfrak{X})} \sum\limits_{x:g(x)=y} g(x) p(x) \\
+= \sum\limits_{x\in \mathfrak{X}} g(x)p(x)$
+
+\bigbreak
+Proof of density case:
+
+The key step is $f_Y(y) dy = \int\limits_{x=-\infty,g(x)=y}^{x=\infty} f_X(x) dx$
+
+$EY = \int\limits_{y=-\infty}^{y=\infty} y f_{Y}(y) dy \\ 
+= \int\limits_{y=-\infty}^{y=\infty} y \int\limits_{x=-\infty,g(x)=y}^{x=\infty} f_X(x)dx \\ 
+= \int\limits_{y=-\infty}^{y=\infty} \int\limits_{x=-\infty,g(x)=y}^{x=\infty} y f_X(x)dx \\
+= \int\limits_{y=-\infty}^{y=\infty} \int\limits_{x=-\infty,g(x)=y}^{x=\infty} g(x) f_X(x)dx \\
+= \int\limits_{x=-\infty}^{x=\infty} g(x) f_X(x)dx$
+
+\section{Properties of Expectation}
+
 
 
 
 \end{document}
-
