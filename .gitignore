@@ -32,6 +32,8 @@ modules.builtin
 *.lzo
 *.patch
 *.gcno
+*.iml
+*.iws
 
 #
 # Top-level generic files
