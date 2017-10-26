@@ -575,7 +575,24 @@ $EY = \int\limits_{y=-\infty}^{y=\infty} y f_{Y}(y) dy \\
 
 \section{Properties of Expectation}
 
+Theorem: Suppose $X,Y$ are random variables and $E|X|<\infty,E|Y|<\infty$,
+\begin{enumerate}
+    \item $E(X)=a$ if $X(w)=a, \forall w\in\Omega$
+    \item $E(aX)=aE(X), \forall a\in\mathbb{R}$
+    \item $E(X+Y)=E(X)+E(Y)$, proof needs future knowledge, on hold.
+    \item if $X\ge 0$, then $E(X)\ge 0$. ($X\ge 0$ means $X(w)\ge 0,\forall w\in\Omega$)
+    \item if $X\le Y$, then $E(X)\le E(Y)$. ($X\le Y$ means $X(w)\le Y(w),\forall w\in\Omega$)
+    \item $E(I_A(X))=P(X\in A)$. ($I_A(x)$ is defined above)
+\end{enumerate}
+The first three together are called ``linearity of expectation".
+The fourth and fifth together are called ``order preserving property of expectation".
+The 1st, 2nd, 4th, 5th are easy to prove. The 3rd needs knowledge from joint
+distribution, so the 3rd will be proved in the future.
 
+\bigbreak
+Theorem: if $X_1,X_2,...$ is a sequence of random variables and $X_i\ge 0,\forall i\ge 1$,
+then $E(\sum\limits_{i=1}^{\infty}X_i)=\sum\limits_{i=1}^{\infty}E(X_i)$. Proof omitted because
+of advanced measure theory knowledge.
 
 
 \end{document}
