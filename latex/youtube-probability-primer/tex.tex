@@ -594,5 +594,27 @@ Theorem: if $X_1,X_2,...$ is a sequence of random variables and $X_i\ge 0,\foral
 then $E(\sum\limits_{i=1}^{\infty}X_i)=\sum\limits_{i=1}^{\infty}E(X_i)$. Proof omitted because
 of advanced measure theory knowledge.
 
+\bigbreak
+Proof of 6th in density case (discrete case is trivial, which can be found in 3rd CLRS):
+Let $Q(A)=EI_A(X)$. We claim that $Q(A)$ is a measure function. Because it
+satisfies the following three properties.
+\begin{enumerate}
+    \item $Q(A)\ge 0$. $I_A(X)$ can only take $0,1$, which are both non-negative values. Based on the 4th
+        theorem above, so $Q(A)=EI_A(X)\ge 0$
+    \item $Q(\phi)=0$. $I_{\phi}(X)$ now only takes one value $0$, so based on the 1st theorem above,
+        $Q(\phi)=E(I_{\phi}(X))=0$.
+    \item $Q(\bigcup\limits_{i=1}^{\infty}A_i)=EI_{\bigcup\limits_{i=1}^{\infty}A_i}(X)
+        =(indicator\ function\ property)E\sum\limits_{i=1}^{\infty}I_{A_i}(X)
+        =(theorem\ above)\sum\limits_{i=1}^{\infty}EI_{A_i}(X)
+        =\sum\limits_{i=1}^{\infty}Q(A_i)$, for mutually disjoint sets $A_i$.
+\end{enumerate}
+
+$Q((-\infty,a])=EI_{(-\infty,a]}(X)=\int\limits_{-\infty}^{\infty}I_{(-\infty,a]}(x)f(x)dx
+=\int\limits_{-\infty}^{a}f(x)dx=F(a)=P(X\le a)=P(X\in(-\infty,a])=P^{X}((-\infty,a])$
+
+Because there is a one-to-one mapping between CDF and probabilitistic measure function,
+and $Q(A)$ is a probabilistic measure function,
+so $Q=P^X$. So $Q(A)=P^X(A)=P(X\in A)$. So $EI_A(X)=Q(A)=P(X\in A)$.
+
 
 \end{document}
