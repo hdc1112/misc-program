@@ -616,5 +616,48 @@ Because there is a one-to-one mapping between CDF and probabilitistic measure fu
 and $Q(A)$ is a probabilistic measure function,
 so $Q=P^X$. So $Q(A)=P^X(A)=P(X\in A)$. So $EI_A(X)=Q(A)=P(X\in A)$.
 
+\section{Mean, Variance, and Moments}
+
+Let $X$ be a random variable
+
+Definition: The mean $\mu(X)$ is $EX$.
+
+Definition: The variance $\sigma^2(X)$, or $Var(X)$, is $E((X-EX)^2)$.
+
+Definition: The standard deviation of $\sigma(X)$ is $\sqrt{\sigma^2(X)}$.
+
+Definition: The $k^{th}$ moment where $k\in \{1,2,3,...\}$,
+$m_k(X)$ is $E(X^k)$.
+
+Definition: The $k^{th}$ central moment is $E((X-EX)^k)$.
+
+Proposition: $\sigma^2(X)=E(X^2)-(EX)^2$.
+
+\section{Multiple discrete random variables}
+
+Definition: given $(\Omega,\A, P)$,
+a random vector is a measurable fuction $X:\Omega\rightarrow \mathbb{R}^d$ where $d\in\{1,2,...\}$.
+Notice that $X\in\mathbb{R}^d$.
+
+Definition: a discrete random vector $X\in \mathbb{R}^d$ is a random vector
+whose $X(\Omega)$ is countable. (Just like one dimensional case).
+
+Definition: The joint pmf of a discrete random vector $X\in\mathbb{R}^d$
+is the function $p:\mathbb{R}^d\rightarrow[0,1]$ such that 
+$p(x)=P(X=x),\forall x\in\mathbb{R}^d$.
+
+Notation: $X=(X_1,...,X_d)$, and $x=(x_1,...x_d)$.
+($X=x$ means $X_i=x_i$ for $i\in\{1,...,d\}$.)
+$p(x)=p(x_1,...,x_d)$.
+$p_X(x)=p(x)$.
+
+Remark: $P(X\in A)=\sum\limits_{x\in(\mathfrak{X}\cap A)} p(X=x)$ where $\mathfrak{X}=X(\Omega)$
+
+Remark: $g(X)$ is also a random vector if $X\in\mathbb{R}^d$ is a random vector
+and $g:\mathbb{R}^d\rightarrow\mathbb{R}^k$ is a measurable function.
+
+Proposition: $Eg(X)=\sum\limits_{x\in\mathfrak{X}} g(x)p(x)$ for
+any (measurable) $g:\mathbb{R}^d\rightarrow\mathbb{R}^k$
+such that this sum is well-defined.
 
 \end{document}
