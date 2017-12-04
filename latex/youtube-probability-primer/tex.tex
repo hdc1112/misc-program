@@ -660,4 +660,33 @@ Proposition: $Eg(X)=\sum\limits_{x\in\mathfrak{X}} g(x)p(x)$ for
 any (measurable) $g:\mathbb{R}^d\rightarrow\mathbb{R}^k$
 such that this sum is well-defined.
 
+\section{Marginals and conditionals}
+
+Fix $(X,Y)\in\mathbb{R}^2$ with probability distribution $p(x,y)=P(X=x,Y=y)$
+
+Definition: The marginal pmf of $X$ is $p_X(x)=P(X=x)$ .
+
+Proposition: $p_X(x)=\sum\limits_{y\in\mathfrak{Y}} p(x,y)$ where $\mathfrak{Y}=Y(\Omega)$.
+
+Proof: $p_X(x) = P(X=x) = P(\{w\in\Omega:X(w)=x\}) = P(\bigcup\limits_{y\in\mathfrak{Y}} \{w\in\Omega:X(w)=x,Y(w)=y\}
+=\sum\limits_{y\in\mathfrak{Y}}P(X=x,Y=y)=\sum\limits_{y\in\mathfrak{Y}}p(x,y)$
+
+Notation: $p(x)=p_X(x)$, $p(y)=p_Y(y)$.
+
+Definition: The conditional pmf of $X$ given $Y=y$
+is $p(x|y)=P(X=x|Y=y)$ when $P(Y=y)>0$.
+
+Remark: $P(X=x|Y=y)=\frac{P(X=x,Y=y)}{P(Y=y)}=\frac{p(x,y)}{p_Y(y)}$
+
+Definition: The conditional expectation of $X$ given $Y=y$ (when $p(y)>0$),
+is $E(X|Y=y)=\sum\limits_{x\in\mathfrak{X}} x p(x|y)$,
+when this sum is well defined.
+
+Remark: $E(X|Y=y)$ is a number.
+But $E(X|Y)$ is a random variable that depends on $Y$.
+
+\section{Multiple random variables with densities}
+
+%Notation: for $g:\mathbb{R}^k
+
 \end{document}
