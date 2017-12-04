@@ -687,6 +687,22 @@ But $E(X|Y)$ is a random variable that depends on $Y$.
 
 \section{Multiple random variables with densities}
 
-%Notation: for $g:\mathbb{R}^k
+Notation: for $g:\mathbb{R}^k\rightarrow\mathbb{R}$,
+$\int\limits_{\mathbb{R}^k} g(x)dx = \int\limits_{-\infty}^{\infty}...\int\limits_{-\infty}^{\infty}g(x_1,...,x_k)dx_1...dx_k$
+
+For $A\in\B(\mathbb{R}^k)$, $\int\limits_{A}g(x)dx=\int\limits_{\mathbb{R}^k}I_A(x)g(x)dx$
+
+Remark: Riemann integral is different from Lebesgue integral. For function $f:[0,1]\rightarrow\{0,1\}$ where if $x$ is rational,
+then $f(x)=1$, otherwise $f(x)=0$, then this function is not Riemann integrable, but it is Lebesgue integrable.
+
+Definition: A random variable $X\in\mathbb{R}^d$ has a density or pdf $f$ if
+$P(X\in A)=\int\limits_Af(x)dx,\forall A$ where $f:\mathbb{R}^d\rightarrow[0,+\infty)$ is a measurable function.
+
+For $X\in\mathbb{R}^d$, $Eg(X)=\int\limits_{\mathbb{R}^d}g(x)f(x)dx$ when well-defined.
+
+Fix $(X,Y)\in\mathbb{R}^2$ with joint pdf $f$.
+$f_X(x)=\int\limits_{R}f(x,y)dy$, $f(x|y)=\frac{f(x,y)}{f_Y(y)}$ (when $f(y)>0$).
+
+$E(X|Y=y)=\int\limits_{\mathbb{R}}xf(x|y)dx$ (when well-defined).
 
 \end{document}
