@@ -705,4 +705,88 @@ $f_X(x)=\int\limits_{R}f(x,y)dy$, $f(x|y)=\frac{f(x,y)}{f_Y(y)}$ (when $f(y)>0$)
 
 $E(X|Y=y)=\int\limits_{\mathbb{R}}xf(x|y)dx$ (when well-defined).
 
+\section{Independent random variables}
+
+$X,Y,Z$ etc are random variables from the same space $(\Omega, \A, P)$
+
+Definition: $X$ and $Y$ are independent if $p_{X,Y}(x,y)=p_X(x)p_Y(y),\forall x\in\mathfrak{X}, y\in\mathfrak{Y}$
+for discrete case, and if $f_{X,Y}(x,y)=f_X(x)f_Y(y),\forall x\in\mathbb{R},y\in\mathbb{R}$ for density case.
+
+Definition: $X_1,...,X_d$ are independent if $p_{X_1,...,X_d}(x_1,...,x_d)=\prod\limits_{i=1}^{d}p_{X_i}(x_i)$
+for the discrete case, and if $f_{X_1,...,X_d}(x_1,...,x_d)=\prod\limits_{i=1}^{d}f_{X_i}(x_i)$.
+
+Theorem: the followings are equivalent
+\begin{enumerate}
+    \item $X$ and $Y$ are independent
+    \item $P(X\in A,Y\in B)=P(X\in A)P(Y\in B), \forall A,B\in\B(\mathbb{R})$
+    \item $g(X)$ and $h(Y)$ are independent for all functions $g,h:\mathbb{R}\rightarrow\mathbb{R}$ measurable.
+    \item $E(g(X)h(Y))=E(g(X))E(h(Y)),\forall g,h:\mathbb{R}\rightarrow\mathbb{R},g\ge 0, h\ge 0$ and measurable
+    \item $E(g(X)h(Y))=E(g(X))E(h(Y)),\forall g,h:\mathbb{R}\rightarrow\mathbb{R}$ such that $E|g(X)|<\infty$, $E|h(Y)|<\infty$.
+\end{enumerate}
+
+Remark: $X,Y$ independent $\Rightarrow E(XY)=E(X)E(Y)$ when $E|X|<\infty$, and $E|Y|<\infty$.
+
+Definition: The covariance of $X$ and $Y$ is
+$Cov(X,Y)=E((X-EX)(Y-EY))$.
+
+Remark:
+\begin{enumerate}
+    \item $Cov(X,X)=\sigma^2(X)$
+    \item $Cov(X,Y)=E(XY)-E(X)E(Y)$
+    \item $X,Y$ are independent $\Rightarrow Cov(X,Y)=0$
+\end{enumerate}
+
+Definition: The Pearson correlation coefficient
+of $X$ and $Y$ is $\rho (X,Y)=\frac{Cov(X,Y)}{\sigma_X\sigma_Y}$
+
+\section{LLN (Law of Large Numbers) and CLT (Central Limit Theorem)}
+
+Definition: $X_1,...,X_n$ are iid (independent and identically distributions)
+if they are independent and $p_{X_1}=p_{X_2}=...=p_{X_n}$.
+
+Let $X_1,X_2,...$ be iid with mean $\mu=E(X_i),\forall i$
+and variance $0<\sigma^2<\infty$
+
+Theorem(LLN): $\frac{1}{n}\sum\limits_{i=1}^{n}X_i\rightarrow\mu$ with probability 1.
+\begin{center}
+$P(\lim\limits_{n\rightarrow\infty}\frac{1}{n}\sum\limits_{i=1}^{n}X_i=\mu)=1$
+\end{center}
+
+Example: $X_i\sim Bernoulli(\mu)$. $X_i\in\{0,1\}$
+
+Theorem(CLT): $\sqrt{\frac{n}{\sigma^2}}(\frac{1}{n}\sum\limits_{i=1}^{n}X_i - \mu) \xrightarrow{D} N(0,1)$
+
+\section{Expectation of geometric random variable}
+
+$X\sim Geometric(\alpha)$, the pdf is $p(k)=(1-\alpha)^{k-1}*\alpha$, $k\in\{1,2,...\}$.
+
+$E[X]=\sum\limits_{k=1}^{\infty}kp(k)=\sum\limits_{k=1}^{\infty}k(1-\alpha)^{k-1}\alpha=\frac{1}{\alpha}$
+by skipping some simple intermediate steps.
+
+\section{Expectation of a Binomial random variable (method 1)}
+
+$X\sim Binomial(n,\alpha)$ $\alpha\in[0,1]$ $n\in\{1,2,...\}$ $p(k)=\binom{n}{k}\alpha^k(1-\alpha)^{n-k}$
+
+$X=\sum\limits_{i=1}^{n}X_i$ where $X_i\sim Bernoulli(\alpha)$ using linearity of expectation,
+we have $E[X]=n\alpha$.
+
+\section{Expectation of a Binomial random variable (method 2)}
+
+$E[X]
+=\sum\limits_{k=0}^{n}k\binom{n}{k}\alpha^k(1-\alpha)^{n-k}$ and can continue
+with the theorem $k\binom{n}{k}=n\binom{n-1}{k-1}$ if $k>0$.
+
+\section{Expecation of a Poisson random variable}
+
+$X\sim Poisson(\lambda),\lambda>0$ and pdf is $p(k)=e^{-\lambda}\frac{\lambda^k}{k!},k\ge 0$.
+
+$E[X] \\
+=\sum\limits_{k=0}^{\infty}kp(k)  \\
+=\sum\limits_{k=0}^{\infty}ke^{-\lambda}\frac{\lambda^k}{k!} \\
+=e^{-\lambda}\sum\limits_{k=1}^{\infty}\frac{k\lambda^k}{k!} \\
+=\lambda e^{-\lambda}\sum\limits_{k=1}^{\infty}\frac{\lambda^{k-1}}{(k-1)!} \\
+=\lambda e^{-\lambda}\sum\limits_{j=0}^{\infty}\frac{\lambda^j}{j!} \\
+=\lambda e^{-\lambda}e^{\lambda} \\
+=\lambda$
+
 \end{document}
