@@ -789,4 +789,77 @@ $E[X] \\
 =\lambda e^{-\lambda}e^{\lambda} \\
 =\lambda$
 
+\section{Multivariate Gaussian}
+
+Univariate Gaussian: $X\sim N(\mu, \sigma^2), \mu\in\mathbb{R},\sigma^2>0$
+means \\ 
+$X$ has pdf
+$f(x)
+=\frac{1}{\sqrt{2\pi\sigma^2}}e^{ -\frac{1}{2\sigma^2}(x-\mu)^2 },\forall x\in\mathbb{R}$
+
+\bigbreak
+Degenerate Univariate Gaussian: 
+$X\sim N(\mu,0)$ if $X\equiv \mu$ i.e. $X(w)=\mu,\forall w\in\Omega$
+
+Definition: A random variable $X\in\mathbb{R}^n$
+is a multivariate gaussian
+if any linear combination is univariate gaussian.
+That is to say, $a^TX=\sum\limits_{i=1}^n a_i X_i$ is univariate gaussian,$\forall a\in\mathbb{R}^n$.
+
+Definition: $X\sim N(\mu, C)$, where $\mu\in\mathbb{R}^n$, and $C$ is a positive semidefinite matrix, means $X$ is a multivariate gaussian
+with $EX_i = \mu_i$ and $Cov(X_i,X_j)=C_{ij}$.
+
+Remark: $\mu$ and $C$ uniquely determines the distribution $N(\mu,C)$
+
+Remark: positive semidefinite matrix means for every eigenvalue $\lambda_i\ge 0,\forall i$.
+
+\section{Multivariate Gaussian, examples and independence}
+
+Definition: $X\sim N(\mu,C)$ is degenerate if $\det C = 0$.
+Lives in a subspace because one dimension has $\sigma=0$.
+
+Fact (independent components): $X_1,...,X_n$ are independent
+with $X_i\sim N(\mu_i,\sigma_i^2)$,
+iff $X=(X_1,...,X_n)\sim N(\mu,C)$ where $\mu=(\mu_1,...,\mu_n)$,
+and $C=
+\begin{pmatrix}
+    \sigma_1^2 & ... & 0 \\
+    ... & ... & ... \\
+    0 & ... & \sigma_n^2
+\end{pmatrix}$
+or $C=diag(\sigma_1^2,...,\sigma_n^2)$.
+
+Fact: if $X\in\mathbb{R}^n$ is gaussian then $\forall i,j\in\{1,...,n\}$,
+$X_i,X_j$ are independent iff $Cov(X_i,X_j)=0$.
+This does not always hold for non-gaussian $X$.
+
+Warning: individual coordinate gaussians
+do not imply a gaussian.
+
+\section{Gaussian coordinates does not imply (multivariate) Gaussian}
+
+Warning: $X_1,..,X_n$ are univariate gaussian $\nRightarrow X=(X_1,...,X_n)$ is
+multivariate gaussian (the reverse direction still holds).
+
+Example: Let $X_1\sim N(0,1)$,
+\begin{equation}
+    X_2 = \begin{cases}
+        X_1, & \text{if $|X_1|\le 1$},\\
+        -X_1, & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+Notice that $X_2$'s pdf is the same
+with $X_1$'s pdf because for the part $|x|>1$,
+$pdf_2(x)$ simply equals to $pdf_1(-x)$,
+and $pdf_1(-x)=pdf_1(x)$, so at last,
+$pdf_2(x)=pdf_1(x)$. So both $X_1$
+and $X_2$ are univariate gaussian variable.
+
+But $X=(X_1,X_2)$ is not multivariate gaussian
+because the linear combination $X_1 + X_2$ is not
+univariate gaussian (because pdf is 0 when $|x|>2$).
+
+
+
 \end{document}
