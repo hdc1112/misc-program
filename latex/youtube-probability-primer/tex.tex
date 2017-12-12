@@ -860,6 +860,82 @@ But $X=(X_1,X_2)$ is not multivariate gaussian
 because the linear combination $X_1 + X_2$ is not
 univariate gaussian (because pdf is 0 when $|x|>2$).
 
+\section{Density for a multivariate Gaussian - definition and intuition}
 
+Fact (Density):
+A Gaussian random variable $X\sim N(\mu, C)$
+has a density iff
+it is non-degenerate, i.e. $\det C \neq 0$.
+($C$ is positive-semidefinite).
+
+The pdf is
+\begin{equation}
+f(x)
+= \frac{1}{\sqrt{|2\pi C|}}e^{-\frac{1}{2}(x-\mu)^TC^{-1}(x-\mu)},\forall x\in\mathbb{R}^n
+\end{equation}
+
+Remark: $\mu\in\mathbb{R}^n$, $C$ is an $n*n$ matrix, $|A|=\det A$, and $\det(2\pi C)=(2\pi)^n C$
+
+Remark: compare this formula with one dimension case.
+
+Remark: quadratic form $x^TAx$ and $Gaussian\propto e^{quadratic\ form}$
+
+\section{Affine property, Constructing Gaussians, and Sphering}
+
+Fact (Affine property): 
+Any affine transformation of a Gaussian
+is Gaussian. Affine transformation
+is $f(x)=Ax+b$.
+That is to say, if $X\sim N(\mu, C)$,
+then $AX+b\sim N(A\mu+b, ACA^T),
+\forall \mu\in\mathbb{R}^n, C\in\mathbb{R}^{n*n} PSD$,
+and $\forall A\in\mathbb{R}^{m*n},b\in\mathbb{R}^m$.
+
+Fact (Constructing) $X_1,..., X_n\sim N(0,1), iid\Rightarrow X=(X_1,X_2,...,X_n)\sim N(0,I)
+\Rightarrow AX+\mu\sim N(\mu, C)$ where $C=AA^T$ $\forall \mu\in\mathbb{R}^n,A\in\mathbb{R}^{m*n}$.
+
+Any positive semidefinite matrix $C$ can be refactored into $AA^T$.
+so any gaussian can be got from $X_1,...,X_n\sim N(0,1)$.
+
+Fact (Sphering, inverse of constructing) if $C$ is positive definite,
+so $\exists A$ such that $C=AA^T$,
+then,
+$y\sim N(\mu, C)\Rightarrow X=A^{-1}(y-\mu)\sim N(0, I)$.
+That is to say, for any gaussian, follow the above
+affine transformation, we will get $X\sim N(0,I)$.
+
+\section{Geometric intuition for the multivariate Gaussian (part 1)}
+
+Let $X\sim N(0,I)$. Let
+$C$ be a convariance matrix (PSD), and
+$\mu\in\mathbb{R}^n$.
+
+Since the commutativity of $Cov$,
+so the covariance matrix $C$ is symmetric.
+Covariance matrix $C$ is then
+symmetric, positive, semi-definite matrix.
+
+$C=U\Lambda U^T$, where $U=(u_1,...,u_n)$ orthogonal,
+and $\Lambda=diag(\lambda_1,..,\lambda_n), \lambda_i\ge 0$.
+$u_i$ is eigen vectors, and $\lambda_i$ is eigen values.
+
+$C=U\Lambda U^T=U\Lambda^{1/2}\Lambda^{1/2}U^T=(U\Lambda^{1/2})(U\Lambda^{1/2})^T=AA^T$.
+
+Let $Y=AX+\mu$ then $Y\sim N(\mu, C)$.
+First step, $\Lambda^{1/2} X \sim N(0, \Lambda)$, geometrically,
+for each dimension, we stretch to make it bigger or smaller.
+Second step, $U(\Lambda^{1/2}X)\sim N(0,C)$, since $U$
+consists of orthogonal vectors, so it rotates the picture (refer
+to linear algebra for more details).
+Third step, $U\Lambda^{1/2}X+\mu\sim N(\mu,C)$, it moves
+the picture. (Move, stretch, rotate).
+
+\section{Geometric intuition for the multivariate Gaussian (part 2)}
+
+Remark: $U$ rotates the picture so that the axises are
+the eigen vectors.
+
+Remark: refer to video for more details about
+the eigen vector length tricky issue.
 
 \end{document}
