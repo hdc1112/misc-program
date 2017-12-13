@@ -938,4 +938,64 @@ the eigen vectors.
 Remark: refer to video for more details about
 the eigen vector length tricky issue.
 
+\section{Marginal distributions of a Gaussian}
+
+$X=(X_1,X_2)\in\mathbb{R}^2$ Gaussian $\Rightarrow$ $X_1,X_2$ is also Gaussian.
+
+Little proof: using Affine property and introduce a matrix $A=(1\ 0)$ and $b=(0)$.
+
+Then $X\sim N(\mu,C)\Rightarrow AX+b\sim N(AX+ b, ACA^T)$ so $X_1$ and even $X_2$ are both Gaussian.
+
+To generalize the conclusion, let $X\sim N(\mu,C), a=(1,...,k), b=(k+1,...,n),1\le k\le n, X\in\mathbb{R}^n$,
+projection to the first $k$ dimensions is also Gaussian.
+
+\begin{equation}
+    X=\begin{pmatrix}
+        X_a \\
+        X_b
+    \end{pmatrix}
+    ,
+    X_a=\begin{pmatrix}
+        X_1\\
+        ...\\
+        X_k
+    \end{pmatrix}
+    ,
+    X_b=\begin{pmatrix}
+        X_{k+1}\\
+        ...\\
+        X_n
+    \end{pmatrix}
+    ,
+    \mu=\begin{pmatrix}
+        \mu_a\\
+        \mu_b
+    \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    C=\begin{pmatrix}
+        C_{aa} & C_{ab} \\
+        C_{ba} & C_{bb}
+    \end{pmatrix}
+,
+    C_{aa}=\begin{pmatrix}
+        C_{11} & ... & C_{1k} \\
+        ... & ... & ... \\
+        C_{k1} & ... & C_{kk}
+    \end{pmatrix}
+\end{equation}
+
+Fact(Marginalization property): 
+$X_a\sim N(\mu_a, C_{aa})$,
+$X_b\sim N(\mu_b, C_{bb})$
+
+Proof: construct a matrix, and then use the affine property
+\begin{equation}
+    A=(I_k, 0_{n-k})
+\end{equation}
+
+So $AX=X_a\sim N(\mu_a, C_{aa})$, $A\mu=\mu_a$, $ACA^T=C_{aa}$
+
+
 \end{document}
