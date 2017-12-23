@@ -997,5 +997,34 @@ Proof: construct a matrix, and then use the affine property
 
 So $AX=X_a\sim N(\mu_a, C_{aa})$, $A\mu=\mu_a$, $ACA^T=C_{aa}$
 
+\section{Conditional distributions of a Gaussian}
+
+$X=(X_1,X_2)^T\in\mathbb{R}^2$ is a Gaussian $\Rightarrow (X_1|X_2=x_2)$ is Gaussian.
+$p(x_1|x_2)$ is the pdf. The pdf can be imagined by slicing the pdf of $X$ with a plane.
+
+Fact (Conditioning property):
+$(X_a|X_b=x_b)\sim N(m,D)$ where $m=\mu_a + C_{ab}C_{bb}^{-1}(x_b-\mu_b)$,
+$D=C_{aa}-C_{ab}C_{bb}^{-1}C_{ba}$.
+
+\section{Sum of independent Gaussians}
+
+Fact: if $X\sim N(\mu_x,C_x)$,$Y\sim N(\mu_y,C_y)$, $X,Y\in\mathbb{R}^n$ independent
+then $X + Y \sim N(\mu_x + \mu_y, C_x + C_y)$
+
+Proof: case $n=1$: $X,Y\in\mathbb{R}$ independent Gaussian $\Rightarrow (X,Y)$
+is a multi-variate gaussian (why?) $\Rightarrow X+Y$ is gaussian (by definition
+of multivariate gaussians).
+
+the remaining proof is achieved by following key facts:
+\begin{enumerate}
+    \item $Cov(X+Y)=Cov(X)+Cov(Y)$
+
+    \item $Cov(X)=EXX^T-EXEX^T$
+
+    \item if $X,Y$ independent, then $EXY^T=EXEY^T$
+\end{enumerate}
+
+
+
 
 \end{document}
