@@ -1,0 +1,44 @@
+digraph G {
+  // dot -Tps mrfim.gv -o graph1.ps
+  // spark-0.9.0-incubating
+  size = "8, 15";
+  ranksep=.75;
+
+  app_client -> AppRoutes;
+  app_client -> ModelsPageReducers;
+
+  AppRoutes -> routes;
+
+  MetricResponseContent -> Message;
+
+  IndexPageContainer -> IndexPage;
+
+  Layout -> Navigation;
+
+  ActionPayload -> Message;
+
+  MetricPageActions -> ActionPayload;
+  MetricPageActions -> MetricResponseContent;
+
+  MetricQueryPage -> MetricResultPageContainer;
+  MetricQueryPage -> SearchBarContainer;
+
+  MetricResultPage -> Message;
+
+  MetricQueryPageContainer -> MetricResultPage;
+  MetricQueryPageContainer -> MetricQueryPage;
+
+  MetricResultPageContainer -> MetricResultPage;
+  MetricResultPageContainer -> MetricPageActions;
+
+  SearchBarContainer -> SearchBar;
+
+  ModelsPageReducers -> ActionPayload;
+
+  routes -> Layout;
+  routes -> NotFoundPage;
+  routes -> ModelsIndexPage;
+  routes -> MetricQueryPageContainer;
+  routes -> IndexPageContainer;
+
+}
